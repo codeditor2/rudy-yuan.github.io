@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/2016-newest-hexo-guide/</loc>
+    <lastmod>2016-03-10T02:17:50.929Z</lastmod>
+    <data>
+        <display>
+        <title>2016年最新最全面的hexo教程</title>
+        <pubTime>2016-03-10T02:07:33.000Z</pubTime>
+        
+        <tag>Hexo</tag>
+         
+        <tag>github静态博客</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术杂文" url="http://www.rudy-yuan.net/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/182/</loc>
     <lastmod>2016-03-09T08:47:12.000Z</lastmod>
     <data>
@@ -218,26 +240,6 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>简体中文测试</title>
-        <pubTime>2013-12-25T12:17:16.000Z</pubTime>
-        
-        <tag>简体</tag>
-         
-         
-           
-             
-              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
@@ -251,26 +253,6 @@
            
              
               <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/traditional-chinese-test/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>繁體中文測試</title>
-        <pubTime>2013-12-25T13:17:16.000Z</pubTime>
-        
-        <tag>繁體</tag>
-         
-         
-           
-             
-              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
           
         </display>
     </data>
@@ -298,39 +280,19 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/color-themes/</loc>
+    <loc>http://www.rudy-yuan.net/archives/traditional-chinese-test/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>Color Themes</title>
-        <pubTime>2016-01-30T05:00:24.000Z</pubTime>
+        <title>繁體中文測試</title>
+        <pubTime>2013-12-25T13:17:16.000Z</pubTime>
         
-        <tag>themes</tag>
+        <tag>繁體</tag>
          
          
            
              
-              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/code-highlight/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Code Highlight</title>
-        <pubTime>2014-03-15T12:17:16.000Z</pubTime>
-        
-        <tag>highlight</tag>
-         
-         
-           
-             
-              <breadCrumb title="Demo" url="http://www.rudy-yuan.net/categories/Demo/"/>
+              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
           
         </display>
     </data>
@@ -351,6 +313,66 @@
            
              
               <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/color-themes/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Color Themes</title>
+        <pubTime>2016-01-30T05:00:24.000Z</pubTime>
+        
+        <tag>themes</tag>
+         
+         
+           
+             
+              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>简体中文测试</title>
+        <pubTime>2013-12-25T12:17:16.000Z</pubTime>
+        
+        <tag>简体</tag>
+         
+         
+           
+             
+              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/code-highlight/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Code Highlight</title>
+        <pubTime>2014-03-15T12:17:16.000Z</pubTime>
+        
+        <tag>highlight</tag>
+         
+         
+           
+             
+              <breadCrumb title="Demo" url="http://www.rudy-yuan.net/categories/Demo/"/>
           
         </display>
     </data>
