@@ -198,12 +198,12 @@
     
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
+    <loc>http://www.rudy-yuan.net/archives/tag-plugins-cn/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>Tag Plugins</title>
-        <pubTime>2014-03-16T02:17:16.000Z</pubTime>
+        <title>Tag Plugins（中文）</title>
+        <pubTime>2014-03-16T02:10:16.000Z</pubTime>
         
         <tag>plugins</tag>
          
@@ -218,12 +218,32 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/tag-plugins-cn/</loc>
+    <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>Tag Plugins（中文）</title>
-        <pubTime>2014-03-16T02:10:16.000Z</pubTime>
+        <title>简体中文测试</title>
+        <pubTime>2013-12-25T12:17:16.000Z</pubTime>
+        
+        <tag>简体</tag>
+         
+         
+           
+             
+              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Tag Plugins</title>
+        <pubTime>2014-03-16T02:17:16.000Z</pubTime>
         
         <tag>plugins</tag>
          
@@ -251,26 +271,6 @@
            
              
               <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/qna/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Questions and Answers</title>
-        <pubTime>2014-03-16T10:17:16.000Z</pubTime>
-        
-        <tag>Q&amp;A</tag>
-         
-         
-           
-             
-              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
           
         </display>
     </data>
@@ -338,19 +338,19 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
+    <loc>http://www.rudy-yuan.net/archives/qna/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>简体中文测试</title>
-        <pubTime>2013-12-25T12:17:16.000Z</pubTime>
+        <title>Questions and Answers</title>
+        <pubTime>2014-03-16T10:17:16.000Z</pubTime>
         
-        <tag>简体</tag>
+        <tag>Q&amp;A</tag>
          
          
            
              
-              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
+              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
           
         </display>
     </data>
