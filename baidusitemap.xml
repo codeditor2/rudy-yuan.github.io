@@ -4,8 +4,23 @@
 
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/remote-mysql/</loc>
+    <lastmod>2016-03-10T02:22:28.636Z</lastmod>
+    <data>
+        <display>
+        <title>remote-mysql</title>
+        <pubTime>2014-03-08T19:30:32.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/2016-newest-hexo-guide/</loc>
-    <lastmod>2016-03-10T02:21:27.648Z</lastmod>
+    <lastmod>2016-03-10T02:22:22.749Z</lastmod>
     <data>
         <display>
         <title>2016年最新最全面的hexo教程</title>
@@ -68,21 +83,6 @@
              
               <breadCrumb title="技术杂文" url="http://www.rudy-yuan.net/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E6%96%87/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/remote-mysql/</loc>
-    <lastmod>2016-03-08T19:30:32.000Z</lastmod>
-    <data>
-        <display>
-        <title>remote-mysql</title>
-        <pubTime>2016-03-08T19:30:32.000Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>
