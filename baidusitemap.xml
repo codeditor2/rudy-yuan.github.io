@@ -4,6 +4,30 @@
 
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/134/</loc>
+    <lastmod>2016-03-14T13:43:52.960Z</lastmod>
+    <data>
+        <display>
+        <title>在mediastreamer2库中添加自定义filter(2)</title>
+        <pubTime>2014-08-15T03:19:04.000Z</pubTime>
+        
+        <tag>热点文章</tag>
+         
+        <tag>mediastreamer2</tag>
+         
+        <tag>数据结构</tag>
+         
+         
+           
+             
+              <breadCrumb title="源码学习" url="http://www.rudy-yuan.net/categories/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/48/</loc>
     <lastmod>2016-03-14T13:30:50.266Z</lastmod>
     <data>
@@ -375,14 +399,14 @@
     
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/tag-plugins-cn/</loc>
+    <loc>http://www.rudy-yuan.net/archives/color-themes/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>Tag Plugins（中文）</title>
-        <pubTime>2014-03-16T02:10:16.000Z</pubTime>
+        <title>Color Themes</title>
+        <pubTime>2016-01-30T05:00:24.000Z</pubTime>
         
-        <tag>plugins</tag>
+        <tag>themes</tag>
          
          
            
@@ -415,26 +439,6 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Tag Plugins</title>
-        <pubTime>2014-03-16T02:17:16.000Z</pubTime>
-        
-        <tag>plugins</tag>
-         
-         
-           
-             
-              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.rudy-yuan.net/archives/code-highlight/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
@@ -455,14 +459,14 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/color-themes/</loc>
+    <loc>http://www.rudy-yuan.net/archives/tag-plugins-cn/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>Color Themes</title>
-        <pubTime>2016-01-30T05:00:24.000Z</pubTime>
+        <title>Tag Plugins（中文）</title>
+        <pubTime>2014-03-16T02:10:16.000Z</pubTime>
         
-        <tag>themes</tag>
+        <tag>plugins</tag>
          
          
            
@@ -488,6 +492,26 @@
            
              
               <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Tag Plugins</title>
+        <pubTime>2014-03-16T02:17:16.000Z</pubTime>
+        
+        <tag>plugins</tag>
+         
+         
+           
+             
+              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
           
         </display>
     </data>
