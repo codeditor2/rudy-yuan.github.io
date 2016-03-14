@@ -3,15 +3,13 @@
 <head>
   <meta charset="utf-8">
   
-  <title>真正让你实现阿里云mysql数据库远程连接 | Rudy-Yuan的博客</title>
+  <title>socket与网络 | Rudy-Yuan的博客</title>
   <meta name="author" content="Rudy-Yuan">
-  
-  <meta name="description" content="最近想把阿里云博客上的mysql数据库备份到本地，使用xshell等远程连接服务器登录都正常。 但是使用 Navicat 远程连接mysql时报错如下，大概意思是本地IP没有登录权限，root用户默认只能在localhost（也就是只能在服务器）登录 网上查到的解决方法如下： 1. 在服务器内部登录数据库 2. 执行grant all privileges on . to ‘root’@’%’…">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="真正让你实现阿里云mysql数据库远程连接"/>
+  
   <meta property="og:site_name" content="Rudy-Yuan的博客"/>
 
   
@@ -99,150 +97,53 @@
     	 
 
 
-
-
-
-<div class="row post">
-	<!-- cols -->
-	
-	<div id="top_meta"></div>
-	<div class="col-md-9">
-	
-
-	<!-- content -->
-
-	<div class="slogan" style="margin-bottom: 17px">
-	  <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">
-	      当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;:&nbsp;
 		
-			<a href="/categories/mysql/">mysql</a>
-		
-	  &nbsp;</a>»&nbsp; 真正让你实现阿里云mysql数据库远程连接 </h4>
-	</div>
-
-	<div id="top_search"></div>
-		      
-
-                        <div class="archive">	  
-			  <div id="archives"> 
-				
-				<header class="entry-header">
-					<div class="entry-info" text-transform : capitalize>				     					      	      
-						
-					      <span class="entry-date">
-						      <span class="fa fa-calendar" aria-hidden="true"></span>
-						      2016-03-05						      
-					      </span>
-					      
-					      <span class="author vcard">
-						      <span class="fa fa-user" aria-hidden="true"></span>
-						      <a href="/">Rudy-Yuan</a> 	 	
-					      </span>
-
-					      <span class="comments-link">
-							<span class="fa fa-comments" aria-hidden="true"></span>
-							<span class="ds-thread-count" data-thread-key="archives/真正让你实现阿里云mysql数据库远程连接/">暂无评论</span>
-					      </span>						
-						
-					</div>	
-
-								
-					<h3 class="entry-title"> 
-						  <a href="/archives/真正让你实现阿里云mysql数据库远程连接/" >真正让你实现阿里云mysql数据库远程连接</a>
-					</h3>		
-                                     <span style="font-size:15px"><p>   最近想把阿里云博客上的mysql数据库备份到本地，使用xshell等远程连接服务器登录都正常。 但是使用 Navicat 远程连接mysql时报错如下，大概意思是本地IP没有登录权限，root用户默认只能在localhost（也就是只能在服务器）登录 网上查到的解决方法如下： 1. 在服务器内部登录数据库 2. 执行grant all privileges on <em>.</em> to ‘root’@’%’…<br><a id="more"></a><br>   最近想把阿里云博客上的mysql数据库备份到本地，使用xshell等远程连接服务器登录都正常。 但是使用 Navicat 远程连接mysql时报错如下，大概意思是本地IP没有登录权限，root用户默认只能在localhost（也就是只能在服务器）登录 网上查到的解决方法如下： 1. 在服务器内部登录数据库 2. 执行grant all privileges on <em>.</em> to ‘root’@’%’…</p>
-</span>
-				</header>
-
-				<!-- share -->
-				
-				    
-
-				    
-
-     <footer class="entry-meta">      
-
-	    <div class="fenlei" style="font-size:13.5px">
-		<span class="entry-categories">
-                	<span class="fa fa-folder" aria-hidden="true"></span> 
-
-		
-			<a href="/categories/mysql/">mysql</a>
+		  <div class="slogan" style="margin-bottom: 17px">
+		    <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;: socket与网络</h4>
+		  </div>
 		
 
-		</span>
-		<span class="entry-tags">        
-                        <span class="fa fa-tags" aria-hidden="true"></span> 
-
-		
-			<a href="/tags/阿里云/">阿里云</a>&nbsp;
-		
-			<a href="/tags/mysql/">mysql</a>&nbsp;
-		
-			<a href="/tags/数据库远程连接/">数据库远程连接</a>&nbsp;
-		
-			<a href="/tags/热点文章/">热点文章</a>&nbsp;
-		
-			<a href="/tags/博主推荐/">博主推荐</a>&nbsp;
-		
-
-                </span>
-	  </div>
-
-     
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style" style="float:right;">
-	    <span class="jiathis_txt">分享到：</span>
-	    <a class="jiathis_button_qzone">QQ空间</a>
-	    <a class="jiathis_button_tsina">新浪微博</a>
-	    <a class="jiathis_button_weixin">微信</a>
-	    <a class="jiathis_button_copy">复制</a>
-	    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	    <a class="jiathis_counter_style"></a>
-	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
-    <br>
-    </footer>
-
-
-
-				
-
-			    </div>	
-                        </div>	 	        
-
-	 
-		
-    	            <p class="p1">上一篇 <a href="/archives/2016-newest-hexo-guide/">2016年最新最全面的hexo教程</a></p> 
-
-		
-		   <p class="p2">下一篇 <a href="/archives/204/">真正让你实现阿里云mysql数据库远程连接</a></p> 
-	
-	
-	<!-- comment -->
-	
-<section id="comment">
+<div class="row page">
+  <!-- cols -->
   
-  	 <div class="ds-thread" data-thread-key="archives/真正让你实现阿里云mysql数据库远程连接/" data-title="真正让你实现阿里云mysql数据库远程连接" data-url="http://www.rudy-yuan.net/archives/真正让你实现阿里云mysql数据库远程连接/"></div>  
-  
-</section>
-
-	</div> <!-- col-md-9/col-md-12 -->	
-
+  <div class="col-md-9">
 	
-	<div id="side_meta">
+
+	  <div id="top_search"></div>
+
+	  <div class="archive">
 		
-      <div class="col-md-3">
-	      <div id="sidebar">
-	      
+		
+		
+			
+			
+			<h4 class="archive-ul" data-toggle="collapse" data-target="#2015">2015<b class="caret"></b></h4>
+			<ul id="2015" class="collapse in">
+			
+		
+		<li class="listing-item">
+		<span class="date_class"> 2015-09-28 </span> &raquo;
+		
+		   <span class="title"><a href="/archives/199/" >什么是 web 框架？</a></span>
+		
+		</li>			
+		
+		</ul>
+		</div>
+
+</div> <!-- col-md-9/col-md-12 -->
+
+
+<div class="col-md-3">
+	<div id="sidebar">
+        
   <div class="form-group has-success has-feedback" id="site_search">
     <form class="site-search-form">
         <input type="text" id="st-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control" />
     </form>
   </div>  
 
-	      <style type="text/css">
+        <style type="text/css">
   .cls_container{height:24px;overflow:hidden;}
   .cls_container ul{list-style-type:none;margin:0;padding:0;margin-left:0px;}
   .cls_container ul li{height:24px;line-height:24px;float:left;display:inline;}
@@ -325,11 +226,7 @@
 	var myscroll=new Scroll("myscroll",24);
 </script>
 
-
-	      <!-- toc -->	      
-	      	      
-
-	      
+        
 	<div class="widget">
 		<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">分类目录</h4>
 		<ul class="tag_box inline list-unstyled">
@@ -342,7 +239,9 @@
 		
 			<li><a href="/categories/leetcode/">leetcode<span>2</span></a></li>
 		
-			<li><a href="/categories/mysql/">mysql<span>1</span></a></li>
+			<li><a href="/categories/mysql/">mysql<span>0</span></a></li>
+		
+			<li><a href="/categories/socket与网络/">socket与网络<span>1</span></a></li>
 		
 			<li><a href="/categories/工具相关/">工具相关<span>1</span></a></li>
 		
@@ -355,59 +254,59 @@
 		</ul>
 	</div>
 	
-	      
+        
 	<div class="widget">
 		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/算法/">算法<span>2</span></a></li>
-		
-			<li><a href="/tags/libevent/">libevent<span>1</span></a></li>
-		
-			<li><a href="/tags/面试/">面试<span>2</span></a></li>
-		
-			<li><a href="/tags/KMP/">KMP<span>2</span></a></li>
-		
-			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
-		
-			<li><a href="/tags/阿里云/">阿里云<span>2</span></a></li>
-		
-			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
-		
-			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
+			<li><a href="/tags/mysql远程连接/">mysql远程连接<span>1</span></a></li>
 		
 			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
 		
-			<li><a href="/tags/themes/">themes<span>1</span></a></li>
+			<li><a href="/tags/Leetcode/">Leetcode<span>1</span></a></li>
 		
-			<li><a href="/tags/Q-A/">Q&amp;A<span>2</span></a></li>
-		
-			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
-		
-			<li><a href="/tags/热点文章/">热点文章<span>3</span></a></li>
-		
-			<li><a href="/tags/数据库远程连接/">数据库远程连接<span>1</span></a></li>
-		
-			<li><a href="/tags/edas提前/">edas提前<span>1</span></a></li>
-		
-			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
-		
-			<li><a href="/tags/leetcode/">leetcode<span>1</span></a></li>
+			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
 		
 			<li><a href="/tags/简体/">简体<span>1</span></a></li>
 		
+			<li><a href="/tags/面试/">面试<span>2</span></a></li>
+		
+			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
+		
+			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
+		
+			<li><a href="/tags/阿里云/">阿里云<span>1</span></a></li>
+		
+			<li><a href="/tags/vi/">vi<span>1</span></a></li>
+		
+			<li><a href="/tags/edas提前/">edas提前<span>1</span></a></li>
+		
+			<li><a href="/tags/网络/">网络<span>1</span></a></li>
+		
+			<li><a href="/tags/English/">English<span>1</span></a></li>
+		
 			<li><a href="/tags/plugins/">plugins<span>2</span></a></li>
 		
-			<li><a href="/tags/Web服务器/">Web服务器<span>1</span></a></li>
+			<li><a href="/tags/转载/">转载<span>1</span></a></li>
+		
+			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
+		
+			<li><a href="/tags/算法/">算法<span>2</span></a></li>
+		
+			<li><a href="/tags/数据库远程连接/">数据库远程连接<span>0</span></a></li>
+		
+			<li><a href="/tags/leetcode/">leetcode<span>1</span></a></li>
+		
+			<li><a href="/tags/KMP/">KMP<span>2</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>28</span></a></li>
+		   <li><a href="/tags">...<span>31</span></a></li>
 		 
 		</ul>
 	</div>
 
 
-	      
+	
 <div class="widget">
 	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">友情链接</h4>
 	<ul class="blogroll list-unstyled">
@@ -432,7 +331,7 @@
 </div>
 
 
-	      
+        
 
 
 <div class="widget">
@@ -454,31 +353,14 @@
 
 
 	
-	      
+        
 <section id="recent-visitors" class="widget widget_recent_comments">
 	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">最近访客</h4>
   	<div class="panelbody clearfix"><ul class="ds-recent-visitors" data-num-items="30"></ul></div>
 </section>    
-	      </div> <!-- sidebar -->
-      </div> <!-- col-md-3 -->
+	</div> <!-- sidebar -->
+</div> <!-- col-md-3 -->
 
-	</div>
-			
-
-
-</div><!-- row -->
-
-<script type="text/javascript">
-  var duoshuoQuery = { short_name: 'rudy-yuan' };
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';
-    ds.async = true;
-    ds.src = 'http://static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script>
 
 
 
