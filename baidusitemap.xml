@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/128/</loc>
+    <lastmod>2016-03-14T13:18:54.556Z</lastmod>
+    <data>
+        <display>
+        <title>对陈皓博客《C++虚函数解析》的补充</title>
+        <pubTime>2014-07-31T16:12:20.000Z</pubTime>
+        
+        <tag>cpp</tag>
+         
+        <tag>虚函数</tag>
+         
+         
+           
+             
+              <breadCrumb title="c和c++" url="http://www.rudy-yuan.net/categories/c%E5%92%8Cc/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/199/</loc>
     <lastmod>2016-03-14T13:12:28.841Z</lastmod>
     <data>
@@ -353,39 +375,19 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/traditional-chinese-test/</loc>
+    <loc>http://www.rudy-yuan.net/archives/code-highlight/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>繁體中文測試</title>
-        <pubTime>2013-12-25T13:17:16.000Z</pubTime>
+        <title>Code Highlight</title>
+        <pubTime>2014-03-15T12:17:16.000Z</pubTime>
         
-        <tag>繁體</tag>
+        <tag>highlight</tag>
          
          
            
              
-              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>简体中文测试</title>
-        <pubTime>2013-12-25T12:17:16.000Z</pubTime>
-        
-        <tag>简体</tag>
-         
-         
-           
-             
-              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
+              <breadCrumb title="Demo" url="http://www.rudy-yuan.net/categories/Demo/"/>
           
         </display>
     </data>
@@ -406,6 +408,26 @@
            
              
               <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>简体中文测试</title>
+        <pubTime>2013-12-25T12:17:16.000Z</pubTime>
+        
+        <tag>简体</tag>
+         
+         
+           
+             
+              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
           
         </display>
     </data>
@@ -446,26 +468,6 @@
            
              
               <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/code-highlight/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Code Highlight</title>
-        <pubTime>2014-03-15T12:17:16.000Z</pubTime>
-        
-        <tag>highlight</tag>
-         
-         
-           
-             
-              <breadCrumb title="Demo" url="http://www.rudy-yuan.net/categories/Demo/"/>
           
         </display>
     </data>

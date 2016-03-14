@@ -3,13 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>二分查找的递归与非递归实现 | Rudy-Yuan的博客</title>
+  <title>对陈皓博客《C++虚函数解析》的补充 | Rudy-Yuan的博客</title>
   <meta name="author" content="Rudy-Yuan">
+  
+  <meta name="description" content="关于C++中虚函数的实现原理，陈皓的这篇文章“C++虚函数解析”讲得不错，但是博客中的代码有点点问题。
+借用他博客里面的几个图，我补充了我在自己理解基础上写出的正确代码:
+1234567891011121314151617181920212223242526272829303132333435363">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="二分查找的递归与非递归实现"/>
+  <meta property="og:title" content="对陈皓博客《C++虚函数解析》的补充"/>
   <meta property="og:site_name" content="Rudy-Yuan的博客"/>
 
   
@@ -113,9 +117,9 @@
 	  <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">
 	      当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;:&nbsp;
 		
-			<a href="/categories/数据结构与算法/">数据结构与算法</a>
+			<a href="/categories/c和c/">c和c++</a>
 		
-	  &nbsp;</a>»&nbsp; 二分查找的递归与非递归实现 </h4>
+	  &nbsp;</a>»&nbsp; 对陈皓博客《C++虚函数解析》的补充 </h4>
 	</div>
 
 	<div id="top_search"></div>
@@ -129,7 +133,7 @@
 						
 					      <span class="entry-date">
 						      <span class="fa fa-calendar" aria-hidden="true"></span>
-						      2013-05-04						      
+						      2014-08-01						      
 					      </span>
 					      
 					      <span class="author vcard">
@@ -139,16 +143,22 @@
 
 					      <span class="comments-link">
 							<span class="fa fa-comments" aria-hidden="true"></span>
-							<span class="ds-thread-count" data-thread-key="archives/binary-search-algorithm/">暂无评论</span>
+							<span class="ds-thread-count" data-thread-key="archives/128/">暂无评论</span>
 					      </span>						
 						
 					</div>	
 
 								
 					<h3 class="entry-title"> 
-						  <a href="/archives/binary-search-algorithm/" >二分查找的递归与非递归实现</a>
+						  <a href="/archives/128/" >对陈皓博客《C++虚函数解析》的补充</a>
 					</h3>		
-                                     <span style="font-size:15px"></span>
+                                     <span style="font-size:15px"><p>关于C++中虚函数的实现原理，陈皓的这篇文章“<a href="http://blog.csdn.net/haoel/article/details/1948051" target="_blank" rel="external">C++虚函数解析</a>”讲得不错，但是博客中的代码有点点问题。</p>
+<p>借用他博客里面的几个图，我补充了我在自己理解基础上写出的正确代码:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Base</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;<span class="built_in">cout</span> &lt;&lt; <span class="string">"Base::f"</span> &lt;&lt; <span class="built_in">endl</span>;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123;<span class="built_in">cout</span> &lt;&lt; <span class="string">"Base::g"</span> &lt;&lt; <span class="built_in">endl</span>;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">h</span><span class="params">()</span> </span>&#123;<span class="built_in">cout</span> &lt;&lt; <span class="string">"Base::h"</span> &lt;&lt; <span class="built_in">endl</span>;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> Drive : <span class="keyword">public</span> Base</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">()</span> </span>&#123;<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drived::f"</span> &lt;&lt; <span class="built_in">endl</span>;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">f1</span><span class="params">()</span> </span>&#123;<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drived::f1"</span> &lt;&lt; <span class="built_in">endl</span>;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">g1</span><span class="params">()</span> </span>&#123;<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drived::g1"</span> &lt;&lt; <span class="built_in">endl</span>;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">h1</span><span class="params">()</span> </span>&#123;<span class="built_in">cout</span> &lt;&lt; <span class="string">"Drived::h1"</span> &lt;&lt; <span class="built_in">endl</span>;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">typedef</span> <span class="title">void</span> <span class="params">(*Fun)</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line">    Base b;</span><br><span class="line">    Fun pFun = <span class="literal">NULL</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"虚函数表指针的地址："</span> &lt;&lt; &amp;b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"虚函数表的地址："</span> &lt;&lt; *(<span class="keyword">int</span> *)&amp;b &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"虚函数表中第一个函数的地址："</span> &lt;&lt; *(<span class="keyword">int</span> *)(*(<span class="keyword">int</span> *)&amp;b) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    </span><br><span class="line">    pFun = (Fun)(*(<span class="keyword">int</span> *)(*(<span class="keyword">int</span> *)&amp;b));</span><br><span class="line">    pFun();</span><br><span class="line">    pFun = (Fun)(*(<span class="keyword">int</span> *)((*(<span class="keyword">int</span> *)&amp;b)+<span class="number">4</span>));</span><br><span class="line">    pFun();</span><br><span class="line">    pFun = (Fun)(*(<span class="keyword">int</span> *)((*(<span class="keyword">int</span> *)&amp;b)+<span class="number">8</span>));</span><br><span class="line">    pFun();</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"多态情况下："</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    Base *b2 = <span class="keyword">new</span> Drive();</span><br><span class="line">    </span><br><span class="line">    pFun = (Fun)(*(<span class="keyword">int</span> *)(*(<span class="keyword">int</span> *)b2));</span><br><span class="line">    pFun();</span><br><span class="line">    pFun = (Fun)(*(<span class="keyword">int</span> *)((*(<span class="keyword">int</span> *)b2)+<span class="number">4</span>));</span><br><span class="line">    pFun();</span><br><span class="line">    pFun = (Fun)(*(<span class="keyword">int</span> *)((*(<span class="keyword">int</span> *)b2)+<span class="number">8</span>));</span><br><span class="line">    pFun();</span><br><span class="line">    pFun = (Fun)(*(<span class="keyword">int</span> *)((*(<span class="keyword">int</span> *)b2)+<span class="number">12</span>));</span><br><span class="line">    pFun();</span><br><span class="line">    pFun = (Fun)(*(<span class="keyword">int</span> *)((*(<span class="keyword">int</span> *)b2)+<span class="number">16</span>));</span><br><span class="line">    pFun();</span><br><span class="line">    pFun = (Fun)(*(<span class="keyword">int</span> *)((*(<span class="keyword">int</span> *)b2)+<span class="number">20</span>));</span><br><span class="line">    pFun();    </span><br><span class="line">    </span><br><span class="line">    system(<span class="string">"pause"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码通过直接操作指针的方式来访问对象中的各个成员函数，执行结果如下：<br><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/12/21/virtual-function.jpg" alt=""></p>
+<p>对于上述代码，Base类对象的内存分布情况如下所示：<br><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/12/21/o_vtable1.jpg" alt=""></p>
+<p>而在子类Drive中，其对象的内存分布情况如下所示：<br><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/12/21/o_vtable2.JPG" alt=""></p>
+</span>
 				</header>
 
 				<!-- share -->
@@ -164,7 +174,7 @@
                 	<span class="fa fa-folder" aria-hidden="true"></span> 
 
 		
-			<a href="/categories/数据结构与算法/">数据结构与算法</a>
+			<a href="/categories/c和c/">c和c++</a>
 		
 
 		</span>
@@ -172,9 +182,9 @@
                         <span class="fa fa-tags" aria-hidden="true"></span> 
 
 		
-			<a href="/tags/面试/">面试</a>&nbsp;
+			<a href="/tags/cpp/">cpp</a>&nbsp;
 		
-			<a href="/tags/算法/">算法</a>&nbsp;
+			<a href="/tags/虚函数/">虚函数</a>&nbsp;
 		
 
                 </span>
@@ -205,17 +215,17 @@
 
 	 
 		
-    	            <p class="p1">上一篇 <a href="/archives/vi-guide/">vi基本使用方法</a></p> 
+    	            <p class="p1">上一篇 <a href="/archives/166/">使用edas系统的“bug”提前查看论文是否被accept</a></p> 
 
 		
-		   <p class="p2">下一篇 <a href="/archives/mysql-commands/">mysql常用命令与使用方法</a></p> 
+		   <p class="p2">下一篇 <a href="/archives/127/">libevent源码分析(5)</a></p> 
 	
 	
 	<!-- comment -->
 	
 <section id="comment">
   
-  	 <div class="ds-thread" data-thread-key="archives/binary-search-algorithm/" data-title="二分查找的递归与非递归实现" data-url="http://www.rudy-yuan.net/archives/binary-search-algorithm/"></div>  
+  	 <div class="ds-thread" data-thread-key="archives/128/" data-title="对陈皓博客《C++虚函数解析》的补充" data-url="http://www.rudy-yuan.net/archives/128/"></div>  
   
 </section>
 
@@ -355,45 +365,45 @@
 		<h4 style="font-weight: bold; color: #333 ">Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/面试/">面试<span>2</span></a></li>
-		
-			<li><a href="/tags/热点文章/">热点文章<span>2</span></a></li>
-		
-			<li><a href="/tags/算法/">算法<span>2</span></a></li>
-		
-			<li><a href="/tags/转载/">转载<span>1</span></a></li>
-		
-			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
-		
 			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
 		
-			<li><a href="/tags/Q-A/">Q&amp;A<span>2</span></a></li>
-		
-			<li><a href="/tags/mysql/">mysql<span>2</span></a></li>
-		
-			<li><a href="/tags/cpp/">cpp<span>1</span></a></li>
-		
-			<li><a href="/tags/博主推荐/">博主推荐<span>2</span></a></li>
-		
-			<li><a href="/tags/Leetcode/">Leetcode<span>1</span></a></li>
+			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
 		
 			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
 		
-			<li><a href="/tags/edas提前/">edas提前<span>1</span></a></li>
-		
-			<li><a href="/tags/themes/">themes<span>1</span></a></li>
+			<li><a href="/tags/网络/">网络<span>1</span></a></li>
 		
 			<li><a href="/tags/English/">English<span>1</span></a></li>
 		
-			<li><a href="/tags/leetcode/">leetcode<span>1</span></a></li>
-		
-			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
-		
-			<li><a href="/tags/mysql远程连接/">mysql远程连接<span>1</span></a></li>
-		
 			<li><a href="/tags/vi/">vi<span>1</span></a></li>
 		
-			<li><a href="/tags/KMP/">KMP<span>2</span></a></li>
+			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
+		
+			<li><a href="/tags/热点文章/">热点文章<span>2</span></a></li>
+		
+			<li><a href="/tags/博主推荐/">博主推荐<span>2</span></a></li>
+		
+			<li><a href="/tags/edas提前/">edas提前<span>1</span></a></li>
+		
+			<li><a href="/tags/plugins/">plugins<span>2</span></a></li>
+		
+			<li><a href="/tags/数据库远程连接/">数据库远程连接<span>0</span></a></li>
+		
+			<li><a href="/tags/leetcode/">leetcode<span>1</span></a></li>
+		
+			<li><a href="/tags/github静态博客/">github静态博客<span>1</span></a></li>
+		
+			<li><a href="/tags/算法/">算法<span>2</span></a></li>
+		
+			<li><a href="/tags/繁體/">繁體<span>0</span></a></li>
+		
+			<li><a href="/tags/cpp/">cpp<span>1</span></a></li>
+		
+			<li><a href="/tags/阿里云/">阿里云<span>1</span></a></li>
+		
+			<li><a href="/tags/面试/">面试<span>2</span></a></li>
+		
+			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>33</span></a></li>
