@@ -160,7 +160,7 @@
 <p>那么怎么计算P[i]呢？</p>
 <p>设变量center表示最大回文子串中心的位置，right是最大回文子串的边界，j是i关于center的对称点。</p>
 <p>计算p[i]的方法如图所示：</p>
-<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2015/05/11/Palindromic-Substring-1.jpg?imageView/2/w/850/h/400" alt=""></p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2015/05/11/Palindromic-Substring-1.jpg?imageView/2/w/750/h/400" alt=""></p>
 <p>下面是我做<a href="https://leetcode.com/problems/longest-palindromic-substring/" target="_blank" rel="external">leetcode上的题目</a>的源代码：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="built_in">string</span> <span class="title">preProcess</span><span class="params">(<span class="built_in">string</span> s)</span></span><br><span class="line">     </span>&#123;</span><br><span class="line">         <span class="keyword">int</span> n = s.length();</span><br><span class="line">         <span class="built_in">string</span> ret = <span class="string">"$"</span>;</span><br><span class="line">         </span><br><span class="line">         <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)</span><br><span class="line">             ret += <span class="string">"#"</span> + s.substr(i, <span class="number">1</span>);</span><br><span class="line">         ret += <span class="string">"#"</span>;</span><br><span class="line">         </span><br><span class="line">         <span class="keyword">return</span> ret;</span><br><span class="line">     &#125;</span><br><span class="line"> </span><br><span class="line">     <span class="function"><span class="built_in">string</span> <span class="title">longestPalindrome</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">if</span>(s.length() == <span class="number">0</span>)</span><br><span class="line">             <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">         </span><br><span class="line">         <span class="built_in">string</span> str = preProcess(s);</span><br><span class="line">         <span class="keyword">int</span> n = str.length();</span><br><span class="line">         </span><br><span class="line">         <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; p(n, <span class="number">0</span>);</span><br><span class="line">         <span class="keyword">int</span> center = <span class="number">0</span>, right = <span class="number">0</span>;</span><br><span class="line">         <span class="keyword">int</span> maxLen = <span class="number">0</span>;</span><br><span class="line">         <span class="keyword">int</span> start;</span><br><span class="line">         <span class="keyword">bool</span> finish;</span><br><span class="line">         </span><br><span class="line">         <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n<span class="number">-1</span>; ++i)</span><br><span class="line">         &#123;</span><br><span class="line">             finish = <span class="literal">false</span>;</span><br><span class="line">             <span class="keyword">if</span>(i &lt; right)</span><br><span class="line">             &#123;</span><br><span class="line">                 <span class="keyword">int</span> j = <span class="number">2</span>*center-i;</span><br><span class="line">                 <span class="keyword">if</span>(p[j] &lt; right-i)</span><br><span class="line">                 &#123;</span><br><span class="line">                     finish = <span class="literal">true</span>;</span><br><span class="line">                     p[i] = p[j];</span><br><span class="line">                 &#125;</span><br><span class="line">                 <span class="keyword">else</span></span><br><span class="line">                 &#123;</span><br><span class="line">                     p[i] = right-i;</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line">             <span class="keyword">else</span></span><br><span class="line">             &#123;</span><br><span class="line">                 p[i] = <span class="number">0</span>;</span><br><span class="line">             &#125;</span><br><span class="line">     </span><br><span class="line">             <span class="keyword">if</span>(finish == <span class="literal">false</span>)</span><br><span class="line">             &#123;</span><br><span class="line">                 <span class="keyword">while</span>(str[i+(<span class="number">1</span>+p[i])] == str[i-(<span class="number">1</span>+p[i])])</span><br><span class="line">                     ++ p[i];</span><br><span class="line">             &#125;</span><br><span class="line"></span><br><span class="line">             <span class="keyword">if</span>(p[i] + i &gt; right)</span><br><span class="line">             &#123;</span><br><span class="line">                 center = i;</span><br><span class="line">                 right = i + p[i];</span><br><span class="line">             &#125;</span><br><span class="line">             </span><br><span class="line">             <span class="keyword">if</span>(p[i] &gt; maxLen)</span><br><span class="line">             &#123;</span><br><span class="line">                 maxLen = p[i];</span><br><span class="line">                 start = i;</span><br><span class="line">             &#125;</span><br><span class="line">         &#125;</span><br><span class="line">         </span><br><span class="line">         <span class="keyword">return</span> s.substr((start<span class="number">-1</span>-maxLen)/<span class="number">2</span>, maxLen);</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
 <p>参考博客：</p>
@@ -380,45 +380,45 @@
 		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/博主推荐/">博主推荐<span>2</span></a></li>
+			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
 		
-			<li><a href="/tags/github/">github<span>1</span></a></li>
+			<li><a href="/tags/对象模型/">对象模型<span>1</span></a></li>
 		
 			<li><a href="/tags/Q-A/">Q&amp;A<span>1</span></a></li>
 		
-			<li><a href="/tags/简体/">简体<span>1</span></a></li>
-		
-			<li><a href="/tags/mysql/">mysql<span>2</span></a></li>
-		
-			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
-		
-			<li><a href="/tags/libevent/">libevent<span>1</span></a></li>
-		
-			<li><a href="/tags/保研/">保研<span>1</span></a></li>
-		
-			<li><a href="/tags/themes/">themes<span>1</span></a></li>
-		
 			<li><a href="/tags/KMP/">KMP<span>2</span></a></li>
 		
-			<li><a href="/tags/数据结构/">数据结构<span>1</span></a></li>
-		
-			<li><a href="/tags/热点文章/">热点文章<span>4</span></a></li>
-		
-			<li><a href="/tags/转载/">转载<span>1</span></a></li>
+			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
 		
 			<li><a href="/tags/edas提前/">edas提前<span>1</span></a></li>
 		
-			<li><a href="/tags/面试/">面试<span>4</span></a></li>
+			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
 		
-			<li><a href="/tags/English/">English<span>1</span></a></li>
-		
-			<li><a href="/tags/Manacher算法/">Manacher算法<span>1</span></a></li>
-		
-			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
+			<li><a href="/tags/阿里云/">阿里云<span>1</span></a></li>
 		
 			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
 		
+			<li><a href="/tags/热点文章/">热点文章<span>4</span></a></li>
+		
+			<li><a href="/tags/mysql远程连接/">mysql远程连接<span>1</span></a></li>
+		
+			<li><a href="/tags/python/">python<span>1</span></a></li>
+		
+			<li><a href="/tags/马拉车算法/">马拉车算法<span>1</span></a></li>
+		
+			<li><a href="/tags/mysql/">mysql<span>2</span></a></li>
+		
+			<li><a href="/tags/mediastreamer2/">mediastreamer2<span>1</span></a></li>
+		
+			<li><a href="/tags/cpp/">cpp<span>3</span></a></li>
+		
+			<li><a href="/tags/plugins/">plugins<span>2</span></a></li>
+		
 			<li><a href="/tags/算法/">算法<span>3</span></a></li>
+		
+			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
+		
+			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>42</span></a></li>
