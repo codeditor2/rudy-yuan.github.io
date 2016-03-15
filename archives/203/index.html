@@ -173,7 +173,7 @@
 </ol>
 </blockquote>
 <p>样例代码参见“sample/echo” <a id="more"></a>。</p>
-<h3 id="1-定义通讯协议"><a href="#1-定义通讯协议" class="headerlink" title="1. 定义通讯协议"></a>1. 定义通讯协议</h3><p>定义协议只需要编写一个proto文件即可。(可参考上一篇博客：<a href="http://www.rudy-yuan.net/archives/201">Google Protobuf语言指南</a></p>
+<h3 id="1-定义通讯协议"><a href="#1-定义通讯协议" class="headerlink" title="1. 定义通讯协议"></a>1. 定义通讯协议</h3><p>定义协议只需要编写一个proto文件即可。(可参考上一篇博客：<a href="http://www.rudy-yuan.net/archives/201">Google Protobuf语言指南</a>)</p>
 <p>范例：echo_service.proto</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package sofa.pbrpc.test; </span><br><span class="line">option cc_generic_services = true; </span><br><span class="line"></span><br><span class="line">// 定义请求消息 </span><br><span class="line">message EchoRequest &#123; </span><br><span class="line">    required string message = 1; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">// 定义回应消息 </span><br><span class="line">message EchoResponse &#123; </span><br><span class="line">    required string message = 1; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">// 定义RPC服务，可包含多个方法（这里只列出一个） </span><br><span class="line">service EchoServer &#123; </span><br><span class="line">    rpc Echo (EchoRequest) returns (EchoResponse); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>使用protoc编译’echo_service.proto’，生成接口文件’echo_service.pb.h’和’echo_service.pb.cc’。</p>
@@ -257,7 +257,7 @@
 					<p class="p1">上一篇 <a href="/archives/206/">谷歌技术"三宝"之MapReduce</a></p> 
 
 				
-				   <p class="p2">下一篇 <a href="/archives/199/">什么是 web 框架？</a></p> 
+				   <p class="p2">下一篇 <a href="/archives/202/">Google Protobuf语言指南</a></p> 
 			
 		
 		<!-- comment -->
@@ -394,7 +394,7 @@
 		
 			<li><a href="/categories/c和c/">c和c++<span>1</span></a></li>
 		
-			<li><a href="/categories/c和cpp/">c和cpp<span>4</span></a></li>
+			<li><a href="/categories/c和cpp/">c和cpp<span>3</span></a></li>
 		
 			<li><a href="/categories/leetcode/">leetcode<span>5</span></a></li>
 		
@@ -410,7 +410,7 @@
 		
 			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>3</span></a></li>
 		
-			<li><a href="/categories/源码学习/">源码学习<span>4</span></a></li>
+			<li><a href="/categories/源码学习/">源码学习<span>5</span></a></li>
 		
 		</ul>
 	</div>
@@ -420,48 +420,48 @@
 		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Leetcode/">Leetcode<span>1</span></a></li>
-		
-			<li><a href="/tags/对象模型/">对象模型<span>1</span></a></li>
-		
-			<li><a href="/tags/vi/">vi<span>1</span></a></li>
-		
-			<li><a href="/tags/保研/">保研<span>1</span></a></li>
-		
-			<li><a href="/tags/马拉车算法/">马拉车算法<span>0</span></a></li>
-		
-			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
-		
-			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
+			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
 		
 			<li><a href="/tags/mediastreamer2/">mediastreamer2<span>1</span></a></li>
 		
-			<li><a href="/tags/Q-A/">Q&amp;A<span>1</span></a></li>
+			<li><a href="/tags/mysql远程连接/">mysql远程连接<span>1</span></a></li>
+		
+			<li><a href="/tags/热点文章/">热点文章<span>5</span></a></li>
+		
+			<li><a href="/tags/mysql/">mysql<span>2</span></a></li>
+		
+			<li><a href="/tags/free2mind/">free2mind<span>1</span></a></li>
+		
+			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
+		
+			<li><a href="/tags/桃江地震/">桃江地震<span>1</span></a></li>
 		
 			<li><a href="/tags/ubuntu-yuan/">ubuntu yuan<span>1</span></a></li>
 		
-			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
+			<li><a href="/tags/马拉车算法/">马拉车算法<span>0</span></a></li>
 		
-			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
+			<li><a href="/tags/保研/">保研<span>1</span></a></li>
 		
-			<li><a href="/tags/ubuntu源/">ubuntu源<span>1</span></a></li>
-		
-			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
-		
-			<li><a href="/tags/github/">github<span>1</span></a></li>
-		
-			<li><a href="/tags/libevent/">libevent<span>1</span></a></li>
-		
-			<li><a href="/tags/网络/">网络<span>1</span></a></li>
-		
-			<li><a href="/tags/clixsense/">clixsense<span>0</span></a></li>
-		
-			<li><a href="/tags/转载/">转载<span>2</span></a></li>
+			<li><a href="/tags/vi/">vi<span>1</span></a></li>
 		
 			<li><a href="/tags/KMP/">KMP<span>2</span></a></li>
 		
+			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
 		
-		   <li><a href="/tags">...<span>51</span></a></li>
+			<li><a href="/tags/面试/">面试<span>5</span></a></li>
+		
+			<li><a href="/tags/NDN/">NDN<span>1</span></a></li>
+		
+			<li><a href="/tags/网络/">网络<span>1</span></a></li>
+		
+			<li><a href="/tags/plugins/">plugins<span>2</span></a></li>
+		
+			<li><a href="/tags/Q-A/">Q&amp;A<span>1</span></a></li>
+		
+			<li><a href="/tags/English/">English<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>52</span></a></li>
 		 
 		</ul>
 	</div>
