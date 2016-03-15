@@ -4,8 +4,56 @@
 
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/198/</loc>
+    <lastmod>2016-03-15T15:01:51.462Z</lastmod>
+    <data>
+        <display>
+        <title>国内访问Facebook的方法(附持续更像hosts文件)</title>
+        <pubTime>2015-09-15T00:11:00.000Z</pubTime>
+        
+        <tag>阿里云</tag>
+         
+        <tag>linux</tag>
+         
+        <tag>xshell</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux学习" url="http://www.rudy-yuan.net/categories/linux%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/196/</loc>
+    <lastmod>2016-03-15T15:01:20.225Z</lastmod>
+    <data>
+        <display>
+        <title>Python生成器</title>
+        <pubTime>2015-09-15T00:11:00.000Z</pubTime>
+        
+        <tag>阿里云</tag>
+         
+        <tag>linux</tag>
+         
+        <tag>xshell</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux学习" url="http://www.rudy-yuan.net/categories/linux%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/197/</loc>
-    <lastmod>2016-03-15T14:59:13.700Z</lastmod>
+    <lastmod>2016-03-15T15:00:28.395Z</lastmod>
     <data>
         <display>
         <title>使用rz和sz命令在windows和阿里云linux间传文件</title>
@@ -797,34 +845,14 @@
     
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
+    <loc>http://www.rudy-yuan.net/archives/tag-plugins-cn/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>Tag Plugins</title>
-        <pubTime>2014-03-16T02:17:16.000Z</pubTime>
+        <title>Tag Plugins（中文）</title>
+        <pubTime>2014-03-16T02:10:16.000Z</pubTime>
         
         <tag>plugins</tag>
-         
-         
-           
-             
-              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/color-themes/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Color Themes</title>
-        <pubTime>2016-01-30T05:00:24.000Z</pubTime>
-        
-        <tag>themes</tag>
          
          
            
@@ -857,6 +885,46 @@
 
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/color-themes/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Color Themes</title>
+        <pubTime>2016-01-30T05:00:24.000Z</pubTime>
+        
+        <tag>themes</tag>
+         
+         
+           
+             
+              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Tag Plugins</title>
+        <pubTime>2014-03-16T02:17:16.000Z</pubTime>
+        
+        <tag>plugins</tag>
+         
+         
+           
+             
+              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
@@ -870,26 +938,6 @@
            
              
               <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/tag-plugins-cn/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Tag Plugins（中文）</title>
-        <pubTime>2014-03-16T02:10:16.000Z</pubTime>
-        
-        <tag>plugins</tag>
-         
-         
-           
-             
-              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
           
         </display>
     </data>
