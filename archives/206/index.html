@@ -6,11 +6,8 @@
   <title>谷歌技术&quot;三宝&quot;之MapReduce | Rudy-Yuan的博客</title>
   <meta name="author" content="Rudy-Yuan">
   
-  <meta name="description" content="MapReduce是如何工作的 
-上图是论文里给出的流程图。一切都是从最上方的user program开始的，user program链接了MapReduce库，实现了最基本的Map函数和Reduce函数。图中执行的顺序都用数字标记了。
-
-
-MapReduce库先把userprogram的输入文件划">
+  <meta name="description" content="MapReduce是如何工作的
+下图是论文里给出的流程图。一切都是从最上方的user program开始的，user program链接了MapReduce库，实现了最基本的Map函数和Reduce函数。图中执行的顺序都用数字标记了">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -133,7 +130,7 @@ MapReduce库先把userprogram的输入文件划">
 							
 						<span class="entry-date">
 							<span class="fa fa-calendar" aria-hidden="true"></span>
-							2015-01-13						      
+							2016-01-13						      
 						</span>
 							  
 							  
@@ -154,8 +151,9 @@ MapReduce库先把userprogram的输入文件划">
 						<a href="/archives/206/" >谷歌技术&quot;三宝&quot;之MapReduce</a>
 					</h3>		
 						
-					<span style="font-size:15px"><h3 id="MapReduce是如何工作的"><a href="#MapReduce是如何工作的" class="headerlink" title="MapReduce是如何工作的"></a>MapReduce是如何工作的</h3><p><img src="http://img.my.csdn.net/uploads/201204/26/1335443612_8438.jpg" alt=""> </p>
-<p>上图是论文里给出的流程图。一切都是从最上方的user program开始的，user program链接了MapReduce库，实现了最基本的Map函数和Reduce函数。图中执行的顺序都用数字标记了。</p>
+					<span style="font-size:15px"><p>MapReduce是如何工作的</p>
+<p>下图是论文里给出的流程图。一切都是从最上方的user program开始的，user program链接了MapReduce库，实现了最基本的Map函数和Reduce函数。图中执行的顺序都用数字标记了<a id="more"></a>。</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog%2F2016%2F01%2F23%2Fmapreduce.jpg?imageView/2/w/750/h/400" alt=""> </p>
 <blockquote>
 <ol>
 <li>MapReduce库先把userprogram的输入文件划分为M份（M为用户定义），每一份通常有16MB到64MB，如图左方所示分成了split0~4；然后使用fork将用户进程拷贝到集群内其它机器上。</li>
@@ -169,8 +167,9 @@ MapReduce库先把userprogram的输入文件划">
 </blockquote>
 <p>所有执行完毕后，MapReduce输出放在了R个分区的输出文件中（分别对应一个Reduce作业）。用户通常并不需要合并这R个文件，而是将其作为输入交给另一个MapReduce程序处理。整个过程中，输入数据是来自底层分布式文件系统（GFS）的，中间数据是放在本地文件系统的，最终输出数据是写入底层分布式文件系统（GFS）的。</p>
 <p>而且我们要注意:</p>
-<p><strong>Map/Reduce作业和map/reduce函数的区别</strong>：*Map作业处理一个输入数据的分片，可能需要调用多次map函数来处理每个输入键值对；</p>
-<p>Reduce作业处理一个分区的中间键值对，期间要对每个不同的键调用一次reduce函数，Reduce作业最终也对应一个输出文件*。</p>
+<p><strong>Map/Reduce作业和map/reduce函数的区别</strong>：Map作业处理一个输入数据的分片，可能需要调用多次map函数来处理每个输入键值对；</p>
+<p>Reduce作业处理一个分区的中间键值对，期间要对每个不同的键调用一次reduce函数，Reduce作业最终也对应一个输出文件。</p>
+<div class="alert alert-success"><i class="fa fa-lightbulb-o"></i>  本文转载自<a href="http://blog.csdn.net/opennaive/article/details/7514146" target="_blank" rel="external">fumin</a>的博客!</div>
 </span>
 				</header>
 
@@ -228,10 +227,10 @@ MapReduce库先把userprogram的输入文件划">
 
 		 
 				
-					<p class="p1">上一篇 <a href="/archives/204/">使用C++实现模板类的友元重载</a></p> 
+					<p class="p1">上一篇 <a href="/archives/color-themes/">Color Themes</a></p> 
 
 				
-				   <p class="p2">下一篇 <a href="/archives/166/">使用edas系统的“bug”提前查看论文是否被accept</a></p> 
+				   <p class="p2">下一篇 <a href="/archives/199/">什么是 web 框架？</a></p> 
 			
 		
 		<!-- comment -->
@@ -385,45 +384,45 @@ MapReduce库先把userprogram的输入文件划">
 		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
+			<li><a href="/tags/themes/">themes<span>1</span></a></li>
+		
 			<li><a href="/tags/mysql远程连接/">mysql远程连接<span>1</span></a></li>
 		
-			<li><a href="/tags/博主推荐/">博主推荐<span>2</span></a></li>
-		
-			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
-		
-			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
-		
-			<li><a href="/tags/Leetcode/">Leetcode<span>1</span></a></li>
-		
-			<li><a href="/tags/github/">github<span>1</span></a></li>
-		
-			<li><a href="/tags/free2mind/">free2mind<span>1</span></a></li>
-		
-			<li><a href="/tags/Manacher算法/">Manacher算法<span>1</span></a></li>
-		
-			<li><a href="/tags/mapReduce/">mapReduce<span>1</span></a></li>
-		
-			<li><a href="/tags/Web服务器/">Web服务器<span>1</span></a></li>
+			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
 		
 			<li><a href="/tags/English/">English<span>1</span></a></li>
 		
-			<li><a href="/tags/保研/">保研<span>1</span></a></li>
+			<li><a href="/tags/free2mind/">free2mind<span>1</span></a></li>
 		
-			<li><a href="/tags/热点文章/">热点文章<span>5</span></a></li>
+			<li><a href="/tags/数据结构/">数据结构<span>1</span></a></li>
 		
-			<li><a href="/tags/plugins/">plugins<span>2</span></a></li>
-		
-			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
-		
-			<li><a href="/tags/cpp/">cpp<span>7</span></a></li>
+			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
 		
 			<li><a href="/tags/桃江地震/">桃江地震<span>1</span></a></li>
 		
-			<li><a href="/tags/vi/">vi<span>1</span></a></li>
+			<li><a href="/tags/python/">python<span>1</span></a></li>
 		
-			<li><a href="/tags/对象模型/">对象模型<span>1</span></a></li>
+			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
+		
+			<li><a href="/tags/github静态博客/">github静态博客<span>1</span></a></li>
+		
+			<li><a href="/tags/算法/">算法<span>3</span></a></li>
+		
+			<li><a href="/tags/leetcode/">leetcode<span>3</span></a></li>
 		
 			<li><a href="/tags/mysql/">mysql<span>2</span></a></li>
+		
+			<li><a href="/tags/Leetcode/">Leetcode<span>1</span></a></li>
+		
+			<li><a href="/tags/马拉车算法/">马拉车算法<span>0</span></a></li>
+		
+			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
+		
+			<li><a href="/tags/热点文章/">热点文章<span>5</span></a></li>
+		
+			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
+		
+			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>45</span></a></li>
