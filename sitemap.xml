@@ -4,6 +4,30 @@
 
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/197/</loc>
+    <lastmod>2016-03-15T14:59:13.700Z</lastmod>
+    <data>
+        <display>
+        <title>使用rz和sz命令在windows和阿里云linux间传文件</title>
+        <pubTime>2015-09-15T00:11:00.000Z</pubTime>
+        
+        <tag>阿里云</tag>
+         
+        <tag>linux</tag>
+         
+        <tag>xshell</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux学习" url="http://www.rudy-yuan.net/categories/linux%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/206/</loc>
     <lastmod>2016-03-15T14:55:01.493Z</lastmod>
     <data>
@@ -469,30 +493,6 @@
     
   <url>
     <loc>http://www.rudy-yuan.net/archives/199/</loc>
-    <lastmod>2016-03-14T13:12:28.841Z</lastmod>
-    <data>
-        <display>
-        <title>什么是 web 框架？</title>
-        <pubTime>2015-09-28T14:09:00.000Z</pubTime>
-        
-        <tag>web服务器</tag>
-         
-        <tag>网络</tag>
-         
-        <tag>转载</tag>
-         
-         
-           
-             
-              <breadCrumb title="socket与网络" url="http://www.rudy-yuan.net/categories/socket%E4%B8%8E%E7%BD%91%E7%BB%9C/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/197/</loc>
     <lastmod>2016-03-14T13:12:28.841Z</lastmod>
     <data>
         <display>

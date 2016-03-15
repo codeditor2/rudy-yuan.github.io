@@ -3,15 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>什么是 web 框架？ | Rudy-Yuan的博客</title>
+  <title>使用rz和sz命令在windows和阿里云linux间传文件 | Rudy-Yuan的博客</title>
   <meta name="author" content="Rudy-Yuan">
   
-  <meta name="description" content="Web 应用框架，或者简单的说是“Web 框架”，其实是建立 web 应用的一种方式。从简单的博客系统到复杂的富 AJAX 应用，web 上每个页面都是通过写代码来生成的。我发现很多人都热衷于学习 web 框架技术，例如 Flask 或这 Django 之类的，但是很多人并不理解什么是 web 框架，或者它们是如何工作的。">
+  <meta name="description" content="对于经常使用Linux系统的人员来说，少不了将本地的文件上传到服务器或者从服务器上下载文件到本地
+例如，在使用阿里云这种远程linux服务器时，由于一般都没有安装图形界面，所以只能进行SSH访问。
+这时候，本地操作系统往往是windows，怎么在本地windows和远程linux系统间相互传送文件呢">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="什么是 web 框架？"/>
+  <meta property="og:title" content="使用rz和sz命令在windows和阿里云linux间传文件"/>
   <meta property="og:site_name" content="Rudy-Yuan的博客"/>
 
   
@@ -112,9 +114,9 @@
 		  <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">
 			  当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;:&nbsp;
 			
-				<a href="/categories/socket与网络/">socket与网络</a>
+				<a href="/categories/linux学习/">linux学习</a>
 			
-		  &nbsp;</a>»&nbsp; 什么是 web 框架？ </h4>
+		  &nbsp;</a>»&nbsp; 使用rz和sz命令在windows和阿里云linux间传文件 </h4>
 		</div>
 
 		<div id="top_search"></div>
@@ -129,7 +131,7 @@
 							
 						<span class="entry-date">
 							<span class="fa fa-calendar" aria-hidden="true"></span>
-							2015-09-28						      
+							2015-09-15						      
 						</span>
 							  
 							  
@@ -147,58 +149,20 @@
 
 									
 					<h3 class="entry-title"> 
-						<a href="/archives/197/" >什么是 web 框架？</a>
+						<a href="/archives/197/" >使用rz和sz命令在windows和阿里云linux间传文件</a>
 					</h3>		
 						
-					<span style="font-size:15px"><p>Web 应用框架，或者简单的说是“Web 框架”，其实是建立 web 应用的一种方式。从简单的博客系统到复杂的富 AJAX 应用，web 上每个页面都是通过写代码来生成的。我发现很多人都热衷于学习 web 框架技术，例如 Flask 或这 Django 之类的，但是很多人并不理解什么是 web 框架，或者它们是如何工作的。<a id="more"></a>这篇文章中，我将探索反复被忽略的 web 框架基础的话题。阅读完这篇文章，你应该首先对什么是 web 框架以及它们为什么会存在有更深的认识。这会让你学习一个新的 web 框架变得简单的多，还会让你在使用不同的框架的时候做个明知的选择。</p>
-<h2 id="1-Web-如何工作的？"><a href="#1-Web-如何工作的？" class="headerlink" title="1. Web 如何工作的？"></a>1. Web 如何工作的？</h2><p>在我们讨论框架之前，我们需要理解 Web 如何“工作”的。为此，我们将深入挖掘你在浏览器里输入一个 URL 按下 Enter 之后都发生了什么。在你的浏览器中打开一个新的标签，浏览<a href="http://www.rudy-yuan.net。" target="_blank" rel="external">http://www.rudy-yuan.net。</a> 我们讨论为了显示这个页面，浏览器都做了什么事情（不关心 DNS 查询）。</p>
-<h3 id="1-1-Web-服务器"><a href="#1-1-Web-服务器" class="headerlink" title="1.1 Web 服务器"></a>1.1 Web 服务器</h3><p>每个页面都以 HTML 的形式传送到你的浏览器中，HTML 是一种浏览器用来描述页面内容和结构的语言。那些负责发送 HTML 到浏览器的应用称之为“Web 服务器”，会让你迷惑的是，这些应用运行的机器通常也叫做 web 服务器。</p>
-<p>然而，最重要的是要理解，到最后所有的 web 应用要做的事情就是发送 HTML 到浏览器。不管应用的逻辑多么复杂，最终的结果总是将 HTML 发送到浏览器（我故意将应用可以响应像 JSON 或者 CSS 等不同类型的数据忽略掉，因为在概念上是相同的）。</p>
-<p>web 应用如何知道发送什么到浏览器呢？它发送浏览器请求的任何东西。</p>
-<h3 id="1-2-HTTP"><a href="#1-2-HTTP" class="headerlink" title="1.2 HTTP"></a>1.2 HTTP</h3><p>浏览器从 web 服务器（或者叫应用服务器）上使用 HTTP 协议下载网站，HTTP 协议是基于一种 请求-响应（request-response）模型的。客户端（你的浏览器）从运行在物理机器上的 web 应用请求数据，web 应用反过来对你的浏览器请求进行响应。</p>
-<p>重要的一点是，要记住通信总是由客户端（你的浏览器）发起的，服务器（也就是 web 服务器）没有办法创建一个链接，发送没有经过请求的数据给你的浏览器。如果你从 web 服务器上接收到数据，一定是因为你的浏览器显示地发送了请求。</p>
-<h3 id="1-3-HTTP-Methods"><a href="#1-3-HTTP-Methods" class="headerlink" title="1.3 HTTP Methods"></a>1.3 HTTP Methods</h3><p>在 HTTP 协议中，每条报文都关联方法（method 或者 verb），不同的 HTTP 方法对应客户端可以发送的逻辑上不同类型的请求，反过来也代表了客户端的不同意图。例如，请求一个 web 页面的 HTML，与提交一个表单在逻辑上是不同的，所以这两种行为就需要使用不同的方法。</p>
-<h4 id="HTTP-GET"><a href="#HTTP-GET" class="headerlink" title="HTTP GET"></a>HTTP GET</h4><p>GET 方法就像其听起来的那样，从 web 服务器上 get（请求）数据。GET 请求是到目前位置最常见的一种 HTTP 请求，在一次 GET 请求过程中，web 应用对请求页面的 HTML 进行响应之外，就不需要做任何事情了。特别的，web 应用在 GET 请求的结果中，不应该改变应用的状态（比如，不能基于 GET 请求创建一个新帐号）。正是因为这个原因，GET 请求通常认为是“安全”的，因为他们不会导致应用的改变。</p>
-<h4 id="HTTP-POST"><a href="#HTTP-POST" class="headerlink" title="HTTP POST"></a>HTTP POST</h4><p>显然，除了简单的查看页面之外，应该还有更多与网站进行交互的操作。我们也能够向应用发送数据，例如通过表单。为了达到这样的目的，就需要一种不同类型的请求方法：POST。POST 请求通常携带由用户输入的数据，web 应用收到之后会产生一些行为。通过在表单里输入你的信息登录一个网站，就是 POST 表单的数据给 web 应用的。</p>
-<p>不同于 GET 请求，POST 请求通常会导致应用状态的改变。在我们的例子中，当表单 POST 之后，一个新的账户被创建。不同于 GET 请求，POST 请求不总是生成一个新的 HTML 页面发送到客户端，而是客户端使用响应的响应码（response code）来决定对应用的操作是否成功。</p>
-<h3 id="1-4-HTTTP-Response-Codes"><a href="#1-4-HTTTP-Response-Codes" class="headerlink" title="1.4 HTTTP Response Codes"></a>1.4 HTTTP Response Codes</h3><p>通常来说，web 服务器返回 200 的响应码，意思是，“我已经完成了你要求我做的事情，一切都正常”。响应码总是一个三位数字的代号，web 应用在每个响应的同时都发送一个这样的代号，表明给定的请求的结果。响应码 200 字面意思是“OK”，是响应一个 GET 请求大多情况下都使用的代号。然而对于 POST 请求， 可能会有 204（“No Content”）发送回来，意思是“一切都正常，但是我不准备向你显示任何东西”。</p>
-<p>POST 请求仍然会发送一个特殊的 URL，这个 URL 可能和提交数据的页面不同，意识这一点是至关重要的。还是以我们的登录为例，表单可能是在 www.foo.com/signup 页面，然而点击 submit，可能会导致带有表单数据的 POST 请求发送到 www.foo.com/process_sigup 上。POST 请求要发送的位置在表单的 HTML 中有特别标明。</p>
-<h2 id="2-Web-应用"><a href="#2-Web-应用" class="headerlink" title="2. Web 应用"></a>2. Web 应用</h2><p>你可以仅仅使用 HTTP GET 和 POST 做很多事情。一个应用程序负责去接收一个 HTTP 请求，同时给以 HTTP 响应，通常包含了请求页面的 HTML。POST 请求会引起 web 应用做出一些行为，可能是往数据库中添加一条记录这样的。还有很多其它的 HTTP 方法，但是我们目前只关注 GET 和 POST。</p>
-<p>那么最简单的 web 应用是什么样的呢？我们可以写一个应用，让它一直监听 80 端口（著名的 HTTP 端口，几乎所有 HTTP 都发送到这个端口上）。一旦它接收到等待的客户端发送的请求连接，然后它就会回复一些简单的 HTML。</p>
-<p>下面是程序的代码：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import socket </span><br><span class="line">HOST = '' </span><br><span class="line">PORT = 80 </span><br><span class="line">listen_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) </span><br><span class="line">listen_socket.bind((HOST, PORT)) </span><br><span class="line">listen_socket.listen(1) </span><br><span class="line">connection, address = listen_socket.accept() </span><br><span class="line">request = connection.recv(1024) connection.sendall(b"""HTTP/1.1 200 OK Content-type: text/html &lt;html&gt;     &lt;body&gt;         &lt;h1&gt;Hello, World!&lt;/h1&gt;     &lt;/body&gt; &lt;/html&gt;""")</span><br><span class="line"></span><br><span class="line">connection.close()</span><br></pre></td></tr></table></figure>
-<p>（如果上面的代码不工作，试着将 PORT 改为类似 8080 这样的端口。）</p>
-<p>这个代码接收简单的链接和简单的请求，不管请求的 URL 是什么，它都会响应 HTTP 200（所以，这不是一个真正意义上的 web 服务器）。Content-type:text/html 行代码的是 header 字段，header 用来提供请求或者响应的元信息。这样，我们就告诉了客户端接下来的数据是 HTML。</p>
-<h3 id="2-1-请求的剖析"><a href="#2-1-请求的剖析" class="headerlink" title="2.1 请求的剖析"></a>2.1 请求的剖析</h3><p>如果看一下测试上面程序的 HTTP 请求，你会发现它和 HTTP 响应非常类似。第一行<http method=""> <url> <http version="">，在这个例子中是 GET / HTTP/1.0。第一行之后就是一些类似Accept: <em>/</em> 这样的头（意思是我们希望在响应中接收任何内容）。</http></url></http></p>
-<p>我们响应和请求有着类似的第一行，格式是<http version=""> <http status-code=""> <status-code reason="" phrase="">，在外面的例子中是HTTP/1.1 200 OK 。接下来是头部，与请求的头部有着相同的格式。最后是响应的实际包含的内容。注意，这会被解释为一个字符串或者二进制文件， Content-type 头告诉客户端怎样去解释响应。</status-code></http></http></p>
-<h2 id="3-Web-服务器之殇"><a href="#3-Web-服务器之殇" class="headerlink" title="3. Web 服务器之殇"></a>3. Web 服务器之殇</h2><p>如果我们继续以上面的例子为基础建立 web 应用，我们还需要解决很多问题：</p>
-<blockquote>
-<p>我们怎样检测请求的 URL 以及返回正确的页面？<br>除了简单的 GET 请求之外我们如何处理 POST 请求？<br>我们如何理解更高级的概念，如 session 和 cookie？<br>我们如何扩展程序以使其处理上千个并发连接？</p>
-</blockquote>
-<p>就像你想的那样，没有人愿意每次建立一个 web 应用都要解决这些问题。正是这个原因，就有处理 HTTP 协议本身和有效解决上面问题的办法的包存在。然而，记住了，它们的核心功能和我们的例子是相同的：监听请求，带有一些 HTML 发回 HTTP 响应。</p>
-<h2 id="4-解决两大问题：路由和模板-重点推荐"><a href="#4-解决两大问题：路由和模板-重点推荐" class="headerlink" title="4. 解决两大问题：路由和模板(重点推荐)"></a>4. 解决两大问题：路由和模板(重点推荐)</h2><p>围绕建立 web 应用的所有问题中，两个问题尤其突出：</p>
-<blockquote>
-<p>我们如何将请求的 URL 映射到处理它的代码上？<br>我们怎样动态地构造请求的 HTML 返回给客户端，HTML 中带有计算得到的值或者从数据库中取出来的信息？</p>
-</blockquote>
-<p>每个 web 框架都以某种方法来解决这些问题，也有很多不同的解决方案。用例子来说明更容易理解，所以我将针对这些问题讨论 Django 和 Flask 的解决方案。但是，首先我们还需要简单讨论一下 MVC 。</p>
-<h3 id="4-1-Django-中的-MVC"><a href="#4-1-Django-中的-MVC" class="headerlink" title="4.1 Django 中的 MVC"></a>4.1 Django 中的 MVC</h3><p>Django 充分利用 MVC 设计模式。 MVC，也就是 Model-View-Controller （模型-视图-控制器），是一种将应用的不同功能从逻辑上划分开。models 代表的是类似数据库表的资源（与 Python 中用 class 来对真实世界目标建模使用的方法大体相同）。controls 包括应用的业务逻辑，对 models 进行操作。为了动态生成代表页面的 HTML，需要 views 给出所有要动态生成页面的 HTML 的信息。</p>
-<p>在 Django 中有点让人困惑的是，controllers 被称做 views，而 views 被称为 templates。除了名字上的有点奇怪，Django 很好地实现了 MVC 的体系架构。</p>
-<h3 id="4-2-Django-中的路由"><a href="#4-2-Django-中的路由" class="headerlink" title="4.2 Django 中的路由"></a>4.2 Django 中的路由</h3><p>路由是处理请求 URL 到负责生成相关的 HTML 的代码之间映射的过程。在简单的情形下，所有的请求都是有相同的代码来处理（就像我们之前的例子那样）。变得稍微复杂一点，每个 URL 对应一个 view function 。举例来说，如果请求 www.foo.com/bar 这样的 URL，调用 handler_bar() 这样的函数来产生响应。我们可以建立这样的映射表，枚举出我们应用支持的所有 URL 与它们相关的函数。</p>
-<p>然而，当 URL 中包含有用的数据，例如资源的 ID（像这样 www.foo.com/users/3/） ，那么这种方法将变得非常臃肿。我们如何将 URL 映射到一个 view 函数，同时如何利用我们想显示 ID 为 3 的用户？</p>
-<p>Django 的答案是，将 URL 正则表达式映射到可以带参数的 view 函数。例如，我假设匹配^/users/(?P<id>\d+)/$ 的 URL 调用 display_user(id) 这样的函数，这儿参数 id 是正则表达式中匹配的 id。这种方法，任何 /users/<some_number>/ 这样的 URL 都会映射到 display_user 函数。这些正则表达式可以非常复杂，包含关键字和参数。</some_number></id></p>
-<h3 id="4-3-Flask-中的路由"><a href="#4-3-Flask-中的路由" class="headerlink" title="4.3 Flask 中的路由"></a>4.3 Flask 中的路由</h3><p>Flask 采取了一点不同的方法。将一个函数和请求的 URL 关联起来的标准方法是通过使用 route() 装饰器。下面是 Flask 代码，在功能上和上面正则表达式方法相同：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route('/users/&lt;id:int&gt;/') </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">display_user</span><span class="params">(id)</span>:</span></span><br><span class="line">    <span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
-<p>就像你看到的这样，装饰器使用几乎最简单的正则表达式的形式来将 URL 映射到参数。通过传递给route() 的 URL 中包含的 <name:type> 指令，可以提取到参数。路由像 /info/about_us.html 这样的静态 URL，可以像你预想的这样 @app.route(‘/info/about_us.html’) 处理。</name:type></p>
-<h3 id="4-4-通过-Templates-产生-HTML"><a href="#4-4-通过-Templates-产生-HTML" class="headerlink" title="4.4 通过 Templates 产生 HTML"></a>4.4 通过 Templates 产生 HTML</h3><p>继续上面的例子，一旦我们有合适的代码映射到正确的 URL，我们如何动态生成 HTML？对于 Django 和 Flask，答案都是通过 HTML Templating。</p>
-<p>HTML Templating 和使用 str.format() 类似：需要动态输出值的地方使用占位符填充，这些占位符后来通过 str.format() 函数用参数替换掉。想象一下，整个 web 页面就是一个字符串，用括号标明动态数据的位置，最后再调用 str.format() 。Django 模板和 Flask 使用的模板引擎 Jinja2 都使用的是这种方法。</p>
-<p>然而，不是所有的模板引擎都能相同的功能。Django 支持在模板里基本的编程，而 Jinja2 只能让你执行特定的代码（不是真正意义上的代码，但也差不多）。Jinja2 可以缓存渲染之后的模板，让接下来具有相同参数的请求可以直接从缓存中返回结果，而不是用再次花大力气渲染。</p>
-<h3 id="4-5-数据库交互"><a href="#4-5-数据库交互" class="headerlink" title="4.5 数据库交互"></a>4.5 数据库交互</h3><p>Django 有着“功能齐全”的设计哲学，其中包含了一个 ORM(Object Realational Mapper， 对象关系映射)，ORM 的目的有两方面：一是将 Python 的 class 与数据库表建立映射，而是剥离出不同数据库引擎直接的差异。没人喜欢 ORM，因为在不同的域之间映射永远不完美，然而这还在承受范围之内。Django 是功能齐全的，而 Flask 是一个微框架，不包括 ORM，尽管它对 SQLAlchemy 兼容性非常好，SQLAlchemy 是 Django ORM 的最大也是唯一的竞争对手。</p>
-<p>内嵌 ORM 让 Django 有能力创建一个功能丰富的 CRUD 应用，从服务器端角度来看，CRUD（CreateRead Update Delete）应用非常适合使用 web 框架技术。Django 和 Flask-SQLchemy 可以直接对每个 model 进行不同的 CRUD 操作。</p>
-<h2 id="5-再谈-web-框架"><a href="#5-再谈-web-框架" class="headerlink" title="5. 再谈 web 框架"></a>5. 再谈 web 框架</h2><p>到现在为止，web 框架的目的应该非常清晰了：向程序员隐藏了处理 HTTP 请求和响应相关的基础代码。至于隐藏多少这取决于不同的框架，Django 和 Flask 走向了两个极端：Django 包括了每种情形，几乎成了它致命的一点；Flask 立足于“微框架”，仅仅实现 web 应用需要的最小功能，其它的不常用的 web 框架任务交由第三方库来完成。</p>
-<p>但是最后要记住的是，Python web 框架都以相同的方式工作的：它们接收 HTTP 请求，分派代码，产生 HTML，创建带有内容的 HTTP 响应。事实上，所有主流的服务器端框架都以这种方式工作的（ JavaScript 框架除外）。但愿了解了这些框架的目的，你能够在不同的框架之间选择适合你应用的框架进行开发。</p>
-<hr>
-<p>原文地址：<a href="http://www.jeffknupp.com/blog/2014/03/03/what-is-a-web-framework/" target="_blank" rel="external">http://www.jeffknupp.com/blog/2014/03/03/what-is-a-web-framework/</a> </p>
-<p>转载自：<a href="http://www.cnblogs.com/hazir/p/what_is_web_framework.html" target="_blank" rel="external">http://www.cnblogs.com/hazir/p/what_is_web_framework.html</a></p>
+					<span style="font-size:15px"><p>对于经常使用Linux系统的人员来说，少不了将本地的文件上传到服务器或者从服务器上下载文件到本地</p>
+<p>例如，在使用阿里云这种远程linux服务器时，由于一般都没有安装图形界面，所以只能进行SSH访问。</p>
+<p>这时候，本地操作系统往往是windows，怎么<strong>在本地windows和远程linux系统间相互传送文件</strong>呢？</p>
+<p>我这里推荐两个命令，分别是rz和sz命令。</p>
+<h4 id="rz命令本地上传文件到服务器"><a href="#rz命令本地上传文件到服务器" class="headerlink" title="rz命令本地上传文件到服务器"></a>rz命令本地上传文件到服务器</h4><p>当在终端输入rz命令时，会弹出一个窗口，选择你需要上传到远程linux上的文件即可进行传送。如下图所示：</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2015/09/15/QQ20150915171704.jpg" alt=""></p>
+<h4 id="sz命令发送文件到本地"><a href="#sz命令发送文件到本地" class="headerlink" title="sz命令发送文件到本地"></a>sz命令发送文件到本地</h4><p>使用sz命令，后面跟上你需要发送到本地的文件名，即可将远程linux系统上的文件发送到本地，在弹出的窗口选择保存文件的位置即可。如下图所示。</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2015/09/15/QQ20150915171555.jpg" alt=""></p>
+<p>注意，很多linux系统初始并没有这两个命令。需要我们自己安装和使用。</p>
+<div class="alert alert-success"><i class="fa fa-lightbulb-o"></i>   本文由<a href="http://www.rudy-yuan.net">Rudy Yuan</a>创作，采用<a href="http://creativecommons.org/licenses/by/3.0/cn" target="_blank" rel="external">CC BY 3.0 CN协议</a>进行许可。
+可自由转载、引用，但需署名作者且注明文章出处。</div>
 </span>
 				</header>
 
@@ -214,7 +178,7 @@
 				<span class="fa fa-folder" aria-hidden="true"></span> 
 
 				
-					<a href="/categories/socket与网络/">socket与网络</a>
+					<a href="/categories/linux学习/">linux学习</a>
 				
 
 			</span>
@@ -223,11 +187,11 @@
 				<span class="fa fa-tags" aria-hidden="true"></span> 
 
 				
-					<a href="/tags/web服务器/">web服务器</a>&nbsp;
+					<a href="/tags/阿里云/">阿里云</a>&nbsp;
 				
-					<a href="/tags/网络/">网络</a>&nbsp;
+					<a href="/tags/linux/">linux</a>&nbsp;
 				
-					<a href="/tags/转载/">转载</a>&nbsp;
+					<a href="/tags/xshell/">xshell</a>&nbsp;
 				
 
 			</span>
@@ -256,17 +220,17 @@
 
 		 
 				
-					<p class="p1">上一篇 <a href="/archives/200/">WSGI、flup、fastcgi、web.py的关系</a></p> 
+					<p class="p1">上一篇 <a href="/archives/199/">什么是 web 框架？</a></p> 
 
 				
-				   <p class="p2">下一篇 <a href="/archives/199/">什么是 web 框架？</a></p> 
+				   <p class="p2">下一篇 <a href="/archives/195/">国内访问google的方法(附持续更像hosts文件)</a></p> 
 			
 		
 		<!-- comment -->
 		
 <section id="comment">
   
-  	 <div class="ds-thread" data-thread-key="archives/197/" data-title="什么是 web 框架？" data-url="http://www.rudy-yuan.net/archives/197/"></div>  
+  	 <div class="ds-thread" data-thread-key="archives/197/" data-title="使用rz和sz命令在windows和阿里云linux间传文件" data-url="http://www.rudy-yuan.net/archives/197/"></div>  
   
 </section>
 
@@ -374,7 +338,7 @@
 		<div class="widget">
 		    <span style="font-size: 14px font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">本文目录 <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a></span>
 		    <div id="toc" class="toc collapse in">
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#1-Web-如何工作的？"><span class="toc-article-text">1. Web 如何工作的？</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#1-1-Web-服务器"><span class="toc-article-text">1.1 Web 服务器</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#1-2-HTTP"><span class="toc-article-text">1.2 HTTP</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#1-3-HTTP-Methods"><span class="toc-article-text">1.3 HTTP Methods</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#HTTP-GET"><span class="toc-article-text">HTTP GET</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#HTTP-POST"><span class="toc-article-text">HTTP POST</span></a></li></ol></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#1-4-HTTTP-Response-Codes"><span class="toc-article-text">1.4 HTTTP Response Codes</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#2-Web-应用"><span class="toc-article-text">2. Web 应用</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#2-1-请求的剖析"><span class="toc-article-text">2.1 请求的剖析</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#3-Web-服务器之殇"><span class="toc-article-text">3. Web 服务器之殇</span></a></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#4-解决两大问题：路由和模板-重点推荐"><span class="toc-article-text">4. 解决两大问题：路由和模板(重点推荐)</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#4-1-Django-中的-MVC"><span class="toc-article-text">4.1 Django 中的 MVC</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#4-2-Django-中的路由"><span class="toc-article-text">4.2 Django 中的路由</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#4-3-Flask-中的路由"><span class="toc-article-text">4.3 Flask 中的路由</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#4-4-通过-Templates-产生-HTML"><span class="toc-article-text">4.4 通过 Templates 产生 HTML</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#4-5-数据库交互"><span class="toc-article-text">4.5 数据库交互</span></a></li></ol></li><li class="toc-article-item toc-article-level-2"><a class="toc-article-link" href="#5-再谈-web-框架"><span class="toc-article-text">5. 再谈 web 框架</span></a></li></ol>
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#rz命令本地上传文件到服务器"><span class="toc-article-text">rz命令本地上传文件到服务器</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#sz命令发送文件到本地"><span class="toc-article-text">sz命令发送文件到本地</span></a></li></ol>
 		    </div>
 		</div>
 	      	      
@@ -400,9 +364,11 @@
 		
 			<li><a href="/categories/leetcode/">leetcode<span>4</span></a></li>
 		
+			<li><a href="/categories/linux学习/">linux学习<span>1</span></a></li>
+		
 			<li><a href="/categories/python与Django/">python与Django<span>1</span></a></li>
 		
-			<li><a href="/categories/socket与网络/">socket与网络<span>3</span></a></li>
+			<li><a href="/categories/socket与网络/">socket与网络<span>2</span></a></li>
 		
 			<li><a href="/categories/不可分/">不可分<span>1</span></a></li>
 		
@@ -422,48 +388,48 @@
 		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/web服务器/">web服务器<span>2</span></a></li>
+			<li><a href="/tags/xshell/">xshell<span>1</span></a></li>
 		
-			<li><a href="/tags/ubuntu源/">ubuntu源<span>1</span></a></li>
+			<li><a href="/tags/python/">python<span>1</span></a></li>
 		
-			<li><a href="/tags/Manacher算法/">Manacher算法<span>1</span></a></li>
-		
-			<li><a href="/tags/ubuntu-yuan/">ubuntu yuan<span>1</span></a></li>
-		
-			<li><a href="/tags/转载/">转载<span>5</span></a></li>
-		
-			<li><a href="/tags/free2mind/">free2mind<span>1</span></a></li>
+			<li><a href="/tags/保研/">保研<span>1</span></a></li>
 		
 			<li><a href="/tags/mapReduce/">mapReduce<span>1</span></a></li>
 		
-			<li><a href="/tags/edas提前/">edas提前<span>1</span></a></li>
+			<li><a href="/tags/Q-A/">Q&amp;A<span>1</span></a></li>
 		
-			<li><a href="/tags/热点文章/">热点文章<span>5</span></a></li>
-		
-			<li><a href="/tags/NDN/">NDN<span>2</span></a></li>
-		
-			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
-		
-			<li><a href="/tags/Web服务器/">Web服务器<span>2</span></a></li>
-		
-			<li><a href="/tags/阿里云/">阿里云<span>1</span></a></li>
-		
-			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
-		
-			<li><a href="/tags/网络/">网络<span>3</span></a></li>
-		
-			<li><a href="/tags/mediastreamer2/">mediastreamer2<span>1</span></a></li>
+			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
 		
 			<li><a href="/tags/mysql远程连接/">mysql远程连接<span>1</span></a></li>
 		
-			<li><a href="/tags/华为面试/">华为面试<span>1</span></a></li>
+			<li><a href="/tags/桃江地震/">桃江地震<span>1</span></a></li>
 		
-			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
+			<li><a href="/tags/热点文章/">热点文章<span>5</span></a></li>
+		
+			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
+		
+			<li><a href="/tags/对象模型/">对象模型<span>1</span></a></li>
+		
+			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
+		
+			<li><a href="/tags/Leetcode/">Leetcode<span>1</span></a></li>
+		
+			<li><a href="/tags/Manacher算法/">Manacher算法<span>1</span></a></li>
 		
 			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
 		
+			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
 		
-		   <li><a href="/tags">...<span>51</span></a></li>
+			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
+		
+			<li><a href="/tags/ubuntu-yuan/">ubuntu yuan<span>1</span></a></li>
+		
+			<li><a href="/tags/数据结构/">数据结构<span>1</span></a></li>
+		
+			<li><a href="/tags/github/">github<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>53</span></a></li>
 		 
 		</ul>
 	</div>
