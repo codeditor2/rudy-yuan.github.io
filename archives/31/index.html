@@ -3,13 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>libevent | Rudy-Yuan的博客</title>
+  <title>ubuntu 14.04 中国科学技术大学源 | Rudy-Yuan的博客</title>
   <meta name="author" content="Rudy-Yuan">
+  
+  <meta name="description" content="以前在武大的时候杜刚师兄跟我说，使用ubuntu，第一件事：更新源；第二件事：装VI。
+这话一直对我影响深远啊。
+Ubuntu下更新源的步骤：
+1.备份原来的源文件1sudo cp /etc/apt/sources.list /etc/apt/sources.list_backup
+2. 打开源文件source.list,用新的源替换原文件中的内容并保存">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="ubuntu 14.04 中国科学技术大学源"/>
   <meta property="og:site_name" content="Rudy-Yuan的博客"/>
 
   
@@ -96,57 +102,152 @@
     	 
 
 
-		
-		   
-		    <div class="slogan" style="margin-bottom: 17px">
-		      <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;标签&nbsp;: libevent</h4>
-		    </div>
-		   
-		
 
-<div class="row page">
-  <!-- cols -->
-  
-  <div class="col-md-9">
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
 	
 
-	  <div id="top_search"></div>
+		<!-- content -->
 
-	  <div class="archive">
-		
-		
-		
+		<div class="slogan" style="margin-bottom: 17px">
+		  <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">
+			  当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;:&nbsp;
 			
+				<a href="/categories/技术杂文/">技术杂文</a>
 			
-			<h4 class="archive-ul" data-toggle="collapse" data-target="#2014">2014<b class="caret"></b></h4>
-			<ul id="2014" class="collapse in">
-			
-		
-		<li class="listing-item">
-		<span class="date_class"> 2014-07-31 </span> &raquo;
-		
-		   <span class="title"><a href="/archives/127/" >libevent源码分析(5)</a></span>
-		
-		</li>			
-		
-		</ul>
+		  &nbsp;</a>»&nbsp; ubuntu 14.04 中国科学技术大学源 </h4>
 		</div>
 
-</div> <!-- col-md-9/col-md-12 -->
-
-
-<div class="col-md-3">
-	<div id="sidebar">
+		<div id="top_search"></div>
+				 
 		
+
+		<div class="archive">	  
+			<div id="archives"> 
 				
+				<header class="entry-header">
+					<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+						<span class="entry-date">
+							<span class="fa fa-calendar" aria-hidden="true"></span>
+							2013-12-09						      
+						</span>
+							  
+							  
+						<span class="author vcard">
+							<span class="fa fa-user" aria-hidden="true"></span>
+							<a href="/">Rudy-Yuan</a> 	 	
+						</span>
+
+						<span class="comments-link">
+							<span class="fa fa-comments" aria-hidden="true"></span>
+							<span class="ds-thread-count" data-thread-key="archives/31/">暂无评论</span>
+						</span>						
+							
+					</div>	
+
+									
+					<h3 class="entry-title"> 
+						<a href="/archives/31/" >ubuntu 14.04 中国科学技术大学源</a>
+					</h3>		
+						
+					<span style="font-size:15px"><p>以前在武大的时候杜刚师兄跟我说，使用ubuntu，第一件事：更新源；第二件事：装VI。</p>
+<p>这话一直对我影响深远啊。</p>
+<p>Ubuntu下更新源的步骤：</p>
+<h3 id="1-备份原来的源文件"><a href="#1-备份原来的源文件" class="headerlink" title="1.备份原来的源文件"></a>1.备份原来的源文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /etc/apt/sources.list /etc/apt/sources.list_backup</span><br></pre></td></tr></table></figure>
+<h3 id="2-打开源文件source-list-用新的源替换原文件中的内容并保存"><a href="#2-打开源文件source-list-用新的源替换原文件中的内容并保存" class="headerlink" title="2. 打开源文件source.list,用新的源替换原文件中的内容并保存 "></a>2. 打开源文件source.list,用新的源替换原文件中的内容并保存 <a id="more"></a></h3><p>教育网用户，选择中科大或者北交的源，速度都很不错。</p>
+<p>下面是中科大提供的ubuntu14.04 TLS的源：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">deb http://debian.ustc.edu.cn/ubuntu/ trusty main multiverse restricted universe</span><br><span class="line"></span><br><span class="line">deb http://debian.ustc.edu.cn/ubuntu/ trusty-backports main multiverse restricted universe</span><br><span class="line"></span><br><span class="line">deb http://debian.ustc.edu.cn/ubuntu/ trusty-proposed main multiverse restricted universe</span><br><span class="line"></span><br><span class="line">deb http://debian.ustc.edu.cn/ubuntu/ trusty-security main multiverse restricted universe</span><br><span class="line"></span><br><span class="line">deb http://debian.ustc.edu.cn/ubuntu/ trusty-updates main multiverse restricted universe</span><br><span class="line"></span><br><span class="line">deb-src http://debian.ustc.edu.cn/ubuntu/ trusty main multiverse restricted universe</span><br><span class="line"></span><br><span class="line">deb-src http://debian.ustc.edu.cn/ubuntu/ trusty-backports main multiverse restricted universe</span><br><span class="line"></span><br><span class="line">deb-src http://debian.ustc.edu.cn/ubuntu/ trusty-proposed main multiverse restricted universe</span><br><span class="line"></span><br><span class="line">deb-src http://debian.ustc.edu.cn/ubuntu/ trusty-security main multiverse restricted universe</span><br><span class="line"></span><br><span class="line">deb-src http://debian.ustc.edu.cn/ubuntu/ trusty-updates main multiverse restricted universe</span><br></pre></td></tr></table></figure>
+<h3 id="3-更新"><a href="#3-更新" class="headerlink" title="3. 更新"></a>3. 更新</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+<div class="alert alert-success"><i class="fa fa-lightbulb-o"></i>   本文由<a href="http://www.rudy-yuan.net">Rudy Yuan</a>创作，采用<a href="http://creativecommons.org/licenses/by/3.0/cn" target="_blank" rel="external">CC BY 3.0 CN协议</a>进行许可。
+可自由转载、引用，但需署名作者且注明文章出处。</div></span>
+				</header>
+
+				<!-- share -->
+				
+					
+
+					
+     <footer class="entry-meta">      
+
+	    <div class="fenlei" style="font-size:13.5px">
+			<span class="entry-categories">
+				<span class="fa fa-folder" aria-hidden="true"></span> 
+
+				
+					<a href="/categories/技术杂文/">技术杂文</a>
+				
+
+			</span>
+			
+			<span class="entry-tags">        
+				<span class="fa fa-tags" aria-hidden="true"></span> 
+
+				
+					<a href="/tags/ubuntu源/">ubuntu源</a>&nbsp;
+				
+					<a href="/tags/ubuntu-yuan/">ubuntu yuan</a>&nbsp;
+				
+
+			</span>
+		</div>
+
+     
+		<!-- JiaThis Button BEGIN -->
+		<div class="jiathis_style" style="float:right;">
+			<span class="jiathis_txt">分享到：</span>
+			<a class="jiathis_button_qzone">QQ空间</a>
+			<a class="jiathis_button_tsina">新浪微博</a>
+			<a class="jiathis_button_weixin">微信</a>
+			<a class="jiathis_button_copy">复制</a>
+			<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+			<a class="jiathis_counter_style"></a>
+		</div>
+		<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+		<!-- JiaThis Button END -->
+		<br>
+    </footer>
+
+
+				
+			</div>	
+		</div>	 	        
+
+		 
+				
+					<p class="p1">Previous <a href="/archives/simplified-chinese-test/">简体中文测试</a></p> 
+
+				
+				   <p class="p2">Next <a href="/archives/vi-guide/">vi基本使用方法</a></p> 
+			
+		
+		<!-- comment -->
+		
+<section id="comment">
+  
+  	 <div class="ds-thread" data-thread-key="archives/31/" data-title="ubuntu 14.04 中国科学技术大学源" data-url="http://www.rudy-yuan.net/archives/31/"></div>  
+  
+</section>
+
+		
+	</div> <!-- col-md-9/col-md-12 -->	
+
+	
+		<div id="side_meta">
+			
+      <div class="col-md-3">
+	      <div id="sidebar">
+	      
   <div class="form-group has-success has-feedback" id="site_search">
     <form class="site-search-form">
         <input type="text" id="st-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control" />
     </form>
   </div>  
 
-			
-				<style type="text/css">
+	      <style type="text/css">
   .cls_container{height:24px;overflow:hidden;}
   .cls_container ul{list-style-type:none;margin:0;padding:0;margin-left:0px;}
   .cls_container ul li{height:24px;line-height:24px;float:left;display:inline;}
@@ -229,8 +330,11 @@
 	var myscroll=new Scroll("myscroll",24);
 </script>
 
-			
-				
+
+	      <!-- toc -->	      
+	      	      
+
+	      
 	<div class="widget">
 		<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Categories</h4>
 		<ul class="tag_box inline list-unstyled">
@@ -267,52 +371,51 @@
 		
 		</ul>
 	</div>
-
-			
-				
+	
+	      
 	<div class="widget">
 		<h4 style="font-weight: bold; color: #333 ">Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/edas提前/">edas提前<span>1</span></a></li>
-		
-			<li><a href="/tags/转载/">转载<span>2</span></a></li>
-		
-			<li><a href="/tags/保研/">保研<span>1</span></a></li>
-		
-			<li><a href="/tags/themes/">themes<span>1</span></a></li>
-		
-			<li><a href="/tags/mediastreamer2/">mediastreamer2<span>1</span></a></li>
-		
 			<li><a href="/tags/cpp/">cpp<span>6</span></a></li>
-		
-			<li><a href="/tags/Web服务器/">Web服务器<span>1</span></a></li>
-		
-			<li><a href="/tags/plugins/">plugins<span>2</span></a></li>
-		
-			<li><a href="/tags/数据结构/">数据结构<span>1</span></a></li>
-		
-			<li><a href="/tags/马拉车算法/">马拉车算法<span>0</span></a></li>
-		
-			<li><a href="/tags/English/">English<span>1</span></a></li>
-		
-			<li><a href="/tags/KMP/">KMP<span>2</span></a></li>
-		
-			<li><a href="/tags/python/">python<span>1</span></a></li>
-		
-			<li><a href="/tags/libevent/">libevent<span>1</span></a></li>
 		
 			<li><a href="/tags/对象模型/">对象模型<span>1</span></a></li>
 		
-			<li><a href="/tags/ubuntu源/">ubuntu源<span>1</span></a></li>
+			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
 		
-			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
+			<li><a href="/tags/KMP/">KMP<span>2</span></a></li>
 		
-			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
+			<li><a href="/tags/Web服务器/">Web服务器<span>1</span></a></li>
 		
-			<li><a href="/tags/Q-A/">Q&amp;A<span>1</span></a></li>
+			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
 		
-			<li><a href="/tags/free2mind/">free2mind<span>1</span></a></li>
+			<li><a href="/tags/python/">python<span>1</span></a></li>
+		
+			<li><a href="/tags/NDN/">NDN<span>1</span></a></li>
+		
+			<li><a href="/tags/leetcode/">leetcode<span>3</span></a></li>
+		
+			<li><a href="/tags/libevent/">libevent<span>1</span></a></li>
+		
+			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
+		
+			<li><a href="/tags/热点文章/">热点文章<span>5</span></a></li>
+		
+			<li><a href="/tags/mysql/">mysql<span>2</span></a></li>
+		
+			<li><a href="/tags/网络/">网络<span>1</span></a></li>
+		
+			<li><a href="/tags/数据结构/">数据结构<span>1</span></a></li>
+		
+			<li><a href="/tags/themes/">themes<span>1</span></a></li>
+		
+			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
+		
+			<li><a href="/tags/博主推荐/">博主推荐<span>2</span></a></li>
+		
+			<li><a href="/tags/mediastreamer2/">mediastreamer2<span>1</span></a></li>
+		
+			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>48</span></a></li>
@@ -321,8 +424,7 @@
 	</div>
 
 
-			
-				
+	      
 <div class="widget">
 	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Friend Links</h4>
 	<ul class="blogroll list-unstyled">
@@ -347,8 +449,7 @@
 </div>
 
 
-			
-				<div class="widget">
+	      <div class="widget">
 	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Recent Comments</h4>
 	<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="0" data-show-admin="1" data-excerpt-length="100" ></ul>
 	
@@ -366,16 +467,31 @@
 </div>
 
 
-
-			
-				<section id="recent-visitors" class="widget widget_recent_comments">
+	
+	      <section id="recent-visitors" class="widget widget_recent_comments">
 	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Recent Visitors</h4>
   	<div class="panelbody clearfix"><ul class="ds-recent-visitors" data-num-items="30"></ul></div>
-</section>
-			  
-	</div> <!-- sidebar -->
-</div> <!-- col-md-3 -->
+</section>    
+	      </div> <!-- sidebar -->
+      </div> <!-- col-md-3 -->
 
+		</div>
+			
+
+</div><!-- row -->
+
+
+	<script type="text/javascript">
+	  var duoshuoQuery = { short_name: 'rudy-yuan' };
+	  (function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';
+		ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	  })();
+	</script>
 
 
 
