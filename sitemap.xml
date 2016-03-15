@@ -5,22 +5,22 @@
     
   <url>
     <loc>http://www.rudy-yuan.net/archives/200/</loc>
-    <lastmod>2016-03-15T14:16:27.346Z</lastmod>
+    <lastmod>2016-03-15T14:33:22.764Z</lastmod>
     <data>
         <display>
         <title>WSGI、flup、fastcgi、web.py的关系</title>
-        <pubTime>2015-08-22T13:05:43.000Z</pubTime>
+        <pubTime>2015-09-29T09:19:43.000Z</pubTime>
         
-        <tag>算法</tag>
+        <tag>Web服务器</tag>
          
-        <tag>leetcode</tag>
+        <tag>网络</tag>
          
-        <tag>华为面试</tag>
+        <tag>转载</tag>
          
          
            
              
-              <breadCrumb title="leetcode" url="http://www.rudy-yuan.net/categories/leetcode/"/>
+              <breadCrumb title="socket与网络" url="http://www.rudy-yuan.net/categories/socket%E4%B8%8E%E7%BD%91%E7%BB%9C/"/>
           
         </display>
     </data>

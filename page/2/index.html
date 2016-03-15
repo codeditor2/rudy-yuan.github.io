@@ -335,7 +335,7 @@
 							
 							  <span class="entry-date">
 								  <span class="fa fa-calendar" aria-hidden="true"></span>
-								  2015-09-28						      
+								  2015-09-29						      
 							  </span>
 							  
 							  <span class="author vcard">
@@ -347,13 +347,13 @@
 
 							<span class="comments-link">
 								<span class="fa fa-comments" aria-hidden="true"></span>
-								<span class="ds-thread-count" data-thread-key="archives/199/">暂无评论</span>
+								<span class="ds-thread-count" data-thread-key="archives/200/">暂无评论</span>
 							</span>	
 							
 						</div>	
 									
 						<h3 class="entry-title"> 
-							  <a href="/archives/199/" >什么是 web 框架？</a>
+							  <a href="/archives/200/" >WSGI、flup、fastcgi、web.py的关系</a>
 						</h3>
 
 					</header>
@@ -361,20 +361,25 @@
 					<div class="entry">
   <div class="row">
 	
-           
-              <div class="thumbnail"><a href="/archives/199/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2015/09/28/1F40S936-1.jpg" alt="什么是 web 框架？"  class="nofancybox"></a>
-           
-		</div>
 	
-	
-		<p>Web 应用框架，或者简单的说是“Web 框架”，其实是建立 web 应用的一种方式。从简单的博客系统到复杂的富 AJAX 应用，web 上每个页面都是通过写代码来生成的。我发现很多人都热衷于学习 web 框架技术，例如 Flask 或这 Django 之类的，但是很多人并不理解什么是 web 框架，或者它们是如何工作的。
+		<p>Apache/lighttpd: 相当于一个request proxy，根据配置，把不同的请求转发给不同的server处理，例如静态的文件请求自己处理，这个时候它就像一个web server；对于fastcgi/python这样的请求转发给flup这样的Server/Gateway进行处理</p>
+<p>flup: 一个用python写的web server，也就是cgi中所谓的Server/Gateway，它负责接受Apache/lighttpd转发的请求，并调用你写的程序 (application)，并将经过application业务逻辑处理的结果返回到Apache/lighttpd</p>
+<p>fastcgi: Apache/lighttpd的一个模块，虽然flup可以作为一个独立的web server使用，<strong>但是对于浏览器请求处理一般都交给Apache/lighttpd处理，然后由Apache/lighttpd转发给flup处理</strong>，这样就需要一个东西来把Apache/lighttpd跟flup联系起来，这个东西就是fastcgi，它通过环境变量以及socket将客户端请求的信息传送给flup并接收flup返回的结果</p>
+<p>web.py: 应该说有了上面的东西你就可以开始编写你的web程序了，但是问题是你就要自己处理浏览器的输入输出，还有cookie、session、模板等各种各样的问题了，web.py的作用就是帮你把这些工作都做好了，它就是所谓的web 框架(framework)，另外一个出名的是django，不过感觉太复杂了，web.py差不多就够用了</p>
+<p>WSGI : 除了flup Server/Gateway外，还有很多其他人的写的Server/Gateway, 这个时候就会出问题了，如果你在flup上写了一个程序，现在由于各种原因你要使用xdly了，这个时候<strong>你的程序也许就要做很多痛苦的修改</strong>才能使用 xdly server了。WSGI就是一个规范，它规范了flup这个服务应该怎么写，应该使用什么方式什么参数调用你写的程序(application)等，当然同时也规范你的程序应该怎么写了。这样的话，<strong>只要flup跟xdly都遵守WSGI的话，你的程序在两个上面都可以使用了</strong>，flup就是一个WSGI server。</p>
+<p>一言以蔽之：WSGI是python的接口规范，这个规范是针对WEB服务器和python应用（框架等）的交互的。FASTCGI则是两者底层的通信协议的规范。</p>
+<h4 id="WEB-处理流程"><a href="#WEB-处理流程" class="headerlink" title="WEB 处理流程"></a>WEB 处理流程</h4><p>nginx                  &lt;——–(fastcgi)——-&gt;                  flup(wsgi/django)</p>
+<p>lighttpd               &lt;—––(fastcgi)——-&gt;                 flup(wsgi/django)</p>
+<p>apache          &lt;——(cgi/fastcgi/scgi/mod_wsgi)————&gt;       flup(wsgi/django)</p>
+<hr>
+<div class="alert alert-success"><i class="fa fa-lightbulb-o"></i>  本文转载自<a href="http://www.douban.com/note/13508388/" target="_blank" rel="external">豆瓣</a>创作!</div>
 	
 	...</div>
 </div>
 
 
 					<footer class="entry-meta">					  
-						<a href="/archives/199/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+						<a href="/archives/200/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
 					</footer>
 
 				</div>	
@@ -512,11 +517,11 @@
 		
 			<li><a href="/categories/c和cpp/">c和cpp<span>3</span></a></li>
 		
-			<li><a href="/categories/leetcode/">leetcode<span>5</span></a></li>
+			<li><a href="/categories/leetcode/">leetcode<span>4</span></a></li>
 		
 			<li><a href="/categories/python与Django/">python与Django<span>1</span></a></li>
 		
-			<li><a href="/categories/socket与网络/">socket与网络<span>1</span></a></li>
+			<li><a href="/categories/socket与网络/">socket与网络<span>2</span></a></li>
 		
 			<li><a href="/categories/不可分/">不可分<span>1</span></a></li>
 		
@@ -537,45 +542,45 @@
 		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
+			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
+		
+			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
+		
+			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
+		
+			<li><a href="/tags/Q-A/">Q&amp;A<span>1</span></a></li>
+		
+			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
+		
+			<li><a href="/tags/python/">python<span>1</span></a></li>
+		
+			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
+		
 			<li><a href="/tags/themes/">themes<span>1</span></a></li>
 		
-			<li><a href="/tags/华为面试/">华为面试<span>2</span></a></li>
+			<li><a href="/tags/转载/">转载<span>4</span></a></li>
 		
-			<li><a href="/tags/简体/">简体<span>1</span></a></li>
+			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
 		
-			<li><a href="/tags/对象模型/">对象模型<span>1</span></a></li>
+			<li><a href="/tags/Web服务器/">Web服务器<span>2</span></a></li>
 		
-			<li><a href="/tags/NDN/">NDN<span>1</span></a></li>
+			<li><a href="/tags/sofa-pbrpc/">sofa-pbrpc<span>1</span></a></li>
 		
-			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
-		
-			<li><a href="/tags/Leetcode/">Leetcode<span>1</span></a></li>
-		
-			<li><a href="/tags/cpp/">cpp<span>4</span></a></li>
+			<li><a href="/tags/Protobuf/">Protobuf<span>1</span></a></li>
 		
 			<li><a href="/tags/桃江地震/">桃江地震<span>1</span></a></li>
 		
-			<li><a href="/tags/热点文章/">热点文章<span>5</span></a></li>
+			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
 		
-			<li><a href="/tags/English/">English<span>1</span></a></li>
+			<li><a href="/tags/vi/">vi<span>1</span></a></li>
 		
-			<li><a href="/tags/Web服务器/">Web服务器<span>1</span></a></li>
+			<li><a href="/tags/算法/">算法<span>4</span></a></li>
 		
-			<li><a href="/tags/转载/">转载<span>3</span></a></li>
+			<li><a href="/tags/free2mind/">free2mind<span>1</span></a></li>
 		
 			<li><a href="/tags/阿里云/">阿里云<span>1</span></a></li>
 		
-			<li><a href="/tags/mysql/">mysql<span>2</span></a></li>
-		
-			<li><a href="/tags/edas提前/">edas提前<span>1</span></a></li>
-		
-			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
-		
-			<li><a href="/tags/面试/">面试<span>5</span></a></li>
-		
-			<li><a href="/tags/leetcode/">leetcode<span>5</span></a></li>
-		
-			<li><a href="/tags/保研/">保研<span>1</span></a></li>
+			<li><a href="/tags/简体/">简体<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>50</span></a></li>

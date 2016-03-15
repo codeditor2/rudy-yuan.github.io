@@ -6,9 +6,8 @@
   <title>WSGI、flup、fastcgi、web.py的关系 | Rudy-Yuan的博客</title>
   <meta name="author" content="Rudy-Yuan">
   
-  <meta name="description" content="leetcode上的原题，在华为的上机考试上也考到了，占比300分。
-这两道题的关键是把输入变成后缀表达式
-变成后缀表达式的方法是">
+  <meta name="description" content="Apache/lighttpd: 相当于一个request proxy，根据配置，把不同的请求转发给不同的server处理，例如静态的文件请求自己处理，这个时候它就像一个web server；对于fastcgi/python这样的请求转发给flup这样的Server/Gateway进行处理
+flup">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -114,7 +113,7 @@
 		  <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">
 			  当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;:&nbsp;
 			
-				<a href="/categories/leetcode/">leetcode</a>
+				<a href="/categories/socket与网络/">socket与网络</a>
 			
 		  &nbsp;</a>»&nbsp; WSGI、flup、fastcgi、web.py的关系 </h4>
 		</div>
@@ -131,7 +130,7 @@
 							
 						<span class="entry-date">
 							<span class="fa fa-calendar" aria-hidden="true"></span>
-							2015-08-22						      
+							2015-09-29						      
 						</span>
 							  
 							  
@@ -152,22 +151,17 @@
 						<a href="/archives/200/" >WSGI、flup、fastcgi、web.py的关系</a>
 					</h3>		
 						
-					<span style="font-size:15px"><p>leetcode上的原题，在华为的上机考试上也考到了，占比300分。</p>
-<p>这两道题的关键是把输入变成<strong>后缀表达式</strong></p>
-<p>变成后缀表达式的方法是<a id="more"></a>：</p>
-<blockquote>
-<p>(1) 对每个操作符设置<strong>左优先级</strong>和<strong>右优先级</strong></p>
-<p>(2) 操作符a和操作符b调用函数priCmp(a, b)进行优先级比较时，a使用左优先级，b使用右优先级</p>
-<p>(3) 使用一个栈opStack保存操作符，使得<strong>栈顶元素的优先级是最高的</strong></p>
-<p>(4) 由此可见，一个操作符的左右优先级是不同的，比如，+的左优先级应该高于右优先级，使得满足+运算是从左至右依次运算；<br>同理，(的左优先级应该是最低的，使得</p>
-<p>(5) 所以，依次扫描输入的字符串，若是数字，则直接保存下来；若是运算符，则将运算符与栈顶元素进行比较：若栈顶元素的优先级高，则出栈直到栈顶元素的优先级小于当前的输入字符串中的运算符；若栈顶元素的优先级比当前运算符优先级低，则将当前运算符进栈；</p>
-<p>(6) 通过步骤5转为<strong>后缀表达式</strong>后，依次扫描后缀表达式，使用一个栈保存数字，遇到一个运算符，则出栈两个元素进行运算，并将运算结果入栈。</p>
-</blockquote>
-<p>最后栈中的元素便为计算结果。</p>
-<p>以下是<a href="https://leetcode.com/problems/basic-calculator-ii/" target="_blank" rel="external">leetcode Basic Calculator II</a>的代码，<a href="https://leetcode.com/problems/basic-calculator/" target="_blank" rel="external">Basic Calculator</a>的代码与之类似，只是运算符不一样</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_SIZE 10</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> Pri</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">char</span> op;</span><br><span class="line">    <span class="keyword">int</span> pri;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> Pri lpri[MAX_SIZE] = &#123;&#123;<span class="string">'='</span>, <span class="number">0</span>&#125;, &#123;<span class="string">'('</span>, <span class="number">1</span>&#125;, &#123;<span class="string">'*'</span>, <span class="number">5</span>&#125;, &#123;<span class="string">'/'</span>, <span class="number">5</span>&#125;, &#123;<span class="string">'+'</span>, <span class="number">3</span>&#125;, &#123;<span class="string">'-'</span>, <span class="number">3</span>&#125;, &#123;<span class="string">')'</span>, <span class="number">6</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">struct</span> Pri rpri[MAX_SIZE] = &#123;&#123;<span class="string">'='</span>, <span class="number">0</span>&#125;, &#123;<span class="string">'('</span>, <span class="number">6</span>&#125;, &#123;<span class="string">'*'</span>, <span class="number">4</span>&#125;, &#123;<span class="string">'/'</span>, <span class="number">4</span>&#125;, &#123;<span class="string">'+'</span>, <span class="number">2</span>&#125;, &#123;<span class="string">'-'</span>, <span class="number">2</span>&#125;, &#123;<span class="string">')'</span>, <span class="number">1</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">leftPri</span><span class="params">(<span class="keyword">char</span> op)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; MAX_SIZE; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(lpri[i].op == op)</span><br><span class="line">            <span class="keyword">return</span> lpri[i].pri;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">rightPri</span><span class="params">(<span class="keyword">char</span> op)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; MAX_SIZE; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(rpri[i].op == op)</span><br><span class="line">            <span class="keyword">return</span> rpri[i].pri;</span><br><span class="line">    &#125;    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">priCmp</span><span class="params">(<span class="keyword">char</span> leftop, <span class="keyword">char</span> rightop)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(leftPri(leftop) == rightPri(rightop))</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(leftPri(leftop) &lt; rightPri(rightop))</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">transfer</span><span class="params">(<span class="keyword">char</span> *s, <span class="keyword">char</span> *postexp)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">char</span> *opStack = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*<span class="number">2</span>*<span class="built_in">strlen</span>(s));</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">int</span> top = <span class="number">-1</span>;</span><br><span class="line">    top ++;</span><br><span class="line">    opStack[top] = <span class="string">'='</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(s[i] != <span class="string">'\0'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        c = s[i];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(c &gt;= <span class="string">'0'</span> &amp;&amp; c &lt;= <span class="string">'9'</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(s[i] &gt;= <span class="string">'0'</span> &amp;&amp; s[i] &lt;= <span class="string">'9'</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                postexp[j++] = s[i++];</span><br><span class="line">            &#125;</span><br><span class="line">            postexp[j++] = <span class="string">'#'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(c == <span class="string">' '</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            i ++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">switch</span>(priCmp(opStack[top], c))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                    top --;</span><br><span class="line">                    i ++;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">1</span>:     <span class="comment">// 栈顶运算符的优先级高，需先计算栈顶运算符，故将栈顶出栈保存到postexp中</span></span><br><span class="line">                    postexp[j++] = opStack[top];</span><br><span class="line">                    top --;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">-1</span>:    <span class="comment">// c运算符的优先级高，进栈c</span></span><br><span class="line">                    top ++;</span><br><span class="line">                    opStack[top] = c;</span><br><span class="line">                    i ++;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(top &gt;= <span class="number">0</span> &amp;&amp; opStack[top] != <span class="string">'='</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        postexp[j++] = opStack[top];</span><br><span class="line">        top --;       </span><br><span class="line">    &#125;</span><br><span class="line">    postexp[j] = <span class="string">'\0'</span>;</span><br><span class="line">    <span class="built_in">free</span>(opStack);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">doCalculate</span><span class="params">(<span class="keyword">char</span> *postexp)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> *numStack = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>)*<span class="built_in">strlen</span>(postexp));</span><br><span class="line">    <span class="keyword">int</span> top = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, tmp;</span><br><span class="line">    <span class="keyword">int</span> a, b;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(postexp[i] != <span class="string">'\0'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">switch</span>(postexp[i])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">'+'</span>:</span><br><span class="line">                a = numStack[top--];</span><br><span class="line">                b = numStack[top--];</span><br><span class="line">                numStack[++top] = a+b;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">                </span><br><span class="line">            <span class="keyword">case</span> <span class="string">'-'</span>:</span><br><span class="line">                a = numStack[top--];</span><br><span class="line">                b = numStack[top--];</span><br><span class="line">                numStack[++top] = b-a;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">                </span><br><span class="line">            <span class="keyword">case</span> <span class="string">'*'</span>:</span><br><span class="line">                a = numStack[top--];</span><br><span class="line">                b = numStack[top--];</span><br><span class="line">                numStack[++top] = a*b;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">case</span> <span class="string">'/'</span>:</span><br><span class="line">                a = numStack[top--];</span><br><span class="line">                b = numStack[top--];</span><br><span class="line">                <span class="keyword">if</span>(a == <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    numStack[++top] = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    numStack[++top] = b/a;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">                </span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                &#123;</span><br><span class="line">                    tmp = <span class="number">0</span>;</span><br><span class="line">                    <span class="keyword">while</span>(postexp[i] &gt;= <span class="string">'0'</span> &amp;&amp; postexp[i] &lt;= <span class="string">'9'</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        tmp = <span class="number">10</span>*tmp + postexp[i]-<span class="string">'0'</span>;</span><br><span class="line">                        i ++;</span><br><span class="line">                    &#125;</span><br><span class="line">                    numStack[++top] = tmp;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        i ++;</span><br><span class="line">    &#125;</span><br><span class="line">    i = numStack[top];</span><br><span class="line">    <span class="built_in">free</span>(numStack);</span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">calculate</span><span class="params">(<span class="keyword">char</span>* s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(s == <span class="literal">NULL</span> || *s == <span class="string">'\0'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">char</span> *postexp = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>)*<span class="number">2</span>*<span class="built_in">strlen</span>(s));</span><br><span class="line">    transfer(s, postexp);</span><br><span class="line">    <span class="keyword">return</span> doCalculate(postexp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<div class="alert alert-success"><i class="fa fa-lightbulb-o"></i>   本文由<a href="http://www.rudy-yuan.net">Rudy Yuan</a>创作，采用<a href="http://creativecommons.org/licenses/by/3.0/cn" target="_blank" rel="external">CC BY 3.0 CN协议</a>进行许可。
-可自由转载、引用，但需署名作者且注明文章出处。</div></span>
+					<span style="font-size:15px"><p>Apache/lighttpd: 相当于一个request proxy，根据配置，把不同的请求转发给不同的server处理，例如静态的文件请求自己处理，这个时候它就像一个web server；对于fastcgi/python这样的请求转发给flup这样的Server/Gateway进行处理</p>
+<p>flup: 一个用python写的web server，也就是cgi中所谓的Server/Gateway，它负责接受Apache/lighttpd转发的请求，并调用你写的程序 (application)，并将经过application业务逻辑处理的结果返回到Apache/lighttpd</p>
+<p>fastcgi: Apache/lighttpd的一个模块，虽然flup可以作为一个独立的web server使用，<strong>但是对于浏览器请求处理一般都交给Apache/lighttpd处理，然后由Apache/lighttpd转发给flup处理</strong>，这样就需要一个东西来把Apache/lighttpd跟flup联系起来，这个东西就是fastcgi，它通过环境变量以及socket将客户端请求的信息传送给flup并接收flup返回的结果</p>
+<p>web.py: 应该说有了上面的东西你就可以开始编写你的web程序了，但是问题是你就要自己处理浏览器的输入输出，还有cookie、session、模板等各种各样的问题了，web.py的作用就是帮你把这些工作都做好了，它就是所谓的web 框架(framework)，另外一个出名的是django，不过感觉太复杂了，web.py差不多就够用了</p>
+<p>WSGI : 除了flup Server/Gateway外，还有很多其他人的写的Server/Gateway, 这个时候就会出问题了，如果你在flup上写了一个程序，现在由于各种原因你要使用xdly了，这个时候<strong>你的程序也许就要做很多痛苦的修改</strong>才能使用 xdly server了。WSGI就是一个规范，它规范了flup这个服务应该怎么写，应该使用什么方式什么参数调用你写的程序(application)等，当然同时也规范你的程序应该怎么写了。这样的话，<strong>只要flup跟xdly都遵守WSGI的话，你的程序在两个上面都可以使用了</strong>，flup就是一个WSGI server。</p>
+<p>一言以蔽之：WSGI是python的接口规范，这个规范是针对WEB服务器和python应用（框架等）的交互的。FASTCGI则是两者底层的通信协议的规范。</p>
+<h4 id="WEB-处理流程"><a href="#WEB-处理流程" class="headerlink" title="WEB 处理流程"></a>WEB 处理流程</h4><p>nginx                  &lt;——–(fastcgi)——-&gt;                  flup(wsgi/django)</p>
+<p>lighttpd               &lt;—––(fastcgi)——-&gt;                 flup(wsgi/django)</p>
+<p>apache          &lt;——(cgi/fastcgi/scgi/mod_wsgi)————&gt;       flup(wsgi/django)</p>
+<hr>
+<div class="alert alert-success"><i class="fa fa-lightbulb-o"></i>  本文转载自<a href="http://www.douban.com/note/13508388/" target="_blank" rel="external">豆瓣</a>创作!</div></span>
 				</header>
 
 				<!-- share -->
@@ -182,7 +176,7 @@
 				<span class="fa fa-folder" aria-hidden="true"></span> 
 
 				
-					<a href="/categories/leetcode/">leetcode</a>
+					<a href="/categories/socket与网络/">socket与网络</a>
 				
 
 			</span>
@@ -191,11 +185,11 @@
 				<span class="fa fa-tags" aria-hidden="true"></span> 
 
 				
-					<a href="/tags/算法/">算法</a>&nbsp;
+					<a href="/tags/Web服务器/">Web服务器</a>&nbsp;
 				
-					<a href="/tags/leetcode/">leetcode</a>&nbsp;
+					<a href="/tags/网络/">网络</a>&nbsp;
 				
-					<a href="/tags/华为面试/">华为面试</a>&nbsp;
+					<a href="/tags/转载/">转载</a>&nbsp;
 				
 
 			</span>
@@ -224,10 +218,10 @@
 
 		 
 				
-					<p class="p1">上一篇 <a href="/archives/195/">国内访问google的方法(附持续更像hosts文件)</a></p> 
+					<p class="p1">上一篇 <a href="/archives/201/">Google Protobuf语言指南</a></p> 
 
 				
-				   <p class="p2">下一篇 <a href="/archives/193/">Basic Calculator && Basic Calculator II</a></p> 
+				   <p class="p2">下一篇 <a href="/archives/199/">什么是 web 框架？</a></p> 
 			
 		
 		<!-- comment -->
@@ -359,11 +353,11 @@
 		
 			<li><a href="/categories/c和cpp/">c和cpp<span>3</span></a></li>
 		
-			<li><a href="/categories/leetcode/">leetcode<span>5</span></a></li>
+			<li><a href="/categories/leetcode/">leetcode<span>4</span></a></li>
 		
 			<li><a href="/categories/python与Django/">python与Django<span>1</span></a></li>
 		
-			<li><a href="/categories/socket与网络/">socket与网络<span>1</span></a></li>
+			<li><a href="/categories/socket与网络/">socket与网络<span>2</span></a></li>
 		
 			<li><a href="/categories/不可分/">不可分<span>1</span></a></li>
 		
@@ -383,45 +377,45 @@
 		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/libevent/">libevent<span>1</span></a></li>
-		
-			<li><a href="/tags/KMP/">KMP<span>2</span></a></li>
-		
-			<li><a href="/tags/plugins/">plugins<span>2</span></a></li>
-		
-			<li><a href="/tags/free2mind/">free2mind<span>1</span></a></li>
-		
-			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
-		
-			<li><a href="/tags/数据结构/">数据结构<span>1</span></a></li>
-		
-			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
-		
-			<li><a href="/tags/mapReduce/">mapReduce<span>1</span></a></li>
-		
-			<li><a href="/tags/github/">github<span>1</span></a></li>
-		
-			<li><a href="/tags/简体/">简体<span>1</span></a></li>
-		
-			<li><a href="/tags/cpp/">cpp<span>4</span></a></li>
+			<li><a href="/tags/Manacher算法/">Manacher算法<span>1</span></a></li>
 		
 			<li><a href="/tags/热点文章/">热点文章<span>5</span></a></li>
 		
-			<li><a href="/tags/对象模型/">对象模型<span>1</span></a></li>
+			<li><a href="/tags/网络/">网络<span>2</span></a></li>
+		
+			<li><a href="/tags/转载/">转载<span>4</span></a></li>
+		
+			<li><a href="/tags/leetcode/">leetcode<span>4</span></a></li>
+		
+			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
+		
+			<li><a href="/tags/简体/">简体<span>1</span></a></li>
+		
+			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
+		
+			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
+		
+			<li><a href="/tags/mediastreamer2/">mediastreamer2<span>1</span></a></li>
+		
+			<li><a href="/tags/English/">English<span>1</span></a></li>
+		
+			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
+		
+			<li><a href="/tags/vi/">vi<span>1</span></a></li>
+		
+			<li><a href="/tags/libevent/">libevent<span>1</span></a></li>
 		
 			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
 		
-			<li><a href="/tags/Protobuf/">Protobuf<span>1</span></a></li>
+			<li><a href="/tags/对象模型/">对象模型<span>1</span></a></li>
 		
-			<li><a href="/tags/github静态博客/">github静态博客<span>1</span></a></li>
+			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
 		
-			<li><a href="/tags/面试/">面试<span>5</span></a></li>
+			<li><a href="/tags/KMP/">KMP<span>2</span></a></li>
 		
-			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
+			<li><a href="/tags/mysql/">mysql<span>2</span></a></li>
 		
-			<li><a href="/tags/ubuntu-yuan/">ubuntu yuan<span>1</span></a></li>
-		
-			<li><a href="/tags/转载/">转载<span>3</span></a></li>
+			<li><a href="/tags/保研/">保研<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>50</span></a></li>
