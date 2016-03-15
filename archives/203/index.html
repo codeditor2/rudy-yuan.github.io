@@ -3,26 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>百度开源框架sofa-pbrpc快速使用三部曲 | Rudy-Yuan的博客</title>
+  <title>强力推荐适合在校大学生的网赚平台clixsense | Rudy-Yuan的博客</title>
   <meta name="author" content="Rudy-Yuan">
   
-  <meta name="description" content="使用sofa-pbrpc只需要三步：
-
-
-定义通讯协议
-
-实现Server
-
-实现Client
-
-
-
-样例代码参见“sample/echo”">
+  <meta name="description" content="最近在家里闲得无聊，不知道怎么弹出了一个网赚的广告，于是乎就google了一下网赚。
+结果找到了两个很出名的平台：NeoBux和clixsense，都是属于点击广告赚美元的类型。
+于是乎赶紧都注册了帐号试了下，都试玩了3天左右，结果爱上了clixsense，并且一发不可收拾啊，哈哈！">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="百度开源框架sofa-pbrpc快速使用三部曲"/>
+  <meta property="og:title" content="强力推荐适合在校大学生的网赚平台clixsense"/>
   <meta property="og:site_name" content="Rudy-Yuan的博客"/>
 
   
@@ -123,9 +114,9 @@
 		  <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">
 			  当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;:&nbsp;
 			
-				<a href="/categories/源码学习/">源码学习</a>
+				<a href="/categories/技术杂文/">技术杂文</a>
 			
-		  &nbsp;</a>»&nbsp; 百度开源框架sofa-pbrpc快速使用三部曲 </h4>
+		  &nbsp;</a>»&nbsp; 强力推荐适合在校大学生的网赚平台clixsense </h4>
 		</div>
 
 		<div id="top_search"></div>
@@ -140,7 +131,7 @@
 							
 						<span class="entry-date">
 							<span class="fa fa-calendar" aria-hidden="true"></span>
-							2015-10-08						      
+							2015-11-02						      
 						</span>
 							  
 							  
@@ -158,49 +149,20 @@
 
 									
 					<h3 class="entry-title"> 
-						<a href="/archives/203/" >百度开源框架sofa-pbrpc快速使用三部曲</a>
+						<a href="/archives/203/" >强力推荐适合在校大学生的网赚平台clixsense</a>
 					</h3>		
 						
-					<span style="font-size:15px"><p>使用sofa-pbrpc只需要三步：</p>
-<blockquote>
-<ol>
-<li><p>定义通讯协议</p>
-</li>
-<li><p>实现Server</p>
-</li>
-<li><p>实现Client</p>
-</li>
-</ol>
-</blockquote>
-<p>样例代码参见“sample/echo” <a id="more"></a>。</p>
-<h3 id="1-定义通讯协议"><a href="#1-定义通讯协议" class="headerlink" title="1. 定义通讯协议"></a>1. 定义通讯协议</h3><p>定义协议只需要编写一个proto文件即可。(可参考上一篇博客：<a href="http://www.rudy-yuan.net/archives/201">Google Protobuf语言指南</a>)</p>
-<p>范例：echo_service.proto</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package sofa.pbrpc.test; </span><br><span class="line">option cc_generic_services = true; </span><br><span class="line"></span><br><span class="line">// 定义请求消息 </span><br><span class="line">message EchoRequest &#123; </span><br><span class="line">    required string message = 1; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">// 定义回应消息 </span><br><span class="line">message EchoResponse &#123; </span><br><span class="line">    required string message = 1; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">// 定义RPC服务，可包含多个方法（这里只列出一个） </span><br><span class="line">service EchoServer &#123; </span><br><span class="line">    rpc Echo (EchoRequest) returns (EchoResponse); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用protoc编译’echo_service.proto’，生成接口文件’echo_service.pb.h’和’echo_service.pb.cc’。</p>
-<p>注意：</p>
-<blockquote>
-<p>package会被映射到C++中的namespace，为了避免冲突建议使用package；<br>需要设置“cc_generic_services”，以通知protoc工具生成RPC框架代码；<br>这里EchoRequest和EchoResponse的成员完全相同，在实际应用中可以设置不同的成员；</p>
-</blockquote>
-<h3 id="2-实现Server"><a href="#2-实现Server" class="headerlink" title="2. 实现Server"></a>2. 实现Server</h3><h4 id="2-1-头文件"><a href="#2-1-头文件" class="headerlink" title="2.1 头文件"></a>2.1 头文件</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sofa/pbrpc/pbrpc.h&gt;</span>  // sofa-pbrpc头文件</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="string">"echo_service.pb.h"</span>   // service接口定义头文件</span></span><br></pre></td></tr></table></figure>
-<h4 id="2-2-实现服务"><a href="#2-2-实现服务" class="headerlink" title="2.2 实现服务"></a>2.2 实现服务</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> EchoServerImpl : <span class="keyword">public</span> sofa::pbrpc::test::EchoServer</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    EchoServerImpl() &#123;&#125;</span><br><span class="line">    <span class="keyword">virtual</span> ~EchoServerImpl() &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">Echo</span><span class="params">(google::protobuf::RpcController* controller,</span><br><span class="line">                      <span class="keyword">const</span> sofa::pbrpc::test::EchoRequest* request,</span><br><span class="line">                      sofa::pbrpc::test::EchoResponse* response,</span><br><span class="line">                      google::protobuf::Closure* done)</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        sofa::pbrpc::RpcController* cntl =</span><br><span class="line">            <span class="keyword">static_cast</span>&lt;sofa::pbrpc::RpcController*&gt;(controller);</span><br><span class="line">        SLOG(NOTICE, <span class="string">"Echo(): request message from %s: %s"</span>,</span><br><span class="line">            cntl-&gt;RemoteAddress().c_str(), request-&gt;message().c_str());</span><br><span class="line">        response-&gt;set_message(<span class="string">"echo message: "</span> + request-&gt;message());</span><br><span class="line">        done-&gt;Run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>注意：</p>
-<blockquote>
-<p>服务完成后必须调用done-&gt;Run()，通知RPC系统服务完成，触发发送Response；<br>在调了done-&gt;Run()之后，Echo的所有四个参数都不再能访问；<br>done-Run()可以分派到其他线程中执行，以实现了真正的异步处理；</p>
-</blockquote>
-<h4 id="2-3-注册和启动服务"><a href="#2-3-注册和启动服务" class="headerlink" title="2.3 注册和启动服务"></a>2.3 注册和启动服务</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="comment">// 设置日志级别</span></span><br><span class="line">    SOFA_PBRPC_SET_LOG_LEVEL(NOTICE);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义RpcServer</span></span><br><span class="line">    sofa::pbrpc::RpcServerOptions options;</span><br><span class="line">    options.work_thread_num = <span class="number">8</span>;</span><br><span class="line">    sofa::pbrpc::<span class="function">RpcServer <span class="title">rpc_server</span><span class="params">(options)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 启动RpcServer</span></span><br><span class="line">    <span class="keyword">if</span> (!rpc_server.Start(<span class="string">"0.0.0.0:12321"</span>)) &#123;</span><br><span class="line">        SLOG(ERROR, <span class="string">"start server failed"</span>);</span><br><span class="line">        <span class="keyword">return</span> EXIT_FAILURE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建和注册服务</span></span><br><span class="line">    sofa::pbrpc::test::EchoServer* echo_service = <span class="keyword">new</span> EchoServerImpl();</span><br><span class="line">    <span class="keyword">if</span> (!rpc_server.RegisterService(echo_service)) &#123;</span><br><span class="line">        SLOG(ERROR, <span class="string">"register service failed"</span>);</span><br><span class="line">        <span class="keyword">return</span> EXIT_FAILURE;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 等待SIGINT/SIGTERM退出信号</span></span><br><span class="line">    rpc_server.Run();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 停止Server</span></span><br><span class="line">    rpc_server.Stop();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="3-实现Client"><a href="#3-实现Client" class="headerlink" title="3. 实现Client"></a>3. 实现Client</h3><p>Client支持同步和异步两种调用方式：</p>
-<blockquote>
-<p>同步调用时，调用线程会被阻塞，直到收到回复或者超时；<br>异步调用时，调用线程不会被阻塞，收到回复或者超时会调用用户提供的回调函数；</p>
-</blockquote>
-<h4 id="3-1-头文件"><a href="#3-1-头文件" class="headerlink" title="3.1 头文件"></a>3.1 头文件</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sofa/pbrpc/pbrpc.h&gt;</span>  // sofa-pbrpc头文件</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="string">"echo_service.pb.h"</span>   // service接口定义头文件</span></span><br></pre></td></tr></table></figure>
-<h4 id="3-2-同步调用"><a href="#3-2-同步调用" class="headerlink" title="3.2 同步调用"></a>3.2 同步调用</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    SOFA_PBRPC_SET_LOG_LEVEL(NOTICE);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义RpcClient对象，管理RPC的所有资源</span></span><br><span class="line">    <span class="comment">// 通常来说，一个client程序只需要一个RpcClient实例</span></span><br><span class="line">    <span class="comment">// 可以通过RpcClientOptions指定一些配置参数，譬如线程数、流控等</span></span><br><span class="line">    sofa::pbrpc::RpcClientOptions client_options;</span><br><span class="line">    client_options.work_thread_num = <span class="number">8</span>;</span><br><span class="line">    sofa::pbrpc::<span class="function">RpcClient <span class="title">rpc_client</span><span class="params">(client_options)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义RpcChannel对象，代表一个消息通道，需传入Server端服务地址</span></span><br><span class="line">    sofa::pbrpc::<span class="function">RpcChannel <span class="title">rpc_channel</span><span class="params">(&amp;rpc_client, <span class="string">"127.0.0.1:12321"</span>)</span></span>;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 定义EchoServer服务的桩对象EchoServer_Stub，使用上面定义的消息通道传输数据</span></span><br><span class="line">    sofa::pbrpc::test::<span class="function">EchoServer_Stub <span class="title">stub</span><span class="params">(&amp;rpc_channel)</span></span>;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 定义和填充调用方法的请求消息</span></span><br><span class="line">    sofa::pbrpc::test::EchoRequest request;</span><br><span class="line">    request.set_message(<span class="string">"Hello world!"</span>);</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 定义方法的回应消息，会在调用返回后被填充</span></span><br><span class="line">    sofa::pbrpc::test::EchoResponse response;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 定义RpcController对象，用于控制本次调用</span></span><br><span class="line">    <span class="comment">// 可以设置超时时间、压缩方式等；默认超时时间为10秒，默认压缩方式为无压缩</span></span><br><span class="line">    sofa::pbrpc::RpcController controller;</span><br><span class="line">    controller.SetTimeout(<span class="number">3000</span>);</span><br><span class="line"> </span><br><span class="line">    <span class="comment">// 发起调用，最后一个参数为NULL表示为同步调用</span></span><br><span class="line">    stub.Echo(&amp;controller, &amp;request, &amp;response, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用完成后，检查是否失败</span></span><br><span class="line">    <span class="keyword">if</span> (controller.Failed()) &#123;</span><br><span class="line">        <span class="comment">// 调用失败后的错误处理，譬如可以进行重试</span></span><br><span class="line">        SLOG(ERROR, <span class="string">"request failed: %s"</span>, controller.ErrorText().c_str());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="3-3-异步调用"><a href="#3-3-异步调用" class="headerlink" title="3.3 异步调用"></a>3.3 异步调用</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义回调函数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">EchoCallback</span><span class="params">(sofa::pbrpc::RpcController* cntl,</span><br><span class="line">        sofa::pbrpc::test::EchoRequest* request,</span><br><span class="line">        sofa::pbrpc::test::EchoResponse* response,</span><br><span class="line">        <span class="keyword">bool</span>* callbacked)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="comment">// 打印一些日志</span></span><br><span class="line">    SLOG(NOTICE, <span class="string">"RemoteAddress=%s"</span>, cntl-&gt;RemoteAddress().c_str());</span><br><span class="line">    SLOG(NOTICE, <span class="string">"IsRequestSent=%s"</span>, cntl-&gt;IsRequestSent() ? <span class="string">"true"</span> : <span class="string">"false"</span>);</span><br><span class="line">    <span class="keyword">if</span> (cntl-&gt;IsRequestSent())</span><br><span class="line">    &#123;</span><br><span class="line">        SLOG(NOTICE, <span class="string">"LocalAddress=%s"</span>, cntl-&gt;LocalAddress().c_str());</span><br><span class="line">        SLOG(NOTICE, <span class="string">"SentBytes=%ld"</span>, cntl-&gt;SentBytes());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检查调用是否失败</span></span><br><span class="line">    <span class="keyword">if</span> (cntl-&gt;Failed()) &#123;</span><br><span class="line">        SLOG(ERROR, <span class="string">"request failed: %s"</span>, cntl-&gt;ErrorText().c_str());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        SLOG(NOTICE, <span class="string">"request succeed: %s"</span>, response-&gt;message().c_str());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 可以在回调函数中执行一些释放资源的操作</span></span><br><span class="line">    <span class="keyword">delete</span> cntl;</span><br><span class="line">    <span class="keyword">delete</span> request;</span><br><span class="line">    <span class="keyword">delete</span> response;</span><br><span class="line"></span><br><span class="line">    *callbacked = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="4-主程序"><a href="#4-主程序" class="headerlink" title="4. 主程序"></a>4. 主程序</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    SOFA_PBRPC_SET_LOG_LEVEL(NOTICE);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义RpcClient</span></span><br><span class="line">    sofa::pbrpc::RpcClientOptions client_options;</span><br><span class="line">    sofa::pbrpc::<span class="function">RpcClient <span class="title">rpc_client</span><span class="params">(client_options)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义RpcChannel</span></span><br><span class="line">    sofa::pbrpc::<span class="function">RpcChannel <span class="title">rpc_channel</span><span class="params">(&amp;rpc_client, <span class="string">"127.0.0.1:12321"</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义EchoServer服务的桩对象</span></span><br><span class="line">    sofa::pbrpc::test::<span class="function">EchoServer_Stub <span class="title">stub</span><span class="params">(&amp;rpc_channel)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建Request和Response消息</span></span><br><span class="line">    sofa::pbrpc::test::EchoRequest* request = <span class="keyword">new</span> sofa::pbrpc::test::EchoRequest();</span><br><span class="line">    request-&gt;set_message(<span class="string">"Hello from qinzuoyan01"</span>);</span><br><span class="line">    sofa::pbrpc::test::EchoResponse* response = <span class="keyword">new</span> sofa::pbrpc::test::EchoResponse();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建RpcController</span></span><br><span class="line">    sofa::pbrpc::RpcController* cntl = <span class="keyword">new</span> sofa::pbrpc::RpcController();</span><br><span class="line">    cntl-&gt;SetTimeout(<span class="number">3000</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建回调函数，回调函数可以预绑定一些参数，譬如callbacked</span></span><br><span class="line">    <span class="keyword">bool</span> callbacked = <span class="literal">false</span>;</span><br><span class="line">    google::protobuf::Closure* done = sofa::pbrpc::NewClosure(</span><br><span class="line">            &amp;EchoCallback, cntl, request, response, &amp;callbacked);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 发起调用，最后一个参数非NULL表示为异步调用</span></span><br><span class="line">    stub.Echo(cntl, request, response, done);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 等待回调完成，此处为简单的变量探测方式，不推荐</span></span><br><span class="line">    <span class="keyword">while</span> (!callbacked) &#123;</span><br><span class="line">        usleep(<span class="number">100000</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> EXIT_SUCCESS;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>注意</strong>：</p>
-<blockquote>
-<p>异步调用传入的controller、request、response参数，在回调函数执行之前需一直保持有效；<br>回调函数的执行会分配到专门的回调线程中运行，可以通过设置RpcClientOptions的callback_thread_num来配置回调线程数；</p>
-</blockquote>
-<div class="alert alert-success"><i class="fa fa-lightbulb-o"></i>  本文转载自<a href="http://dwz.cn/2UpF7k" target="_blank" rel="external">百度网页搜索部开源团队github</a>。</div>
+					<span style="font-size:15px"><p>最近在家里闲得无聊，不知道怎么弹出了一个网赚的广告，于是乎就google了一下网赚。</p>
+<p>结果找到了两个很出名的平台：<a href="http://www.neobux.com/" target="_blank" rel="external">NeoBux</a>和<a href="http://www.clixsense.com/" target="_blank" rel="external">clixsense</a>，都是属于点击广告赚美元的类型。</p>
+<p>于是乎赶紧都注册了帐号试了下，都试玩了3天左右，结果爱上了clixsense，并且一发不可收拾啊，哈哈！<a id="more"></a></p>
+<p>clixsense最大的优势在于：<strong>平台上会每天提供若干个有报酬的survey，一般是0.7到1.5美元之间</strong>。</p>
+<p>附上一张我玩了3天的工作成果，还不错吧，8美元了，而且几乎没占用我什么时间。</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog%2F2015%2F11%2F02%2Fclixsense.jpg" alt=""></p>
+<p>希望跟我一样还在实验室无聊的在校学生，可以注册个帐号玩玩，每个月至少得个600RMB应该是不成问题的。</p>
+<p>欢迎大家在文章下面给我留言，大家一起交流clixsense的玩法，加油。</p>
+<p>最后附上注册地址：<a href="http://csl.ink/1aV6" target="_blank" rel="external">http://csl.ink/1aV6</a></p>
+<div class="alert alert-success"><i class="fa fa-lightbulb-o"></i>   本文由<a href="http://www.rudy-yuan.net">Rudy Yuan</a>创作，采用<a href="http://creativecommons.org/licenses/by/3.0/cn" target="_blank" rel="external">CC BY 3.0 CN协议</a>进行许可。
+可自由转载、引用，但需署名作者且注明文章出处。</div>
 </span>
 				</header>
 
@@ -216,7 +178,7 @@
 				<span class="fa fa-folder" aria-hidden="true"></span> 
 
 				
-					<a href="/categories/源码学习/">源码学习</a>
+					<a href="/categories/技术杂文/">技术杂文</a>
 				
 
 			</span>
@@ -225,9 +187,7 @@
 				<span class="fa fa-tags" aria-hidden="true"></span> 
 
 				
-					<a href="/tags/转载/">转载</a>&nbsp;
-				
-					<a href="/tags/sofa-pbrpc/">sofa-pbrpc</a>&nbsp;
+					<a href="/tags/clixsense/">clixsense</a>&nbsp;
 				
 
 			</span>
@@ -259,14 +219,14 @@
 					<p class="p1">上一篇 <a href="/archives/206/">谷歌技术"三宝"之MapReduce</a></p> 
 
 				
-				   <p class="p2">下一篇 <a href="/archives/201/">Google Protobuf语言指南</a></p> 
+				   <p class="p2">下一篇 <a href="/archives/202/">百度开源框架sofa-pbrpc快速使用三部曲</a></p> 
 			
 		
 		<!-- comment -->
 		
 <section id="comment">
   
-  	 <div class="ds-thread" data-thread-key="archives/203/" data-title="百度开源框架sofa-pbrpc快速使用三部曲" data-url="http://www.rudy-yuan.net/archives/203/"></div>  
+  	 <div class="ds-thread" data-thread-key="archives/203/" data-title="强力推荐适合在校大学生的网赚平台clixsense" data-url="http://www.rudy-yuan.net/archives/203/"></div>  
   
 </section>
 
@@ -370,18 +330,11 @@
 
 
 	      <!-- toc -->	      
-	      
-		<div class="widget">
-		    <span style="font-size: 14px font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">本文目录 <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a></span>
-		    <div id="toc" class="toc collapse in">
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#1-定义通讯协议"><span class="toc-article-text">1. 定义通讯协议</span></a></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#2-实现Server"><span class="toc-article-text">2. 实现Server</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#2-1-头文件"><span class="toc-article-text">2.1 头文件</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#2-2-实现服务"><span class="toc-article-text">2.2 实现服务</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#2-3-注册和启动服务"><span class="toc-article-text">2.3 注册和启动服务</span></a></li></ol></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#3-实现Client"><span class="toc-article-text">3. 实现Client</span></a><ol class="toc-article-child"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#3-1-头文件"><span class="toc-article-text">3.1 头文件</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#3-2-同步调用"><span class="toc-article-text">3.2 同步调用</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#3-3-异步调用"><span class="toc-article-text">3.3 异步调用</span></a></li></ol></li><li class="toc-article-item toc-article-level-3"><a class="toc-article-link" href="#4-主程序"><span class="toc-article-text">4. 主程序</span></a></li></ol>
-		    </div>
-		</div>
 	      	      
 
 	      
 	<div class="widget">
-		<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">分類目錄</h4>
+		<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">分类目录</h4>
 		<ul class="tag_box inline list-unstyled">
 		
 			<li><a href="/categories/Demo/">Demo<span>1</span></a></li>
@@ -408,7 +361,7 @@
 		
 			<li><a href="/categories/工具相关/">工具相关<span>1</span></a></li>
 		
-			<li><a href="/categories/技术杂文/">技术杂文<span>8</span></a></li>
+			<li><a href="/categories/技术杂文/">技术杂文<span>9</span></a></li>
 		
 			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>3</span></a></li>
 		
@@ -419,51 +372,51 @@
 	
 	      
 	<div class="widget">
-		<h4 style="font-weight: bold; color: #333 ">標籤雲</h4>
+		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
+			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
 		
-			<li><a href="/tags/Leetcode/">Leetcode<span>1</span></a></li>
+			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
 		
-			<li><a href="/tags/对象模型/">对象模型<span>1</span></a></li>
+			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
 		
-			<li><a href="/tags/Protobuf/">Protobuf<span>1</span></a></li>
+			<li><a href="/tags/sofa-pbrpc/">sofa-pbrpc<span>1</span></a></li>
 		
-			<li><a href="/tags/热点文章/">热点文章<span>5</span></a></li>
+			<li><a href="/tags/保研/">保研<span>1</span></a></li>
 		
-			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
+			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
 		
-			<li><a href="/tags/mapReduce/">mapReduce<span>1</span></a></li>
+			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
 		
-			<li><a href="/tags/github/">github<span>1</span></a></li>
-		
-			<li><a href="/tags/Q-A/">Q&amp;A<span>1</span></a></li>
-		
-			<li><a href="/tags/mediastreamer2/">mediastreamer2<span>1</span></a></li>
-		
-			<li><a href="/tags/NDN/">NDN<span>1</span></a></li>
+			<li><a href="/tags/ubuntu源/">ubuntu源<span>1</span></a></li>
 		
 			<li><a href="/tags/python/">python<span>1</span></a></li>
 		
 			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
 		
-			<li><a href="/tags/mysql/">mysql<span>2</span></a></li>
-		
-			<li><a href="/tags/网络/">网络<span>2</span></a></li>
-		
 			<li><a href="/tags/转载/">转载<span>4</span></a></li>
 		
-			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
+			<li><a href="/tags/Protobuf/">Protobuf<span>1</span></a></li>
 		
-			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
+			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
 		
-			<li><a href="/tags/面试/">面试<span>5</span></a></li>
+			<li><a href="/tags/对象模型/">对象模型<span>1</span></a></li>
 		
-			<li><a href="/tags/ubuntu源/">ubuntu源<span>1</span></a></li>
+			<li><a href="/tags/华为面试/">华为面试<span>1</span></a></li>
+		
+			<li><a href="/tags/github/">github<span>1</span></a></li>
+		
+			<li><a href="/tags/简体/">简体<span>1</span></a></li>
+		
+			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
+		
+			<li><a href="/tags/libevent/">libevent<span>1</span></a></li>
+		
+			<li><a href="/tags/KMP/">KMP<span>2</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>50</span></a></li>
+		   <li><a href="/tags">...<span>51</span></a></li>
 		 
 		</ul>
 	</div>
@@ -471,7 +424,7 @@
 
 	      
 <div class="widget">
-	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">友情鏈接</h4>
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">友情链接</h4>
 	<ul class="blogroll list-unstyled">
 	
 		<li style="font-size:14px"><i class="fa fa-share"></i><a href="http://hexo.io" title="My Linkin account." target="_blank"]);">Hexo</a></li>
@@ -495,7 +448,7 @@
 
 
 	      <div class="widget">
-	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">近期評論</h4>
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">近期评论</h4>
 	<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="0" data-show-admin="1" data-excerpt-length="100" ></ul>
 	
 	<script type="text/javascript">
@@ -514,7 +467,7 @@
 
 	
 	      <section id="recent-visitors" class="widget widget_recent_comments">
-	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">最近訪客</h4>
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">最近访客</h4>
   	<div class="panelbody clearfix"><ul class="ds-recent-visitors" data-num-items="30"></ul></div>
 </section>    
 	      </div> <!-- sidebar -->
