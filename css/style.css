@@ -544,16 +544,17 @@ margin-bottom: 9px;
 }
 
 .p1{
-float:left;
-font-size: 15px;
+	float:left;
+	font-size: 15px;
 }
 .p2{
-float:right;
+	float:right;
+	font-size: 15px;
 }
 .curent{
-width:30px;
-height:30px;
-footerfooter
+	width:30px;
+	height:30px;
+	footerfooter
 }
 
 .entry-date,
