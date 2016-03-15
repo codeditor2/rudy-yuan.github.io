@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/195/</loc>
+    <lastmod>2016-03-15T01:51:24.869Z</lastmod>
+    <data>
+        <display>
+        <title>国内访问google的方法(附持续更像hosts文件)</title>
+        <pubTime>2015-08-27T01:09:00.000Z</pubTime>
+        
+        <tag>google访问</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术杂文" url="http://www.rudy-yuan.net/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/134/</loc>
     <lastmod>2016-03-14T13:48:30.067Z</lastmod>
     <data>
@@ -399,26 +419,6 @@
     
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/color-themes/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Color Themes</title>
-        <pubTime>2016-01-30T05:00:24.000Z</pubTime>
-        
-        <tag>themes</tag>
-         
-         
-           
-             
-              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
@@ -432,26 +432,6 @@
            
              
               <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/code-highlight/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Code Highlight</title>
-        <pubTime>2014-03-15T12:17:16.000Z</pubTime>
-        
-        <tag>highlight</tag>
-         
-         
-           
-             
-              <breadCrumb title="Demo" url="http://www.rudy-yuan.net/categories/Demo/"/>
           
         </display>
     </data>
@@ -479,19 +459,39 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/lorem-ipsum/</loc>
+    <loc>http://www.rudy-yuan.net/archives/code-highlight/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>Lorem Ipsum</title>
+        <title>Code Highlight</title>
         <pubTime>2014-03-15T12:17:16.000Z</pubTime>
         
-        <tag>English</tag>
+        <tag>highlight</tag>
          
          
            
              
-              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
+              <breadCrumb title="Demo" url="http://www.rudy-yuan.net/categories/Demo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/color-themes/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Color Themes</title>
+        <pubTime>2016-01-30T05:00:24.000Z</pubTime>
+        
+        <tag>themes</tag>
+         
+         
+           
+             
+              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
           
         </display>
     </data>
@@ -512,6 +512,26 @@
            
              
               <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/lorem-ipsum/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Lorem Ipsum</title>
+        <pubTime>2014-03-15T12:17:16.000Z</pubTime>
+        
+        <tag>English</tag>
+         
+         
+           
+             
+              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
           
         </display>
     </data>
