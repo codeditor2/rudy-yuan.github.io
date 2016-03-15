@@ -126,13 +126,13 @@
 
 							<span class="comments-link">
 								<span class="fa fa-comments" aria-hidden="true"></span>
-								<span class="ds-thread-count" data-thread-key="archives/206/">暂无评论</span>
+								<span class="ds-thread-count" data-thread-key="archives/34/">暂无评论</span>
 							</span>	
 							
 						</div>	
 									
 						<h3 class="entry-title"> 
-							  <a href="/archives/206/" >使用C++实现模板类的友元重载</a>
+							  <a href="/archives/34/" >谈谈翻墙术</a>
 						</h3>
 
 					</header>
@@ -141,22 +141,19 @@
   <div class="row">
 	
            
-              <div class="thumbnail"><a href="/archives/206/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2015/05/27/template-friend.jpg" alt="使用C++实现模板类的友元重载"  class="nofancybox"></a>
+              <div class="thumbnail"><a href="/archives/34/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2015/05/27/template-friend.jpg" alt="谈谈翻墙术"  class="nofancybox"></a>
            
 		</div>
 	
 	
-		<p>程序员面试宝典中的一个题目：使用C++代码实现模板类的友元重载。</p>
-<p>关键在于：</p>
-<blockquote>
-<p>模板类的友元函数如何在模板类中进行申明？<br>友元函数在类体外如何定义？<br>
+		
 	
 	...</div>
 </div>
 
 
 					<footer class="entry-meta">					  
-						<a href="/archives/206/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+						<a href="/archives/34/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
 					</footer>
 
 				</div>	
@@ -228,7 +225,7 @@
 							
 							  <span class="entry-date">
 								  <span class="fa fa-calendar" aria-hidden="true"></span>
-								  2015-05-29						      
+								  2015-01-13						      
 							  </span>
 							  
 							  <span class="author vcard">
@@ -240,13 +237,13 @@
 
 							<span class="comments-link">
 								<span class="fa fa-comments" aria-hidden="true"></span>
-								<span class="ds-thread-count" data-thread-key="archives/34/">暂无评论</span>
+								<span class="ds-thread-count" data-thread-key="archives/206/">暂无评论</span>
 							</span>	
 							
 						</div>	
 									
 						<h3 class="entry-title"> 
-							  <a href="/archives/34/" >谈谈翻墙术</a>
+							  <a href="/archives/206/" >谷歌技术&quot;三宝&quot;之MapReduce</a>
 						</h3>
 
 					</header>
@@ -255,19 +252,36 @@
   <div class="row">
 	
            
-              <div class="thumbnail"><a href="/archives/34/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2015/05/27/template-friend.jpg" alt="谈谈翻墙术"  class="nofancybox"></a>
+              <div class="thumbnail"><a href="/archives/206/"><img src="http://img.my.csdn.net/uploads/201204/26/1335443612_8438.jpg" alt="谷歌技术&quot;三宝&quot;之MapReduce"  class="nofancybox"></a>
            
 		</div>
 	
 	
-		
+		<h3 id="MapReduce是如何工作的"><a href="#MapReduce是如何工作的" class="headerlink" title="MapReduce是如何工作的"></a>MapReduce是如何工作的</h3><p><img src="http://img.my.csdn.net/uploads/201204/26/1335443612_8438.jpg" alt=""> </p>
+<p>上图是论文里给出的流程图。一切都是从最上方的user program开始的，user program链接了MapReduce库，实现了最基本的Map函数和Reduce函数。图中执行的顺序都用数字标记了。</p>
+<blockquote>
+<ol>
+<li>MapReduce库先把userprogram的输入文件划分为M份（M为用户定义），每一份通常有16MB到64MB，如图左方所示分成了split0~4；然后使用fork将用户进程拷贝到集群内其它机器上。</li>
+<li>user program的副本中有一个称为master，其余称为worker，master是负责调度的，为空闲worker分配作业（Map作业或者Reduce作业），worker的数量也是可以由用户指定的。</li>
+<li>被分配了Map作业的worker，开始读取对应分片的输入数据，Map作业数量是由M决定的，和split一一对应；Map作业从输入数据中抽取出键值对，每一个键值对都作为参数传递给map函数，map函数产生的中间键值对被缓存在内存中。</li>
+<li>缓存的中间键值对会被定期写入本地磁盘，而且被分为R个区，R的大小是由用户定义的，将来每个区会对应一个Reduce作业；这些中间键值对的位置会被通报给master，master负责将信息转发给Reduce worker。</li>
+<li>master通知分配了Reduce作业的worker它负责的分区在什么位置（肯定不止一个地方，每个Map作业产生的中间键值对都可能映射到所有R个不同分区），当Reduce worker把所有它负责的中间键值对都读过来后，先对它们进行排序，使得相同键的键值对聚集在一起。因为不同的键可能会映射到同一个分区也就是同一个Reduce作业（谁让分区少呢），所以排序是必须的。</li>
+<li>reduce worker遍历排序后的中间键值对，对于每个唯一的键，都将键与关联的值传递给reduce函数，reduce函数产生的输出会添加到这个分区的输出文件中。</li>
+<li>当所有的Map和Reduce作业都完成了，master唤醒正版的user program，MapReduce函数调用返回user program的代码。</li>
+</ol>
+</blockquote>
+<p>所有执行完毕后，MapReduce输出放在了R个分区的输出文件中（分别对应一个Reduce作业）。用户通常并不需要合并这R个文件，而是将其作为输入交给另一个MapReduce程序处理。整个过程中，输入数据是来自底层分布式文件系统（GFS）的，中间数据是放在本地文件系统的，最终输出数据是写入底层分布式文件系统（GFS）的。</p>
+<p>而且我们要注意:</p>
+<p><strong>Map/Reduce作业和map/reduce函数的区别</strong>：*Map作业处理一个输入数据的分片，可能需要调用多次map函数来处理每个输入键值对；</p>
+<p>Reduce作业处理一个分区的中间键值对，期间要对每个不同的键调用一次reduce函数，Reduce作业最终也对应一个输出文件*。</p>
+
 	
 	...</div>
 </div>
 
 
 					<footer class="entry-meta">					  
-						<a href="/archives/34/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+						<a href="/archives/206/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
 					</footer>
 
 				</div>	
@@ -502,11 +516,13 @@
 		
 			<li><a href="/categories/Docs/">Docs<span>4</span></a></li>
 		
+			<li><a href="/categories/MapReduce/">MapReduce<span>1</span></a></li>
+		
 			<li><a href="/categories/Test/">Test<span>2</span></a></li>
 		
 			<li><a href="/categories/c和c/">c和c++<span>1</span></a></li>
 		
-			<li><a href="/categories/c和cpp/">c和cpp<span>7</span></a></li>
+			<li><a href="/categories/c和cpp/">c和cpp<span>6</span></a></li>
 		
 			<li><a href="/categories/leetcode/">leetcode<span>3</span></a></li>
 		
@@ -533,48 +549,48 @@
 		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Web服务器/">Web服务器<span>1</span></a></li>
+			<li><a href="/tags/github/">github<span>1</span></a></li>
 		
-			<li><a href="/tags/算法/">算法<span>3</span></a></li>
+			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
 		
-			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
+			<li><a href="/tags/面试/">面试<span>8</span></a></li>
+		
+			<li><a href="/tags/free2mind/">free2mind<span>1</span></a></li>
+		
+			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
 		
 			<li><a href="/tags/博主推荐/">博主推荐<span>2</span></a></li>
 		
-			<li><a href="/tags/简体/">简体<span>1</span></a></li>
+			<li><a href="/tags/转载/">转载<span>2</span></a></li>
 		
-			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
+			<li><a href="/tags/github静态博客/">github静态博客<span>1</span></a></li>
 		
-			<li><a href="/tags/KMP/">KMP<span>2</span></a></li>
+			<li><a href="/tags/桃江地震/">桃江地震<span>1</span></a></li>
 		
-			<li><a href="/tags/马拉车算法/">马拉车算法<span>0</span></a></li>
+			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
+		
+			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
 		
 			<li><a href="/tags/对象模型/">对象模型<span>1</span></a></li>
 		
-			<li><a href="/tags/数据结构/">数据结构<span>1</span></a></li>
-		
-			<li><a href="/tags/Q-A/">Q&amp;A<span>1</span></a></li>
-		
 			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
 		
-			<li><a href="/tags/vi/">vi<span>1</span></a></li>
+			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
 		
-			<li><a href="/tags/libevent/">libevent<span>1</span></a></li>
-		
-			<li><a href="/tags/mediastreamer2/">mediastreamer2<span>1</span></a></li>
-		
-			<li><a href="/tags/English/">English<span>1</span></a></li>
-		
-			<li><a href="/tags/cpp/">cpp<span>8</span></a></li>
-		
-			<li><a href="/tags/themes/">themes<span>1</span></a></li>
+			<li><a href="/tags/算法/">算法<span>3</span></a></li>
 		
 			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
 		
-			<li><a href="/tags/python/">python<span>1</span></a></li>
+			<li><a href="/tags/马拉车算法/">马拉车算法<span>0</span></a></li>
+		
+			<li><a href="/tags/libevent/">libevent<span>1</span></a></li>
+		
+			<li><a href="/tags/English/">English<span>1</span></a></li>
+		
+			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>43</span></a></li>
+		   <li><a href="/tags">...<span>45</span></a></li>
 		 
 		</ul>
 	</div>
