@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/194/</loc>
+    <lastmod>2016-03-15T08:31:36.523Z</lastmod>
+    <data>
+        <display>
+        <title>Python对象模型(2)</title>
+        <pubTime>2015-08-22T07:09:00.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>对象模型</tag>
+         
+         
+           
+             
+              <breadCrumb title="python与Django" url="http://www.rudy-yuan.net/categories/python%E4%B8%8EDjango/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/new-hexo-theme-free2mind/</loc>
     <lastmod>2016-03-15T08:19:28.614Z</lastmod>
     <data>
@@ -531,19 +553,19 @@
     
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
+    <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>简体中文测试</title>
-        <pubTime>2013-12-25T12:17:16.000Z</pubTime>
+        <title>Tag Plugins</title>
+        <pubTime>2014-03-16T02:17:16.000Z</pubTime>
         
-        <tag>简体</tag>
+        <tag>plugins</tag>
          
          
            
              
-              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
+              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
           
         </display>
     </data>
@@ -564,6 +586,46 @@
            
              
               <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>简体中文测试</title>
+        <pubTime>2013-12-25T12:17:16.000Z</pubTime>
+        
+        <tag>简体</tag>
+         
+         
+           
+             
+              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/tag-plugins-cn/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Tag Plugins（中文）</title>
+        <pubTime>2014-03-16T02:10:16.000Z</pubTime>
+        
+        <tag>plugins</tag>
+         
+         
+           
+             
+              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
           
         </display>
     </data>
@@ -599,46 +661,6 @@
         <pubTime>2016-01-30T05:00:24.000Z</pubTime>
         
         <tag>themes</tag>
-         
-         
-           
-             
-              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/tag-plugins-cn/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Tag Plugins（中文）</title>
-        <pubTime>2014-03-16T02:10:16.000Z</pubTime>
-        
-        <tag>plugins</tag>
-         
-         
-           
-             
-              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Tag Plugins</title>
-        <pubTime>2014-03-16T02:17:16.000Z</pubTime>
-        
-        <tag>plugins</tag>
          
          
            
