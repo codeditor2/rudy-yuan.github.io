@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/205/</loc>
+    <lastmod>2016-03-15T14:50:32.598Z</lastmod>
+    <data>
+        <display>
+        <title>命名数据网络(NDN)介绍</title>
+        <pubTime>2016-01-18T07:55:23.000Z</pubTime>
+        
+        <tag>NDN</tag>
+         
+         
+           
+             
+              <breadCrumb title="NDN" url="http://www.rudy-yuan.net/categories/NDN/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/203/</loc>
     <lastmod>2016-03-15T14:47:27.357Z</lastmod>
     <data>
@@ -129,26 +149,6 @@
            
              
               <breadCrumb title="技术杂文" url="http://www.rudy-yuan.net/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E6%96%87/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/205/</loc>
-    <lastmod>2016-03-15T09:23:52.250Z</lastmod>
-    <data>
-        <display>
-        <title>命名数据网络(NDN)与TCP/IP网络的显著区别</title>
-        <pubTime>2016-01-22T07:09:00.000Z</pubTime>
-        
-        <tag>NDN</tag>
-         
-         
-           
-             
-              <breadCrumb title="NDN" url="http://www.rudy-yuan.net/categories/NDN/"/>
           
         </display>
     </data>
