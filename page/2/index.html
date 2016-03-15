@@ -298,13 +298,13 @@
 
 							<span class="comments-link">
 								<span class="fa fa-comments" aria-hidden="true"></span>
-								<span class="ds-thread-count" data-thread-key="archives/202/">暂无评论</span>
+								<span class="ds-thread-count" data-thread-key="archives/201/">暂无评论</span>
 							</span>	
 							
 						</div>	
 									
 						<h3 class="entry-title"> 
-							  <a href="/archives/202/" >Google Protobuf语言指南</a>
+							  <a href="/archives/201/" >Google Protobuf语言指南</a>
 						</h3>
 
 					</header>
@@ -313,71 +313,14 @@
   <div class="row">
 	
 	
-		<h3 id="1-定义一个消息类型"><a href="#1-定义一个消息类型" class="headerlink" title="1. 定义一个消息类型"></a>1. 定义一个消息类型</h3><p>先来看一个非常简单的例子。假设你想定义一个“搜索请求”的消息格式，每一个请求含有一个查询字符串、你感兴趣的查询结果所在的页数，以及每一页多少条查询结果。可以采用如下的方式来定义消息类型的.proto文件了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">message SearchRequest &#123;</span><br><span class="line"></span><br><span class="line">  required string query = 1;</span><br><span class="line"></span><br><span class="line">  optional int32 page_number = 2;</span><br><span class="line"></span><br><span class="line">  optional int32 result_per_page = 3;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>SearchRequest消息格式有3个字段，在消息中承载的数据分别对应于每一个字段。其中每个字段都有一个名字和一种类型。</p>
-<h4 id="1-1-指定字段类型"><a href="#1-1-指定字段类型" class="headerlink" title="1.1 指定字段类型"></a>1.1 指定字段类型</h4><p>在上面的例子中，所有字段都是标量类型：两个整型（page_number和result_per_page），一个string类型（query）。当然，你也可以为字段指定其他的合成类型，包括枚举（enumerations）或其他消息类型。</p>
-<h4 id="1-2-分配标识号"><a href="#1-2-分配标识号" class="headerlink" title="1.2 分配标识号"></a>1.2 分配标识号</h4><p>正如上述文件格式，在消息定义中，每个字段都有唯一的一个标识符。这些标识符是用来在消息的二进制格式中识别各个字段的，一旦开始使用就不能够再改 变。</p>
-<p>注：[1,15]之内的标识号在编码的时候会占用一个字节。[16,2047]之内的标识号则占用2个字节。所以应该为那些频繁出现的消息元素保留 [1,15]之内的标识号。切记：要为将来有可能添加的、频繁出现的标识号预留一些标识号。</p>
-<p>最小的标识号可以从1开始，最大到229 - 1, or 536,870,911。不可以使用其中的[19000－19999]的标识号， Protobuf协议实现中对这些进行了预留。如果非要在.proto文件中使用这些预留标识号，编译时就会报警。</p>
-<h4 id="1-3-指定字段规则"><a href="#1-3-指定字段规则" class="headerlink" title="1.3 指定字段规则"></a>1.3 指定字段规则</h4><p>所指定的消息字段修饰符必须是如下之一：</p>
-<blockquote>
-<p>required：一个格式良好的消息一定要含有1个这种字段。表示该值是必须要设置的；<br>optional：消息格式中该字段可以有0个或1个值（不超过1个）。<br>repeated：在一个格式良好的消息中，这种字段可以重复任意多次（包括0次）。重复的值的顺序会被保留。表示该值可以重复，相当于java中的List。</p>
-</blockquote>
-<p>在一个.proto文件中可以定义多个消息类型。在定义多个相关的消息的时候，这一点特别有用——例如，如果想定义与SearchResponse消息类型对应的回复消息格式的话，你可以将它添加到相同的.proto文件中，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">message SearchRequest &#123;</span><br><span class="line"></span><br><span class="line">  required string query = 1;</span><br><span class="line"></span><br><span class="line">  optional int32 page_number = 2;</span><br><span class="line"></span><br><span class="line">  optional int32 result_per_page = 3;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">message SearchResponse &#123;</span><br><span class="line"></span><br><span class="line"> …</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="1-4-添加注释"><a href="#1-4-添加注释" class="headerlink" title="1.4 添加注释"></a>1.4 添加注释</h4><p>向.proto文件添加注释，可以使用C/C++/java风格的双斜杠（//） 语法格式，如：</p>
-<h3 id="2-从-proto文件生成了什么？"><a href="#2-从-proto文件生成了什么？" class="headerlink" title="2. 从.proto文件生成了什么？"></a>2. 从.proto文件生成了什么？</h3><p>当用<strong>protocolbuffer编译器</strong>来运行.proto文件时，编译器将生成所选择语言的代码，这些代码可以操作在.proto文件中定义的消息类型，包括获取、设置字段值，将消息序列化到一个输出流中，以及从一个输入流中解析消息。</p>
-<ol>
-<li>对C++来说，编译器会为每个.proto文件生成一个.h文件和一个.cc文件，.proto文件中的每一个消息有一个对应的类。</li>
-<li>对Java来说，编译器为每一个消息类型生成了一个.java文件，以及一个特殊的Builder类（该类是用来创建消息类接口的）。</li>
-<li>对Python来说，有点不太一样——Python编译器为.proto文件中的每个消息类型生成一个含有静态描述符的模块，，该模块与一个元类（metaclass）在运行时（runtime）被用来创建所需的Python数据访问类。Optional的字段和默认值</li>
-</ol>
-<h3 id="3-Optional的字段和默认值"><a href="#3-Optional的字段和默认值" class="headerlink" title="3. Optional的字段和默认值"></a>3. Optional的字段和默认值</h3><p>如上所述，消息描述中的一个元素可以被标记为“可选的”（optional）。一个格式良好的消息可以包含0个或一个optional的元素。当解析消息时，如果它不包含optional的元素值，那么解析出来的对象中的对应字段就被置为默认值。默认值可以在消息描述文件中指定。例如，要为 SearchRequest消息的result_per_page字段指定默认值10，在定义消息格式时如下所示：</p>
-<p>optional int32 result_per_page = 3 [default = 10];</p>
-<p>如果没有为optional的元素指定默认值，就会使用与特定类型相关的默认值：对string来说，默认值是空字符串。对bool来说，默认值是false。对数值类型来说，默认值是0。对枚举来说，默认值是枚举类型定义中的第一个值。</p>
-<h3 id="4-使用其他消息类型"><a href="#4-使用其他消息类型" class="headerlink" title="4. 使用其他消息类型"></a>4. 使用其他消息类型</h3><p>你可以将其他消息类型用作字段类型。例如，假设在每一个SearchResponse消息中包含Result消息，此时可以在相同的.proto文件中定义一个Result消息类型，然后在SearchResponse消息中指定一个Result类型的字段，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">message SearchResponse &#123;</span><br><span class="line"></span><br><span class="line">  repeated Result result = 1;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message Result &#123;</span><br><span class="line"></span><br><span class="line">  required string url = 1;</span><br><span class="line"></span><br><span class="line">  optional string title = 2;</span><br><span class="line"></span><br><span class="line">  repeated string snippets = 3;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="4-1-导入定义"><a href="#4-1-导入定义" class="headerlink" title="4.1 导入定义"></a>4.1 导入定义</h4><p>在上面的例子中，Result消息类型与SearchResponse是定义在同一文件中的。如果想要使用的消息类型已经在其他.proto文件中已经定义过了呢？</p>
-<p> 你可以通过导入（importing）其他.proto文件中的定义来使用它们。要导入其他.proto文件的定义，你需要在你的文件中添加一个导入声明，如：</p>
-<p>import “myproject/other_protos.proto”;</p>
-<p>protocol编译器就会在一系列目录中查找需要被导入的文件，这些目录通过protocol编译器的命令行参数-I/–import_path指定。如果不提供参数，编译器就在其调用目录下查找。</p>
-<h4 id="4-2-嵌套类型"><a href="#4-2-嵌套类型" class="headerlink" title="4.2 嵌套类型"></a>4.2 嵌套类型</h4><p>你可以在其他消息类型中定义、使用消息类型，在下面的例子中，Result消息就定义在SearchResponse消息内，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">message SearchResponse &#123;</span><br><span class="line"></span><br><span class="line">  message Result &#123;</span><br><span class="line"></span><br><span class="line">    required string url = 1;</span><br><span class="line"></span><br><span class="line">    optional string title = 2;</span><br><span class="line"></span><br><span class="line">    repeated string snippets = 3;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  repeated Result result = 1;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="5-包（Package）"><a href="#5-包（Package）" class="headerlink" title="5. 包（Package）"></a>5. 包（Package）</h3><p>可以为.proto文件新增一个可选的package声明符，用来防止不同的消息类型有命名冲突。如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">package foo.bar;</span><br><span class="line"></span><br><span class="line">message Open &#123; ... &#125;</span><br></pre></td></tr></table></figure>
-<p>在其他的消息格式定义中可以使用包名+消息名的方式来定义域的类型，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">message Foo &#123;</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">  required foo.bar.Open open = 1;</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>包的声明符会根据使用语言的不同影响生成的代码。对于C++，产生的类会被包装在C++的命名空间中，如上例中的Open会被封装在 foo::bar空间中；对于Java，包声明符会变为java的一个包，除非在.proto文件中提供了一个明确有java_package；对于 Python，这个包声明符是被忽略的，因为Python模块是按照其在文件系统中的位置进行组织的。</p>
-<h4 id="5-1-包及名称的解析"><a href="#5-1-包及名称的解析" class="headerlink" title="5.1 包及名称的解析"></a>5.1 包及名称的解析</h4><p>Protocol buffer语言中类型名称的解析与C++是一致的：首先从最内部开始查找，依次向外进行，每个包会被看作是其父类包的内部类。当然对于 （foo.bar.Baz）这样以“.”分隔的意味着是从最外围开始的。ProtocolBuffer编译器会解析.proto文件中定义的所有类型名。 对于不同语言的代码生成器会知道如何来指向每个具体的类型，即使它们使用了不同的规则。</p>
-<h4 id="5-2-定义服务-Service"><a href="#5-2-定义服务-Service" class="headerlink" title="5.2 定义服务(Service)"></a>5.2 定义服务(Service)</h4><p>如果想要将消息类型用在RPC(远程方法调用)系统中，可以在.proto文件中定义一个RPC服务接口，protocol buffer编译器将会根据所选择的不同语言生成服务接口代码及存根。如，想要定义一个RPC服务并具有一个方法，该方法能够接收 SearchRequest并返回一个SearchResponse，此时可以在.proto文件中进行如下定义：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">service SearchService &#123;</span><br><span class="line"></span><br><span class="line">  rpc Search (SearchRequest) returns (SearchResponse);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>protocol编译器将产生一个抽象接口SearchService以及一个相应的存根实现。存根将所有的调用指向RpcChannel，它是一个抽象接口，必须在RPC系统中对该接口进行实现。如，可以实现RpcChannel以完成序列化消息并通过HTTP方式来发送到一个服务器。换句话说，产生的存根提供了一个类型安全的接口用来完成基于protocolbuffer的RPC调用，而不是将你限定在一个特定的RPC的实现中。C++中的代码 如下所示：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> google::protobuf;</span><br><span class="line"></span><br><span class="line">protobuf::RpcChannel* channel;</span><br><span class="line">protobuf::RpcController* controller;</span><br><span class="line">SearchService* service;</span><br><span class="line">SearchRequest request;</span><br><span class="line">SearchResponse response;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DoSearch</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// You provide classes MyRpcChannel and MyRpcController, which implement</span></span><br><span class="line">  <span class="comment">// the abstract interfaces protobuf::RpcChannel and protobuf::RpcController.</span></span><br><span class="line">  channel = <span class="keyword">new</span> MyRpcChannel(<span class="string">"somehost.example.com:1234"</span>);</span><br><span class="line">  controller = <span class="keyword">new</span> MyRpcController;</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="comment">// The protocol compiler generates the SearchService class based on the</span></span><br><span class="line">  <span class="comment">// definition given above.</span></span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">service = <span class="keyword">new</span> SearchService::Stub(channel);</span><br><span class="line">  <span class="comment">// Set up the request.</span></span><br><span class="line">  request.set_query(<span class="string">"protocol buffers"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Execute the RPC.</span></span><br><span class="line">  service-&gt;Search(controller, request, response, protobuf::NewCallback(&amp;Done));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Done</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">delete</span> service;</span><br><span class="line">  <span class="keyword">delete</span> channel;</span><br><span class="line">  <span class="keyword">delete</span> controller;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>所有service类都必须实现Service接口，它提供了一种用来调用具体方法的方式，即在编译期不需要知道方法名及它的输入、输出类型。在服务器端，通过服务注册它可以被用来实现一个RPC Server。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> google::protobuf;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> ExampleSearchService : <span class="keyword">public</span> SearchService &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">Search</span><span class="params">(protobuf::RpcController* controller,</span><br><span class="line">              <span class="keyword">const</span> SearchRequest* request,</span><br><span class="line">              SearchResponse* response,</span><br><span class="line">              protobuf::Closure* done)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (request-&gt;query() == <span class="string">"google"</span>) &#123;</span><br><span class="line">      response-&gt;add_result()-&gt;set_url(<span class="string">"http://www.google.com"</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (request-&gt;query() == <span class="string">"protocol buffers"</span>) &#123;</span><br><span class="line">      response-&gt;add_result()-&gt;set_url(<span class="string">"http://protobuf.googlecode.com"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    done-&gt;Run();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// You provide class MyRpcServer.  It does not have to implement any</span></span><br><span class="line">  <span class="comment">// particular interface; this is just an example.</span></span><br><span class="line">  MyRpcServer server;</span><br><span class="line"></span><br><span class="line">  protobuf::Service* service = <span class="keyword">new</span> ExampleSearchService;</span><br><span class="line">  server.ExportOnPort(<span class="number">1234</span>, service);</span><br><span class="line">  server.Run();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">delete</span> service;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="6-生成访问类"><a href="#6-生成访问类" class="headerlink" title="6. 生成访问类"></a>6. 生成访问类</h3><p>可以通过定义好的.proto文件来生成Java、Python、C++代码，需要基于.proto文件运行protocol buffer编译器protoc。运行的命令如下所示：</p>
-<p>protoc –proto_path=IMPORT_PATH –cpp_out=DST_DIR –java_out=DST_DIR –python_out=DST_DIR path/to/file.proto</p>
-<blockquote>
-<ol>
-<li>IMPORT_PATH声明了一个.proto文件所在的具体目录。如果忽略该值，则使用当前目录。如果有多个目录则可以对–proto_path 写多次，它们将会顺序的被访问并执行导入。-I=IMPORT_PATH是它的简化形式。</li>
-<li>–cpp_out 在目标目录DST_DIR中产生C++代码</li>
-<li>–java_out 在目标目录DST_DIR中产生Java代码</li>
-<li>–python_out 在目标目录 DST_DIR 中产生Python代码</li>
-</ol>
-</blockquote>
-<p>作为一种额外的使得，如果DST_DIR 是以.zip或.jar结尾的，编译器将输出结果打包成一个zip格式的归档文件。.jar将会输出一个 Java JAR声明必须的manifest文件。注：如果该输出归档文件已经存在，它将会被重写，编译器并没有做到足够的智能来为已经存在的归档文件添加新的文件。</p>
-<p>你必须提供一个或多个.proto文件作为输入。多个.proto文件能够一次全部声明。虽然这些文件是相对于当前目录来命名的，每个文件必须在一个IMPORT_PATH中，只有如此编译器才可以决定它的标准名称。</p>
-<hr>
-<div class="alert alert-success"><i class="fa fa-lightbulb-o"></i>  本文整理自<a href="http://www.open-open.com/home/space.php?uid=37924&do=blog&id=5873" target="_blank" rel="external">Rudy Yuan</a>jopen的日志。</div>
-
+		<h3 id="1-定义一个消息类型"><a href="#1-定义一个消息类型" class="headerlink" title="1. 定义一个消息类型"></a>1. 定义一个消息类型</h3><p>先来看一个非常简单的例子。假设你想定义一个“搜索请求”的消息格式，每一个请求含有一个查询字符串、你感兴趣的查询结果所在的页数，以及每一页多少条查询结果。可以采用如下的方式来定义消息类型的.proto文件了
 	
 	...</div>
 </div>
 
 
 					<footer class="entry-meta">					  
-						<a href="/archives/202/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+						<a href="/archives/201/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
 					</footer>
 
 				</div>	
@@ -594,45 +537,45 @@
 		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/mysql远程连接/">mysql远程连接<span>1</span></a></li>
+			<li><a href="/tags/libevent/">libevent<span>1</span></a></li>
 		
-			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
+			<li><a href="/tags/python/">python<span>1</span></a></li>
 		
-			<li><a href="/tags/ubuntu-yuan/">ubuntu yuan<span>1</span></a></li>
+			<li><a href="/tags/阿里云/">阿里云<span>1</span></a></li>
 		
-			<li><a href="/tags/English/">English<span>1</span></a></li>
+			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
 		
-			<li><a href="/tags/Leetcode/">Leetcode<span>1</span></a></li>
+			<li><a href="/tags/华为面试/">华为面试<span>2</span></a></li>
 		
-			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
+			<li><a href="/tags/sofa-pbrpc/">sofa-pbrpc<span>1</span></a></li>
 		
-			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
+			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
 		
-			<li><a href="/tags/edas提前/">edas提前<span>1</span></a></li>
-		
-			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
-		
-			<li><a href="/tags/leetcode/">leetcode<span>5</span></a></li>
-		
-			<li><a href="/tags/cpp/">cpp<span>4</span></a></li>
-		
-			<li><a href="/tags/ubuntu源/">ubuntu源<span>1</span></a></li>
-		
-			<li><a href="/tags/clixsense/">clixsense<span>0</span></a></li>
-		
-			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
-		
-			<li><a href="/tags/网络/">网络<span>1</span></a></li>
+			<li><a href="/tags/mysql/">mysql<span>2</span></a></li>
 		
 			<li><a href="/tags/算法/">算法<span>5</span></a></li>
 		
-			<li><a href="/tags/转载/">转载<span>2</span></a></li>
+			<li><a href="/tags/Q-A/">Q&amp;A<span>1</span></a></li>
 		
-			<li><a href="/tags/plugins/">plugins<span>2</span></a></li>
+			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
 		
-			<li><a href="/tags/热点文章/">热点文章<span>5</span></a></li>
+			<li><a href="/tags/themes/">themes<span>1</span></a></li>
 		
-			<li><a href="/tags/保研/">保研<span>1</span></a></li>
+			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
+		
+			<li><a href="/tags/English/">English<span>1</span></a></li>
+		
+			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
+		
+			<li><a href="/tags/ubuntu源/">ubuntu源<span>1</span></a></li>
+		
+			<li><a href="/tags/leetcode/">leetcode<span>5</span></a></li>
+		
+			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
+		
+			<li><a href="/tags/桃江地震/">桃江地震<span>1</span></a></li>
+		
+			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>52</span></a></li>

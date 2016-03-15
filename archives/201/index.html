@@ -6,8 +6,7 @@
   <title>Google Protobuf语言指南 | Rudy-Yuan的博客</title>
   <meta name="author" content="Rudy-Yuan">
   
-  <meta name="description" content="1. 定义一个消息类型先来看一个非常简单的例子。假设你想定义一个“搜索请求”的消息格式，每一个请求含有一个查询字符串、你感兴趣的查询结果所在的页数，以及每一页多少条查询结果。可以采用如下的方式来定义消息类型的.proto文件了：
-123456789message SearchRequest &amp;#12">
+  <meta name="description" content="1. 定义一个消息类型先来看一个非常简单的例子。假设你想定义一个“搜索请求”的消息格式，每一个请求含有一个查询字符串、你感兴趣的查询结果所在的页数，以及每一页多少条查询结果。可以采用如下的方式来定义消息类型的.proto文件了">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -141,17 +140,17 @@
 
 						<span class="comments-link">
 							<span class="fa fa-comments" aria-hidden="true"></span>
-							<span class="ds-thread-count" data-thread-key="archives/202/">暂无评论</span>
+							<span class="ds-thread-count" data-thread-key="archives/201/">暂无评论</span>
 						</span>						
 							
 					</div>	
 
 									
 					<h3 class="entry-title"> 
-						<a href="/archives/202/" >Google Protobuf语言指南</a>
+						<a href="/archives/201/" >Google Protobuf语言指南</a>
 					</h3>		
 						
-					<span style="font-size:15px"><h3 id="1-定义一个消息类型"><a href="#1-定义一个消息类型" class="headerlink" title="1. 定义一个消息类型"></a>1. 定义一个消息类型</h3><p>先来看一个非常简单的例子。假设你想定义一个“搜索请求”的消息格式，每一个请求含有一个查询字符串、你感兴趣的查询结果所在的页数，以及每一页多少条查询结果。可以采用如下的方式来定义消息类型的.proto文件了：</p>
+					<span style="font-size:15px"><h3 id="1-定义一个消息类型"><a href="#1-定义一个消息类型" class="headerlink" title="1. 定义一个消息类型"></a>1. 定义一个消息类型</h3><p>先来看一个非常简单的例子。假设你想定义一个“搜索请求”的消息格式，每一个请求含有一个查询字符串、你感兴趣的查询结果所在的页数，以及每一页多少条查询结果。可以采用如下的方式来定义消息类型的.proto文件了<a id="more"></a>：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">message SearchRequest &#123;</span><br><span class="line"></span><br><span class="line">  required string query = 1;</span><br><span class="line"></span><br><span class="line">  optional int32 page_number = 2;</span><br><span class="line"></span><br><span class="line">  optional int32 result_per_page = 3;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>SearchRequest消息格式有3个字段，在消息中承载的数据分别对应于每一个字段。其中每个字段都有一个名字和一种类型。</p>
 <h4 id="1-1-指定字段类型"><a href="#1-1-指定字段类型" class="headerlink" title="1.1 指定字段类型"></a>1.1 指定字段类型</h4><p>在上面的例子中，所有字段都是标量类型：两个整型（page_number和result_per_page），一个string类型（query）。当然，你也可以为字段指定其他的合成类型，包括枚举（enumerations）或其他消息类型。</p>
@@ -271,7 +270,7 @@
 		
 <section id="comment">
   
-  	 <div class="ds-thread" data-thread-key="archives/202/" data-title="Google Protobuf语言指南" data-url="http://www.rudy-yuan.net/archives/202/"></div>  
+  	 <div class="ds-thread" data-thread-key="archives/201/" data-title="Google Protobuf语言指南" data-url="http://www.rudy-yuan.net/archives/201/"></div>  
   
 </section>
 
@@ -427,45 +426,45 @@
 		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/vi/">vi<span>1</span></a></li>
-		
-			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
-		
-			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
-		
-			<li><a href="/tags/桃江地震/">桃江地震<span>1</span></a></li>
-		
-			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
-		
-			<li><a href="/tags/libevent/">libevent<span>1</span></a></li>
-		
-			<li><a href="/tags/网络/">网络<span>1</span></a></li>
-		
-			<li><a href="/tags/阿里云/">阿里云<span>1</span></a></li>
-		
-			<li><a href="/tags/free2mind/">free2mind<span>1</span></a></li>
-		
-			<li><a href="/tags/ubuntu-yuan/">ubuntu yuan<span>1</span></a></li>
-		
-			<li><a href="/tags/Leetcode/">Leetcode<span>1</span></a></li>
-		
-			<li><a href="/tags/themes/">themes<span>1</span></a></li>
-		
-			<li><a href="/tags/转载/">转载<span>2</span></a></li>
-		
-			<li><a href="/tags/sofa-pbrpc/">sofa-pbrpc<span>1</span></a></li>
-		
-			<li><a href="/tags/edas提前/">edas提前<span>1</span></a></li>
-		
-			<li><a href="/tags/github/">github<span>1</span></a></li>
+			<li><a href="/tags/mysql远程连接/">mysql远程连接<span>1</span></a></li>
 		
 			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
 		
-			<li><a href="/tags/保研/">保研<span>1</span></a></li>
+			<li><a href="/tags/sofa-pbrpc/">sofa-pbrpc<span>1</span></a></li>
 		
-			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
+			<li><a href="/tags/github静态博客/">github静态博客<span>1</span></a></li>
+		
+			<li><a href="/tags/mediastreamer2/">mediastreamer2<span>1</span></a></li>
+		
+			<li><a href="/tags/博主推荐/">博主推荐<span>2</span></a></li>
+		
+			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
+		
+			<li><a href="/tags/themes/">themes<span>1</span></a></li>
 		
 			<li><a href="/tags/python/">python<span>1</span></a></li>
+		
+			<li><a href="/tags/华为面试/">华为面试<span>2</span></a></li>
+		
+			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
+		
+			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
+		
+			<li><a href="/tags/算法/">算法<span>5</span></a></li>
+		
+			<li><a href="/tags/Protobuf/">Protobuf<span>1</span></a></li>
+		
+			<li><a href="/tags/mapReduce/">mapReduce<span>1</span></a></li>
+		
+			<li><a href="/tags/free2mind/">free2mind<span>1</span></a></li>
+		
+			<li><a href="/tags/English/">English<span>1</span></a></li>
+		
+			<li><a href="/tags/edas提前/">edas提前<span>1</span></a></li>
+		
+			<li><a href="/tags/Leetcode/">Leetcode<span>1</span></a></li>
+		
+			<li><a href="/tags/桃江地震/">桃江地震<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>52</span></a></li>
