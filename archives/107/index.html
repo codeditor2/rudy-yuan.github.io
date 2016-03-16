@@ -3,13 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Page 2 | cpp | Rudy-Yuan的博客</title>
+  <title>设计模式之--观察者模式(Observer模式) | Rudy-Yuan的博客</title>
   <meta name="author" content="Rudy-Yuan">
+  
+  <meta name="description" content="观察者模式就是定义了对象间的一种一对多的依赖关系，当一个对象的状态发生改变时，所有依赖于它的对象都得到通知并被自动更新。当一个对象发生了变化，关注它的对象就会得到通知">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
+  <meta property="og:title" content="设计模式之--观察者模式(Observer模式)"/>
   <meta property="og:site_name" content="Rudy-Yuan的博客"/>
 
   
@@ -96,90 +98,168 @@
     	 
 
 
-		
-		   
-		    <div class="slogan" style="margin-bottom: 17px">
-		      <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;标签&nbsp;: cpp</h4>
-		    </div>
-		   
-		
 
-<div class="row page">
-  <!-- cols -->
-  
-  <div class="col-md-9">
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
 	
 
-	  <div id="top_search"></div>
+		<!-- content -->
 
-	  <div class="archive">
-		
-		
-		
+		<div class="slogan" style="margin-bottom: 17px">
+		  <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">
+			  当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;:&nbsp;
 			
+				<a href="/categories/数据结构与算法/">数据结构与算法</a>
 			
-			<h4 class="archive-ul" data-toggle="collapse" data-target="#2015">2015<b class="caret"></b></h4>
-			<ul id="2015" class="collapse in">
-			
-		
-		<li class="listing-item">
-		<span class="date_class"> 2015-05-29 </span> &raquo;
-		
-		   <span class="title"><a href="/archives/176/" >模板类的成员初始化方法</a></span>
-		
-		</li>			
-		
-		
-		
-		<li class="listing-item">
-		<span class="date_class"> 2015-05-29 </span> &raquo;
-		
-		   <span class="title"><a href="/archives/177/" >使用C++实现模板类的友元重载</a></span>
-		
-		</li>			
-		
-		
-		
-			
-			</ul>
-			
-			
-			<h4 class="archive-ul" data-toggle="collapse" data-target="#2014">2014<b class="caret"></b></h4>
-			<ul id="2014" class="collapse in">
-			
-		
-		<li class="listing-item">
-		<span class="date_class"> 2014-08-01 </span> &raquo;
-		
-		   <span class="title"><a href="/archives/128/" >对陈皓博客《C++虚函数解析》的补充</a></span>
-		
-		</li>			
-		
-		</ul>
+		  &nbsp;</a>»&nbsp; 设计模式之--观察者模式(Observer模式) </h4>
 		</div>
 
-</div> <!-- col-md-9/col-md-12 -->
-
-
-<div class="col-md-3">
-	<div id="sidebar">
+		<div id="top_search"></div>
+				 
 		
+
+		<div class="archive">	  
+			<div id="archives"> 
 				
+				<header class="entry-header">
+					<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+						<span class="entry-date">
+							<span class="fa fa-calendar" aria-hidden="true"></span>
+							2014-07-04						      
+						</span>
+							  
+							  
+						<span class="author vcard">
+							<span class="fa fa-user" aria-hidden="true"></span>
+							<a href="/">Rudy-Yuan</a> 	 	
+						</span>
+
+						<span class="comments-link">
+							<span class="fa fa-comments" aria-hidden="true"></span>
+							<span class="ds-thread-count" data-thread-key="archives/107/">暂无评论</span>
+						</span>						
+							
+					</div>	
+
+									
+					<h3 class="entry-title"> 
+						<a href="/archives/107/" >设计模式之--观察者模式(Observer模式)</a>
+					</h3>		
+						
+					<span style="font-size:15px"><p>观察者模式就是定义了对象间的一种<strong>一对多</strong>的依赖关系，当<strong>一个对象的状态</strong>发生改变时，<strong>所有依赖于它的对象</strong>都得到通知并被自动更新。当一个对象发生了变化，关注它的对象就会得到通知<a id="more"></a>；</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/11/01/ObserverPatternDemo.jpg?imageView/2/w/800/h/600" alt=""></p>
+<p>观察者模式按照以下方式进行协作：</p>
+<p>当ConcreteSubject发生任何可能<strong>导致其观察者与本身状态不一致的改变</strong>时，它将通知它的所有观察者；</p>
+<p>在得到一个ConcreteSubject的改变通知后，ConcreteObserver对象可向ConcreteSubject对象查询信息。ConcreteObserver使用这些信息以使它的状态与目标对象的状态一致。</p>
+<p>这里关键的原理就是：多态机制！！！</p>
+<p><strong>在以下任一情况下都可以使用观察者模式</strong>：</p>
+<blockquote>
+<ol>
+<li>当一个抽象模型有两个方面，其中一个方面依赖于另一方面。将这二者封装在独立的对象中以使它们可以各自独立的改变和复用；</li>
+<li>当对一个对象的改变需要同时改变其它对象，而不知道具体有多少对象有待改变；</li>
+<li>当一个对象必须通知其它对象，而它又不能假定其它对象是谁；也就是说，你不希望这些对象是紧密耦合的</li>
+</ol>
+</blockquote>
+<p><strong>参考博客</strong>：</p>
+<p><a href="http://www.cnblogs.com/jiese/archive/2013/07/11/3183635.html" target="_blank" rel="external">http://www.cnblogs.com/jiese/archive/2013/07/11/3183635.html</a></p>
+<p><a href="http://blog.csdn.net/wuzhekai1985/article/details/6674984" target="_blank" rel="external">http://blog.csdn.net/wuzhekai1985/article/details/6674984</a></p>
+<p><a href="http://www.jellythink.com/archives/359" target="_blank" rel="external">http://www.jellythink.com/archives/359</a></p>
+</span>
+				</header>
+
+				<!-- share -->
+				
+					
+
+					
+     <footer class="entry-meta">      
+
+	    <div class="fenlei" style="font-size:13.5px">
+			<span class="entry-categories">
+				<span class="fa fa-folder" aria-hidden="true"></span> 
+
+				
+					<a href="/categories/数据结构与算法/">数据结构与算法</a>
+				
+
+			</span>
+			
+			<span class="entry-tags">        
+				<span class="fa fa-tags" aria-hidden="true"></span> 
+
+				
+					<a href="/tags/设计模式/">设计模式</a>&nbsp;
+				
+					<a href="/tags/观察者模式/">观察者模式</a>&nbsp;
+				
+
+			</span>
+		</div>
+
+     
+		<!-- JiaThis Button BEGIN -->
+		<div class="jiathis_style" style="float:right;">
+			<span class="jiathis_txt">分享到：</span>
+			<a class="jiathis_button_qzone">QQ空间</a>
+			<a class="jiathis_button_tsina">新浪微博</a>
+			<a class="jiathis_button_weixin">微信</a>
+			<a class="jiathis_button_copy">复制</a>
+			<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+			<a class="jiathis_counter_style"></a>
+		</div>
+		<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+		<!-- JiaThis Button END -->
+		<br>
+    </footer>
+
+
+				
+			</div>	
+		</div>	 	        
+
+		 
+				
+					<p class="p1">上一篇 <a href="/archives/127/">libevent源码分析(5)</a></p> 
+
+				
+				   <p class="p2">下一篇 <a href="/archives/68/">leetcode--Rotate Image</a></p> 
+			
+		
+		<!-- comment -->
+		
+<section id="comment">
+  
+  	 <div class="ds-thread" data-thread-key="archives/107/" data-title="设计模式之--观察者模式(Observer模式)" data-url="http://www.rudy-yuan.net/archives/107/"></div>  
+  
+</section>
+
+		
+	</div> <!-- col-md-9/col-md-12 -->	
+
+	
+		<div id="side_meta">
+			
+      <div class="col-md-3">
+	      <div id="sidebar">
+	      
   <div class="form-group has-success has-feedback" id="site_search">
     <form class="site-search-form">
-        <input type="text" id="st-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control" />
+        <input type="text" id="st-search-input" name="q" results="0" placeholder="搜索" class="st-search-input st-default-search-input form-control" />
     </form>
   </div>  
 
-			
-				<style type="text/css">
+	      <style type="text/css">
   .cls_container{height:24px;overflow:hidden;}
   .cls_container ul{list-style-type:none;margin:0;padding:0;margin-left:0px;}
   .cls_container ul li{height:24px;line-height:24px;float:left;display:inline;}
 </style>
 
 <div class="widget">
-	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Notification</h4>
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">本站公告</h4>
 
 	<div id="myscroll" class="cls_container">
 		<ul>
@@ -255,10 +335,13 @@
 	var myscroll=new Scroll("myscroll",24);
 </script>
 
-			
-				
+
+	      <!-- toc -->	      
+	      	      
+
+	      
 	<div class="widget">
-		<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Categories</h4>
+		<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">分类目录</h4>
 		<ul class="tag_box inline list-unstyled">
 		
 			<li><a href="/categories/Demo/">Demo<span>1</span></a></li>
@@ -273,11 +356,11 @@
 		
 			<li><a href="/categories/c和c/">c和c++<span>1</span></a></li>
 		
-			<li><a href="/categories/c和cpp/">c和cpp<span>12</span></a></li>
+			<li><a href="/categories/c和cpp/">c和cpp<span>9</span></a></li>
 		
-			<li><a href="/categories/leetcode/">leetcode<span>9</span></a></li>
+			<li><a href="/categories/leetcode/">leetcode<span>10</span></a></li>
 		
-			<li><a href="/categories/linux学习/">linux学习<span>1</span></a></li>
+			<li><a href="/categories/linux学习/">linux学习<span>2</span></a></li>
 		
 			<li><a href="/categories/python与Django/">python与Django<span>7</span></a></li>
 		
@@ -289,70 +372,68 @@
 		
 			<li><a href="/categories/技术杂文/">技术杂文<span>12</span></a></li>
 		
-			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>3</span></a></li>
+			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>5</span></a></li>
 		
 			<li><a href="/categories/源码学习/">源码学习<span>7</span></a></li>
 		
 		</ul>
 	</div>
-
-			
-				
+	
+	      
 	<div class="widget">
-		<h4 style="font-weight: bold; color: #333 ">Tag Cloud</h4>
+		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/cpp/">cpp<span>13</span></a></li>
+			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
 		
-			<li><a href="/tags/plugins/">plugins<span>2</span></a></li>
+			<li><a href="/tags/libevent/">libevent<span>1</span></a></li>
+		
+			<li><a href="/tags/vi/">vi<span>1</span></a></li>
 		
 			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
 		
-			<li><a href="/tags/ndnSIM/">ndnSIM<span>1</span></a></li>
+			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
 		
-			<li><a href="/tags/Leetcode/">Leetcode<span>1</span></a></li>
+			<li><a href="/tags/edas提前/">edas提前<span>1</span></a></li>
+		
+			<li><a href="/tags/数据结构/">数据结构<span>3</span></a></li>
 		
 			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
 		
+			<li><a href="/tags/Manacher算法/">Manacher算法<span>1</span></a></li>
+		
+			<li><a href="/tags/shell/">shell<span>1</span></a></li>
+		
+			<li><a href="/tags/观察者模式/">观察者模式<span>1</span></a></li>
+		
+			<li><a href="/tags/sofa-pbrpc/">sofa-pbrpc<span>1</span></a></li>
+		
+			<li><a href="/tags/ubuntu源/">ubuntu源<span>1</span></a></li>
+		
+			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
+		
+			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
+		
 			<li><a href="/tags/awk/">awk<span>1</span></a></li>
 		
-			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
+			<li><a href="/tags/简体/">简体<span>1</span></a></li>
 		
-			<li><a href="/tags/free2mind/">free2mind<span>1</span></a></li>
+			<li><a href="/tags/English/">English<span>1</span></a></li>
 		
-			<li><a href="/tags/读书笔记/">读书笔记<span>1</span></a></li>
+			<li><a href="/tags/plugins/">plugins<span>2</span></a></li>
 		
-			<li><a href="/tags/github静态博客/">github静态博客<span>1</span></a></li>
-		
-			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
-		
-			<li><a href="/tags/clixsense/">clixsense<span>1</span></a></li>
-		
-			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
-		
-			<li><a href="/tags/设计模式/">设计模式<span>1</span></a></li>
-		
-			<li><a href="/tags/KMP/">KMP<span>2</span></a></li>
-		
-			<li><a href="/tags/阿里云/">阿里云<span>2</span></a></li>
-		
-			<li><a href="/tags/Protobuf/">Protobuf<span>1</span></a></li>
-		
-			<li><a href="/tags/算法/">算法<span>7</span></a></li>
-		
-			<li><a href="/tags/python/">python<span>7</span></a></li>
+			<li><a href="/tags/对象模型/">对象模型<span>2</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>63</span></a></li>
+		   <li><a href="/tags">...<span>66</span></a></li>
 		 
 		</ul>
 	</div>
 
 
-			
-				
+	      
 <div class="widget">
-	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Friend Links</h4>
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">友情链接</h4>
 	<ul class="blogroll list-unstyled">
 	
 		<li style="font-size:14px"><i class="fa fa-share"></i><a href="http://hexo.io" title="My Linkin account." target="_blank"]);">Hexo</a></li>
@@ -375,9 +456,8 @@
 </div>
 
 
-			
-				<div class="widget">
-	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Recent Comments</h4>
+	      <div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">近期评论</h4>
 	<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="0" data-show-admin="1" data-excerpt-length="100" ></ul>
 	
 	<script type="text/javascript">
@@ -394,16 +474,31 @@
 </div>
 
 
-
-			
-				<section id="recent-visitors" class="widget widget_recent_comments">
-	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Recent Visitors</h4>
+	
+	      <section id="recent-visitors" class="widget widget_recent_comments">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">最近访客</h4>
   	<div class="panelbody clearfix"><ul class="ds-recent-visitors" data-num-items="30"></ul></div>
-</section>
-			  
-	</div> <!-- sidebar -->
-</div> <!-- col-md-3 -->
+</section>    
+	      </div> <!-- sidebar -->
+      </div> <!-- col-md-3 -->
 
+		</div>
+			
+
+</div><!-- row -->
+
+
+	<script type="text/javascript">
+	  var duoshuoQuery = { short_name: 'rudy-yuan' };
+	  (function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';
+		ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	  })();
+	</script>
 
 
 

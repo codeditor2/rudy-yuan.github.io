@@ -3,13 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>模板类的成员初始化方法 | Rudy-Yuan的博客</title>
+  <title>《剑指offer》上的一道题--数据流中的中位数 | Rudy-Yuan的博客</title>
   <meta name="author" content="Rudy-Yuan">
+  
+  <meta name="description" content="如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。
+思路：
+(1) 将整个数组分为左右两个部分，且左右两部分元素的个数之差不能超过1；
+(2) 如果是奇数个元素，那么中位数就是左边部分的最大值；如果是偶数个元素，那么中位数是左边部分最大值和右边部分最小值的平均值">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="模板类的成员初始化方法"/>
+  <meta property="og:title" content="《剑指offer》上的一道题--数据流中的中位数"/>
   <meta property="og:site_name" content="Rudy-Yuan的博客"/>
 
   
@@ -110,9 +115,9 @@
 		  <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">
 			  当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;:&nbsp;
 			
-				<a href="/categories/c和cpp/">c和cpp</a>
+				<a href="/categories/数据结构与算法/">数据结构与算法</a>
 			
-		  &nbsp;</a>»&nbsp; 模板类的成员初始化方法 </h4>
+		  &nbsp;</a>»&nbsp; 《剑指offer》上的一道题--数据流中的中位数 </h4>
 		</div>
 
 		<div id="top_search"></div>
@@ -127,7 +132,7 @@
 							
 						<span class="entry-date">
 							<span class="fa fa-calendar" aria-hidden="true"></span>
-							2015-05-29						      
+							2015-04-26						      
 						</span>
 							  
 							  
@@ -145,10 +150,21 @@
 
 									
 					<h3 class="entry-title"> 
-						<a href="/archives/174/" >模板类的成员初始化方法</a>
+						<a href="/archives/174/" >《剑指offer》上的一道题--数据流中的中位数</a>
 					</h3>		
 						
-					<span style="font-size:15px"></span>
+					<span style="font-size:15px"><p>如何得到一个<strong>数据流</strong>中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。</p>
+<p>思路：</p>
+<p>(1) 将整个数组分为左右两个部分，且左右两部分元素的个数之差不能超过1；</p>
+<p>(2) 如果是奇数个元素，那么中位数就是左边部分的最大值；如果是偶数个元素，那么中位数是左边部分最大值和右边部分最小值的平均值<a id="more"></a></p>
+<p>(3) 为了在0(1)时间内获得最大值和最小值，使用堆来存储数据</p>
+<p>使用C++中的push_heap和pop_heap进行大根堆、小根堆的有关操作</p>
+<p>PS：使用<strong>priority_queue</strong>也是可以的。</p>
+<p>源代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">(<span class="keyword">int</span> num)</span></span><br><span class="line">     </span>&#123;</span><br><span class="line">         <span class="keyword">if</span>((leftMax.size() + rightMin.size() &amp; <span class="number">1</span>) == <span class="number">0</span>)</span><br><span class="line">         &#123;</span><br><span class="line">             <span class="comment">// 插入到左边的最大堆中</span></span><br><span class="line">             rightMin.push_back(num);</span><br><span class="line">             push_heap(rightMin.begin(), rightMin.end(), greater&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">             <span class="keyword">int</span> target = rightMin[<span class="number">0</span>];</span><br><span class="line">             pop_heap(rightMin.begin(), rightMin.end(), greater&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">             rightMin.pop_back();</span><br><span class="line"></span><br><span class="line">             leftMax.push_back(target);</span><br><span class="line">             push_heap(leftMax.begin(), leftMax.end(), less&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">else</span></span><br><span class="line">         &#123;</span><br><span class="line">             <span class="comment">// 插入到右边的最小堆中</span></span><br><span class="line">             leftMax.push_back(num);</span><br><span class="line">             push_heap(leftMax.begin(), leftMax.end(), less&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">             <span class="keyword">int</span> target = leftMax[<span class="number">0</span>];</span><br><span class="line">             pop_heap(leftMax.begin(), leftMax.end(), less&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">             leftMax.pop_back();</span><br><span class="line"></span><br><span class="line">             rightMin.push_back(target);</span><br><span class="line">             push_heap(rightMin.begin(), rightMin.end(), greater&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">double</span> <span class="title">GetMedian</span><span class="params">()</span></span><br><span class="line">     </span>&#123;</span><br><span class="line">         <span class="keyword">int</span> size = leftMax.size() + rightMin.size();</span><br><span class="line">         <span class="keyword">if</span>(size &lt;= <span class="number">0</span>)</span><br><span class="line">             <span class="keyword">return</span> <span class="number">0.0</span>;</span><br><span class="line">         <span class="keyword">else</span> <span class="keyword">if</span>((size &amp; <span class="number">1</span>) == <span class="number">1</span>)</span><br><span class="line">         &#123;</span><br><span class="line">             <span class="keyword">return</span> (<span class="keyword">double</span>)leftMax[<span class="number">0</span>];</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">else</span></span><br><span class="line">         &#123;</span><br><span class="line">             <span class="keyword">return</span> ((<span class="keyword">double</span>)leftMax[<span class="number">0</span>] + (<span class="keyword">double</span>)rightMin[<span class="number">0</span>])/<span class="number">2.0</span>;</span><br><span class="line">         &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">     <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; leftMax;</span><br><span class="line">     <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; rightMin;</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
+<p>通过了牛客网的在线测试：<br><a href="http://www.nowcoder.com/questionTerminal/9be0172896bd43948f8a32fb954e1be1" target="_blank" rel="external">http://www.nowcoder.com/questionTerminal/9be0172896bd43948f8a32fb954e1be1</a></p>
+<div class="alert alert-success"><i class="fa fa-lightbulb-o"></i>   本文由<a href="http://www.rudy-yuan.net">Rudy Yuan</a>创作，采用<a href="http://creativecommons.org/licenses/by/3.0/cn" target="_blank" rel="external">CC BY 3.0 CN协议</a>进行许可。
+可自由转载、引用，但需署名作者且注明文章出处。</div></span>
 				</header>
 
 				<!-- share -->
@@ -163,7 +179,7 @@
 				<span class="fa fa-folder" aria-hidden="true"></span> 
 
 				
-					<a href="/categories/c和cpp/">c和cpp</a>
+					<a href="/categories/数据结构与算法/">数据结构与算法</a>
 				
 
 			</span>
@@ -172,9 +188,11 @@
 				<span class="fa fa-tags" aria-hidden="true"></span> 
 
 				
-					<a href="/tags/cpp/">cpp</a>&nbsp;
+					<a href="/tags/算法/">算法</a>&nbsp;
 				
-					<a href="/tags/面试/">面试</a>&nbsp;
+					<a href="/tags/leetcode/">leetcode</a>&nbsp;
+				
+					<a href="/tags/剑指offer/">剑指offer</a>&nbsp;
 				
 
 			</span>
@@ -203,17 +221,17 @@
 
 		 
 				
-					<p class="p1">Previous <a href="/archives/175/">模板类的成员初始化方法</a></p> 
+					<p class="p1">上一篇 <a href="/archives/175/">2015-05-11日leetcode题目总结</a></p> 
 
 				
-				   <p class="p2">Next <a href="/archives/173/">模板类的成员初始化方法</a></p> 
+				   <p class="p2">下一篇 <a href="/archives/173/">./a.out > outfile 2>&1和./a.out 2>&1 > outfile</a></p> 
 			
 		
 		<!-- comment -->
 		
 <section id="comment">
   
-  	 <div class="ds-thread" data-thread-key="archives/174/" data-title="模板类的成员初始化方法" data-url="http://www.rudy-yuan.net/archives/174/"></div>  
+  	 <div class="ds-thread" data-thread-key="archives/174/" data-title="《剑指offer》上的一道题--数据流中的中位数" data-url="http://www.rudy-yuan.net/archives/174/"></div>  
   
 </section>
 
@@ -228,7 +246,7 @@
 	      
   <div class="form-group has-success has-feedback" id="site_search">
     <form class="site-search-form">
-        <input type="text" id="st-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control" />
+        <input type="text" id="st-search-input" name="q" results="0" placeholder="搜索" class="st-search-input st-default-search-input form-control" />
     </form>
   </div>  
 
@@ -239,7 +257,7 @@
 </style>
 
 <div class="widget">
-	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Notification</h4>
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">本站公告</h4>
 
 	<div id="myscroll" class="cls_container">
 		<ul>
@@ -321,7 +339,7 @@
 
 	      
 	<div class="widget">
-		<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Categories</h4>
+		<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">分类目录</h4>
 		<ul class="tag_box inline list-unstyled">
 		
 			<li><a href="/categories/Demo/">Demo<span>1</span></a></li>
@@ -336,11 +354,11 @@
 		
 			<li><a href="/categories/c和c/">c和c++<span>1</span></a></li>
 		
-			<li><a href="/categories/c和cpp/">c和cpp<span>12</span></a></li>
+			<li><a href="/categories/c和cpp/">c和cpp<span>9</span></a></li>
 		
-			<li><a href="/categories/leetcode/">leetcode<span>9</span></a></li>
+			<li><a href="/categories/leetcode/">leetcode<span>10</span></a></li>
 		
-			<li><a href="/categories/linux学习/">linux学习<span>1</span></a></li>
+			<li><a href="/categories/linux学习/">linux学习<span>2</span></a></li>
 		
 			<li><a href="/categories/python与Django/">python与Django<span>7</span></a></li>
 		
@@ -352,7 +370,7 @@
 		
 			<li><a href="/categories/技术杂文/">技术杂文<span>12</span></a></li>
 		
-			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>3</span></a></li>
+			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>5</span></a></li>
 		
 			<li><a href="/categories/源码学习/">源码学习<span>7</span></a></li>
 		
@@ -361,51 +379,51 @@
 	
 	      
 	<div class="widget">
-		<h4 style="font-weight: bold; color: #333 ">Tag Cloud</h4>
+		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/mysql/">mysql<span>2</span></a></li>
+			<li><a href="/tags/博主推荐/">博主推荐<span>2</span></a></li>
 		
 			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
 		
 			<li><a href="/tags/libevent/">libevent<span>1</span></a></li>
 		
+			<li><a href="/tags/对象模型/">对象模型<span>2</span></a></li>
+		
+			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
+		
+			<li><a href="/tags/shell/">shell<span>1</span></a></li>
+		
 			<li><a href="/tags/IO复用/">IO复用<span>1</span></a></li>
 		
-			<li><a href="/tags/English/">English<span>1</span></a></li>
+			<li><a href="/tags/设计模式/">设计模式<span>2</span></a></li>
 		
-			<li><a href="/tags/ubuntu-yuan/">ubuntu yuan<span>1</span></a></li>
+			<li><a href="/tags/linux/">linux<span>3</span></a></li>
 		
-			<li><a href="/tags/python/">python<span>7</span></a></li>
+			<li><a href="/tags/算法/">算法<span>9</span></a></li>
 		
-			<li><a href="/tags/ndnSIM/">ndnSIM<span>1</span></a></li>
+			<li><a href="/tags/读书笔记/">读书笔记<span>1</span></a></li>
 		
-			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
-		
-			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
-		
-			<li><a href="/tags/转载/">转载<span>7</span></a></li>
-		
-			<li><a href="/tags/facebook访问/">facebook访问<span>1</span></a></li>
-		
-			<li><a href="/tags/github/">github<span>1</span></a></li>
-		
-			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
-		
-			<li><a href="/tags/翻墙/">翻墙<span>1</span></a></li>
-		
-			<li><a href="/tags/华为面试/">华为面试<span>1</span></a></li>
-		
-			<li><a href="/tags/mediastreamer2/">mediastreamer2<span>3</span></a></li>
-		
-			<li><a href="/tags/算法/">算法<span>7</span></a></li>
+			<li><a href="/tags/mysql/">mysql<span>2</span></a></li>
 		
 			<li><a href="/tags/KMP/">KMP<span>2</span></a></li>
 		
-			<li><a href="/tags/面试/">面试<span>14</span></a></li>
+			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
+		
+			<li><a href="/tags/观察者模式/">观察者模式<span>1</span></a></li>
+		
+			<li><a href="/tags/阿里云/">阿里云<span>2</span></a></li>
+		
+			<li><a href="/tags/awk/">awk<span>1</span></a></li>
+		
+			<li><a href="/tags/回文/">回文<span>1</span></a></li>
+		
+			<li><a href="/tags/xshell/">xshell<span>1</span></a></li>
+		
+			<li><a href="/tags/github/">github<span>1</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>63</span></a></li>
+		   <li><a href="/tags">...<span>66</span></a></li>
 		 
 		</ul>
 	</div>
@@ -413,7 +431,7 @@
 
 	      
 <div class="widget">
-	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Friend Links</h4>
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">友情链接</h4>
 	<ul class="blogroll list-unstyled">
 	
 		<li style="font-size:14px"><i class="fa fa-share"></i><a href="http://hexo.io" title="My Linkin account." target="_blank"]);">Hexo</a></li>
@@ -437,7 +455,7 @@
 
 
 	      <div class="widget">
-	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Recent Comments</h4>
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">近期评论</h4>
 	<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="0" data-show-admin="1" data-excerpt-length="100" ></ul>
 	
 	<script type="text/javascript">
@@ -456,7 +474,7 @@
 
 	
 	      <section id="recent-visitors" class="widget widget_recent_comments">
-	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Recent Visitors</h4>
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">最近访客</h4>
   	<div class="panelbody clearfix"><ul class="ds-recent-visitors" data-num-items="30"></ul></div>
 </section>    
 	      </div> <!-- sidebar -->
