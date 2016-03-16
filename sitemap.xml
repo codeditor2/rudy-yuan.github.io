@@ -3,6 +3,66 @@
 
 
     
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/vi-guide/</loc>
+    <lastmod>2016-03-16T14:49:36.285Z</lastmod>
+    <data>
+        <display>
+        <title>vi基本使用方法</title>
+        <pubTime>2013-07-01T05:23:34.000Z</pubTime>
+        
+        <tag>vi</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具相关" url="http://www.rudy-yuan.net/categories/%E5%B7%A5%E5%85%B7%E7%9B%B8%E5%85%B3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/25/</loc>
+    <lastmod>2016-03-16T14:49:09.045Z</lastmod>
+    <data>
+        <display>
+        <title>在linux内核中添加自定义“网络层”协议</title>
+        <pubTime>2013-11-14T12:00:58.000Z</pubTime>
+        
+        <tag>linux内核</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux学习" url="http://www.rudy-yuan.net/categories/linux%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/73/</loc>
+    <lastmod>2016-03-16T14:48:19.502Z</lastmod>
+    <data>
+        <display>
+        <title>手把手教你使用git及github(1)</title>
+        <pubTime>2014-04-26T13:00:58.000Z</pubTime>
+        
+        <tag>github</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具相关" url="http://www.rudy-yuan.net/categories/%E5%B7%A5%E5%85%B7%E7%9B%B8%E5%85%B3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
     
     
   <url>
@@ -420,26 +480,6 @@
         <tag>linux</tag>
          
         <tag>多线程</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux学习" url="http://www.rudy-yuan.net/categories/linux%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/25/</loc>
-    <lastmod>2016-03-16T09:11:39.751Z</lastmod>
-    <data>
-        <display>
-        <title>在linux内核中添加自定义“网络层”协议</title>
-        <pubTime>2013-11-14T12:00:58.000Z</pubTime>
-        
-        <tag>linux内核</tag>
          
          
            
@@ -1703,26 +1743,6 @@
     </url>
 
     
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/vi-guide/</loc>
-    <lastmod>2016-03-14T12:37:46.165Z</lastmod>
-    <data>
-        <display>
-        <title>vi基本使用方法</title>
-        <pubTime>2013-07-01T05:23:34.000Z</pubTime>
-        
-        <tag>vi</tag>
-         
-         
-           
-             
-              <breadCrumb title="工具相关" url="http://www.rudy-yuan.net/categories/%E5%B7%A5%E5%85%B7%E7%9B%B8%E5%85%B3/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
     
   <url>
     <loc>http://www.rudy-yuan.net/archives/remote-mysql/</loc>
@@ -1861,19 +1881,39 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/tag-plugins-cn/</loc>
+    <loc>http://www.rudy-yuan.net/archives/color-themes/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>Tag Plugins（中文）</title>
-        <pubTime>2014-03-16T02:10:16.000Z</pubTime>
+        <title>Color Themes</title>
+        <pubTime>2016-01-30T05:00:24.000Z</pubTime>
         
-        <tag>plugins</tag>
+        <tag>themes</tag>
          
          
            
              
               <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/code-highlight/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Code Highlight</title>
+        <pubTime>2014-03-15T12:17:16.000Z</pubTime>
+        
+        <tag>highlight</tag>
+         
+         
+           
+             
+              <breadCrumb title="Demo" url="http://www.rudy-yuan.net/categories/Demo/"/>
           
         </display>
     </data>
@@ -1901,19 +1941,19 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/code-highlight/</loc>
+    <loc>http://www.rudy-yuan.net/archives/tag-plugins-cn/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>Code Highlight</title>
-        <pubTime>2014-03-15T12:17:16.000Z</pubTime>
+        <title>Tag Plugins（中文）</title>
+        <pubTime>2014-03-16T02:10:16.000Z</pubTime>
         
-        <tag>highlight</tag>
+        <tag>plugins</tag>
          
          
            
              
-              <breadCrumb title="Demo" url="http://www.rudy-yuan.net/categories/Demo/"/>
+              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
           
         </display>
     </data>
@@ -1954,26 +1994,6 @@
            
              
               <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/color-themes/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Color Themes</title>
-        <pubTime>2016-01-30T05:00:24.000Z</pubTime>
-        
-        <tag>themes</tag>
-         
-         
-           
-             
-              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
           
         </display>
     </data>
