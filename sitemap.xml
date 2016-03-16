@@ -4,6 +4,138 @@
 
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/blog-cnzz-visitor-group/</loc>
+    <lastmod>2016-03-16T08:57:01.055Z</lastmod>
+    <data>
+        <display>
+        <title>学霸，您好！欢迎访问我的个人博客</title>
+        <pubTime>2016-03-13T02:09:00.000Z</pubTime>
+        
+        <tag>cnzz</tag>
+         
+        <tag>个人博客</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术杂文" url="http://www.rudy-yuan.net/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/168/</loc>
+    <lastmod>2016-03-16T08:29:48.041Z</lastmod>
+    <data>
+        <display>
+        <title>select、poll和epoll的区别与使用方法</title>
+        <pubTime>2015-02-08T01:27:58.000Z</pubTime>
+        
+        <tag>IO复用</tag>
+         
+        <tag>linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="c和cpp" url="http://www.rudy-yuan.net/categories/c%E5%92%8Ccpp/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/162/</loc>
+    <lastmod>2016-03-16T08:28:12.814Z</lastmod>
+    <data>
+        <display>
+        <title>操作系统中3种链接方式的比较</title>
+        <pubTime>2014-11-02T11:27:58.000Z</pubTime>
+        
+        <tag>读书笔记</tag>
+         
+        <tag>操作系统</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术杂文" url="http://www.rudy-yuan.net/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/169/</loc>
+    <lastmod>2016-03-16T08:25:27.571Z</lastmod>
+    <data>
+        <display>
+        <title>操作系统复习笔记</title>
+        <pubTime>2015-02-11T02:27:58.000Z</pubTime>
+        
+        <tag>面试</tag>
+         
+        <tag>操作系统</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术杂文" url="http://www.rudy-yuan.net/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/170/</loc>
+    <lastmod>2016-03-16T08:14:04.460Z</lastmod>
+    <data>
+        <display>
+        <title>数据库复习笔记</title>
+        <pubTime>2015-02-15T06:58:58.000Z</pubTime>
+        
+        <tag>面试</tag>
+         
+        <tag>mysql</tag>
+         
+        <tag>数据库</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术杂文" url="http://www.rudy-yuan.net/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/171/</loc>
+    <lastmod>2016-03-16T08:02:19.630Z</lastmod>
+    <data>
+        <display>
+        <title>gdb调试Segmentation fault</title>
+        <pubTime>2015-02-26T15:27:58.000Z</pubTime>
+        
+        <tag>gdb</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术杂文" url="http://www.rudy-yuan.net/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/172/</loc>
     <lastmod>2016-03-16T07:58:01.576Z</lastmod>
     <data>
@@ -162,94 +294,6 @@
   <url>
     <loc>http://www.rudy-yuan.net/archives/167/</loc>
     <lastmod>2016-03-16T07:19:25.638Z</lastmod>
-    <data>
-        <display>
-        <title>模板类的成员初始化方法</title>
-        <pubTime>2015-05-29T07:27:58.000Z</pubTime>
-        
-        <tag>cpp</tag>
-         
-        <tag>面试</tag>
-         
-         
-           
-             
-              <breadCrumb title="c和cpp" url="http://www.rudy-yuan.net/categories/c%E5%92%8Ccpp/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/168/</loc>
-    <lastmod>2016-03-16T07:19:15.318Z</lastmod>
-    <data>
-        <display>
-        <title>模板类的成员初始化方法</title>
-        <pubTime>2015-05-29T07:27:58.000Z</pubTime>
-        
-        <tag>cpp</tag>
-         
-        <tag>面试</tag>
-         
-         
-           
-             
-              <breadCrumb title="c和cpp" url="http://www.rudy-yuan.net/categories/c%E5%92%8Ccpp/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/169/</loc>
-    <lastmod>2016-03-16T07:19:06.374Z</lastmod>
-    <data>
-        <display>
-        <title>模板类的成员初始化方法</title>
-        <pubTime>2015-05-29T07:27:58.000Z</pubTime>
-        
-        <tag>cpp</tag>
-         
-        <tag>面试</tag>
-         
-         
-           
-             
-              <breadCrumb title="c和cpp" url="http://www.rudy-yuan.net/categories/c%E5%92%8Ccpp/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/170/</loc>
-    <lastmod>2016-03-16T07:18:53.708Z</lastmod>
-    <data>
-        <display>
-        <title>模板类的成员初始化方法</title>
-        <pubTime>2015-05-29T07:27:58.000Z</pubTime>
-        
-        <tag>cpp</tag>
-         
-        <tag>面试</tag>
-         
-         
-           
-             
-              <breadCrumb title="c和cpp" url="http://www.rudy-yuan.net/categories/c%E5%92%8Ccpp/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/171/</loc>
-    <lastmod>2016-03-16T07:18:46.054Z</lastmod>
     <data>
         <display>
         <title>模板类的成员初始化方法</title>
@@ -1459,14 +1503,14 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/tag-plugins-cn/</loc>
+    <loc>http://www.rudy-yuan.net/archives/color-themes/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>Tag Plugins（中文）</title>
-        <pubTime>2014-03-16T02:10:16.000Z</pubTime>
+        <title>Color Themes</title>
+        <pubTime>2016-01-30T05:00:24.000Z</pubTime>
         
-        <tag>plugins</tag>
+        <tag>themes</tag>
          
          
            
@@ -1499,6 +1543,26 @@
 
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/code-highlight/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Code Highlight</title>
+        <pubTime>2014-03-15T12:17:16.000Z</pubTime>
+        
+        <tag>highlight</tag>
+         
+         
+           
+             
+              <breadCrumb title="Demo" url="http://www.rudy-yuan.net/categories/Demo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/lorem-ipsum/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
@@ -1519,39 +1583,19 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/color-themes/</loc>
+    <loc>http://www.rudy-yuan.net/archives/tag-plugins-cn/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>Color Themes</title>
-        <pubTime>2016-01-30T05:00:24.000Z</pubTime>
+        <title>Tag Plugins（中文）</title>
+        <pubTime>2014-03-16T02:10:16.000Z</pubTime>
         
-        <tag>themes</tag>
+        <tag>plugins</tag>
          
          
            
              
               <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/code-highlight/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Code Highlight</title>
-        <pubTime>2014-03-15T12:17:16.000Z</pubTime>
-        
-        <tag>highlight</tag>
-         
-         
-           
-             
-              <breadCrumb title="Demo" url="http://www.rudy-yuan.net/categories/Demo/"/>
           
         </display>
     </data>

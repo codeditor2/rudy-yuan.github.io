@@ -1,0 +1,569 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>操作系统中3种链接方式的比较 | Rudy-Yuan的博客</title>
+  <meta name="author" content="Rudy-Yuan">
+  
+  <meta name="description" content="(1) 链接的含义
+连接程序的功能，是将经过编译或汇编后所得到的一组目标模块以及它们所需要的库函数，装配成一个
+完整的装入模块。链接之前与链接之后，都是逻辑地址">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="操作系统中3种链接方式的比较"/>
+  <meta property="og:site_name" content="Rudy-Yuan的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+
+
+  <link rel="stylesheet" href="/css/themes/cerulean.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Rudy-Yuan的博客</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/tags/热点文章/" title="All the tags.">
+			  <i class="fa fa-fire"></i>热点文章
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags/博主推荐/" title="All the tags.">
+			  <i class="fa fa-volume-up"></i>博主推荐
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>文章归档
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/message" title="All the tags.">
+			  <i class="fa fa-pencil"></i>给我留言
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-info-circle"></i>关于本站
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+		<!-- content -->
+
+		<div class="slogan" style="margin-bottom: 17px">
+		  <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">
+			  当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;:&nbsp;
+			
+				<a href="/categories/技术杂文/">技术杂文</a>
+			
+		  &nbsp;</a>»&nbsp; 操作系统中3种链接方式的比较 </h4>
+		</div>
+
+		<div id="top_search"></div>
+				 
+		
+
+		<div class="archive">	  
+			<div id="archives"> 
+				
+				<header class="entry-header">
+					<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+						<span class="entry-date">
+							<span class="fa fa-calendar" aria-hidden="true"></span>
+							2014-11-02						      
+						</span>
+							  
+							  
+						<span class="author vcard">
+							<span class="fa fa-user" aria-hidden="true"></span>
+							<a href="/">Rudy-Yuan</a> 	 	
+						</span>
+
+						<span class="comments-link">
+							<span class="fa fa-comments" aria-hidden="true"></span>
+							<span class="ds-thread-count" data-thread-key="archives/162/">暂无评论</span>
+						</span>						
+							
+					</div>	
+
+									
+					<h3 class="entry-title"> 
+						<a href="/archives/162/" >操作系统中3种链接方式的比较</a>
+					</h3>		
+						
+					<span style="font-size:15px"><p>(1) 链接的含义</p>
+<p>连接程序的功能，是将经过编译或汇编后所得到的一组目标模块以及它们所需要的库函数，装配成一个</p>
+<p>完整的装入模块。链接之前与链接之后，都是逻辑地址<a id="more"></a>。</p>
+<p>(2) 链接的类型</p>
+<p>实现链接的方法有三种：静态链接、装入时动态链接和运行时动态链接。</p>
+<p>① 静态链接</p>
+<p>图5.2.2示出了经编译后所得到的三个目标模块A、B、C,他们的长度分别为 L、M、N。在模块A中，有</p>
+<p>一条语句CALL B，用于调用模块B。在模块B中，有一条语句CALL C, 用于调用模块C。B和C都属于外部</p>
+<p>调用符号，在将这几个目标模块链接装配成一个装入模块时，需要解决以下两个问题：</p>
+<p>● 对相对地址进行修改</p>
+<p>通常由编译程序产生的所有目标模块，其起始地址都为0，每个模块中的地址都是相对于0的。在链接成一个装入程序后，模块B和C的起始地址不再是0，而是L和L+M，此时需修改B和C中的相对地址，即模块</p>
+<p>B中的所有相对地址加上L，模块C中的相对地址都加上L+M。</p>
+<p>● 变换外部调用符号</p>
+<p>即将每个模块中所用的外部调用符号，都变换为相对地址，如把B的起始地址变换为L；C的起始地址变换为L+M,如图5.2.2(a)所示。这种先进行链接所形成的一个完整的装入模块，又称为可执行文件。通</p>
+<p>常都不要拆开它，要运行时可直接将它装入内存。这种事先进行链接，以后不再拆开的链接方式，称为静态链接方式。</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/11/20/link5.2.2.jpg" alt=""></p>
+<p>② 装入时动态链接(Load-Time Dynamic Linking)</p>
+<p>用户源程序经编译后所得到的目标模块,是在装入内存时,边装入边链接的.即在装入一个目标模块时,若发生一个外部模块调用,将引起装入程序去找出相应的外部目标模块,并将它装入内存,还要按照图所示的方式来修改目标模块中的相对地址。装入时动态链接方式有以下优点：</p>
+<p>● 便于软件版本的修改和更新</p>
+<p>在采用装入时动态链接方式时，要修改或更新各个目标模块，是件非常容易的事，但对于经静态链接以</p>
+<p>装配在一起的装入模块，如果要修改或更新其中的某个目标模块时，则要求重新打开装入模块，这不仅</p>
+<p>是低效的，而且有时是不可能的。</p>
+<p>● 便于实现目标模块共享</p>
+<p>若采用装入时动态链接方式，OS能够将一个目标模块链接到几个应用模块，即实现多个应用程序对该模</p>
+<p>块的共享；然而，采用静态链接方式时每个应用模块都必须含有该目标模块的拷贝，否则无法实现共享。</p>
+<p>③ 运行时动态链接（Run –Time Dynamic Linking）</p>
+<p>虽然前面所介绍的动态装入方式，可将一个装入模块装入到内存的任何地方，但装入模块的结构是静态的，它主要表现在两个方面：一是在进程的整个执行期间，装入模块不改变；再者是每次运行时的装</p>
+<p>入模块都是相同的。实际上，在许多情况下，每次要运行的模块可能是不相同的，但由于事先无法知道</p>
+<p>本次要运行哪些模块，故只能是将所有可能要运行到的模块，在装入时全部链接在一起，是每次执行时</p>
+<p>的装入模块是相同的。显然这是低效的。因为这样，在装入模块的运行过程中，往往会有某些目标模块</p>
+<p>根本就不运行。比较典型的例子是错误处理模块，如果程序在整个运行过程中，都不出现错误，便不会</p>
+<p>用到该模块。</p>
+<p>能有效的改变这种情况的链接方式，是最近几年流行起来的运行时动态链接方式。这种链接方式，可将某些目标模块的链接，推迟到执行时才进行。即在执行过程中，若发现一个被调用模块尚未装入内存时，由OS去找到该模块，将它装入内存，并把它连接到调用者模块上。  </p>
+<p>原文链接：<a href="http://202.206.245.23/oscai/333/523.htm" target="_blank" rel="external">http://202.206.245.23/oscai/333/523.htm</a></p>
+</span>
+				</header>
+
+				<!-- share -->
+				
+					
+
+					
+     <footer class="entry-meta">      
+
+	    <div class="fenlei" style="font-size:13.5px">
+			<span class="entry-categories">
+				<span class="fa fa-folder" aria-hidden="true"></span> 
+
+				
+					<a href="/categories/技术杂文/">技术杂文</a>
+				
+
+			</span>
+			
+			<span class="entry-tags">        
+				<span class="fa fa-tags" aria-hidden="true"></span> 
+
+				
+					<a href="/tags/读书笔记/">读书笔记</a>&nbsp;
+				
+					<a href="/tags/操作系统/">操作系统</a>&nbsp;
+				
+
+			</span>
+		</div>
+
+     
+		<!-- JiaThis Button BEGIN -->
+		<div class="jiathis_style" style="float:right;">
+			<span class="jiathis_txt">分享到：</span>
+			<a class="jiathis_button_qzone">QQ空间</a>
+			<a class="jiathis_button_tsina">新浪微博</a>
+			<a class="jiathis_button_weixin">微信</a>
+			<a class="jiathis_button_copy">复制</a>
+			<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+			<a class="jiathis_counter_style"></a>
+		</div>
+		<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+		<!-- JiaThis Button END -->
+		<br>
+    </footer>
+
+
+				
+			</div>	
+		</div>	 	        
+
+		 
+				
+					<p class="p1">上一篇 <a href="/archives/166/">使用edas系统的“bug”提前查看论文是否被accept</a></p> 
+
+				
+				   <p class="p2">下一篇 <a href="/archives/148/">leetcode ——Repeated DNA Sequences</a></p> 
+			
+		
+		<!-- comment -->
+		
+<section id="comment">
+  
+  	 <div class="ds-thread" data-thread-key="archives/162/" data-title="操作系统中3种链接方式的比较" data-url="http://www.rudy-yuan.net/archives/162/"></div>  
+  
+</section>
+
+		
+	</div> <!-- col-md-9/col-md-12 -->	
+
+	
+		<div id="side_meta">
+			
+      <div class="col-md-3">
+	      <div id="sidebar">
+	      
+  <div class="form-group has-success has-feedback" id="site_search">
+    <form class="site-search-form">
+        <input type="text" id="st-search-input" name="q" results="0" placeholder="搜索" class="st-search-input st-default-search-input form-control" />
+    </form>
+  </div>  
+
+	      <style type="text/css">
+  .cls_container{height:24px;overflow:hidden;}
+  .cls_container ul{list-style-type:none;margin:0;padding:0;margin-left:0px;}
+  .cls_container ul li{height:24px;line-height:24px;float:left;display:inline;}
+</style>
+
+<div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">本站公告</h4>
+
+	<div id="myscroll" class="cls_container">
+		<ul>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>欢迎访问本站!</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>本站内容已经全部进行迁移</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>谷歌浏览器访问本站效果最佳!</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>若URL失效，请使用本站内部搜索</span></li></br>
+		</ul>
+	</div>
+
+	<div id="showhint"></div>
+</div>
+
+<script type="text/javascript">
+	function $(element){
+	 if(arguments.length>1){
+	  for(var i=0,length=arguments.length,elements=[];i<length;i++){
+	   elements.push($(arguments[i]));
+	  }
+	  return elements;
+	 }
+	 if(typeof element=="string"){
+	  return document.getElementById(element);
+	 }else{
+	  return element;
+	 }
+	}
+	var Class={
+	 create:function(){
+	  return function(){
+	   this.initialize.apply(this,arguments);
+	  }
+	 }
+	}
+	Function.prototype.bind=function(object){
+	 var method=this;
+	 return function(){
+	  method.apply(object,arguments);
+	 }
+	}
+	var Scroll=Class.create();
+	Scroll.prototype={
+	 initialize:function(element,height){
+	  this.element=$(element);
+	  this.element.innerHTML+=this.element.innerHTML;
+	  this.height=height;
+	  this.maxHeight=this.element.scrollHeight/2;
+	  this.counter=0;
+	  this.scroll();
+	  this.timer="";
+	  this.element.onmouseover=this.stop.bind(this);
+	  this.element.onmouseout=function(){this.timer=setTimeout(this.scroll.bind(this),1000);}.bind(this);
+	 },
+	 scroll:function(){
+	  if(this.element.scrollTop<this.maxHeight){
+	   this.element.scrollTop++;
+	   this.counter++;
+	  }else{
+	   this.element.scrollTop=0;
+	   this.counter=0;
+	  }
+	  if(this.counter<this.height){
+	   this.timer=setTimeout(this.scroll.bind(this),20);
+	  }else{
+	   this.counter=0;
+	   this.timer=setTimeout(this.scroll.bind(this),3000);
+	  }
+	 },
+	 stop:function(){
+	  clearTimeout(this.timer);
+	 }
+	}
+	var myscroll=new Scroll("myscroll",24);
+</script>
+
+
+	      <!-- toc -->	      
+	      	      
+
+	      
+	<div class="widget">
+		<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">分类目录</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Demo/">Demo<span>1</span></a></li>
+		
+			<li><a href="/categories/Docs/">Docs<span>4</span></a></li>
+		
+			<li><a href="/categories/MapReduce/">MapReduce<span>1</span></a></li>
+		
+			<li><a href="/categories/NDN/">NDN<span>3</span></a></li>
+		
+			<li><a href="/categories/Test/">Test<span>2</span></a></li>
+		
+			<li><a href="/categories/c和c/">c和c++<span>1</span></a></li>
+		
+			<li><a href="/categories/c和cpp/">c和cpp<span>6</span></a></li>
+		
+			<li><a href="/categories/leetcode/">leetcode<span>10</span></a></li>
+		
+			<li><a href="/categories/linux学习/">linux学习<span>2</span></a></li>
+		
+			<li><a href="/categories/python与Django/">python与Django<span>7</span></a></li>
+		
+			<li><a href="/categories/socket与网络/">socket与网络<span>3</span></a></li>
+		
+			<li><a href="/categories/不可分/">不可分<span>1</span></a></li>
+		
+			<li><a href="/categories/工具相关/">工具相关<span>1</span></a></li>
+		
+			<li><a href="/categories/技术杂文/">技术杂文<span>17</span></a></li>
+		
+			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>5</span></a></li>
+		
+			<li><a href="/categories/源码学习/">源码学习<span>7</span></a></li>
+		
+		</ul>
+	</div>
+	
+	      
+	<div class="widget">
+		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
+		
+			<li><a href="/tags/操作系统/">操作系统<span>2</span></a></li>
+		
+			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
+		
+			<li><a href="/tags/themes/">themes<span>1</span></a></li>
+		
+			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
+		
+			<li><a href="/tags/个人博客/">个人博客<span>1</span></a></li>
+		
+			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
+		
+			<li><a href="/tags/保研/">保研<span>1</span></a></li>
+		
+			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
+		
+			<li><a href="/tags/观察者模式/">观察者模式<span>1</span></a></li>
+		
+			<li><a href="/tags/ubuntu-yuan/">ubuntu yuan<span>1</span></a></li>
+		
+			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
+		
+			<li><a href="/tags/回文/">回文<span>1</span></a></li>
+		
+			<li><a href="/tags/NDN/">NDN<span>3</span></a></li>
+		
+			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
+		
+			<li><a href="/tags/博主推荐/">博主推荐<span>2</span></a></li>
+		
+			<li><a href="/tags/awk/">awk<span>1</span></a></li>
+		
+			<li><a href="/tags/热点文章/">热点文章<span>7</span></a></li>
+		
+			<li><a href="/tags/Web服务器/">Web服务器<span>2</span></a></li>
+		
+			<li><a href="/tags/vi/">vi<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>71</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+	      
+<div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">友情链接</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li style="font-size:14px"><i class="fa fa-share"></i><a href="http://hexo.io" title="My Linkin account." target="_blank"]);">Hexo</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-github"></i><a href="http://www.github.com/rudy-yuan" title="My Github account." target="_blank"]);">我的github</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-trash"></i><a href="http://yjiehn.sinaapp.com" title="My Linkin account." target="_blank"]);">我的旧版博客</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-cloud-upload"></i><a href="http://www.qiniu.com" title="My Weibo account." target="_blank"]);">七牛云存储</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://netlab.pkusz.edu.cn" title="My Weibo account." target="_blank"]);">北大互联网信息工程研发中心</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://cs.whu.edu.cn" title="My Weibo account." target="_blank"]);">武汉大学 计算机学院</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://github.com/wzpan/hexo-theme-freemind" title="My Weibo account." target="_blank"]);">Hexo-Theme-Freemind</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://www.wengweitao.com" title="My Weibo account." target="_blank"]);">WWT的博客</a></li>
+	
+	</ul>
+</div>
+
+
+	      <div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">近期评论</h4>
+	<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="0" data-show-admin="1" data-excerpt-length="100" ></ul>
+	
+	<script type="text/javascript">
+	    var duoshuoQuery = {short_name:"rudy-yuan"};
+	    (function() {
+	    var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+	</script>
+
+</div>
+
+
+	
+	      <section id="recent-visitors" class="widget widget_recent_comments">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">最近访客</h4>
+  	<div class="panelbody clearfix"><ul class="ds-recent-visitors" data-num-items="30"></ul></div>
+</section>    
+	      </div> <!-- sidebar -->
+      </div> <!-- col-md-3 -->
+
+		</div>
+			
+
+</div><!-- row -->
+
+
+	<script type="text/javascript">
+	  var duoshuoQuery = { short_name: 'rudy-yuan' };
+	  (function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';
+		ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	  })();
+	</script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  Rudy-Yuan &copy; 2013-2016.
+  
+       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, <a href="https://swiftype.com/" target="_blank">Swiftype</a> and <a href="http://www.qiniu.com/" target="_blank">七牛云存储</a>.
+      <i class="fa fa-sitemap %>"></i> <a href="/sitemap.xml" target="_blank"> 站点地图</a>. <a href="http://www.miitbeian.gov.cn/">粤ICP备15038546号</a>.
+      <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255163192'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1255163192' type='text/javascript'%3E%3C/script%3E"));</script>   
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+  <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'YYG5W2xNQTns7U8J3YqW','2.0.0');
+  </script>
+
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>
