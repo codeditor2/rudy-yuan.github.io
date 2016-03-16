@@ -8,7 +8,8 @@
   
   <meta name="description" content="最小回文分割算法！
 Given a string s, partition s such that every substring of the partition is a palindrome.
-Return the minimum cuts needed for a palindrome pa">
+Return the minimum cuts needed for a palindrome partitioning of s.
+For example, given s = “aab”">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -155,7 +156,7 @@ Return the minimum cuts needed for a palindrome pa">
 					<span style="font-size:15px"><p>最小回文分割算法！</p>
 <p>Given a string s, partition s such that every substring of the partition is a palindrome.</p>
 <p>Return the minimum cuts needed for a palindrome partitioning of s.</p>
-<p>For example, given s = “aab”,</p>
+<p>For example, given s = “aab”<a id="more"></a>,</p>
 <p>Return 1 since the palindrome partitioning [“aa”,”b”] could be produced using 1 cut. </p>
 <p>这个题目有难度啊！！</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">int</span> <span class="title">minCut</span><span class="params">(<span class="built_in">string</span> s)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">         <span class="keyword">int</span> len = s.size();</span><br><span class="line">         <span class="keyword">int</span>* dp = <span class="keyword">new</span> <span class="keyword">int</span>[len+<span class="number">1</span>];</span><br><span class="line">         </span><br><span class="line">         <span class="keyword">for</span>(<span class="keyword">int</span> i=len; i&gt;=<span class="number">0</span>; i--)</span><br><span class="line">             dp[i] = len-i;</span><br><span class="line">             </span><br><span class="line">         <span class="keyword">bool</span>** matrix = <span class="keyword">new</span> <span class="keyword">bool</span>*[len];</span><br><span class="line">         <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;len; i++)</span><br><span class="line">         &#123;</span><br><span class="line">             matrix[i] = <span class="keyword">new</span> <span class="keyword">bool</span>[len];</span><br><span class="line">             <span class="built_in">memset</span>(matrix[i], <span class="literal">false</span>, <span class="keyword">sizeof</span>(<span class="keyword">bool</span>)*len);</span><br><span class="line">         &#125;</span><br><span class="line">         </span><br><span class="line">         <span class="keyword">for</span>(<span class="keyword">int</span> i=len<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--)</span><br><span class="line">             <span class="keyword">for</span>(<span class="keyword">int</span> j=i; j&lt;len; j++)</span><br><span class="line">             &#123;</span><br><span class="line">                 <span class="keyword">if</span>(s[i] == s[j] &amp;&amp; (j-i&lt;<span class="number">2</span> || matrix[i+<span class="number">1</span>][j<span class="number">-1</span>])) <span class="comment">// 这表明，s[i]..s[j]是回文</span></span><br><span class="line">                 &#123;</span><br><span class="line">                     matrix[i][j] = <span class="literal">true</span>;</span><br><span class="line">                     dp[i] = min(dp[i], dp[j+<span class="number">1</span>]+<span class="number">1</span>);</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;</span><br><span class="line">         <span class="keyword">return</span> dp[<span class="number">0</span>]<span class="number">-1</span>;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;;</span><br></pre></td></tr></table></figure>
@@ -222,7 +223,7 @@ Return the minimum cuts needed for a palindrome pa">
 					<p class="p1">Previous <a href="/archives/185/">leetcode——Minimum Window Substring</a></p> 
 
 				
-				   <p class="p2">Next <a href="/archives/183/">一幅图让你彻底理解KMP算法</a></p> 
+				   <p class="p2">Next <a href="/archives/183/">leetcode--Binary Tree Paths</a></p> 
 			
 		
 		<!-- comment -->
@@ -346,31 +347,31 @@ Return the minimum cuts needed for a palindrome pa">
 		
 			<li><a href="/categories/MapReduce/">MapReduce<span>1</span></a></li>
 		
-			<li><a href="/categories/NDN/">NDN<span>2</span></a></li>
+			<li><a href="/categories/NDN/">NDN<span>3</span></a></li>
 		
 			<li><a href="/categories/Test/">Test<span>2</span></a></li>
 		
 			<li><a href="/categories/c和c/">c和c++<span>1</span></a></li>
 		
-			<li><a href="/categories/c和cpp/">c和cpp<span>2</span></a></li>
+			<li><a href="/categories/c和cpp/">c和cpp<span>12</span></a></li>
 		
-			<li><a href="/categories/leetcode/">leetcode<span>6</span></a></li>
+			<li><a href="/categories/leetcode/">leetcode<span>9</span></a></li>
 		
 			<li><a href="/categories/linux学习/">linux学习<span>1</span></a></li>
 		
 			<li><a href="/categories/python与Django/">python与Django<span>7</span></a></li>
 		
-			<li><a href="/categories/socket与网络/">socket与网络<span>2</span></a></li>
+			<li><a href="/categories/socket与网络/">socket与网络<span>3</span></a></li>
 		
 			<li><a href="/categories/不可分/">不可分<span>1</span></a></li>
 		
 			<li><a href="/categories/工具相关/">工具相关<span>1</span></a></li>
 		
-			<li><a href="/categories/技术杂文/">技术杂文<span>11</span></a></li>
+			<li><a href="/categories/技术杂文/">技术杂文<span>12</span></a></li>
 		
-			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>4</span></a></li>
+			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>3</span></a></li>
 		
-			<li><a href="/categories/源码学习/">源码学习<span>5</span></a></li>
+			<li><a href="/categories/源码学习/">源码学习<span>7</span></a></li>
 		
 		</ul>
 	</div>
@@ -380,48 +381,48 @@ Return the minimum cuts needed for a palindrome pa">
 		<h4 style="font-weight: bold; color: #333 ">Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/facebook访问/">facebook访问<span>1</span></a></li>
+			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
 		
-			<li><a href="/tags/数组对称/">数组对称<span>1</span></a></li>
+			<li><a href="/tags/翻墙/">翻墙<span>1</span></a></li>
 		
-			<li><a href="/tags/leetcode/">leetcode<span>6</span></a></li>
+			<li><a href="/tags/华为面试/">华为面试<span>1</span></a></li>
 		
-			<li><a href="/tags/plugins/">plugins<span>2</span></a></li>
+			<li><a href="/tags/mediastreamer2/">mediastreamer2<span>3</span></a></li>
 		
-			<li><a href="/tags/edas提前/">edas提前<span>1</span></a></li>
+			<li><a href="/tags/github/">github<span>1</span></a></li>
 		
-			<li><a href="/tags/clixsense/">clixsense<span>1</span></a></li>
+			<li><a href="/tags/Q-A/">Q&amp;A<span>1</span></a></li>
 		
-			<li><a href="/tags/linux/">linux<span>2</span></a></li>
+			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
+		
+			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
+		
+			<li><a href="/tags/数据结构/">数据结构<span>3</span></a></li>
 		
 			<li><a href="/tags/themes/">themes<span>1</span></a></li>
 		
-			<li><a href="/tags/Protobuf/">Protobuf<span>1</span></a></li>
+			<li><a href="/tags/IO复用/">IO复用<span>1</span></a></li>
 		
-			<li><a href="/tags/面试/">面试<span>4</span></a></li>
+			<li><a href="/tags/博主推荐/">博主推荐<span>2</span></a></li>
 		
-			<li><a href="/tags/github静态博客/">github静态博客<span>1</span></a></li>
+			<li><a href="/tags/面试/">面试<span>14</span></a></li>
 		
-			<li><a href="/tags/ubuntu-yuan/">ubuntu yuan<span>1</span></a></li>
-		
-			<li><a href="/tags/Next数组/">Next数组<span>2</span></a></li>
-		
-			<li><a href="/tags/阿里云/">阿里云<span>2</span></a></li>
-		
-			<li><a href="/tags/mysql/">mysql<span>2</span></a></li>
-		
-			<li><a href="/tags/libevent/">libevent<span>1</span></a></li>
-		
-			<li><a href="/tags/Web服务器/">Web服务器<span>2</span></a></li>
+			<li><a href="/tags/select/">select<span>1</span></a></li>
 		
 			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
 		
-			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
+			<li><a href="/tags/mysql远程连接/">mysql远程连接<span>1</span></a></li>
 		
-			<li><a href="/tags/mediastreamer2/">mediastreamer2<span>1</span></a></li>
+			<li><a href="/tags/KMP/">KMP<span>2</span></a></li>
+		
+			<li><a href="/tags/Leetcode/">Leetcode<span>1</span></a></li>
+		
+			<li><a href="/tags/回文/">回文<span>1</span></a></li>
+		
+			<li><a href="/tags/clixsense/">clixsense<span>1</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>57</span></a></li>
+		   <li><a href="/tags">...<span>63</span></a></li>
 		 
 		</ul>
 	</div>

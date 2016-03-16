@@ -114,7 +114,7 @@
 							
 							  <span class="entry-date">
 								  <span class="fa fa-calendar" aria-hidden="true"></span>
-								  2013-04-24						      
+								  2014-08-15						      
 							  </span>
 							  
 							  <span class="author vcard">
@@ -126,115 +126,13 @@
 
 							<span class="comments-link">
 								<span class="fa fa-comments" aria-hidden="true"></span>
-								<span class="ds-thread-count" data-thread-key="archives/mysql-commands/">暂无评论</span>
+								<span class="ds-thread-count" data-thread-key="archives/134/">暂无评论</span>
 							</span>	
 							
 						</div>	
 									
 						<h3 class="entry-title"> 
-							  <a href="/archives/mysql-commands/" >mysql常用命令与使用方法</a>
-						</h3>
-
-					</header>
-
-					<div class="entry">
-  <div class="row">
-	
-	
-		<p><a href="http://www.mysql.com">mysql</a>作为一个被广泛使用的关系型数据库，其性能早已经过众多用户和项目的考验。</p>
-<p>下面记录常用的mysql命令。</p>
-<h3 id="1-连接mysql"><a href="#1-连接mysql" class="headerlink" title="1. 连接mysql"></a>1. 连接mysql</h3><ul>
-<li>连接本机mysql：mysql -uroot -ppassword;</li>
-<li>连接远程主机mysql：mysql -h 127.0.0.1 -uroot -ppassword;
-	
-	...</div>
-</div>
-
-
-					<footer class="entry-meta">					  
-						<a href="/archives/mysql-commands/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
-					</footer>
-
-				</div>	
-
-             </div>
-		
-            <div class="archive">	  
-				<div id="archives"> 
-				
-					<header class="entry-header">
-						<div class="entry-info" text-transform : capitalize>				     					      	      
-							
-							  <span class="entry-date">
-								  <span class="fa fa-calendar" aria-hidden="true"></span>
-								  2013-04-01						      
-							  </span>
-							  
-							  <span class="author vcard">
-								  <span class="fa fa-user" aria-hidden="true"></span>
-								  <a href="/">Rudy-Yuan</a> 	
-							  </span>
-
-
-
-							<span class="comments-link">
-								<span class="fa fa-comments" aria-hidden="true"></span>
-								<span class="ds-thread-count" data-thread-key="archives/quick-sort-algorithm/">暂无评论</span>
-							</span>	
-							
-						</div>	
-									
-						<h3 class="entry-title"> 
-							  <a href="/archives/quick-sort-algorithm/" >快速排序算法</a>
-						</h3>
-
-					</header>
-
-					<div class="entry">
-  <div class="row">
-	
-	
-		
-	
-	...</div>
-</div>
-
-
-					<footer class="entry-meta">					  
-						<a href="/archives/quick-sort-algorithm/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
-					</footer>
-
-				</div>	
-
-             </div>
-		
-            <div class="archive">	  
-				<div id="archives"> 
-				
-					<header class="entry-header">
-						<div class="entry-info" text-transform : capitalize>				     					      	      
-							
-							  <span class="entry-date">
-								  <span class="fa fa-calendar" aria-hidden="true"></span>
-								  2013-04-01						      
-							  </span>
-							  
-							  <span class="author vcard">
-								  <span class="fa fa-user" aria-hidden="true"></span>
-								  <a href="/">Rudy-Yuan</a> 	
-							  </span>
-
-
-
-							<span class="comments-link">
-								<span class="fa fa-comments" aria-hidden="true"></span>
-								<span class="ds-thread-count" data-thread-key="archives/new-site-online/">暂无评论</span>
-							</span>	
-							
-						</div>	
-									
-						<h3 class="entry-title"> 
-							  <a href="/archives/new-site-online/" >我的个人博客正式上线</a>
+							  <a href="/archives/134/" >在mediastreamer2库中添加自定义filter(2)</a>
 						</h3>
 
 					</header>
@@ -243,20 +141,244 @@
   <div class="row">
 	
            
-              <div class="thumbnail"><a href="/archives/new-site-online/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2013/04/01/congratulation.jpg" alt="我的个人博客正式上线"  class="nofancybox"></a>
+              <div class="thumbnail"><a href="/archives/134/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/12/17/result.png" alt="在mediastreamer2库中添加自定义filter(2)"  class="nofancybox"></a>
            
 		</div>
 	
 	
-		<p>喜大普奔，我的个人独立网站正式上线了！</p>
-<p>今天，在bluehost买了一个香港的主机，使用我大三了解过的一点点关于django的知识，搭建了这么一个丑陋的个人博客！暂时启用域名：<a href="http://www.labmake.com">www.labmake.com</a><br>
+		<h4 id="增加自定义filter"><a href="#增加自定义filter" class="headerlink" title="增加自定义filter"></a>增加自定义filter</h4><p>通过自定义插件，可以给mediastreamer2框架加入新功能，而本文提到的加解密模块正是通过此方式实现。</p>
+<p>要自定义一个模块，需要按照规范定义一系列数据结构，其中最关键的是描述插件功能的结构体MSFilterDesc，该结构体包含了插件名字、类型、输入输出端个数和处理函数。</p>
+<p>例如这里定义了本方案中实现加密功能的插件
 	
 	...</div>
 </div>
 
 
 					<footer class="entry-meta">					  
-						<a href="/archives/new-site-online/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+						<a href="/archives/134/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+					</footer>
+
+				</div>	
+
+             </div>
+		
+            <div class="archive">	  
+				<div id="archives"> 
+				
+					<header class="entry-header">
+						<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+							  <span class="entry-date">
+								  <span class="fa fa-calendar" aria-hidden="true"></span>
+								  2014-08-05						      
+							  </span>
+							  
+							  <span class="author vcard">
+								  <span class="fa fa-user" aria-hidden="true"></span>
+								  <a href="/">Rudy-Yuan</a> 	
+							  </span>
+
+
+
+							<span class="comments-link">
+								<span class="fa fa-comments" aria-hidden="true"></span>
+								<span class="ds-thread-count" data-thread-key="archives/130/">暂无评论</span>
+							</span>	
+							
+						</div>	
+									
+						<h3 class="entry-title"> 
+							  <a href="/archives/130/" >求字符串的最长回文子串--最直观的“马拉车算法”分析</a>
+						</h3>
+
+					</header>
+
+					<div class="entry">
+  <div class="row">
+	
+           
+              <div class="thumbnail"><a href="/archives/130/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/08/05/Palindromic-Substring-2.jpg" alt="求字符串的最长回文子串--最直观的“马拉车算法”分析"  class="nofancybox"></a>
+           
+		</div>
+	
+	
+		<p>首先用一个非常巧妙的方式，将所有可能的奇数/偶数长度的回文子串都转换成了奇数长度：在每个字符的两边都插入一个特殊的符号。比如 abba 变成 #a#b#b#a#， aba变成 #a#b#a#。 为了进一步减少编码的复杂度，可以在字符串的开始加入另一个特殊字符，这样就不用特殊处理越界问题，比如$#a#b#a#（注意，下面的代码是用C语言写就，由于C语言规范还要求字符串末尾有一个’\0’所以正好OK，但其他语言可能会导致越界）
+	
+	...</div>
+</div>
+
+
+					<footer class="entry-meta">					  
+						<a href="/archives/130/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+					</footer>
+
+				</div>	
+
+             </div>
+		
+            <div class="archive">	  
+				<div id="archives"> 
+				
+					<header class="entry-header">
+						<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+							  <span class="entry-date">
+								  <span class="fa fa-calendar" aria-hidden="true"></span>
+								  2014-08-01						      
+							  </span>
+							  
+							  <span class="author vcard">
+								  <span class="fa fa-user" aria-hidden="true"></span>
+								  <a href="/">Rudy-Yuan</a> 	
+							  </span>
+
+
+
+							<span class="comments-link">
+								<span class="fa fa-comments" aria-hidden="true"></span>
+								<span class="ds-thread-count" data-thread-key="archives/128/">暂无评论</span>
+							</span>	
+							
+						</div>	
+									
+						<h3 class="entry-title"> 
+							  <a href="/archives/128/" >对陈皓博客《C++虚函数解析》的补充</a>
+						</h3>
+
+					</header>
+
+					<div class="entry">
+  <div class="row">
+	
+           
+              <div class="thumbnail"><a href="/archives/128/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/12/21/o_vtable1.jpg" alt="对陈皓博客《C++虚函数解析》的补充"  class="nofancybox"></a>
+           
+		</div>
+	
+	
+		<p>关于C++中虚函数的实现原理，陈皓的这篇文章“<a href="http://blog.csdn.net/haoel/article/details/1948051">C++虚函数解析</a>”讲得不错，但是博客中的代码有点点问题。</p>
+<p>借用他博客里面的几个图，我补充了我在自己理解基础上写出的正确代码:
+	
+	...</div>
+</div>
+
+
+					<footer class="entry-meta">					  
+						<a href="/archives/128/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+					</footer>
+
+				</div>	
+
+             </div>
+		
+            <div class="archive">	  
+				<div id="archives"> 
+				
+					<header class="entry-header">
+						<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+							  <span class="entry-date">
+								  <span class="fa fa-calendar" aria-hidden="true"></span>
+								  2014-07-31						      
+							  </span>
+							  
+							  <span class="author vcard">
+								  <span class="fa fa-user" aria-hidden="true"></span>
+								  <a href="/">Rudy-Yuan</a> 	
+							  </span>
+
+
+
+							<span class="comments-link">
+								<span class="fa fa-comments" aria-hidden="true"></span>
+								<span class="ds-thread-count" data-thread-key="archives/127/">暂无评论</span>
+							</span>	
+							
+						</div>	
+									
+						<h3 class="entry-title"> 
+							  <a href="/archives/127/" >libevent源码分析(5)</a>
+						</h3>
+
+					</header>
+
+					<div class="entry">
+  <div class="row">
+	
+           
+              <div class="thumbnail"><a href="/archives/127/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/04/15/main-loop.JPG" alt="libevent源码分析(5)"  class="nofancybox"></a>
+           
+		</div>
+	
+	
+		<p><strong>libevent中I/O、signal、定时器事件的统一管理</strong></p>
+<p>前面已经介绍了libevent是怎么处理IO事件、signal事件的注册和分发，这篇博客简单说下libevent对定时器任务的管理，然后总结下整个libevent的事件处理主循环框架。</p>
+<p>像select()和epoll_wait()都允许程序指定一个最大等待时间timeout，使得在即使没有I/O事件发生的情况下，也保证能在timeout时间内返回。<br>
+	
+	...</div>
+</div>
+
+
+					<footer class="entry-meta">					  
+						<a href="/archives/127/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+					</footer>
+
+				</div>	
+
+             </div>
+		
+            <div class="archive">	  
+				<div id="archives"> 
+				
+					<header class="entry-header">
+						<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+							  <span class="entry-date">
+								  <span class="fa fa-calendar" aria-hidden="true"></span>
+								  2014-04-21						      
+							  </span>
+							  
+							  <span class="author vcard">
+								  <span class="fa fa-user" aria-hidden="true"></span>
+								  <a href="/">Rudy-Yuan</a> 	
+							  </span>
+
+
+
+							<span class="comments-link">
+								<span class="fa fa-comments" aria-hidden="true"></span>
+								<span class="ds-thread-count" data-thread-key="archives/68/">暂无评论</span>
+							</span>	
+							
+						</div>	
+									
+						<h3 class="entry-title"> 
+							  <a href="/archives/68/" >leetcode--Rotate Image</a>
+						</h3>
+
+					</header>
+
+					<div class="entry">
+  <div class="row">
+	
+           
+              <div class="thumbnail"><a href="/archives/68/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/04/22/Rotate-image.jpg" alt="leetcode--Rotate Image"  class="nofancybox"></a>
+           
+		</div>
+	
+	
+		<p><a href="https://leetcode.com/problems/rotate-image/">Rotate Image</a></p>
+<p>You are given an n x n 2D matrix representing an image.</p>
+<p>Rotate the image by 90 degrees (clockwise).</p>
+<p>Follow up:</p>
+<p>Could you do this <strong>in-place</strong>
+	
+	...</div>
+</div>
+
+
+					<footer class="entry-meta">					  
+						<a href="/archives/68/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
 					</footer>
 
 				</div>	
@@ -269,7 +391,7 @@
 			<center>
 			
     <nav class="pagination">
-	    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span>
+	    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
     </nav>
 
 
@@ -386,31 +508,31 @@
 		
 			<li><a href="/categories/MapReduce/">MapReduce<span>1</span></a></li>
 		
-			<li><a href="/categories/NDN/">NDN<span>2</span></a></li>
+			<li><a href="/categories/NDN/">NDN<span>3</span></a></li>
 		
 			<li><a href="/categories/Test/">Test<span>2</span></a></li>
 		
 			<li><a href="/categories/c和c/">c和c++<span>1</span></a></li>
 		
-			<li><a href="/categories/c和cpp/">c和cpp<span>2</span></a></li>
+			<li><a href="/categories/c和cpp/">c和cpp<span>12</span></a></li>
 		
-			<li><a href="/categories/leetcode/">leetcode<span>6</span></a></li>
+			<li><a href="/categories/leetcode/">leetcode<span>9</span></a></li>
 		
 			<li><a href="/categories/linux学习/">linux学习<span>1</span></a></li>
 		
 			<li><a href="/categories/python与Django/">python与Django<span>7</span></a></li>
 		
-			<li><a href="/categories/socket与网络/">socket与网络<span>2</span></a></li>
+			<li><a href="/categories/socket与网络/">socket与网络<span>3</span></a></li>
 		
 			<li><a href="/categories/不可分/">不可分<span>1</span></a></li>
 		
 			<li><a href="/categories/工具相关/">工具相关<span>1</span></a></li>
 		
-			<li><a href="/categories/技术杂文/">技术杂文<span>11</span></a></li>
+			<li><a href="/categories/技术杂文/">技术杂文<span>12</span></a></li>
 		
-			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>4</span></a></li>
+			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>3</span></a></li>
 		
-			<li><a href="/categories/源码学习/">源码学习<span>5</span></a></li>
+			<li><a href="/categories/源码学习/">源码学习<span>7</span></a></li>
 		
 		</ul>
 	</div>
@@ -421,48 +543,48 @@
 		<h4 style="font-weight: bold; color: #333 ">Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/读书笔记/">读书笔记<span>1</span></a></li>
+			<li><a href="/tags/facebook访问/">facebook访问<span>1</span></a></li>
 		
-			<li><a href="/tags/对象模型/">对象模型<span>2</span></a></li>
+			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
 		
-			<li><a href="/tags/数组对称/">数组对称<span>1</span></a></li>
+			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
 		
-			<li><a href="/tags/leetcode/">leetcode<span>6</span></a></li>
+			<li><a href="/tags/ubuntu-yuan/">ubuntu yuan<span>1</span></a></li>
 		
-			<li><a href="/tags/edas提前/">edas提前<span>1</span></a></li>
+			<li><a href="/tags/算法/">算法<span>7</span></a></li>
 		
-			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
+			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
 		
-			<li><a href="/tags/热点文章/">热点文章<span>5</span></a></li>
-		
-			<li><a href="/tags/github静态博客/">github静态博客<span>1</span></a></li>
-		
-			<li><a href="/tags/mapReduce/">mapReduce<span>1</span></a></li>
-		
-			<li><a href="/tags/ubuntu源/">ubuntu源<span>1</span></a></li>
+			<li><a href="/tags/github/">github<span>1</span></a></li>
 		
 			<li><a href="/tags/English/">English<span>1</span></a></li>
 		
-			<li><a href="/tags/sofa-pbrpc/">sofa-pbrpc<span>1</span></a></li>
+			<li><a href="/tags/mapReduce/">mapReduce<span>1</span></a></li>
 		
-			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
+			<li><a href="/tags/linux/">linux<span>2</span></a></li>
 		
-			<li><a href="/tags/转载/">转载<span>7</span></a></li>
-		
-			<li><a href="/tags/Leetcode/">Leetcode<span>1</span></a></li>
-		
-			<li><a href="/tags/Protobuf/">Protobuf<span>1</span></a></li>
+			<li><a href="/tags/Q-A/">Q&amp;A<span>1</span></a></li>
 		
 			<li><a href="/tags/libevent/">libevent<span>1</span></a></li>
 		
-			<li><a href="/tags/算法/">算法<span>6</span></a></li>
+			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
 		
-			<li><a href="/tags/保研/">保研<span>1</span></a></li>
+			<li><a href="/tags/热点文章/">热点文章<span>7</span></a></li>
+		
+			<li><a href="/tags/ndnSIM/">ndnSIM<span>1</span></a></li>
+		
+			<li><a href="/tags/转载/">转载<span>7</span></a></li>
+		
+			<li><a href="/tags/mysql/">mysql<span>2</span></a></li>
+		
+			<li><a href="/tags/awk/">awk<span>1</span></a></li>
 		
 			<li><a href="/tags/回文/">回文<span>1</span></a></li>
 		
+			<li><a href="/tags/翻墙/">翻墙<span>1</span></a></li>
 		
-		   <li><a href="/tags">...<span>57</span></a></li>
+		
+		   <li><a href="/tags">...<span>63</span></a></li>
 		 
 		</ul>
 	</div>

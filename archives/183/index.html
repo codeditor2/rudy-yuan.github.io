@@ -3,17 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>一幅图让你彻底理解KMP算法 | Rudy-Yuan的博客</title>
+  <title>leetcode--Binary Tree Paths | Rudy-Yuan的博客</title>
   <meta name="author" content="Rudy-Yuan">
   
-  <meta name="description" content="对于KMP算法，最难理解的莫过于next数组是如何计算得到的？
-看了这幅图，你还不了解为什么吗？
-假设当前考虑的是下标为j的字符，此时已经有头部k长度的字符与尾部k长度的字符是相等的，即图中标的两个长度为k的子字符串。。">
+  <meta name="description" content="简单题，使用后序遍历的非递归实现，栈底到栈顶的元素便是路径">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="一幅图让你彻底理解KMP算法"/>
+  <meta property="og:title" content="leetcode--Binary Tree Paths"/>
   <meta property="og:site_name" content="Rudy-Yuan的博客"/>
 
   
@@ -114,9 +112,9 @@
 		  <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">
 			  当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;:&nbsp;
 			
-				<a href="/categories/数据结构与算法/">数据结构与算法</a>
+				<a href="/categories/leetcode/">leetcode</a>
 			
-		  &nbsp;</a>»&nbsp; 一幅图让你彻底理解KMP算法 </h4>
+		  &nbsp;</a>»&nbsp; leetcode--Binary Tree Paths </h4>
 		</div>
 
 		<div id="top_search"></div>
@@ -149,19 +147,11 @@
 
 									
 					<h3 class="entry-title"> 
-						<a href="/archives/183/" >一幅图让你彻底理解KMP算法</a>
+						<a href="/archives/183/" >leetcode--Binary Tree Paths</a>
 					</h3>		
 						
-					<span style="font-size:15px"><p>对于KMP算法，最难理解的莫过于next数组是如何计算得到的？</p>
-<p>看了这幅图，你还不了解为什么吗？</p>
-<p>假设当前考虑的是下标为j的字符，此时已经有<strong>头部k长度的字符</strong>与<strong>尾部k长度的字符是相等的</strong>，即图中标的两个长度为k的子字符串。。<br><a id="more"></a><br>如下图，如果p[j]=p[k]，万事大吉，说明<strong>头部字符</strong>和<strong>尾部字符</strong>的长度都可以增加1。</p>
-<p>KMP最难理解的是，如果p[j] != p[k]时，为什么要将k赋值为next[k] ？？？</p>
-<p>重点来了，你看下图中的那个<strong>头部长度为k</strong>的子字符串，<em>他其实也是经过了前缀</em>、后缀匹配过程的呢！！</p>
-<p>所以，对于<strong>长度为k</strong>的头部子字符串，他可能有图中<strong>蓝色部分</strong>的前缀和后缀。。</p>
-<p>注意，如果图中<strong>头部的黄色表示的字符与下标j表示的字符相等</strong>，那么，下标j找到了他的最长前缀了</p>
-<p>而头部黄色表示的字符的下标是多少？？？？这就是关键！！<strong>头部黄色表示的字符的下标就是next[k]</strong>。。</p>
-<p>因为<strong>next[k]表示的就是字符串长度为k的头部字符串的最长前缀和后缀</strong></p>
-<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2015/07/22/kmp.jpg" alt=""></p>
+					<span style="font-size:15px"><p>简单题，使用后序遍历的非递归实现，栈底到栈顶的元素便是路径<a id="more"></a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> Solution &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; binaryTreePaths(TreeNode* root) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="built_in">string</span>&gt; result;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">vector</span>&lt;TreeNode *&gt; myStack;</span><br><span class="line">        <span class="built_in">vector</span>&lt;TreeNode *&gt;::reverse_iterator it;</span><br><span class="line">        TreeNode *p = root;</span><br><span class="line">        TreeNode *lastVisited = <span class="literal">NULL</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(p != <span class="literal">NULL</span> || !myStack.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(p != <span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                myStack.push_back(p);</span><br><span class="line">                p = p-&gt;left;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            p = *(myStack.rbegin());</span><br><span class="line">            <span class="keyword">if</span>(p-&gt;right == <span class="literal">NULL</span> || p-&gt;right == lastVisited)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(p-&gt;left == <span class="literal">NULL</span> &amp;&amp; p-&gt;right == <span class="literal">NULL</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="built_in">string</span> str = to_string(myStack[<span class="number">0</span>]-&gt;val);</span><br><span class="line">                    <span class="keyword">int</span> size = myStack.size();</span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; size; i++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        str += <span class="string">"-&gt;"</span> + to_string(myStack[i]-&gt;val);</span><br><span class="line">                    &#125;</span><br><span class="line">                    result.push_back(str);</span><br><span class="line">                &#125;</span><br><span class="line">                myStack.pop_back();</span><br><span class="line">                lastVisited = p;</span><br><span class="line">                p = <span class="literal">NULL</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                p = p-&gt;right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <div class="alert alert-success"><i class="fa fa-lightbulb-o"></i>   本文由<a href="http://www.rudy-yuan.net">Rudy Yuan</a>创作，采用<a href="http://creativecommons.org/licenses/by/3.0/cn" target="_blank" rel="external">CC BY 3.0 CN协议</a>进行许可。
 可自由转载、引用，但需署名作者且注明文章出处。</div>
 </span>
@@ -179,7 +169,7 @@
 				<span class="fa fa-folder" aria-hidden="true"></span> 
 
 				
-					<a href="/categories/数据结构与算法/">数据结构与算法</a>
+					<a href="/categories/leetcode/">leetcode</a>
 				
 
 			</span>
@@ -190,11 +180,7 @@
 				
 					<a href="/tags/算法/">算法</a>&nbsp;
 				
-					<a href="/tags/KMP/">KMP</a>&nbsp;
-				
-					<a href="/tags/Next数组/">Next数组</a>&nbsp;
-				
-					<a href="/tags/博主推荐/">博主推荐</a>&nbsp;
+					<a href="/tags/leetcode/">leetcode</a>&nbsp;
 				
 
 			</span>
@@ -233,7 +219,7 @@
 		
 <section id="comment">
   
-  	 <div class="ds-thread" data-thread-key="archives/183/" data-title="一幅图让你彻底理解KMP算法" data-url="http://www.rudy-yuan.net/archives/183/"></div>  
+  	 <div class="ds-thread" data-thread-key="archives/183/" data-title="leetcode--Binary Tree Paths" data-url="http://www.rudy-yuan.net/archives/183/"></div>  
   
 </section>
 
@@ -350,31 +336,31 @@
 		
 			<li><a href="/categories/MapReduce/">MapReduce<span>1</span></a></li>
 		
-			<li><a href="/categories/NDN/">NDN<span>2</span></a></li>
+			<li><a href="/categories/NDN/">NDN<span>3</span></a></li>
 		
 			<li><a href="/categories/Test/">Test<span>2</span></a></li>
 		
 			<li><a href="/categories/c和c/">c和c++<span>1</span></a></li>
 		
-			<li><a href="/categories/c和cpp/">c和cpp<span>2</span></a></li>
+			<li><a href="/categories/c和cpp/">c和cpp<span>12</span></a></li>
 		
-			<li><a href="/categories/leetcode/">leetcode<span>6</span></a></li>
+			<li><a href="/categories/leetcode/">leetcode<span>9</span></a></li>
 		
 			<li><a href="/categories/linux学习/">linux学习<span>1</span></a></li>
 		
 			<li><a href="/categories/python与Django/">python与Django<span>7</span></a></li>
 		
-			<li><a href="/categories/socket与网络/">socket与网络<span>2</span></a></li>
+			<li><a href="/categories/socket与网络/">socket与网络<span>3</span></a></li>
 		
 			<li><a href="/categories/不可分/">不可分<span>1</span></a></li>
 		
 			<li><a href="/categories/工具相关/">工具相关<span>1</span></a></li>
 		
-			<li><a href="/categories/技术杂文/">技术杂文<span>11</span></a></li>
+			<li><a href="/categories/技术杂文/">技术杂文<span>12</span></a></li>
 		
-			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>4</span></a></li>
+			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>3</span></a></li>
 		
-			<li><a href="/categories/源码学习/">源码学习<span>5</span></a></li>
+			<li><a href="/categories/源码学习/">源码学习<span>7</span></a></li>
 		
 		</ul>
 	</div>
@@ -384,48 +370,48 @@
 		<h4 style="font-weight: bold; color: #333 ">Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/libevent/">libevent<span>1</span></a></li>
+			<li><a href="/tags/对象模型/">对象模型<span>2</span></a></li>
 		
-			<li><a href="/tags/Protobuf/">Protobuf<span>1</span></a></li>
+			<li><a href="/tags/leetcode/">leetcode<span>9</span></a></li>
 		
-			<li><a href="/tags/github静态博客/">github静态博客<span>1</span></a></li>
-		
-			<li><a href="/tags/sofa-pbrpc/">sofa-pbrpc<span>1</span></a></li>
-		
-			<li><a href="/tags/free2mind/">free2mind<span>1</span></a></li>
-		
-			<li><a href="/tags/Web服务器/">Web服务器<span>2</span></a></li>
-		
-			<li><a href="/tags/xshell/">xshell<span>1</span></a></li>
-		
-			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
+			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
 		
 			<li><a href="/tags/mysql/">mysql<span>2</span></a></li>
 		
-			<li><a href="/tags/themes/">themes<span>1</span></a></li>
+			<li><a href="/tags/转载/">转载<span>7</span></a></li>
 		
-			<li><a href="/tags/回文/">回文<span>1</span></a></li>
+			<li><a href="/tags/facebook访问/">facebook访问<span>1</span></a></li>
 		
-			<li><a href="/tags/数据结构/">数据结构<span>1</span></a></li>
+			<li><a href="/tags/English/">English<span>1</span></a></li>
 		
-			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
+			<li><a href="/tags/阿里云/">阿里云<span>2</span></a></li>
 		
-			<li><a href="/tags/clixsense/">clixsense<span>1</span></a></li>
+			<li><a href="/tags/桃江地震/">桃江地震<span>1</span></a></li>
 		
-			<li><a href="/tags/github/">github<span>1</span></a></li>
+			<li><a href="/tags/读书笔记/">读书笔记<span>1</span></a></li>
 		
-			<li><a href="/tags/Manacher算法/">Manacher算法<span>1</span></a></li>
+			<li><a href="/tags/free2mind/">free2mind<span>1</span></a></li>
 		
-			<li><a href="/tags/博主推荐/">博主推荐<span>3</span></a></li>
+			<li><a href="/tags/翻墙/">翻墙<span>1</span></a></li>
 		
-			<li><a href="/tags/cpp/">cpp<span>3</span></a></li>
+			<li><a href="/tags/设计模式/">设计模式<span>1</span></a></li>
+		
+			<li><a href="/tags/NDN/">NDN<span>3</span></a></li>
+		
+			<li><a href="/tags/算法/">算法<span>7</span></a></li>
+		
+			<li><a href="/tags/ndnSIM/">ndnSIM<span>1</span></a></li>
 		
 			<li><a href="/tags/数组对称/">数组对称<span>1</span></a></li>
 		
-			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
+			<li><a href="/tags/保研/">保研<span>1</span></a></li>
+		
+			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
+		
+			<li><a href="/tags/cpp/">cpp<span>13</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>57</span></a></li>
+		   <li><a href="/tags">...<span>63</span></a></li>
 		 
 		</ul>
 	</div>
