@@ -6,10 +6,8 @@
   <title>Python生成器 | Rudy-Yuan的博客</title>
   <meta name="author" content="Rudy-Yuan">
   
-  <meta name="description" content="对于经常使用Linux系统的人员来说，少不了将本地的文件上传到服务器或者从服务器上下载文件到本地
-例如，在使用阿里云这种远程linux服务器时，由于一般都没有安装图形界面，所以只能进行SSH访问。
-这时候，本地操作系统往往是windows，怎么在本地windows和远程linux系统间相互传送文件呢？
-我这里推荐两个命令，分别是rz和sz命令">
+  <meta name="description" content="1. 生成器概念生成器是一个包含yield关键字的函数，当它被调用时，在函数体中的代码不会被执行，而会返回一个迭代器。每次请求一个值，就会执行生成器中的代码，直到遇到一个yield或者return语句
+生成器是一种用普通的函数语法定义的迭代器——所谓的迭代器就是具有next方法的对">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -115,7 +113,7 @@
 		  <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">
 			  当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;:&nbsp;
 			
-				<a href="/categories/linux学习/">linux学习</a>
+				<a href="/categories/python与Django/">python与Django</a>
 			
 		  &nbsp;</a>»&nbsp; Python生成器 </h4>
 		</div>
@@ -132,7 +130,7 @@
 							
 						<span class="entry-date">
 							<span class="fa fa-calendar" aria-hidden="true"></span>
-							2015-09-15						      
+							2015-09-06						      
 						</span>
 							  
 							  
@@ -153,15 +151,18 @@
 						<a href="/archives/196/" >Python生成器</a>
 					</h3>		
 						
-					<span style="font-size:15px"><p>对于经常使用Linux系统的人员来说，少不了将本地的文件上传到服务器或者从服务器上下载文件到本地</p>
-<p>例如，在使用阿里云这种远程linux服务器时，由于一般都没有安装图形界面，所以只能进行SSH访问。</p>
-<p>这时候，本地操作系统往往是windows，怎么<strong>在本地windows和远程linux系统间相互传送文件</strong>呢？</p>
-<p>我这里推荐两个命令，分别是rz和sz命令<a id="more"></a>。</p>
-<h4 id="rz命令本地上传文件到服务器"><a href="#rz命令本地上传文件到服务器" class="headerlink" title="rz命令本地上传文件到服务器"></a>rz命令本地上传文件到服务器</h4><p>当在终端输入rz命令时，会弹出一个窗口，选择你需要上传到远程linux上的文件即可进行传送。如下图所示：</p>
-<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2015/09/15/QQ20150915171704.jpg" alt=""></p>
-<h4 id="sz命令发送文件到本地"><a href="#sz命令发送文件到本地" class="headerlink" title="sz命令发送文件到本地"></a>sz命令发送文件到本地</h4><p>使用sz命令，后面跟上你需要发送到本地的文件名，即可将远程linux系统上的文件发送到本地，在弹出的窗口选择保存文件的位置即可。如下图所示。</p>
-<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2015/09/15/QQ20150915171555.jpg" alt=""></p>
-<p>注意，很多linux系统初始并没有这两个命令。需要我们自己安装和使用。</p>
+					<span style="font-size:15px"><h4 id="1-生成器概念"><a href="#1-生成器概念" class="headerlink" title="1. 生成器概念"></a>1. 生成器概念</h4><p>生成器是一个包含yield关键字的函数，当它被调用时，<strong>在函数体中的代码不会被执行，而会返回一个迭代器</strong>。每次请求一个值，就会执行生成器中的代码，直到遇到一个yield或者return语句</p>
+<p>生成器是一种用普通的函数语法定义的<strong>迭代器</strong>——所谓的迭代器就是具有next方法的对<a id="more"></a>象</p>
+<p>生成器由两部分组成：生成器的函数和生成器的迭代器</p>
+<p>生成器的函数返回的迭代器可以像其他普通迭代器一样被使用，如<strong>调用flatten()返回的迭代器作为list函数的参数</strong></p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2015/09/06/python-generator0.jpg" alt=""></p>
+<h4 id="2-生成器方法"><a href="#2-生成器方法" class="headerlink" title="2. 生成器方法"></a>2. 生成器方法</h4><p>调用生成器的next方法，将<em>运行到yield位置</em>，此时暂停执行环境，<strong>并返回yield后的值</strong></p>
+<p>——<strong>yield类似于调试程序时加入的断点的作用，但是不是一回事</strong></p>
+<p>第1次调用next，执行到yield 0暂停并返回0，此时屏幕上打印0——对应图中的箭头1</p>
+<p>第2次调用next时恢复环境，给tmp赋值(注意：恢复环境时tmp的值并不是x的值，而是通过send方法接受的值)，由于这里没有调用send方法，所以tmp的值为None, 此时输出print in gen(): None，并返回1——对应图中的箭头2</p>
+<p>第3次执行send(‘hello’)，那么程序将收到‘hello’，并给tmp赋值为’hello’, 此时tmp==’hello’为真，所以输出’print in gen(): world’,并执行到下一次yield 2,所以又打印出2.（next()等价于send(None)）</p>
+<p>第4次执行send(‘what’)，同理，将执行else语句。</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2015/09/06/python-generator.jpg" alt=""></p>
 <div class="alert alert-success"><i class="fa fa-lightbulb-o"></i>   本文由<a href="http://www.rudy-yuan.net">Rudy Yuan</a>创作，采用<a href="http://creativecommons.org/licenses/by/3.0/cn" target="_blank" rel="external">CC BY 3.0 CN协议</a>进行许可。
 可自由转载、引用，但需署名作者且注明文章出处。</div>
 </span>
@@ -179,7 +180,7 @@
 				<span class="fa fa-folder" aria-hidden="true"></span> 
 
 				
-					<a href="/categories/linux学习/">linux学习</a>
+					<a href="/categories/python与Django/">python与Django</a>
 				
 
 			</span>
@@ -188,11 +189,7 @@
 				<span class="fa fa-tags" aria-hidden="true"></span> 
 
 				
-					<a href="/tags/linux/">linux</a>&nbsp;
-				
-					<a href="/tags/阿里云/">阿里云</a>&nbsp;
-				
-					<a href="/tags/xshell/">xshell</a>&nbsp;
+					<a href="/tags/python/">python</a>&nbsp;
 				
 
 			</span>
@@ -221,10 +218,10 @@
 
 		 
 				
-					<p class="p1">Previous <a href="/archives/199/">什么是 web 框架？</a></p> 
+					<p class="p1">Previous <a href="/archives/197/">使用rz和sz命令在windows和阿里云linux间传文件</a></p> 
 
 				
-				   <p class="p2">Next <a href="/archives/197/">使用rz和sz命令在windows和阿里云linux间传文件</a></p> 
+				   <p class="p2">Next <a href="/archives/195/">国内访问google的方法(附持续更像hosts文件)</a></p> 
 			
 		
 		<!-- comment -->
@@ -335,13 +332,6 @@
 
 
 	      <!-- toc -->	      
-	      
-		<div class="widget">
-		    <span style="font-size: 14px font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">本文目录 <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a></span>
-		    <div id="toc" class="toc collapse in">
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#rz命令本地上传文件到服务器"><span class="toc-article-text">rz命令本地上传文件到服务器</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#sz命令发送文件到本地"><span class="toc-article-text">sz命令发送文件到本地</span></a></li></ol>
-		    </div>
-		</div>
 	      	      
 
 	      
@@ -363,11 +353,11 @@
 		
 			<li><a href="/categories/c和cpp/">c和cpp<span>2</span></a></li>
 		
-			<li><a href="/categories/leetcode/">leetcode<span>4</span></a></li>
+			<li><a href="/categories/leetcode/">leetcode<span>6</span></a></li>
 		
-			<li><a href="/categories/linux学习/">linux学习<span>3</span></a></li>
+			<li><a href="/categories/linux学习/">linux学习<span>1</span></a></li>
 		
-			<li><a href="/categories/python与Django/">python与Django<span>1</span></a></li>
+			<li><a href="/categories/python与Django/">python与Django<span>7</span></a></li>
 		
 			<li><a href="/categories/socket与网络/">socket与网络<span>2</span></a></li>
 		
@@ -375,9 +365,9 @@
 		
 			<li><a href="/categories/工具相关/">工具相关<span>1</span></a></li>
 		
-			<li><a href="/categories/技术杂文/">技术杂文<span>9</span></a></li>
+			<li><a href="/categories/技术杂文/">技术杂文<span>11</span></a></li>
 		
-			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>3</span></a></li>
+			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>4</span></a></li>
 		
 			<li><a href="/categories/源码学习/">源码学习<span>5</span></a></li>
 		
@@ -389,48 +379,48 @@
 		<h4 style="font-weight: bold; color: #333 ">Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
+			<li><a href="/tags/读书笔记/">读书笔记<span>1</span></a></li>
 		
-			<li><a href="/tags/libevent/">libevent<span>1</span></a></li>
-		
-			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
-		
-			<li><a href="/tags/网络/">网络<span>2</span></a></li>
-		
-			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
-		
-			<li><a href="/tags/面试/">面试<span>4</span></a></li>
-		
-			<li><a href="/tags/clixsense/">clixsense<span>1</span></a></li>
-		
-			<li><a href="/tags/ubuntu源/">ubuntu源<span>1</span></a></li>
-		
-			<li><a href="/tags/NDN/">NDN<span>2</span></a></li>
-		
-			<li><a href="/tags/mysql远程连接/">mysql远程连接<span>1</span></a></li>
-		
-			<li><a href="/tags/Manacher算法/">Manacher算法<span>1</span></a></li>
-		
-			<li><a href="/tags/xshell/">xshell<span>3</span></a></li>
-		
-			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
+			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
 		
 			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
 		
-			<li><a href="/tags/Web服务器/">Web服务器<span>2</span></a></li>
+			<li><a href="/tags/vi/">vi<span>1</span></a></li>
 		
-			<li><a href="/tags/free2mind/">free2mind<span>1</span></a></li>
+			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
 		
-			<li><a href="/tags/English/">English<span>1</span></a></li>
+			<li><a href="/tags/github静态博客/">github静态博客<span>1</span></a></li>
 		
-			<li><a href="/tags/themes/">themes<span>1</span></a></li>
+			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
 		
 			<li><a href="/tags/简体/">简体<span>1</span></a></li>
 		
-			<li><a href="/tags/数据结构/">数据结构<span>1</span></a></li>
+			<li><a href="/tags/mysql远程连接/">mysql远程连接<span>1</span></a></li>
+		
+			<li><a href="/tags/xshell/">xshell<span>1</span></a></li>
+		
+			<li><a href="/tags/ubuntu-yuan/">ubuntu yuan<span>1</span></a></li>
+		
+			<li><a href="/tags/mapReduce/">mapReduce<span>1</span></a></li>
+		
+			<li><a href="/tags/对象模型/">对象模型<span>2</span></a></li>
+		
+			<li><a href="/tags/edas提前/">edas提前<span>1</span></a></li>
+		
+			<li><a href="/tags/Leetcode/">Leetcode<span>1</span></a></li>
+		
+			<li><a href="/tags/数组对称/">数组对称<span>1</span></a></li>
+		
+			<li><a href="/tags/plugins/">plugins<span>2</span></a></li>
+		
+			<li><a href="/tags/facebook访问/">facebook访问<span>1</span></a></li>
+		
+			<li><a href="/tags/网络/">网络<span>3</span></a></li>
+		
+			<li><a href="/tags/ubuntu源/">ubuntu源<span>1</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>53</span></a></li>
+		   <li><a href="/tags">...<span>57</span></a></li>
 		 
 		</ul>
 	</div>

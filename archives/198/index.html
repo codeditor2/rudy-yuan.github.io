@@ -6,10 +6,8 @@
   <title>国内访问Facebook的方法(附持续更像hosts文件) | Rudy-Yuan的博客</title>
   <meta name="author" content="Rudy-Yuan">
   
-  <meta name="description" content="对于经常使用Linux系统的人员来说，少不了将本地的文件上传到服务器或者从服务器上下载文件到本地
-例如，在使用阿里云这种远程linux服务器时，由于一般都没有安装图形界面，所以只能进行SSH访问。
-这时候，本地操作系统往往是windows，怎么在本地windows和远程linux系统间相互传送文件呢？
-我这里推荐两个命令，分别是rz和sz命令">
+  <meta name="description" content="仍然是使用修改hosts文件的方法访问Facebook、twitter。
+hosts文件在C:\Windows\System32\Drivers\etc文件夹下">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -115,7 +113,7 @@
 		  <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">
 			  当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;:&nbsp;
 			
-				<a href="/categories/linux学习/">linux学习</a>
+				<a href="/categories/技术杂文/">技术杂文</a>
 			
 		  &nbsp;</a>»&nbsp; 国内访问Facebook的方法(附持续更像hosts文件) </h4>
 		</div>
@@ -132,7 +130,7 @@
 							
 						<span class="entry-date">
 							<span class="fa fa-calendar" aria-hidden="true"></span>
-							2015-09-15						      
+							2015-09-22						      
 						</span>
 							  
 							  
@@ -153,15 +151,11 @@
 						<a href="/archives/198/" >国内访问Facebook的方法(附持续更像hosts文件)</a>
 					</h3>		
 						
-					<span style="font-size:15px"><p>对于经常使用Linux系统的人员来说，少不了将本地的文件上传到服务器或者从服务器上下载文件到本地</p>
-<p>例如，在使用阿里云这种远程linux服务器时，由于一般都没有安装图形界面，所以只能进行SSH访问。</p>
-<p>这时候，本地操作系统往往是windows，怎么<strong>在本地windows和远程linux系统间相互传送文件</strong>呢？</p>
-<p>我这里推荐两个命令，分别是rz和sz命令<a id="more"></a>。</p>
-<h4 id="rz命令本地上传文件到服务器"><a href="#rz命令本地上传文件到服务器" class="headerlink" title="rz命令本地上传文件到服务器"></a>rz命令本地上传文件到服务器</h4><p>当在终端输入rz命令时，会弹出一个窗口，选择你需要上传到远程linux上的文件即可进行传送。如下图所示：</p>
-<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2015/09/15/QQ20150915171704.jpg" alt=""></p>
-<h4 id="sz命令发送文件到本地"><a href="#sz命令发送文件到本地" class="headerlink" title="sz命令发送文件到本地"></a>sz命令发送文件到本地</h4><p>使用sz命令，后面跟上你需要发送到本地的文件名，即可将远程linux系统上的文件发送到本地，在弹出的窗口选择保存文件的位置即可。如下图所示。</p>
-<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2015/09/15/QQ20150915171555.jpg" alt=""></p>
-<p>注意，很多linux系统初始并没有这两个命令。需要我们自己安装和使用。</p>
+					<span style="font-size:15px"><p>仍然是使用<strong>修改hosts文件</strong>的方法访问Facebook、twitter。</p>
+<p>hosts文件在C:\Windows\System32\Drivers\etc文件夹下<a id="more"></a>:</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2015/08/27/QQ20151017092234.jpg" alt=""></p>
+<p>通过记事本等编辑工具<strong>将下面的内容复制到hosts文件</strong>中，保存后便可正常访问google了(保存时忽略杀毒软件的提示即可)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br></pre></td><td class="code"><pre><span class="line"># Facebook start</span><br><span class="line">182.239.95.137    fb.me</span><br><span class="line">31.13.66.14    video.xx.fbcdn.net</span><br><span class="line">31.13.66.9    scontent.xx.fbcdn.net</span><br><span class="line">31.13.66.9    scontent-a.xx.fbcdn.net</span><br><span class="line">31.13.66.9    scontent-b.xx.fbcdn.net</span><br><span class="line">31.13.66.9    scontent-c.xx.fbcdn.net</span><br><span class="line">31.13.66.9    scontent-d.xx.fbcdn.net</span><br><span class="line">23.63.99.242    fbexternal-a.akamaihd.net</span><br><span class="line">23.67.255.208    fbcdn-creative-a.akamaihd.net</span><br><span class="line">23.63.99.186    fbcdn-video-a-a.akamaihd.net</span><br><span class="line">23.63.99.171    fbcdn-video-b-a.akamaihd.net</span><br><span class="line">23.63.99.120    fbcdn-video-c-a.akamaihd.net</span><br><span class="line">23.63.99.144    fbcdn-video-d-a.akamaihd.net</span><br><span class="line">23.63.99.131    fbcdn-video-e-a.akamaihd.net</span><br><span class="line">23.63.99.160    fbcdn-video-f-a.akamaihd.net</span><br><span class="line">23.63.99.171    fbcdn-video-g-a.akamaihd.net</span><br><span class="line">23.63.99.130    fbcdn-video-h-a.akamaihd.net</span><br><span class="line">23.63.99.145    fbcdn-video-i-a.akamaihd.net</span><br><span class="line">23.63.99.178    fbcdn-video-j-a.akamaihd.net</span><br><span class="line">23.63.99.201    fbcdn-video-k-a.akamaihd.net</span><br><span class="line">23.63.99.170    fbcdn-video-l-a.akamaihd.net</span><br><span class="line">23.63.99.136    fbcdn-video-m-a.akamaihd.net</span><br><span class="line">23.63.99.169    fbcdn-video-n-a.akamaihd.net</span><br><span class="line">23.63.99.171    fbcdn-video-o-a.akamaihd.net</span><br><span class="line">23.63.99.144    fbcdn-video-p-a.akamaihd.net</span><br><span class="line">23.63.99.123    fbcdn-vthumb-a.akamaihd.net</span><br><span class="line">182.239.95.137    mqtt.facebook.com</span><br><span class="line">77.67.4.11    fbcdn-sphotos-a-a.akamaihd.net</span><br><span class="line">77.67.4.64    fbcdn-sphotos-b-a.akamaihd.net</span><br><span class="line">77.67.4.74    fbcdn-sphotos-c-a.akamaihd.net</span><br><span class="line">77.67.4.73    fbcdn-sphotos-d-a.akamaihd.net</span><br><span class="line">77.67.4.74    fbcdn-sphotos-e-a.akamaihd.net</span><br><span class="line">77.67.4.10    fbcdn-sphotos-f-a.akamaihd.net</span><br><span class="line">23.63.99.56    fbcdn-sphotos-g-a.akamaihd.net</span><br><span class="line">23.63.99.88    fbcdn-sphotos-h-a.akamaihd.net</span><br><span class="line">2.16.162.11    fbcdn-profile-a.akamaihd.net</span><br><span class="line">23.213.58.87    s-static.ak.facebook.com</span><br><span class="line">23.213.58.87    profile.ak.facebook.com</span><br><span class="line">184.28.188.154    static.ak.facebook.com</span><br><span class="line">184.28.188.154    b.static.ak.facebook.com</span><br><span class="line">182.239.95.137    graph.facebook.com</span><br><span class="line">182.239.95.137    ssl.facebook.com</span><br><span class="line">182.239.95.137    api.facebook.com</span><br><span class="line">182.239.95.137    secure-profile.facebook.com</span><br><span class="line">182.239.95.137    secure.facebook.com</span><br><span class="line">182.239.95.137    zh-cn.facebook.com</span><br><span class="line">182.239.95.137    login.facebook.com</span><br><span class="line">182.239.95.137    m.facebook.com</span><br><span class="line">108.166.120.82    messages-facebook.com</span><br><span class="line">182.239.95.137    attachments.facebook.com</span><br><span class="line">182.239.95.137    touch.facebook.com</span><br><span class="line">182.239.95.137    facebook.com</span><br><span class="line">182.239.95.137    www.facebook.com</span><br><span class="line">182.239.95.137    apps.facebook.com</span><br><span class="line">182.239.95.137    upload.facebook.com</span><br><span class="line">182.239.95.137    developers.facebook.com</span><br><span class="line">182.239.95.137    fbcdn.net</span><br><span class="line">165.254.42.232    profile.ak.fbcdn.net</span><br><span class="line">173.252.71.184    vpn.tfbnw.net</span><br><span class="line">184.28.188.240    vthumb.ak.fbcdn.net</span><br><span class="line">184.28.188.152    photos-a.ak.fbcdn.net</span><br><span class="line">184.28.188.154    photos-b.ak.fbcdn.net</span><br><span class="line">184.28.188.171    photos-c.ak.fbcdn.net</span><br><span class="line">184.28.188.171    photos-d.ak.fbcdn.net</span><br><span class="line">184.28.188.153    photos-e.ak.fbcdn.net</span><br><span class="line">184.28.188.153    photos-f.ak.fbcdn.net</span><br><span class="line">184.28.188.171    photos-g.ak.fbcdn.net</span><br><span class="line">184.28.188.146    photos-h.ak.fbcdn.net</span><br><span class="line">184.28.188.171    creative.ak.fbcdn.net</span><br><span class="line">184.28.188.153    external.ak.fbcdn.net</span><br><span class="line">184.28.188.153    b.static.ak.fbcdn.net</span><br><span class="line">184.28.188.153    static.ak.fbcdn.net</span><br><span class="line">184.28.188.153    act.channel.facebook.com</span><br><span class="line">184.28.188.153    0-act.channel.facebook.com</span><br><span class="line">184.28.188.153    1-act.channel.facebook.com</span><br><span class="line">184.28.188.153    2-act.channel.facebook.com</span><br><span class="line">184.28.188.153    3-act.channel.facebook.com</span><br><span class="line">184.28.188.153    4-act.channel.facebook.com</span><br><span class="line">184.28.188.153    5-act.channel.facebook.com</span><br><span class="line">184.28.188.153    6-act.channel.facebook.com</span><br><span class="line">184.28.188.153    origincache-ai-01-05-ash3.fbcdn.net</span><br><span class="line">184.28.188.153    inyour-slb-01-05-ash3.facebook.com</span><br><span class="line">184.28.188.153    origincache-starfacebook-ai-01-05-ash3.facebook.com</span><br><span class="line">69.171.246.7    beta-chat-01-05-ash3.facebook.com</span><br><span class="line">69.171.235.9    static.thefacebook.com</span><br><span class="line">69.171.246.16    channel-ecmp-05-ash3.facebook.com</span><br><span class="line">69.171.246.17    channel-staging-ecmp-05-ash3.facebook.com</span><br><span class="line">69.171.246.18    channel-testing-ecmp-05-ash3.facebook.com</span><br><span class="line">182.239.95.137    0-edge-chat.facebook.com</span><br><span class="line">182.239.95.137    1-edge-chat.facebook.com</span><br><span class="line">182.239.95.137    2-edge-chat.facebook.com</span><br><span class="line">182.239.95.137    3-edge-chat.facebook.com</span><br><span class="line">182.239.95.137    4-edge-chat.facebook.com</span><br><span class="line">182.239.95.137    5-edge-chat.facebook.com</span><br><span class="line">182.239.95.137    6-edge-chat.facebook.com</span><br><span class="line">182.239.95.137    api-read.facebook.com</span><br><span class="line">182.239.95.137    attachment.fbsbx.com</span><br><span class="line">182.239.95.137    bigzipfiles.facebook.com</span><br><span class="line">182.239.95.137    check4.facebook.com</span><br><span class="line">182.239.95.137    check6.facebook.com</span><br><span class="line">182.239.95.137    code.facebook.com</span><br><span class="line">182.239.95.137    connect.facebook.com</span><br><span class="line">182.239.95.137    edge-chat.facebook.com</span><br><span class="line">182.239.95.137    pixel.facebook.com</span><br><span class="line">182.239.95.137    star.c10r.facebook.com</span><br><span class="line">182.239.95.137    star.facebook.com</span><br><span class="line">182.239.95.137    zh-tw.facebook.com</span><br><span class="line">173.252.74.27    b-api.facebook.com</span><br><span class="line">173.252.74.27    b-graph.facebook.com</span><br><span class="line">104.78.23.174    connect.facebook.net</span><br><span class="line">23.32.248.41    creative.ak.fbcdn.net</span><br><span class="line">173.252.102.13    d.facebook.com</span><br><span class="line">31.13.95.12    ent-a.xx.fbcdn.net</span><br><span class="line">31.13.95.12    ent-b.xx.fbcdn.net</span><br><span class="line">31.13.95.12    ent-c.xx.fbcdn.net</span><br><span class="line">31.13.95.12    ent-d.xx.fbcdn.net</span><br><span class="line">31.13.95.12    ent-e.xx.fbcdn.net</span><br><span class="line">72.246.188.82    fbcdn-photos-a.akamaihd.net</span><br><span class="line">72.246.188.19    fbcdn-photos-e-a.akamaihd.net</span><br><span class="line">23.205.168.10    fbcdn-sphotos-a.akamaihd.net</span><br><span class="line">23.63.99.209    fbstatic-a.akamaihd.net</span><br><span class="line">192.168.52.23    ldap.thefacebook.com</span><br><span class="line">173.252.88.128    orcart.facebook.com</span><br><span class="line">31.13.70.7    scontent-a-lax.xx.fbcdn.net</span><br><span class="line">31.13.79.251    scontent-a-sin.xx.fbcdn.net</span><br><span class="line">31.13.70.7    scontent-b-lax.xx.fbcdn.net</span><br><span class="line">183.111.23.18    scontent-b-sin.xx.fbcdn.net</span><br><span class="line">31.13.82.7    scontent-c.xx.fbcdn.net</span><br><span class="line">31.13.95.7    scontent-d.xx.fbcdn.net</span><br><span class="line">31.13.79.224    scontent-e.xx.fbcdn.net</span><br><span class="line">31.13.86.4    scontent-mxp.xx.fbcdn.net</span><br><span class="line">23.207.122.24    s-external.ak.fbcdn.net</span><br><span class="line">23.34.45.177    s-static.ak.fbcdn.net</span><br><span class="line">118.214.29.177    s-static.facebook.com</span><br><span class="line">69.171.235.49    vupload.facebook.com</span><br><span class="line">69.171.235.49    vupload2.vvv.facebook.com</span><br><span class="line"># Facebook end</span><br></pre></td></tr></table></figure>
 <div class="alert alert-success"><i class="fa fa-lightbulb-o"></i>   本文由<a href="http://www.rudy-yuan.net">Rudy Yuan</a>创作，采用<a href="http://creativecommons.org/licenses/by/3.0/cn" target="_blank" rel="external">CC BY 3.0 CN协议</a>进行许可。
 可自由转载、引用，但需署名作者且注明文章出处。</div>
 </span>
@@ -179,7 +173,7 @@
 				<span class="fa fa-folder" aria-hidden="true"></span> 
 
 				
-					<a href="/categories/linux学习/">linux学习</a>
+					<a href="/categories/技术杂文/">技术杂文</a>
 				
 
 			</span>
@@ -188,11 +182,7 @@
 				<span class="fa fa-tags" aria-hidden="true"></span> 
 
 				
-					<a href="/tags/linux/">linux</a>&nbsp;
-				
-					<a href="/tags/阿里云/">阿里云</a>&nbsp;
-				
-					<a href="/tags/xshell/">xshell</a>&nbsp;
+					<a href="/tags/facebook访问/">facebook访问</a>&nbsp;
 				
 
 			</span>
@@ -221,10 +211,10 @@
 
 		 
 				
-					<p class="p1">Previous <a href="/archives/197/">使用rz和sz命令在windows和阿里云linux间传文件</a></p> 
+					<p class="p1">Previous <a href="/archives/199/">什么是 web 框架？</a></p> 
 
 				
-				   <p class="p2">Next <a href="/archives/195/">国内访问google的方法(附持续更像hosts文件)</a></p> 
+				   <p class="p2">Next <a href="/archives/197/">使用rz和sz命令在windows和阿里云linux间传文件</a></p> 
 			
 		
 		<!-- comment -->
@@ -335,13 +325,6 @@
 
 
 	      <!-- toc -->	      
-	      
-		<div class="widget">
-		    <span style="font-size: 14px font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">本文目录 <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a></span>
-		    <div id="toc" class="toc collapse in">
-			<ol class="toc-article"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#rz命令本地上传文件到服务器"><span class="toc-article-text">rz命令本地上传文件到服务器</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#sz命令发送文件到本地"><span class="toc-article-text">sz命令发送文件到本地</span></a></li></ol>
-		    </div>
-		</div>
 	      	      
 
 	      
@@ -363,11 +346,11 @@
 		
 			<li><a href="/categories/c和cpp/">c和cpp<span>2</span></a></li>
 		
-			<li><a href="/categories/leetcode/">leetcode<span>4</span></a></li>
+			<li><a href="/categories/leetcode/">leetcode<span>6</span></a></li>
 		
-			<li><a href="/categories/linux学习/">linux学习<span>3</span></a></li>
+			<li><a href="/categories/linux学习/">linux学习<span>1</span></a></li>
 		
-			<li><a href="/categories/python与Django/">python与Django<span>1</span></a></li>
+			<li><a href="/categories/python与Django/">python与Django<span>7</span></a></li>
 		
 			<li><a href="/categories/socket与网络/">socket与网络<span>2</span></a></li>
 		
@@ -375,9 +358,9 @@
 		
 			<li><a href="/categories/工具相关/">工具相关<span>1</span></a></li>
 		
-			<li><a href="/categories/技术杂文/">技术杂文<span>9</span></a></li>
+			<li><a href="/categories/技术杂文/">技术杂文<span>11</span></a></li>
 		
-			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>3</span></a></li>
+			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>4</span></a></li>
 		
 			<li><a href="/categories/源码学习/">源码学习<span>5</span></a></li>
 		
@@ -389,48 +372,48 @@
 		<h4 style="font-weight: bold; color: #333 ">Tag Cloud</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
+			<li><a href="/tags/Next数组/">Next数组<span>2</span></a></li>
 		
-			<li><a href="/tags/cpp/">cpp<span>3</span></a></li>
+			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
 		
-			<li><a href="/tags/linux/">linux<span>3</span></a></li>
+			<li><a href="/tags/mysql/">mysql<span>2</span></a></li>
 		
-			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
-		
-			<li><a href="/tags/sofa-pbrpc/">sofa-pbrpc<span>1</span></a></li>
-		
-			<li><a href="/tags/mysql远程连接/">mysql远程连接<span>1</span></a></li>
-		
-			<li><a href="/tags/数据结构/">数据结构<span>1</span></a></li>
-		
-			<li><a href="/tags/Protobuf/">Protobuf<span>1</span></a></li>
-		
-			<li><a href="/tags/English/">English<span>1</span></a></li>
-		
-			<li><a href="/tags/python/">python<span>1</span></a></li>
-		
-			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
-		
-			<li><a href="/tags/leetcode/">leetcode<span>4</span></a></li>
-		
-			<li><a href="/tags/free2mind/">free2mind<span>1</span></a></li>
-		
-			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
-		
-			<li><a href="/tags/plugins/">plugins<span>2</span></a></li>
-		
-			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
-		
-			<li><a href="/tags/热点文章/">热点文章<span>5</span></a></li>
-		
-			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
+			<li><a href="/tags/网络/">网络<span>3</span></a></li>
 		
 			<li><a href="/tags/mapReduce/">mapReduce<span>1</span></a></li>
 		
+			<li><a href="/tags/NDN/">NDN<span>2</span></a></li>
+		
+			<li><a href="/tags/热点文章/">热点文章<span>5</span></a></li>
+		
+			<li><a href="/tags/facebook访问/">facebook访问<span>1</span></a></li>
+		
+			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
+		
+			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
+		
+			<li><a href="/tags/xshell/">xshell<span>1</span></a></li>
+		
+			<li><a href="/tags/Manacher算法/">Manacher算法<span>1</span></a></li>
+		
+			<li><a href="/tags/算法/">算法<span>6</span></a></li>
+		
+			<li><a href="/tags/Protobuf/">Protobuf<span>1</span></a></li>
+		
+			<li><a href="/tags/mysql远程连接/">mysql远程连接<span>1</span></a></li>
+		
 			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
 		
+			<li><a href="/tags/linux/">linux<span>2</span></a></li>
 		
-		   <li><a href="/tags">...<span>53</span></a></li>
+			<li><a href="/tags/leetcode/">leetcode<span>6</span></a></li>
+		
+			<li><a href="/tags/数据结构/">数据结构<span>1</span></a></li>
+		
+			<li><a href="/tags/English/">English<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>57</span></a></li>
 		 
 		</ul>
 	</div>

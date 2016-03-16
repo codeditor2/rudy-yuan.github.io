@@ -1,0 +1,603 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Python内存池管理与缓冲池设计 | Rudy-Yuan的博客</title>
+  <meta name="author" content="Rudy-Yuan">
+  
+  <meta name="description" content="Python是一门开发效率很高的语言，而且其既下里巴人，又阳春白雪。也就是说这门语言只要稍加学习就可以上手开发，而深入探究也会发现Python有很多高深的东西。最近读了《Python源码剖析》，收获良多，今天就把Python的内存管理整理一番。
+本文的组织如下：第一部分：整理Python的内存管理机制，主要包括内存池以及对象缓存池第二部分：从百度的笔试题来探讨如何实现一个缓存池">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Python内存池管理与缓冲池设计"/>
+  <meta property="og:site_name" content="Rudy-Yuan的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+
+
+  <link rel="stylesheet" href="/css/themes/cerulean.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Rudy-Yuan的博客</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/tags/热点文章/" title="All the tags.">
+			  <i class="fa fa-fire"></i>热点文章
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags/博主推荐/" title="All the tags.">
+			  <i class="fa fa-volume-up"></i>博主推荐
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>文章归档
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/message" title="All the tags.">
+			  <i class="fa fa-pencil"></i>给我留言
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-info-circle"></i>关于本站
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+		<!-- content -->
+
+		<div class="slogan" style="margin-bottom: 17px">
+		  <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">
+			  当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;:&nbsp;
+			
+				<a href="/categories/python与Django/">python与Django</a>
+			
+		  &nbsp;</a>»&nbsp; Python内存池管理与缓冲池设计 </h4>
+		</div>
+
+		<div id="top_search"></div>
+				 
+		
+
+		<div class="archive">	  
+			<div id="archives"> 
+				
+				<header class="entry-header">
+					<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+						<span class="entry-date">
+							<span class="fa fa-calendar" aria-hidden="true"></span>
+							2015-08-21						      
+						</span>
+							  
+							  
+						<span class="author vcard">
+							<span class="fa fa-user" aria-hidden="true"></span>
+							<a href="/">Rudy-Yuan</a> 	 	
+						</span>
+
+						<span class="comments-link">
+							<span class="fa fa-comments" aria-hidden="true"></span>
+							<span class="ds-thread-count" data-thread-key="archives/190/">暂无评论</span>
+						</span>						
+							
+					</div>	
+
+									
+					<h3 class="entry-title"> 
+						<a href="/archives/190/" >Python内存池管理与缓冲池设计</a>
+					</h3>		
+						
+					<span style="font-size:15px"><p>Python是一门开发效率很高的语言，而且其既下里巴人，又阳春白雪。也就是说这门语言只要稍加学习就可以上手开发，而深入探究也会发现Python有很多高深的东西。最近读了《Python源码剖析》，收获良多，今天就把Python的内存管理整理一番。</p>
+<p>本文的组织如下：<br>第一部分：整理Python的内存管理机制，主要包括内存池以及对象缓存池<br>第二部分：从百度的笔试题来探讨如何实现一个缓存池<a id="more"></a>。</p>
+<h3 id="第一部分-整理Python的内存管理机制"><a href="#第一部分-整理Python的内存管理机制" class="headerlink" title="第一部分 整理Python的内存管理机制"></a>第一部分 整理Python的内存管理机制</h3><p>Python的内存管理内存总共分为4层，如下图所示<br><img src="http://my.csdn.net/uploads/201205/08/1336476307_4497.jpg" alt=""></p>
+<p>其中Layer2为内存池，Layer3为对象缓冲池。Python的对象缓冲池Layer3是建立在Layer2基础上的。<br>本文重点总结内存池和对象缓冲池。</p>
+<h4 id="内存池"><a href="#内存池" class="headerlink" title="内存池"></a>内存池</h4><p>Python又分为大内存和小内存。大小以256字节为界限，对于大内存使用Malloc进行分配，而对于小内存则使用内存池进行分配。Python的内存池又分为4个层次：Block、Pool、Arean、usedpool，如下图所示</p>
+<p><img src="http://my.csdn.net/uploads/201205/08/1336476362_4151.jpg" alt=""></p>
+<p>其中block是最小的内存单元，大小为8的整数倍。如果想申请27B的内存，会分配一个32B的block，其中申请size和size_index之间的关系有对应，见下图</p>
+<p><img src="http://my.csdn.net/uploads/201205/08/1336476393_5592.jpg" alt=""></p>
+<p>其中block是最小的内存单元，大小为8的整数倍。如果想申请27B的内存，会分配一个32B的block，其中申请size和size_index之间的关系有对应，见下图</p>
+<p><img src="http://my.csdn.net/uploads/201205/08/1336476410_7947.jpg" alt=""></p>
+<h4 id="对象缓冲池"><a href="#对象缓冲池" class="headerlink" title="对象缓冲池"></a>对象缓冲池</h4><ul>
+<li>整数对象缓冲池</li>
+</ul>
+<p>对于[-5,257]这样的小整数，系统已经初始化好，可以直接拿来用。而对于其他的大整数，系统则提前申请了一块内存空间，等需要的时候在这上面创建大整数对象。</p>
+<p><img src="http://my.csdn.net/uploads/201205/08/1336476513_6665.jpg" alt=""></p>
+<p>最上面的为PyInBlock结构，每个PyInBlock中是一个PyIntObject数组。</p>
+<p><img src="http://my.csdn.net/uploads/201205/08/1336476536_8015.jpg" alt=""></p>
+<p>而连续数组在内存不断进行申请和释放中就会出现不连续的空闲块，因此需要把所有的空闲内存块组织起来，这样就需要使用free_list进行组织</p>
+<p><img src="http://my.csdn.net/uploads/201205/08/1336476546_9241.jpg" alt=""></p>
+<ul>
+<li>String对象缓冲池</li>
+</ul>
+<p>Python为256个Ascii码进行了对象缓冲池，见下图</p>
+<p><img src="http://my.csdn.net/uploads/201205/08/1336476566_6014.jpg" alt=""></p>
+<p>这里面的过程是先对所创建的字符对象进行Intern机制，再将intern的结果缓存到字符串缓冲池characters中。所谓的intern机制是指在系统中建立一个(key,value)映射关系的集合，记录着被intern机制处理过的PyStringObject对象。对于被Intern之后的字符串，在整个Python运行时，系统中都只有唯一的与该字符串对应的PyStringObject对象。这样当判断两个PyStringObject对象是否相同时，如果它们都被Intern了，那么只需要简单地检查它们对应的PyObject*是否相同即可。这个机制既节省了空间，又简化了对PyStringObject对象的比较</p>
+<p><img src="http://my.csdn.net/uploads/201205/08/1336476584_8034.jpg" alt=""></p>
+<ul>
+<li>List和Dict对象缓冲池</li>
+</ul>
+<p><img src="http://my.csdn.net/uploads/201205/08/1336476591_5584.jpg" alt=""></p>
+<h3 id="第二部分-设计缓冲池"><a href="#第二部分-设计缓冲池" class="headerlink" title="第二部分 设计缓冲池"></a>第二部分 设计缓冲池</h3><p>说完了Python的内存管理，我们再来探讨一下如何设计并实现一个对象缓冲池。首先来看一下百度的一个笔试题。</p>
+<p>设计一个缓冲池，用于存放系统所需要的资源。满足如下要求：<br>（1）当读取缓冲池资源是，如果没有该资源，则创建该资源，放入缓冲池中。<br>（2）缓冲池可以存放各种形式的资源。<br>（3）要有刷新机制，当一个资源长时间没有使用时，要把该资源从缓冲池中剔除。</p>
+<p>要考虑分配资源的合理性和时效性，缓冲池可以有的参数有最小资源数、最大资源数、timeout等，重点描述一下缓冲池的刷新机制。</p>
+<p>先要知道缓冲池是用来干嘛的！所谓缓冲池是为了减少磁盘的IO操作，专门在内存中开辟一块区域，将磁盘中一些经常访问的数据放入到该区域，以检查IO操作。</p>
+<p>因此设计一个缓存池需要考虑的几个问题：<br>a) 如何对数据库进行组织，使得可以快速查找到缓存池中的资源<br>b) 当缓存池满的时候，使用什么样的换入换出策略，如何保证数据块置换的效率<br>c) 对同一个数据块的并发访问<br>d) 维护数据一致性，采用什么样的写入策略</p>
+<h4 id="缓冲池的概貌"><a href="#缓冲池的概貌" class="headerlink" title="缓冲池的概貌"></a>缓冲池的概貌</h4><p><img src="http://my.csdn.net/uploads/201205/08/1336476710_7823.jpg" alt=""></p>
+<p>这里的hash bucket就是内存二维数组的第一维。它是通过对buffer header里记录的数据块地址和数据块类型运用hash算法以后，得到的组号。<br>这里的hash chain就是属于同一个hash bucket的所有buffer header所串起来的链表。实际上，hash bucket只是一个逻辑上的概念。每个hash bucket都是通过不同的hash chain而体现出来的。每个hash chain都会由一个cache buffers chains latch来管理其并发操作。</p>
+<p>而对于buffer header来说，每一个数据块在被读入buffer cache时，都会先在buffer cache中构造一个buffer header，buffer header与数据块一一对应。</p>
+<h4 id="刷新机制"><a href="#刷新机制" class="headerlink" title="刷新机制"></a>刷新机制</h4><p>本文重点讨论一下刷新机制。所谓刷新即当一个资源长时间没有使用时，要把该资源从缓冲池中剔除，怎么样才能判定一个资源长时间没有使用呢？参考操作系统中Cache的设计机制，cache中常用换页机制，采用的有FIFO、LRU、Clock算法。这里我们就是用LRU算法。</p>
+<ul>
+<li>LRU</li>
+</ul>
+<p>我们举一个例子。假设缓冲池只能容纳4个数据块，同时只有一个hash chain和一个LRU。当系统刚刚启动，缓冲池是空的。这时前台进程获取数据块，系统找一个空的内存数据块，并将其对应的buffer header挂到hash chain上。同时，系统还会把该buffer header挂到LRU的最尾端。随后前台进程又发出获取数据块请求，这时所找到的buffer header在LRU上会挂到前一个buffer header的后面，也就是说请求所找到的buffer header现在变成了LRU的最尾端了。假设发出4数据请求以后找到了4个buffer header，从而用完了所有的buffer cache空间。这个时候的LRU可以用下图来表示。</p>
+<p><img src="http://my.csdn.net/uploads/201205/08/1336476749_5905.jpg" alt=""></p>
+<p>这个时候，进程发来了第5个数据块请求语句。这时的缓存池里已经没有空的内存数据块了。但是既然需要容纳下第五个数据块，就必然需要找一个可以被替换的内存数据块。这个内存数据块会到LRU上去找。按照系统设定的最近最少使用的原则，位于LRU最尾端的BH1将成为牺牲者，系统会把该BH1对应的内存数据块的内容清空，并将当前所获得的数据块的内容拷贝进去。这个时候，BH1就成了LRU的首端，而BH2则成为了LRU的尾端。如下图所示。在这种方式下，经常被访问的数据块可以一直靠近LRU的首端，也就保证了这些数据块可以尽可能的不被替换掉，从而保证了访问的效率。</p>
+<p><img src="http://my.csdn.net/uploads/201205/08/1336476756_3333.jpg" alt=""></p>
+<ul>
+<li>加入访问次数的LRU</li>
+</ul>
+<p>OK，假如我们想把每个数据块的访问次数加入到数据块置换策略中，该如何实现呢？<br>我们来增加一个辅助链表。缓冲池有LRU和LRUW两个链表，分别叫做辅助链表和主链表。同时还对buffer header增加了一个属性：touch数量，也就是每个buffer header曾经被访问过的次数，来对LRU链表进行管理。系统每访问一次buffer header，就会将该buffer header上的touch数量增加1，因此，touch数量“近似”的体现了某个内存数据块总共被访问的次数。注意，这只是近似，并不精确。因为touch的增加并没有使用锁来管理并发性。这只是一个大概值，表示趋势的，不用百分百的精确。</p>
+<p>还是用上面的这个例子来说明。还是假设buffer cache只能容纳4个数据块，同时只有一个hash chain和一个LRU（确切的说应该是一对LRU主链表和辅助链表）。读入第一个数据块时，该数据块对应的buffer header会挂到LRU辅助链表（注意，这里是辅助链表，而不是主链表）的最末端，同时touch数量为1。读取第二个不同的数据块时，该数据块对应的buffer header会挂到前一个buffer header的后面，从而位于LRU辅助链表的最末端，同样touch为1。假设4个数据块全都用完以后的LRU链表可以用下图四描述。每个buffer header的touch数量都为1。</p>
+<p><img src="http://my.csdn.net/uploads/201205/08/1336476804_6532.jpg" alt=""></p>
+<p>上图中我们可以看到辅助LRU链表都挂满了，而主LRU链表还是空的。这个时候，系统要求返回指定的数据块。系统发现buffer cache里已经没有空的内存数据块了，于是从辅助LRU链表的尾部开始扫描，也就是从BH1开始扫描，以查找可以被替代的数据块。这时将选出BH1作为牺牲者，并将其对应的内存数据块的内容清空，同时将当前第五个数据块的内容拷贝进去。但是这里要注意，这个时候该BH1在LRU链表上的位置并不会发生任何的变化。而不会之前的那样，BH1变成LRU链表的首端。</p>
+<p>接下来，系统发出两次数据块请求，分别要返回与第5个和第4个一样的数据块，也就是要返回当前的BH1和BH4。这个时候，oracle会增加BH1和BH4的touch数量，同时将该BH1和BH4从辅助LRU链表上摘下，转移到主LRU链表的中间位置。可以用下图描述。</p>
+<p><img src="http://my.csdn.net/uploads/201205/08/1336476824_8644.jpg" alt=""></p>
+<p>这个时候，如果发来了第个数据块请求，要求返回与第3个相同的数据块，也就是当前的BH3，则这时该BH3会插入主LRU链表上的BH1和BH4中间，注意每次向主LRU列表插入buffer header时都是向中间位置插入。如果发来了第九句SQL要求返回BH2，则我们可以知道，BH2会转移到主LRU链表的中间。这个时候，辅助LRU链表就空了，没有buffer header了。</p>
+<p>这时，如果又发来第10个数据块请求，要求返回一个新的、buffer cache中不存在所需内容的数据块时。oracle会先扫描辅助LRU链表，发现上面没有任何的buffer header时，则必须扫描主LRU链表。从尾部开始扫描，采用前面说到的与扫描辅助LRU链表相同的规则挑选牺牲者。挑出的可以被替代的buffer header将从主LRU链表上摘下，放入辅助LRU链表。</p>
+<p>从上面所描述的buffer header在辅助LRU链表和主LRU链表之间交替的过程中，这种改进LRU链表的管理方式的目的，就是想千方百计的能够将多次被访问的数据块保留在内存里，同时又要平衡有限的内存资源。这种方式相比较之前而言，无疑是进步很多的。在之前中，某个数据块可能只会被访问一次，但是就这么一次的访问就将该数据块放到了LRU的首端，从而可能就挤掉了一个LRU上不是那么经常被访问，但是也会多次访问的数据块。而后面的算法，将访问一次的数据块和访问一次以上的数据块彻底分开，而且查找可用数据块时，始终都是从辅助LRU链表开始扫描。实际上也就使得越倾向于只访问一次的数据块越快的从内存中清理出去。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>本文首先根据《Python源码剖析》整理了Python的内存管理机制，重点讨论了内存池以及对象缓存池。在第二部分结合百度的笔试题探讨了如何实现一个缓存池，重点讨论了缓存池基本架构以及数据块换出策略。</p>
+<h4 id="Further-Reading-and-Reference："><a href="#Further-Reading-and-Reference：" class="headerlink" title="Further Reading and Reference："></a>Further Reading and Reference：</h4><p>Python内存管理：</p>
+<blockquote>
+<ol>
+<li>《Python源码剖析》 非常好的一本介绍Python源码的书籍，里面介绍了Python的对象机制、虚拟机、类、内存管理、垃圾回收等各个方面</li>
+<li><a href="http://blog.donews.com/lemur/?s=Python%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90Python" target="_blank" rel="external">http://blog.donews.com/lemur/?s=Python%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90Python</a> Python源码剖析的作者的博客，专门介绍CPython源码的专栏。</li>
+<li><a href="http://docs.python.org/library/index.html" target="_blank" rel="external">http://docs.python.org/library/index.html</a>  想了解Python？ 官方文档才是王道！</li>
+</ol>
+</blockquote>
+<hr>
+<div class="alert alert-success"><i class="fa fa-lightbulb-o"></i>  本文转载自<a href="http://blog.csdn.net/zhzhl202/article/details/7547445" target="_blank" rel="external">zhzhl202的CSDN博客</a>!</div>
+</span>
+				</header>
+
+				<!-- share -->
+				
+					
+
+					
+     <footer class="entry-meta">      
+
+	    <div class="fenlei" style="font-size:13.5px">
+			<span class="entry-categories">
+				<span class="fa fa-folder" aria-hidden="true"></span> 
+
+				
+					<a href="/categories/python与Django/">python与Django</a>
+				
+
+			</span>
+			
+			<span class="entry-tags">        
+				<span class="fa fa-tags" aria-hidden="true"></span> 
+
+				
+					<a href="/tags/转载/">转载</a>&nbsp;
+				
+					<a href="/tags/python/">python</a>&nbsp;
+				
+
+			</span>
+		</div>
+
+     
+		<!-- JiaThis Button BEGIN -->
+		<div class="jiathis_style" style="float:right;">
+			<span class="jiathis_txt">分享到：</span>
+			<a class="jiathis_button_qzone">QQ空间</a>
+			<a class="jiathis_button_tsina">新浪微博</a>
+			<a class="jiathis_button_weixin">微信</a>
+			<a class="jiathis_button_copy">复制</a>
+			<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+			<a class="jiathis_counter_style"></a>
+		</div>
+		<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+		<!-- JiaThis Button END -->
+		<br>
+    </footer>
+
+
+				
+			</div>	
+		</div>	 	        
+
+		 
+				
+					<p class="p1">Previous <a href="/archives/191/">Python对象模型</a></p> 
+
+				
+				   <p class="p2">Next <a href="/archives/189/">实现一个简单的python爬虫</a></p> 
+			
+		
+		<!-- comment -->
+		
+<section id="comment">
+  
+  	 <div class="ds-thread" data-thread-key="archives/190/" data-title="Python内存池管理与缓冲池设计" data-url="http://www.rudy-yuan.net/archives/190/"></div>  
+  
+</section>
+
+		
+	</div> <!-- col-md-9/col-md-12 -->	
+
+	
+		<div id="side_meta">
+			
+      <div class="col-md-3">
+	      <div id="sidebar">
+	      
+  <div class="form-group has-success has-feedback" id="site_search">
+    <form class="site-search-form">
+        <input type="text" id="st-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control" />
+    </form>
+  </div>  
+
+	      <style type="text/css">
+  .cls_container{height:24px;overflow:hidden;}
+  .cls_container ul{list-style-type:none;margin:0;padding:0;margin-left:0px;}
+  .cls_container ul li{height:24px;line-height:24px;float:left;display:inline;}
+</style>
+
+<div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Notification</h4>
+
+	<div id="myscroll" class="cls_container">
+		<ul>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>欢迎访问本站!</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>本站内容已经全部进行迁移</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>谷歌浏览器访问本站效果最佳!</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>若URL失效，请使用本站内部搜索</span></li></br>
+		</ul>
+	</div>
+
+	<div id="showhint"></div>
+</div>
+
+<script type="text/javascript">
+	function $(element){
+	 if(arguments.length>1){
+	  for(var i=0,length=arguments.length,elements=[];i<length;i++){
+	   elements.push($(arguments[i]));
+	  }
+	  return elements;
+	 }
+	 if(typeof element=="string"){
+	  return document.getElementById(element);
+	 }else{
+	  return element;
+	 }
+	}
+	var Class={
+	 create:function(){
+	  return function(){
+	   this.initialize.apply(this,arguments);
+	  }
+	 }
+	}
+	Function.prototype.bind=function(object){
+	 var method=this;
+	 return function(){
+	  method.apply(object,arguments);
+	 }
+	}
+	var Scroll=Class.create();
+	Scroll.prototype={
+	 initialize:function(element,height){
+	  this.element=$(element);
+	  this.element.innerHTML+=this.element.innerHTML;
+	  this.height=height;
+	  this.maxHeight=this.element.scrollHeight/2;
+	  this.counter=0;
+	  this.scroll();
+	  this.timer="";
+	  this.element.onmouseover=this.stop.bind(this);
+	  this.element.onmouseout=function(){this.timer=setTimeout(this.scroll.bind(this),1000);}.bind(this);
+	 },
+	 scroll:function(){
+	  if(this.element.scrollTop<this.maxHeight){
+	   this.element.scrollTop++;
+	   this.counter++;
+	  }else{
+	   this.element.scrollTop=0;
+	   this.counter=0;
+	  }
+	  if(this.counter<this.height){
+	   this.timer=setTimeout(this.scroll.bind(this),20);
+	  }else{
+	   this.counter=0;
+	   this.timer=setTimeout(this.scroll.bind(this),3000);
+	  }
+	 },
+	 stop:function(){
+	  clearTimeout(this.timer);
+	 }
+	}
+	var myscroll=new Scroll("myscroll",24);
+</script>
+
+
+	      <!-- toc -->	      
+	      	      
+
+	      
+	<div class="widget">
+		<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Demo/">Demo<span>1</span></a></li>
+		
+			<li><a href="/categories/Docs/">Docs<span>4</span></a></li>
+		
+			<li><a href="/categories/MapReduce/">MapReduce<span>1</span></a></li>
+		
+			<li><a href="/categories/NDN/">NDN<span>2</span></a></li>
+		
+			<li><a href="/categories/Test/">Test<span>2</span></a></li>
+		
+			<li><a href="/categories/c和c/">c和c++<span>1</span></a></li>
+		
+			<li><a href="/categories/c和cpp/">c和cpp<span>2</span></a></li>
+		
+			<li><a href="/categories/leetcode/">leetcode<span>6</span></a></li>
+		
+			<li><a href="/categories/linux学习/">linux学习<span>1</span></a></li>
+		
+			<li><a href="/categories/python与Django/">python与Django<span>7</span></a></li>
+		
+			<li><a href="/categories/socket与网络/">socket与网络<span>2</span></a></li>
+		
+			<li><a href="/categories/不可分/">不可分<span>1</span></a></li>
+		
+			<li><a href="/categories/工具相关/">工具相关<span>1</span></a></li>
+		
+			<li><a href="/categories/技术杂文/">技术杂文<span>11</span></a></li>
+		
+			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>4</span></a></li>
+		
+			<li><a href="/categories/源码学习/">源码学习<span>5</span></a></li>
+		
+		</ul>
+	</div>
+	
+	      
+	<div class="widget">
+		<h4 style="font-weight: bold; color: #333 ">Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/Manacher算法/">Manacher算法<span>1</span></a></li>
+		
+			<li><a href="/tags/Next数组/">Next数组<span>2</span></a></li>
+		
+			<li><a href="/tags/mapReduce/">mapReduce<span>1</span></a></li>
+		
+			<li><a href="/tags/themes/">themes<span>1</span></a></li>
+		
+			<li><a href="/tags/算法/">算法<span>6</span></a></li>
+		
+			<li><a href="/tags/面试/">面试<span>4</span></a></li>
+		
+			<li><a href="/tags/leetcode/">leetcode<span>6</span></a></li>
+		
+			<li><a href="/tags/Protobuf/">Protobuf<span>1</span></a></li>
+		
+			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
+		
+			<li><a href="/tags/xshell/">xshell<span>1</span></a></li>
+		
+			<li><a href="/tags/github静态博客/">github静态博客<span>1</span></a></li>
+		
+			<li><a href="/tags/网络/">网络<span>3</span></a></li>
+		
+			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
+		
+			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
+		
+			<li><a href="/tags/linux/">linux<span>2</span></a></li>
+		
+			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
+		
+			<li><a href="/tags/博主推荐/">博主推荐<span>3</span></a></li>
+		
+			<li><a href="/tags/facebook访问/">facebook访问<span>1</span></a></li>
+		
+			<li><a href="/tags/Web服务器/">Web服务器<span>2</span></a></li>
+		
+			<li><a href="/tags/Q-A/">Q&amp;A<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>57</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+	      
+<div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Friend Links</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li style="font-size:14px"><i class="fa fa-share"></i><a href="http://hexo.io" title="My Linkin account." target="_blank"]);">Hexo</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-github"></i><a href="http://www.github.com/rudy-yuan" title="My Github account." target="_blank"]);">我的github</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-trash"></i><a href="http://yjiehn.sinaapp.com" title="My Linkin account." target="_blank"]);">我的旧版博客</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-cloud-upload"></i><a href="http://www.qiniu.com" title="My Weibo account." target="_blank"]);">七牛云存储</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://netlab.pkusz.edu.cn" title="My Weibo account." target="_blank"]);">北大互联网信息工程研发中心</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://cs.whu.edu.cn" title="My Weibo account." target="_blank"]);">武汉大学 计算机学院</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://github.com/wzpan/hexo-theme-freemind" title="My Weibo account." target="_blank"]);">Hexo-Theme-Freemind</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://www.wengweitao.com" title="My Weibo account." target="_blank"]);">WWT的博客</a></li>
+	
+	</ul>
+</div>
+
+
+	      <div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Recent Comments</h4>
+	<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="0" data-show-admin="1" data-excerpt-length="100" ></ul>
+	
+	<script type="text/javascript">
+	    var duoshuoQuery = {short_name:"rudy-yuan"};
+	    (function() {
+	    var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+	</script>
+
+</div>
+
+
+	
+	      <section id="recent-visitors" class="widget widget_recent_comments">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Recent Visitors</h4>
+  	<div class="panelbody clearfix"><ul class="ds-recent-visitors" data-num-items="30"></ul></div>
+</section>    
+	      </div> <!-- sidebar -->
+      </div> <!-- col-md-3 -->
+
+		</div>
+			
+
+</div><!-- row -->
+
+
+	<script type="text/javascript">
+	  var duoshuoQuery = { short_name: 'rudy-yuan' };
+	  (function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';
+		ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	  })();
+	</script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  Rudy-Yuan &copy; 2013-2016.
+  
+       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, <a href="https://swiftype.com/" target="_blank">Swiftype</a> and <a href="http://www.qiniu.com/" target="_blank">七牛云存储</a>.
+      <i class="fa fa-sitemap %>"></i> <a href="/sitemap.xml" target="_blank"> 站点地图</a>. <a href="http://www.miitbeian.gov.cn/">粤ICP备15038546号</a>.
+      <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255163192'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1255163192' type='text/javascript'%3E%3C/script%3E"));</script>   
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+  <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'YYG5W2xNQTns7U8J3YqW','2.0.0');
+  </script>
+
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>

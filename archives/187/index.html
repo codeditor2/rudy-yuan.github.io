@@ -1,0 +1,576 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>终端窗口管理神器--tmux | Rudy-Yuan的博客</title>
+  <meta name="author" content="Rudy-Yuan">
+  
+  <meta name="description" content="什么是tmuxtmux是一个终端的复用器（terminal multiplexer），可以简单理解为一个终端的窗口管理程序。相比系统自带的 screen 功能要强大许多。其使用场景和特性包括">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="终端窗口管理神器--tmux"/>
+  <meta property="og:site_name" content="Rudy-Yuan的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+
+
+  <link rel="stylesheet" href="/css/themes/cerulean.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Rudy-Yuan的博客</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/tags/热点文章/" title="All the tags.">
+			  <i class="fa fa-fire"></i>热点文章
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags/博主推荐/" title="All the tags.">
+			  <i class="fa fa-volume-up"></i>博主推荐
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>文章归档
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/message" title="All the tags.">
+			  <i class="fa fa-pencil"></i>给我留言
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-info-circle"></i>关于本站
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+		<!-- content -->
+
+		<div class="slogan" style="margin-bottom: 17px">
+		  <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">
+			  当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;:&nbsp;
+			
+				<a href="/categories/技术杂文/">技术杂文</a>
+			
+		  &nbsp;</a>»&nbsp; 终端窗口管理神器--tmux </h4>
+		</div>
+
+		<div id="top_search"></div>
+				 
+		
+
+		<div class="archive">	  
+			<div id="archives"> 
+				
+				<header class="entry-header">
+					<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+						<span class="entry-date">
+							<span class="fa fa-calendar" aria-hidden="true"></span>
+							2015-06-11						      
+						</span>
+							  
+							  
+						<span class="author vcard">
+							<span class="fa fa-user" aria-hidden="true"></span>
+							<a href="/">Rudy-Yuan</a> 	 	
+						</span>
+
+						<span class="comments-link">
+							<span class="fa fa-comments" aria-hidden="true"></span>
+							<span class="ds-thread-count" data-thread-key="archives/187/">暂无评论</span>
+						</span>						
+							
+					</div>	
+
+									
+					<h3 class="entry-title"> 
+						<a href="/archives/187/" >终端窗口管理神器--tmux</a>
+					</h3>		
+						
+					<span style="font-size:15px"><h4 id="什么是tmux"><a href="#什么是tmux" class="headerlink" title="什么是tmux"></a>什么是tmux</h4><p>tmux是一个终端的复用器（terminal multiplexer），可以简单理解为一个终端的窗口管理程序。相比系统自带的 screen 功能要强大许多。其使用场景和特性包括<a id="more"></a>：</p>
+<blockquote>
+<p>当你使用SSH连接到服务器的时候，由于网络掉线导致连接中断（这是经常发生的。。。）。当你重新连接后，所有的工作现场丢失了。你还得重新打开 之前的各种窗口，进入各种很深的目录，非常麻烦。而如果使用tmux，即时掉线之后，重新连接也能直接回到之前的工作环境，极大提高工作的效率。<br>可以完全通过键盘操控<br>支持自定义的按键绑定模式，例如设置成vim按键绑定模式<br>可以在一个SSH连接下打开多个会话、窗口，也可以对窗口进行各种分割，效果如下图所示。</p>
+</blockquote>
+<h4 id="tmux的基本概念"><a href="#tmux的基本概念" class="headerlink" title="tmux的基本概念"></a>tmux的基本概念</h4><p>首先，需要先安装tmux：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum install tmux</span><br></pre></td></tr></table></figure></p>
+<p>安装好后，直接输入 tmux 即可运行 tmux.</p>
+<p>tmux 包括以下3个基本概念：</p>
+<blockquote>
+<p>session：会话，是一组窗口的集合，通常同一个任务可以放入一个session。可以同时打开多个session，每个session可以有自己的名字方便任务的切换。<br>window：窗口，一个会话包含多个窗口，类似于一个tab，各个window也可以有自己的编号。<br>panel：面板，一个窗口包含多个面板，就是窗口中不同的小块窗口。</p>
+</blockquote>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog%2F2015%2F06%2F11%2Ftumux-window.jpg?imageView/2/w/800/h/600" alt=""></p>
+<p>session会在tmux窗口的左下角显示，window会以tab形式显示在其后，并且会以当前活动的程序自动命名。以上图为例，这是第3个session，一共有3个window，分别是vim, bash, ssh。而panel就是用格子分割开的各个区块。</p>
+<h4 id="tmux的基本用法"><a href="#tmux的基本用法" class="headerlink" title="tmux的基本用法"></a>tmux的基本用法</h4><p>tmux 指令必须包含一个前缀（就是一组按键），你必须先按下前缀以后，系统才知道你后面的命令是tmux指令。系统默认的前缀指令是 <strong>ctrl + b</strong>，例如你要新建一个窗口就先按下：<strong>ctrl + b</strong>，然后再按：c。</p>
+<p>下面是几组常用的tmux指令（所有的前缀用prefix代替）：</p>
+<ul>
+<li>prefix + ? ： 帮助，可以查看所有的tmux指令，使用q退出</li>
+<li>prefix + s： 列出所有session编号,并进行选择切换</li>
+<li>prefix + d： 离开当前session</li>
+<li>prefix + $： 重命名当前session</li>
+<li>prefix + c：新建一个窗口</li>
+<li>prefix + &amp;： 关闭当前窗口</li>
+<li>prefix + n： 切换到下一个窗口</li>
+<li>prefix + w：列出所有窗口编号,并进行选择切换</li>
+<li>prefix + 窗口号： 切换到某个窗口</li>
+<li>prefix + “： 垂直拆分出一个panel</li>
+<li>prefix + %： 水平拆分出一个panel</li>
+<li>prefix + o： 切换到下一个panel</li>
+<li>prefix + !： 关闭所有的panel</li>
+<li>prefix + x： 关闭当前panel</li>
+<li>prefix + z： 暂时将当前的panel放到最大</li>
+</ul>
+<p>更多的tmux指令，可以参考<a href="http://www.openbsd.org/cgi-bin/man.cgi/OpenBSD-current/man1/tmux.1?query=tmux&amp;sec=1" target="_blank" rel="external">这里</a>。</p>
+<h4 id="对tmux进行个性化配置"><a href="#对tmux进行个性化配置" class="headerlink" title="对tmux进行个性化配置"></a>对tmux进行个性化配置</h4><p>默认的配置，可以比较不习惯，可以编辑 $HOME/.tmux.conf 文件，对tmux进行配置。</p>
+<h5 id="1-将前缀更改为-ctrl-a："><a href="#1-将前缀更改为-ctrl-a：" class="headerlink" title="1. 将前缀更改为 ctrl + a："></a>1. 将前缀更改为 ctrl + a：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set -g prefix ^a</span><br><span class="line">unbind ^b</span><br><span class="line">bind a send-prefix</span><br></pre></td></tr></table></figure>
+<p>保存后，为了使配置生效： 先按 <strong>ctrl+b</strong>，然后输入<strong>:</strong>，进入命令行模式， 在命令行模式下输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source-file ~/.tmux.conf</span><br></pre></td></tr></table></figure></p>
+<p>现在就把前缀改为了ctrl + a了。</p>
+<h5 id="2-水平或垂直分割窗口"><a href="#2-水平或垂直分割窗口" class="headerlink" title="2. 水平或垂直分割窗口"></a>2. 水平或垂直分割窗口</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">unbind &apos;&quot;&apos;</span><br><span class="line">bind - splitw -v # 分割成上下两个窗口</span><br><span class="line">unbind %</span><br><span class="line">bind | splitw -h # 分割成左右两个窗口</span><br></pre></td></tr></table></figure>
+<h5 id="3-切换窗格设置为和Vim一样"><a href="#3-切换窗格设置为和Vim一样" class="headerlink" title="3. 切换窗格设置为和Vim一样"></a>3. 切换窗格设置为和Vim一样</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># navigate panes with hjkl</span><br><span class="line">bind h select-pane -L</span><br><span class="line">bind j select-pane -D</span><br><span class="line">bind k select-pane -U</span><br><span class="line">bind l select-pane -R</span><br></pre></td></tr></table></figure>
+<h5 id="4-panel大小调整"><a href="#4-panel大小调整" class="headerlink" title="4. panel大小调整"></a>4. panel大小调整</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bind ^k resizep -U 10 # 跟选择窗格的设置相同，只是多加 Ctrl（Ctrl-k）</span><br><span class="line">bind ^j resizep -D 10 # 同上</span><br><span class="line">bind ^h resizep -L 10 # ...</span><br><span class="line">bind ^l resizep -R 10 # ...</span><br></pre></td></tr></table></figure>
+<h5 id="5-交换两个窗格"><a href="#5-交换两个窗格" class="headerlink" title="5. 交换两个窗格"></a>5. 交换两个窗格</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bind ^u swapp -U # 与上窗格交换 Ctrl-u</span><br><span class="line">bind ^d swapp -D # 与下窗格交换 Ctrl-d</span><br></pre></td></tr></table></figure>
+<p>这里就不一一列举，所有的配置。大家可以根据自己的习惯和喜好进行更改。以下是几个配置供大家参考：</p>
+<p><a href="https://github.com/gpakosz/.tmux" target="_blank" rel="external">https://github.com/gpakosz/.tmux</a><br><a href="https://github.com/tony/tmux-config" target="_blank" rel="external">https://github.com/tony/tmux-config</a><br><a href="https://gist.github.com/spicycode/1229612" target="_blank" rel="external">https://gist.github.com/spicycode/1229612</a><br><a href="http://zanshin.net/2013/09/05/my-tmux-configuration/" target="_blank" rel="external">http://zanshin.net/2013/09/05/my-tmux-configuration/</a></p>
+<hr>
+</span>
+				</header>
+
+				<!-- share -->
+				
+					
+
+					
+     <footer class="entry-meta">      
+
+	    <div class="fenlei" style="font-size:13.5px">
+			<span class="entry-categories">
+				<span class="fa fa-folder" aria-hidden="true"></span> 
+
+				
+					<a href="/categories/技术杂文/">技术杂文</a>
+				
+
+			</span>
+			
+			<span class="entry-tags">        
+				<span class="fa fa-tags" aria-hidden="true"></span> 
+
+				
+					<a href="/tags/linux/">linux</a>&nbsp;
+				
+					<a href="/tags/转载/">转载</a>&nbsp;
+				
+
+			</span>
+		</div>
+
+     
+		<!-- JiaThis Button BEGIN -->
+		<div class="jiathis_style" style="float:right;">
+			<span class="jiathis_txt">分享到：</span>
+			<a class="jiathis_button_qzone">QQ空间</a>
+			<a class="jiathis_button_tsina">新浪微博</a>
+			<a class="jiathis_button_weixin">微信</a>
+			<a class="jiathis_button_copy">复制</a>
+			<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+			<a class="jiathis_counter_style"></a>
+		</div>
+		<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+		<!-- JiaThis Button END -->
+		<br>
+    </footer>
+
+
+				
+			</div>	
+		</div>	 	        
+
+		 
+				
+					<p class="p1">Previous <a href="/archives/188/">《python基础教程》学习笔记</a></p> 
+
+				
+				   <p class="p2">Next <a href="/archives/186/">leetcode——Shortest Palindrome</a></p> 
+			
+		
+		<!-- comment -->
+		
+<section id="comment">
+  
+  	 <div class="ds-thread" data-thread-key="archives/187/" data-title="终端窗口管理神器--tmux" data-url="http://www.rudy-yuan.net/archives/187/"></div>  
+  
+</section>
+
+		
+	</div> <!-- col-md-9/col-md-12 -->	
+
+	
+		<div id="side_meta">
+			
+      <div class="col-md-3">
+	      <div id="sidebar">
+	      
+  <div class="form-group has-success has-feedback" id="site_search">
+    <form class="site-search-form">
+        <input type="text" id="st-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control" />
+    </form>
+  </div>  
+
+	      <style type="text/css">
+  .cls_container{height:24px;overflow:hidden;}
+  .cls_container ul{list-style-type:none;margin:0;padding:0;margin-left:0px;}
+  .cls_container ul li{height:24px;line-height:24px;float:left;display:inline;}
+</style>
+
+<div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Notification</h4>
+
+	<div id="myscroll" class="cls_container">
+		<ul>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>欢迎访问本站!</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>本站内容已经全部进行迁移</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>谷歌浏览器访问本站效果最佳!</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>若URL失效，请使用本站内部搜索</span></li></br>
+		</ul>
+	</div>
+
+	<div id="showhint"></div>
+</div>
+
+<script type="text/javascript">
+	function $(element){
+	 if(arguments.length>1){
+	  for(var i=0,length=arguments.length,elements=[];i<length;i++){
+	   elements.push($(arguments[i]));
+	  }
+	  return elements;
+	 }
+	 if(typeof element=="string"){
+	  return document.getElementById(element);
+	 }else{
+	  return element;
+	 }
+	}
+	var Class={
+	 create:function(){
+	  return function(){
+	   this.initialize.apply(this,arguments);
+	  }
+	 }
+	}
+	Function.prototype.bind=function(object){
+	 var method=this;
+	 return function(){
+	  method.apply(object,arguments);
+	 }
+	}
+	var Scroll=Class.create();
+	Scroll.prototype={
+	 initialize:function(element,height){
+	  this.element=$(element);
+	  this.element.innerHTML+=this.element.innerHTML;
+	  this.height=height;
+	  this.maxHeight=this.element.scrollHeight/2;
+	  this.counter=0;
+	  this.scroll();
+	  this.timer="";
+	  this.element.onmouseover=this.stop.bind(this);
+	  this.element.onmouseout=function(){this.timer=setTimeout(this.scroll.bind(this),1000);}.bind(this);
+	 },
+	 scroll:function(){
+	  if(this.element.scrollTop<this.maxHeight){
+	   this.element.scrollTop++;
+	   this.counter++;
+	  }else{
+	   this.element.scrollTop=0;
+	   this.counter=0;
+	  }
+	  if(this.counter<this.height){
+	   this.timer=setTimeout(this.scroll.bind(this),20);
+	  }else{
+	   this.counter=0;
+	   this.timer=setTimeout(this.scroll.bind(this),3000);
+	  }
+	 },
+	 stop:function(){
+	  clearTimeout(this.timer);
+	 }
+	}
+	var myscroll=new Scroll("myscroll",24);
+</script>
+
+
+	      <!-- toc -->	      
+	      	      
+
+	      
+	<div class="widget">
+		<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Demo/">Demo<span>1</span></a></li>
+		
+			<li><a href="/categories/Docs/">Docs<span>4</span></a></li>
+		
+			<li><a href="/categories/MapReduce/">MapReduce<span>1</span></a></li>
+		
+			<li><a href="/categories/NDN/">NDN<span>2</span></a></li>
+		
+			<li><a href="/categories/Test/">Test<span>2</span></a></li>
+		
+			<li><a href="/categories/c和c/">c和c++<span>1</span></a></li>
+		
+			<li><a href="/categories/c和cpp/">c和cpp<span>2</span></a></li>
+		
+			<li><a href="/categories/leetcode/">leetcode<span>6</span></a></li>
+		
+			<li><a href="/categories/linux学习/">linux学习<span>1</span></a></li>
+		
+			<li><a href="/categories/python与Django/">python与Django<span>7</span></a></li>
+		
+			<li><a href="/categories/socket与网络/">socket与网络<span>2</span></a></li>
+		
+			<li><a href="/categories/不可分/">不可分<span>1</span></a></li>
+		
+			<li><a href="/categories/工具相关/">工具相关<span>1</span></a></li>
+		
+			<li><a href="/categories/技术杂文/">技术杂文<span>11</span></a></li>
+		
+			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>4</span></a></li>
+		
+			<li><a href="/categories/源码学习/">源码学习<span>5</span></a></li>
+		
+		</ul>
+	</div>
+	
+	      
+	<div class="widget">
+		<h4 style="font-weight: bold; color: #333 ">Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/mysql远程连接/">mysql远程连接<span>1</span></a></li>
+		
+			<li><a href="/tags/vi/">vi<span>1</span></a></li>
+		
+			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
+		
+			<li><a href="/tags/Protobuf/">Protobuf<span>1</span></a></li>
+		
+			<li><a href="/tags/English/">English<span>1</span></a></li>
+		
+			<li><a href="/tags/Manacher算法/">Manacher算法<span>1</span></a></li>
+		
+			<li><a href="/tags/ubuntu-yuan/">ubuntu yuan<span>1</span></a></li>
+		
+			<li><a href="/tags/对象模型/">对象模型<span>2</span></a></li>
+		
+			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
+		
+			<li><a href="/tags/数组对称/">数组对称<span>1</span></a></li>
+		
+			<li><a href="/tags/python/">python<span>7</span></a></li>
+		
+			<li><a href="/tags/回文/">回文<span>1</span></a></li>
+		
+			<li><a href="/tags/转载/">转载<span>7</span></a></li>
+		
+			<li><a href="/tags/数据结构/">数据结构<span>1</span></a></li>
+		
+			<li><a href="/tags/clixsense/">clixsense<span>1</span></a></li>
+		
+			<li><a href="/tags/华为面试/">华为面试<span>1</span></a></li>
+		
+			<li><a href="/tags/cpp/">cpp<span>3</span></a></li>
+		
+			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
+		
+			<li><a href="/tags/读书笔记/">读书笔记<span>1</span></a></li>
+		
+			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>57</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+	      
+<div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Friend Links</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li style="font-size:14px"><i class="fa fa-share"></i><a href="http://hexo.io" title="My Linkin account." target="_blank"]);">Hexo</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-github"></i><a href="http://www.github.com/rudy-yuan" title="My Github account." target="_blank"]);">我的github</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-trash"></i><a href="http://yjiehn.sinaapp.com" title="My Linkin account." target="_blank"]);">我的旧版博客</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-cloud-upload"></i><a href="http://www.qiniu.com" title="My Weibo account." target="_blank"]);">七牛云存储</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://netlab.pkusz.edu.cn" title="My Weibo account." target="_blank"]);">北大互联网信息工程研发中心</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://cs.whu.edu.cn" title="My Weibo account." target="_blank"]);">武汉大学 计算机学院</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://github.com/wzpan/hexo-theme-freemind" title="My Weibo account." target="_blank"]);">Hexo-Theme-Freemind</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://www.wengweitao.com" title="My Weibo account." target="_blank"]);">WWT的博客</a></li>
+	
+	</ul>
+</div>
+
+
+	      <div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Recent Comments</h4>
+	<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="0" data-show-admin="1" data-excerpt-length="100" ></ul>
+	
+	<script type="text/javascript">
+	    var duoshuoQuery = {short_name:"rudy-yuan"};
+	    (function() {
+	    var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+	</script>
+
+</div>
+
+
+	
+	      <section id="recent-visitors" class="widget widget_recent_comments">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Recent Visitors</h4>
+  	<div class="panelbody clearfix"><ul class="ds-recent-visitors" data-num-items="30"></ul></div>
+</section>    
+	      </div> <!-- sidebar -->
+      </div> <!-- col-md-3 -->
+
+		</div>
+			
+
+</div><!-- row -->
+
+
+	<script type="text/javascript">
+	  var duoshuoQuery = { short_name: 'rudy-yuan' };
+	  (function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';
+		ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	  })();
+	</script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  Rudy-Yuan &copy; 2013-2016.
+  
+       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, <a href="https://swiftype.com/" target="_blank">Swiftype</a> and <a href="http://www.qiniu.com/" target="_blank">七牛云存储</a>.
+      <i class="fa fa-sitemap %>"></i> <a href="/sitemap.xml" target="_blank"> 站点地图</a>. <a href="http://www.miitbeian.gov.cn/">粤ICP备15038546号</a>.
+      <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255163192'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1255163192' type='text/javascript'%3E%3C/script%3E"));</script>   
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+  <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'YYG5W2xNQTns7U8J3YqW','2.0.0');
+  </script>
+
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>

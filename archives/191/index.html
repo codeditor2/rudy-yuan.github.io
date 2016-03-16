@@ -1,0 +1,631 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Python对象模型 | Rudy-Yuan的博客</title>
+  <meta name="author" content="Rudy-Yuan">
+  
+  <meta name="description" content="对一门具体的编程语言来说，在应用设计模式时影响最大的莫过于它的对象模型了，这是因为大部分设计模式都源自于C++和Java这类面向对象编程语言。要想在Python中复用这些设计模式，首先需要对Python的对象模型有一个比较清晰的认识">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Python对象模型"/>
+  <meta property="og:site_name" content="Rudy-Yuan的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+
+
+  <link rel="stylesheet" href="/css/themes/cerulean.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Rudy-Yuan的博客</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/tags/热点文章/" title="All the tags.">
+			  <i class="fa fa-fire"></i>热点文章
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags/博主推荐/" title="All the tags.">
+			  <i class="fa fa-volume-up"></i>博主推荐
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>文章归档
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/message" title="All the tags.">
+			  <i class="fa fa-pencil"></i>给我留言
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-info-circle"></i>关于本站
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+		<!-- content -->
+
+		<div class="slogan" style="margin-bottom: 17px">
+		  <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">
+			  当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;:&nbsp;
+			
+				<a href="/categories/python与Django/">python与Django</a>
+			
+		  &nbsp;</a>»&nbsp; Python对象模型 </h4>
+		</div>
+
+		<div id="top_search"></div>
+				 
+		
+
+		<div class="archive">	  
+			<div id="archives"> 
+				
+				<header class="entry-header">
+					<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+						<span class="entry-date">
+							<span class="fa fa-calendar" aria-hidden="true"></span>
+							2015-08-22						      
+						</span>
+							  
+							  
+						<span class="author vcard">
+							<span class="fa fa-user" aria-hidden="true"></span>
+							<a href="/">Rudy-Yuan</a> 	 	
+						</span>
+
+						<span class="comments-link">
+							<span class="fa fa-comments" aria-hidden="true"></span>
+							<span class="ds-thread-count" data-thread-key="archives/191/">暂无评论</span>
+						</span>						
+							
+					</div>	
+
+									
+					<h3 class="entry-title"> 
+						<a href="/archives/191/" >Python对象模型</a>
+					</h3>		
+						
+					<span style="font-size:15px"><p>对一门具体的编程语言来说，在应用设计模式时影响最大的莫过于它的对象模型了，这是因为大部分设计模式都源自于C++和Java这类面向对象编程语言。要想在Python中复用这些设计模式，首先需要对Python的对象模型有一个比较清晰的认识<a id="more"></a>。</p>
+<h4 id="1-1-类"><a href="#1-1-类" class="headerlink" title="1.1 类"></a>1.1 类</h4><p>同其它面向对象编程语言一样，Python中的类也是一种用户自定义的数据类型，其基本的语法格式是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> &lt;<span class="title">name</span>&gt;<span class="params">(superclass, ...)</span>:</span> <span class="comment"># 定义类</span></span><br><span class="line">    data = value   <span class="comment"># 共享的类变量</span></span><br><span class="line">	</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">method</span><span class="params">(self, ...)</span>:</span>   <span class="comment"># 类中的方法</span></span><br><span class="line">		self.member = value <span class="comment"># 实例的数据</span></span><br></pre></td></tr></table></figure>
+<p>类定义从关键字class开始，并包含整个缩进代码块，类中定义的方法和属性构成了类的名字空间（name space）。一个类通常会有多个方法，它们都以关键字def开头，并且第一个参数通常都是self，Python中的变量self相当于C++中的关键字this，其作用是传递一个对象的引用。</p>
+<p>Python中的类属性位于类的名字空间中，可以被所有的类实例所共享，这一点同C++和Java相同。访问类属性时不需要事先创建类的实例，直接使用类名就可以了。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Friend:</span><br><span class="line">   default_age = 20</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; Friend.default_age</span><br><span class="line">   20</span><br></pre></td></tr></table></figure>
+<p>除了自定义的类属性外，Python中的每个类其实都具有一些特殊的类属性，它们都是由Python的对象模型所提供的。表1列出了这些类属性：</p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>dict</strong></td>
+<td style="text-align:center">类名字空间的字典变量</td>
+</tr>
+<tr>
+<td><strong>doc</strong></td>
+<td style="text-align:center">类的文档说明字符串</td>
+</tr>
+<tr>
+<td><strong>name</strong></td>
+<td style="text-align:center">类的名称</td>
+</tr>
+<tr>
+<td><strong>module</strong></td>
+<td style="text-align:center">类的模块名</td>
+</tr>
+<tr>
+<td><strong>bases</strong></td>
+<td style="text-align:center">该类所有父类组成的元组</td>
+</tr>
+</tbody>
+</table>
+<p>表1特殊的类属性 </p>
+<h4 id="1-2-实例"><a href="#1-2-实例" class="headerlink" title="1.2 实例"></a>1.2 实例</h4><p>定义类的目的是为了创建它的实例，从面向对象的角度看，类是对数据及其相关操作的封装，而类实例则是对现实生活中某个实体的抽象。假设定义了如下一个类：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">School</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">		self.name = name</span><br><span class="line">		self.students = []</span><br><span class="line">		</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">addStudent</span><span class="params">(self, student)</span>:</span></span><br><span class="line">		self.students.append(student)</span><br></pre></td></tr></table></figure>
+<p>要创建School类的一个实例，可以执行下面的语句：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bit = School(<span class="string">"Beijing Institute of Technology"</span>)</span><br></pre></td></tr></table></figure>
+<p>在C++和Java中创建类实例时，与类具有相同名称的构造函数被调用，而在Python中创建一个类的实例时，将调用名为<strong>init</strong>的特殊方法。Python中的类实例继承了类的所有方法和属性，并且有自己独立的名字空间，使用下面的方法可以访问类实例的方法和属性：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bit.addStudent(<span class="string">"gary"</span>)</span><br><span class="line">bit.students</span><br></pre></td></tr></table></figure>
+<p>Python中的对象属性有一个非常有趣的地方，那就是使用它们之前不用像C++和Java那样，必须先在类中进行声明，因为这些都是可以动态创建的。作为一门动态类型语言，Python的这一特性的确非常灵活，但有时也难免产生问题。例如在许多针对接口的设计模式中，通常都需要知道对象所属的类，以便能够调用不同的实现方法，这些在C++和Java这些强类型语言的对象模型中不难实现，但对Python来讲可就不那么简单了，因为Python中的每个变量事实上都没有固定的类型。</p>
+<p>为了解决这一问题，Python的<strong>builtin</strong>模块提供了两个非常实用的内建函数：isinstance()和issubclass()。其中函数isinstance()用于测试一个对象是否是某个类的实例，如果是的话则返回1，否则返回0。其基本的语法格式是：isinstance (instance_object, class_object)</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class Test:</span><br><span class="line">   pass</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; inst = Test()</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; isinstance(inst, Test)</span><br><span class="line">   1</span><br></pre></td></tr></table></figure>
+<p>而函数issubclass()则用于测试一个类是否是另一个类的子类，如果是的话则返回1，否则返回0。其基本的语法格式是：issubclass(classobj1, classobj2)</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; class TestA:</span><br><span class="line">pass</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; class TestB(TestA):</span><br><span class="line">pass</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; issubclass(TestA, TestB)</span><br><span class="line">0</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; issubclass(TestB, TestA)</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<p>和类一样，Python中的每个类实例也具有一些特殊的属性，它们都是由Python的对象模型所提供的。表2列出了这些属性：</p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>dict</strong></td>
+<td style="text-align:center">实例名字空间的字典变量</td>
+</tr>
+<tr>
+<td><strong>class</strong></td>
+<td style="text-align:center">生成该实例的类</td>
+</tr>
+<tr>
+<td><strong>methods</strong></td>
+<td style="text-align:center">实例所有方法的列表</td>
+</tr>
+</tbody>
+</table>
+<p>表2 特殊的实例属性 </p>
+<h4 id="1-3-继承"><a href="#1-3-继承" class="headerlink" title="1.3 继承"></a>1.3 继承</h4><p>在面向对象的程序设计中，继承（Inheritance）允许子类从父类那里获得属性和方法，同时子类可以添加或者重载其父类中的任何方法。</p>
+<p>例如，对于下面这个类：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span>:</span></span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name, salary = <span class="number">0</span>)</span>:</span></span><br><span class="line"></span><br><span class="line">          self.name = name</span><br><span class="line"></span><br><span class="line">          self.salary = salary</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">raisesalary</span><span class="params">(self, percent)</span>:</span></span><br><span class="line"></span><br><span class="line">          self.salary = self.salary * (<span class="number">1</span> + percent)</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="keyword">def</span> <span class="title">work</span><span class="params">(self)</span>:</span></span><br><span class="line"></span><br><span class="line">          <span class="keyword">print</span> self.name, <span class="string">"writes computer code"</span></span><br></pre></td></tr></table></figure>
+<p>可以为其定义如下的子类：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Designer</span><span class="params">(Employee)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name)</span>:</span></span><br><span class="line">		Employee.__init__(self, name, <span class="number">5000</span>)</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">work</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">print</span> self.name, <span class="string">"writes design document"</span></span><br></pre></td></tr></table></figure>
+<p>在C++和Java的对象模型中，子类的构造函数会自动调用父类的构造函数，但在Python中却不是这样，<strong>你必须在子类中显示调用父类的构造函数</strong>，这就是为什么在Designer. <strong>init</strong>方法中必须调用Employee.<strong>init</strong>方法的原因。</p>
+<p>人们对多重继承的看法一直褒贬不一，C++对象模型允许多重继承，而Java对象模型则是通过接口（Interface）来间接实现多重继承的。在对多重继承的处理上，Python采用了和C++类似的方法，即允许多重继承，例如：</p>
+<h4 id="1-4-多态"><a href="#1-4-多态" class="headerlink" title="1.4 多态"></a>1.4 多态</h4><p>严格说来，像C++和Java这些强类型语言对象模型中的多态概念并不适用于Python，因为Python没有提供类型声明机制。但由于Python本身是一种动态类型语言，允许将任意值赋给任何一个变量，如果我们对多态的概念稍加扩充，将其理解为具有能同时处理多种数据类型的函数或方法，那么Python对象模型实际上也支持经过<strong>弱化后的多态</strong>。</p>
+<p>Python<strong>直到代码运行之时才去决定一个变量所属的类型，这一特性称为运行时绑定</strong>（runtime binding）。Python解析器内部虽然也对变量进行类型分配，但却十分模糊，并且只有在真正使用它们时才隐式地分配类型。例如，如果程序调用abs(num)，则除数字之外的任何类型对变量num都没有意义，此时变量num事实上就进行了非正式的类型分配。</p>
+<p>能够处理不同抽象层次的对象，是面向对象编程最重要的特性之一，也是Python的一个非常重要的组成部分。下面的例子示范了如何让Python中的一个函数能够同时处理多种类型的数据，在C++的对象模型中，这种多态被称为方法重载。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Polymorph</span>:</span></span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">def</span> <span class="title">deal_int</span><span class="params">(self, arg)</span>:</span></span><br><span class="line"></span><br><span class="line">           <span class="keyword">print</span> <span class="string">'%d is an integer'</span> % arg</span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">def</span> <span class="title">deal_str</span><span class="params">(self, arg)</span>:</span></span><br><span class="line"></span><br><span class="line">           <span class="keyword">print</span> <span class="string">'%s is a string'</span> % arg</span><br><span class="line"></span><br><span class="line">       <span class="function"><span class="keyword">def</span> <span class="title">deal</span><span class="params">(self, arg)</span>:</span></span><br><span class="line"></span><br><span class="line">           <span class="keyword">if</span> type(arg) == type(<span class="number">1</span>):</span><br><span class="line"></span><br><span class="line">             self.deal_int(arg)</span><br><span class="line"></span><br><span class="line">           <span class="keyword">elif</span> type(arg) == type(<span class="string">' '</span>):</span><br><span class="line"></span><br><span class="line">             self.deal_str(arg)</span><br><span class="line"></span><br><span class="line">          <span class="keyword">else</span>:</span><br><span class="line"></span><br><span class="line">             <span class="keyword">print</span> <span class="string">'%s is not an integer or a string'</span> % arg</span><br></pre></td></tr></table></figure>
+<p>这样，Polymorph类中的方法deal就可以同时处理数字和字符串了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; p = Polymorph()</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; p.deal(100)</span><br><span class="line">100 is an integer</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; p.deal(&quot;Hello World!&quot;)</span><br><span class="line">Hello World! is a string</span><br></pre></td></tr></table></figure>
+<h4 id="1-5-可见性"><a href="#1-5-可见性" class="headerlink" title="1.5 可见性"></a>1.5 可见性</h4><p>Python对象模型对可见性的处理与C++和Java完全不同。在C++和Java中，如果属性或者方法被声明为private，那就意味着它们只能在类中被访问，而如果被声明为protected，则只有该类或者其子类中的代码能够访问这些属性和方法。但<strong>在Python对象模型中，所有属性和方法都是public的</strong>，也就是说数据没有做相应的保护，你可以在任何地方对它们进行任意的修改。</p>
+<p>能够对可见性进行约束是面向对象编程的一个重要特点，其目的是使对象具有优良的封装性：对象仅仅向外界提供访问接口，而内部实现细节则被很好地隐藏起来。奇怪的是作为一门面向对象脚本语言，Python并没有提供对可见性进行约束的机制，所有属性和方法对任何人都是可见的，任何人想知道对象的内部实现细节都是可能的。虽然这样做能够带来部分效率上的优化，但却无法阻止其它程序员对已经封装好的类进行破坏，从某种程度上这不得不说是Python带给我们的一丝的缺憾。</p>
+<p>直到Python 1.5，Guido才引入了<strong>名字压缩</strong>（name mangling）的概念，使得类中的一些属性得以局部化。在进行定义类时，如果一个属性的名称是以两个下划线开始，同时又不是以下划线结束的，那么它在编译时将自动地被改写为类名加上属性名。例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeting</span>:</span></span><br><span class="line"></span><br><span class="line">   __data = <span class="string">"Hello World!"</span></span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, str)</span>:</span></span><br><span class="line"></span><br><span class="line">       Greeting.__data = str</span><br></pre></td></tr></table></figure>
+<p>从下面的显示结果可以看出，Greeting类的属性<strong>data变成了_Greeting</strong>data。虽然这样仍然无法阻止外界对它的访问，但的确使得访问变得不再那么直接了，从而在一定程序上保护了类中的数据不被外界破坏。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; g = Greeting(&quot;Hello Gary!&quot;)</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; dir (g)</span><br><span class="line">[&apos;_Greeting__data&apos;, &apos;__doc__&apos;, &apos;__init__&apos;, &apos;__module__&apos;]</span><br></pre></td></tr></table></figure>
+<hr>
+<div class="alert alert-success"><i class="fa fa-lightbulb-o"></i>  本文转载自学步园<a href="http://www.xuebuyuan.com/2047615.html" target="_blank" rel="external">asserted的博客</a>!</div>
+</span>
+				</header>
+
+				<!-- share -->
+				
+					
+
+					
+     <footer class="entry-meta">      
+
+	    <div class="fenlei" style="font-size:13.5px">
+			<span class="entry-categories">
+				<span class="fa fa-folder" aria-hidden="true"></span> 
+
+				
+					<a href="/categories/python与Django/">python与Django</a>
+				
+
+			</span>
+			
+			<span class="entry-tags">        
+				<span class="fa fa-tags" aria-hidden="true"></span> 
+
+				
+					<a href="/tags/转载/">转载</a>&nbsp;
+				
+					<a href="/tags/python/">python</a>&nbsp;
+				
+					<a href="/tags/对象模型/">对象模型</a>&nbsp;
+				
+
+			</span>
+		</div>
+
+     
+		<!-- JiaThis Button BEGIN -->
+		<div class="jiathis_style" style="float:right;">
+			<span class="jiathis_txt">分享到：</span>
+			<a class="jiathis_button_qzone">QQ空间</a>
+			<a class="jiathis_button_tsina">新浪微博</a>
+			<a class="jiathis_button_weixin">微信</a>
+			<a class="jiathis_button_copy">复制</a>
+			<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+			<a class="jiathis_counter_style"></a>
+		</div>
+		<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+		<!-- JiaThis Button END -->
+		<br>
+    </footer>
+
+
+				
+			</div>	
+		</div>	 	        
+
+		 
+				
+					<p class="p1">Previous <a href="/archives/192/">Python闭包</a></p> 
+
+				
+				   <p class="p2">Next <a href="/archives/190/">Python内存池管理与缓冲池设计</a></p> 
+			
+		
+		<!-- comment -->
+		
+<section id="comment">
+  
+  	 <div class="ds-thread" data-thread-key="archives/191/" data-title="Python对象模型" data-url="http://www.rudy-yuan.net/archives/191/"></div>  
+  
+</section>
+
+		
+	</div> <!-- col-md-9/col-md-12 -->	
+
+	
+		<div id="side_meta">
+			
+      <div class="col-md-3">
+	      <div id="sidebar">
+	      
+  <div class="form-group has-success has-feedback" id="site_search">
+    <form class="site-search-form">
+        <input type="text" id="st-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control" />
+    </form>
+  </div>  
+
+	      <style type="text/css">
+  .cls_container{height:24px;overflow:hidden;}
+  .cls_container ul{list-style-type:none;margin:0;padding:0;margin-left:0px;}
+  .cls_container ul li{height:24px;line-height:24px;float:left;display:inline;}
+</style>
+
+<div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Notification</h4>
+
+	<div id="myscroll" class="cls_container">
+		<ul>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>欢迎访问本站!</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>本站内容已经全部进行迁移</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>谷歌浏览器访问本站效果最佳!</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>若URL失效，请使用本站内部搜索</span></li></br>
+		</ul>
+	</div>
+
+	<div id="showhint"></div>
+</div>
+
+<script type="text/javascript">
+	function $(element){
+	 if(arguments.length>1){
+	  for(var i=0,length=arguments.length,elements=[];i<length;i++){
+	   elements.push($(arguments[i]));
+	  }
+	  return elements;
+	 }
+	 if(typeof element=="string"){
+	  return document.getElementById(element);
+	 }else{
+	  return element;
+	 }
+	}
+	var Class={
+	 create:function(){
+	  return function(){
+	   this.initialize.apply(this,arguments);
+	  }
+	 }
+	}
+	Function.prototype.bind=function(object){
+	 var method=this;
+	 return function(){
+	  method.apply(object,arguments);
+	 }
+	}
+	var Scroll=Class.create();
+	Scroll.prototype={
+	 initialize:function(element,height){
+	  this.element=$(element);
+	  this.element.innerHTML+=this.element.innerHTML;
+	  this.height=height;
+	  this.maxHeight=this.element.scrollHeight/2;
+	  this.counter=0;
+	  this.scroll();
+	  this.timer="";
+	  this.element.onmouseover=this.stop.bind(this);
+	  this.element.onmouseout=function(){this.timer=setTimeout(this.scroll.bind(this),1000);}.bind(this);
+	 },
+	 scroll:function(){
+	  if(this.element.scrollTop<this.maxHeight){
+	   this.element.scrollTop++;
+	   this.counter++;
+	  }else{
+	   this.element.scrollTop=0;
+	   this.counter=0;
+	  }
+	  if(this.counter<this.height){
+	   this.timer=setTimeout(this.scroll.bind(this),20);
+	  }else{
+	   this.counter=0;
+	   this.timer=setTimeout(this.scroll.bind(this),3000);
+	  }
+	 },
+	 stop:function(){
+	  clearTimeout(this.timer);
+	 }
+	}
+	var myscroll=new Scroll("myscroll",24);
+</script>
+
+
+	      <!-- toc -->	      
+	      	      
+
+	      
+	<div class="widget">
+		<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Categories</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Demo/">Demo<span>1</span></a></li>
+		
+			<li><a href="/categories/Docs/">Docs<span>4</span></a></li>
+		
+			<li><a href="/categories/MapReduce/">MapReduce<span>1</span></a></li>
+		
+			<li><a href="/categories/NDN/">NDN<span>2</span></a></li>
+		
+			<li><a href="/categories/Test/">Test<span>2</span></a></li>
+		
+			<li><a href="/categories/c和c/">c和c++<span>1</span></a></li>
+		
+			<li><a href="/categories/c和cpp/">c和cpp<span>2</span></a></li>
+		
+			<li><a href="/categories/leetcode/">leetcode<span>6</span></a></li>
+		
+			<li><a href="/categories/linux学习/">linux学习<span>1</span></a></li>
+		
+			<li><a href="/categories/python与Django/">python与Django<span>7</span></a></li>
+		
+			<li><a href="/categories/socket与网络/">socket与网络<span>2</span></a></li>
+		
+			<li><a href="/categories/不可分/">不可分<span>1</span></a></li>
+		
+			<li><a href="/categories/工具相关/">工具相关<span>1</span></a></li>
+		
+			<li><a href="/categories/技术杂文/">技术杂文<span>11</span></a></li>
+		
+			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>4</span></a></li>
+		
+			<li><a href="/categories/源码学习/">源码学习<span>5</span></a></li>
+		
+		</ul>
+	</div>
+	
+	      
+	<div class="widget">
+		<h4 style="font-weight: bold; color: #333 ">Tag Cloud</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
+		
+			<li><a href="/tags/edas提前/">edas提前<span>1</span></a></li>
+		
+			<li><a href="/tags/github静态博客/">github静态博客<span>1</span></a></li>
+		
+			<li><a href="/tags/plugins/">plugins<span>2</span></a></li>
+		
+			<li><a href="/tags/English/">English<span>1</span></a></li>
+		
+			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
+		
+			<li><a href="/tags/转载/">转载<span>7</span></a></li>
+		
+			<li><a href="/tags/NDN/">NDN<span>2</span></a></li>
+		
+			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
+		
+			<li><a href="/tags/Next数组/">Next数组<span>2</span></a></li>
+		
+			<li><a href="/tags/libevent/">libevent<span>1</span></a></li>
+		
+			<li><a href="/tags/数组对称/">数组对称<span>1</span></a></li>
+		
+			<li><a href="/tags/Web服务器/">Web服务器<span>2</span></a></li>
+		
+			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
+		
+			<li><a href="/tags/facebook访问/">facebook访问<span>1</span></a></li>
+		
+			<li><a href="/tags/Leetcode/">Leetcode<span>1</span></a></li>
+		
+			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
+		
+			<li><a href="/tags/保研/">保研<span>1</span></a></li>
+		
+			<li><a href="/tags/Q-A/">Q&amp;A<span>1</span></a></li>
+		
+			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>57</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+	      
+<div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Friend Links</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li style="font-size:14px"><i class="fa fa-share"></i><a href="http://hexo.io" title="My Linkin account." target="_blank"]);">Hexo</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-github"></i><a href="http://www.github.com/rudy-yuan" title="My Github account." target="_blank"]);">我的github</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-trash"></i><a href="http://yjiehn.sinaapp.com" title="My Linkin account." target="_blank"]);">我的旧版博客</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-cloud-upload"></i><a href="http://www.qiniu.com" title="My Weibo account." target="_blank"]);">七牛云存储</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://netlab.pkusz.edu.cn" title="My Weibo account." target="_blank"]);">北大互联网信息工程研发中心</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://cs.whu.edu.cn" title="My Weibo account." target="_blank"]);">武汉大学 计算机学院</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://github.com/wzpan/hexo-theme-freemind" title="My Weibo account." target="_blank"]);">Hexo-Theme-Freemind</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://www.wengweitao.com" title="My Weibo account." target="_blank"]);">WWT的博客</a></li>
+	
+	</ul>
+</div>
+
+
+	      <div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Recent Comments</h4>
+	<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="0" data-show-admin="1" data-excerpt-length="100" ></ul>
+	
+	<script type="text/javascript">
+	    var duoshuoQuery = {short_name:"rudy-yuan"};
+	    (function() {
+	    var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+	</script>
+
+</div>
+
+
+	
+	      <section id="recent-visitors" class="widget widget_recent_comments">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Recent Visitors</h4>
+  	<div class="panelbody clearfix"><ul class="ds-recent-visitors" data-num-items="30"></ul></div>
+</section>    
+	      </div> <!-- sidebar -->
+      </div> <!-- col-md-3 -->
+
+		</div>
+			
+
+</div><!-- row -->
+
+
+	<script type="text/javascript">
+	  var duoshuoQuery = { short_name: 'rudy-yuan' };
+	  (function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';
+		ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	  })();
+	</script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  Rudy-Yuan &copy; 2013-2016.
+  
+       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, <a href="https://swiftype.com/" target="_blank">Swiftype</a> and <a href="http://www.qiniu.com/" target="_blank">七牛云存储</a>.
+      <i class="fa fa-sitemap %>"></i> <a href="/sitemap.xml" target="_blank"> 站点地图</a>. <a href="http://www.miitbeian.gov.cn/">粤ICP备15038546号</a>.
+      <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255163192'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1255163192' type='text/javascript'%3E%3C/script%3E"));</script>   
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+  <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'YYG5W2xNQTns7U8J3YqW','2.0.0');
+  </script>
+
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+</body>
+   </html>
