@@ -4,6 +4,216 @@
 
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/153/</loc>
+    <lastmod>2016-03-16T13:11:48.271Z</lastmod>
+    <data>
+        <display>
+        <title>动态规划有关算法总结</title>
+        <pubTime>2014-09-11T02:19:22.000Z</pubTime>
+        
+        <tag>算法</tag>
+         
+        <tag>leetcode</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据结构与算法" url="http://www.rudy-yuan.net/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/151/</loc>
+    <lastmod>2016-03-16T13:08:10.736Z</lastmod>
+    <data>
+        <display>
+        <title>TCP字节流与UDP数据报</title>
+        <pubTime>2014-09-05T13:33:22.000Z</pubTime>
+        
+        <tag>转载</tag>
+         
+        <tag>网络</tag>
+         
+        <tag>TCP</tag>
+         
+         
+           
+             
+              <breadCrumb title="socket与网络" url="http://www.rudy-yuan.net/categories/socket%E4%B8%8E%E7%BD%91%E7%BB%9C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/152/</loc>
+    <lastmod>2016-03-16T13:07:09.395Z</lastmod>
+    <data>
+        <display>
+        <title>latex常用命令</title>
+        <pubTime>2014-09-06T02:17:22.000Z</pubTime>
+        
+        <tag>latex</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术杂文" url="http://www.rudy-yuan.net/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/150/</loc>
+    <lastmod>2016-03-16T12:57:58.790Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx工作原理</title>
+        <pubTime>2014-09-05T13:09:22.000Z</pubTime>
+        
+        <tag>Web服务器</tag>
+         
+        <tag>网络</tag>
+         
+        <tag>nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="源码学习" url="http://www.rudy-yuan.net/categories/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/149/</loc>
+    <lastmod>2016-03-16T12:48:25.428Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx多进程网络模型</title>
+        <pubTime>2014-09-05T13:07:22.000Z</pubTime>
+        
+        <tag>Web服务器</tag>
+         
+        <tag>网络</tag>
+         
+        <tag>nginx</tag>
+         
+         
+           
+             
+              <breadCrumb title="源码学习" url="http://www.rudy-yuan.net/categories/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/157/</loc>
+    <lastmod>2016-03-16T11:10:57.603Z</lastmod>
+    <data>
+        <display>
+        <title>leetcode--Valid Phone Numbers</title>
+        <pubTime>2014-10-21T03:01:22.000Z</pubTime>
+        
+        <tag>leetcode</tag>
+         
+        <tag>shell</tag>
+         
+        <tag>sed</tag>
+         
+         
+           
+             
+              <breadCrumb title="shell编程" url="http://www.rudy-yuan.net/categories/shell%E7%BC%96%E7%A8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/156/</loc>
+    <lastmod>2016-03-16T11:10:47.075Z</lastmod>
+    <data>
+        <display>
+        <title>leetcode--Valid Phone Numbers</title>
+        <pubTime>2014-10-21T03:01:22.000Z</pubTime>
+        
+        <tag>leetcode</tag>
+         
+        <tag>shell</tag>
+         
+        <tag>sed</tag>
+         
+         
+           
+             
+              <breadCrumb title="shell编程" url="http://www.rudy-yuan.net/categories/shell%E7%BC%96%E7%A8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/155/</loc>
+    <lastmod>2016-03-16T11:10:37.605Z</lastmod>
+    <data>
+        <display>
+        <title>leetcode--Valid Phone Numbers</title>
+        <pubTime>2014-10-21T03:01:22.000Z</pubTime>
+        
+        <tag>leetcode</tag>
+         
+        <tag>shell</tag>
+         
+        <tag>sed</tag>
+         
+         
+           
+             
+              <breadCrumb title="shell编程" url="http://www.rudy-yuan.net/categories/shell%E7%BC%96%E7%A8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/154/</loc>
+    <lastmod>2016-03-16T11:10:25.747Z</lastmod>
+    <data>
+        <display>
+        <title>leetcode--Valid Phone Numbers</title>
+        <pubTime>2014-10-21T03:01:22.000Z</pubTime>
+        
+        <tag>leetcode</tag>
+         
+        <tag>shell</tag>
+         
+        <tag>sed</tag>
+         
+         
+           
+             
+              <breadCrumb title="shell编程" url="http://www.rudy-yuan.net/categories/shell%E7%BC%96%E7%A8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/193/</loc>
     <lastmod>2016-03-16T11:06:12.049Z</lastmod>
     <data>
@@ -1659,6 +1869,26 @@
     
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Tag Plugins</title>
+        <pubTime>2014-03-16T02:17:16.000Z</pubTime>
+        
+        <tag>plugins</tag>
+         
+         
+           
+             
+              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/lorem-ipsum/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
@@ -1667,6 +1897,26 @@
         <pubTime>2014-03-15T12:17:16.000Z</pubTime>
         
         <tag>English</tag>
+         
+         
+           
+             
+              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>简体中文测试</title>
+        <pubTime>2013-12-25T12:17:16.000Z</pubTime>
+        
+        <tag>简体</tag>
          
          
            
@@ -1719,26 +1969,6 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>简体中文测试</title>
-        <pubTime>2013-12-25T12:17:16.000Z</pubTime>
-        
-        <tag>简体</tag>
-         
-         
-           
-             
-              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.rudy-yuan.net/archives/code-highlight/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
@@ -1752,26 +1982,6 @@
            
              
               <breadCrumb title="Demo" url="http://www.rudy-yuan.net/categories/Demo/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Tag Plugins</title>
-        <pubTime>2014-03-16T02:17:16.000Z</pubTime>
-        
-        <tag>plugins</tag>
-         
-         
-           
-             
-              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
           
         </display>
     </data>
