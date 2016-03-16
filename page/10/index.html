@@ -114,7 +114,7 @@
 							
 							  <span class="entry-date">
 								  <span class="fa fa-calendar" aria-hidden="true"></span>
-								  2014-12-30						      
+								  2014-09-05						      
 							  </span>
 							  
 							  <span class="author vcard">
@@ -126,64 +126,13 @@
 
 							<span class="comments-link">
 								<span class="fa fa-comments" aria-hidden="true"></span>
-								<span class="ds-thread-count" data-thread-key="archives/167/">暂无评论</span>
+								<span class="ds-thread-count" data-thread-key="archives/149/">暂无评论</span>
 							</span>	
 							
 						</div>	
 									
 						<h3 class="entry-title"> 
-							  <a href="/archives/167/" >linux多线程</a>
-						</h3>
-
-					</header>
-
-					<div class="entry">
-  <div class="row">
-	
-	
-		<p>为什么有了进程的概念后，还要再引入线程呢？</p>
-<p>使用多线程的理由之一是和进程相比，它是一种非常”节俭”的多任务操作方式</p>
-<p>使用多线程的理由之二是线程间方便的通信机制
-	
-	...</div>
-</div>
-
-
-					<footer class="entry-meta">					  
-						<a href="/archives/167/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
-					</footer>
-
-				</div>	
-
-             </div>
-		
-            <div class="archive">	  
-				<div id="archives"> 
-				
-					<header class="entry-header">
-						<div class="entry-info" text-transform : capitalize>				     					      	      
-							
-							  <span class="entry-date">
-								  <span class="fa fa-calendar" aria-hidden="true"></span>
-								  2014-12-28						      
-							  </span>
-							  
-							  <span class="author vcard">
-								  <span class="fa fa-user" aria-hidden="true"></span>
-								  <a href="/">Rudy-Yuan</a> 	
-							  </span>
-
-
-
-							<span class="comments-link">
-								<span class="fa fa-comments" aria-hidden="true"></span>
-								<span class="ds-thread-count" data-thread-key="archives/166/">暂无评论</span>
-							</span>	
-							
-						</div>	
-									
-						<h3 class="entry-title"> 
-							  <a href="/archives/166/" >使用edas系统的“bug”提前查看论文是否被accept</a>
+							  <a href="/archives/149/" >Nginx多进程网络模型</a>
 						</h3>
 
 					</header>
@@ -192,21 +141,21 @@
   <div class="row">
 	
            
-              <div class="thumbnail"><a href="/archives/166/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2015/07/09/1.jpg" alt="使用edas系统的“bug”提前查看论文是否被accept"  class="nofancybox"></a>
+              <div class="thumbnail"><a href="/archives/149/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/06/13nginx-network.png" alt="Nginx多进程网络模型"  class="nofancybox"></a>
            
 		</div>
 	
 	
-		<p>当你投了一篇论文后，心里肯定是想着能快点知道论文的结果。</p>
-<p>在使用edas作为投稿系统的会议，可以使用如下的bug进行“提前查看”审稿结果</p>
-<p>1，如果打开“<a href="http://edas.info/uploadPaper.php?m=你的文章编号”">http://edas.info/uploadPaper.php?m=你的文章编号”</a> 显示cannot upload paper decided but not yet notified. 则表明该论文的结果已经出了但还没正式公布，在这种情况下，可以进行第2步；否则，则说明该论文的结果还没录入edas系统<br>
+		<p>Nginx启动后以daemon的方式在后台运行，后台进程包含<strong>一个master进程</strong>和<strong>多个worker进程</strong></p>
+<p>Nginx采用<strong>异步非阻塞</strong>的方式来处理网络事件，类似于Libevent ？？？（是同步非阻塞吧？？？）</p>
+<p>master进程先建好需要listen的socket后，然后再<strong>fork</strong>复制出多个woker进程，这样每个work进程都可以去accept这个socket
 	
 	...</div>
 </div>
 
 
 					<footer class="entry-meta">					  
-						<a href="/archives/166/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+						<a href="/archives/149/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
 					</footer>
 
 				</div>	
@@ -221,7 +170,7 @@
 							
 							  <span class="entry-date">
 								  <span class="fa fa-calendar" aria-hidden="true"></span>
-								  2014-12-13						      
+								  2014-09-02						      
 							  </span>
 							  
 							  <span class="author vcard">
@@ -233,13 +182,13 @@
 
 							<span class="comments-link">
 								<span class="fa fa-comments" aria-hidden="true"></span>
-								<span class="ds-thread-count" data-thread-key="archives/165/">暂无评论</span>
+								<span class="ds-thread-count" data-thread-key="archives/148/">暂无评论</span>
 							</span>	
 							
 						</div>	
 									
 						<h3 class="entry-title"> 
-							  <a href="/archives/165/" >leetcode--Word Frequency</a>
+							  <a href="/archives/148/" >leetcode ——Repeated DNA Sequences</a>
 						</h3>
 
 					</header>
@@ -248,17 +197,16 @@
   <div class="row">
 	
 	
-		<p><a href="https://leetcode.com/problems/word-frequency/">https://leetcode.com/problems/word-frequency/</a></p>
-<p>Write a bash script to calculate the frequency of each word in a text file words.txt.</p>
-<p>For simplicity sake, you may assume:</p>
-<p>words.txt contains only lowercase characters and space ‘ ‘ characters.
+		<p><a href="https://leetcode.com/problems/repeated-dna-sequences/">Repeated DNA Sequences题目链接</a></p>
+<p>All DNA is composed of a series of nucleotides abbreviated as A, C, G, and T, for example: “ACGAATTCCG”. When studying DNA, it is sometimes useful to identify repeated sequences within the DNA.</p>
+<p>Write a function to find all the 10-letter-long sequences (substrings) that occur more than once in a DNA molecule.
 	
 	...</div>
 </div>
 
 
 					<footer class="entry-meta">					  
-						<a href="/archives/165/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+						<a href="/archives/148/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
 					</footer>
 
 				</div>	
@@ -273,7 +221,7 @@
 							
 							  <span class="entry-date">
 								  <span class="fa fa-calendar" aria-hidden="true"></span>
-								  2014-12-05						      
+								  2014-08-17						      
 							  </span>
 							  
 							  <span class="author vcard">
@@ -285,13 +233,13 @@
 
 							<span class="comments-link">
 								<span class="fa fa-comments" aria-hidden="true"></span>
-								<span class="ds-thread-count" data-thread-key="archives/164/">暂无评论</span>
+								<span class="ds-thread-count" data-thread-key="archives/137/">暂无评论</span>
 							</span>	
 							
 						</div>	
 									
 						<h3 class="entry-title"> 
-							  <a href="/archives/164/" >Django的分页对象Paginator</a>
+							  <a href="/archives/137/" >使用I/O多路复用技术--select实现Reactor模式</a>
 						</h3>
 
 					</header>
@@ -300,15 +248,15 @@
   <div class="row">
 	
 	
-		<p>Django分页的<a href="https://docs.djangoproject.com/en/dev/topics/pagination/">基本操作</a>在Django文档有简单的例子，基本上看一下就知道。核心代码在django.core.paginator.py中。</p>
-<h4 id="分页对象Paginator"><a href="#分页对象Paginator" class="headerlink" title="分页对象Paginator"></a>分页对象Paginator</h4><p>只需提供<strong>两个必要的参数</strong>，第一个就是用于展示的数据（object_list），第二参数就是每页显示的大小（per_page），提供了这两个参数，其他的都好说
+		<p>reactor类内部提供一个事件循环：handle_events()，事件循环的代码实现利用了操作系统提供的多路分离函数select，select多路分离的函数的特点是，可以同时等待多个句柄，</p>
+<p>在等待过程中所在线程属于挂起状态，不消耗CPU时间，<strong>一旦某个句柄被触发，则线程被唤醒，函数将返回，线程可以执行后面的代码</strong>
 	
 	...</div>
 </div>
 
 
 					<footer class="entry-meta">					  
-						<a href="/archives/164/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+						<a href="/archives/137/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
 					</footer>
 
 				</div>	
@@ -323,7 +271,7 @@
 							
 							  <span class="entry-date">
 								  <span class="fa fa-calendar" aria-hidden="true"></span>
-								  2014-11-28						      
+								  2014-08-15						      
 							  </span>
 							  
 							  <span class="author vcard">
@@ -335,13 +283,13 @@
 
 							<span class="comments-link">
 								<span class="fa fa-comments" aria-hidden="true"></span>
-								<span class="ds-thread-count" data-thread-key="archives/163/">暂无评论</span>
+								<span class="ds-thread-count" data-thread-key="archives/136/">暂无评论</span>
 							</span>	
 							
 						</div>	
 									
 						<h3 class="entry-title"> 
-							  <a href="/archives/163/" >重载python的print命令，作为多重继承的基类</a>
+							  <a href="/archives/136/" >在mediastreamer2库中添加自定义filter(3)</a>
 						</h3>
 
 					</header>
@@ -350,19 +298,186 @@
   <div class="row">
 	
            
-              <div class="thumbnail"><a href="/archives/163/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/08/01/python-print.jpg" alt="重载python的print命令，作为多重继承的基类"  class="nofancybox"></a>
+              <div class="thumbnail"><a href="/archives/136/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/12/17/sip.jpg" alt="在mediastreamer2库中添加自定义filter(3)"  class="nofancybox"></a>
            
 		</div>
 	
 	
-		<p>python的多重继承与运算符重载示例
+		<p>接着<a href="http://www.rudy-yuan.net/archives/134/">上篇博客</a>的内容，这篇博客简要介绍如何修改mediastreamer2库的源代码来实现linphone的加密语音通信。</p>
+<p>博客2中只是添加了一个自定义的filter并自己写了个测试demo来调用增加的filter。</p>
+<p>为了让linphone能够调用增加的filter，首先需要在mediastream.h文件中对struct _AudioStream结构体的定义进行扩展，加入加密和解密filter作为结构体成员
 	
 	...</div>
 </div>
 
 
 					<footer class="entry-meta">					  
-						<a href="/archives/163/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+						<a href="/archives/136/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+					</footer>
+
+				</div>	
+
+             </div>
+		
+            <div class="archive">	  
+				<div id="archives"> 
+				
+					<header class="entry-header">
+						<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+							  <span class="entry-date">
+								  <span class="fa fa-calendar" aria-hidden="true"></span>
+								  2014-08-15						      
+							  </span>
+							  
+							  <span class="author vcard">
+								  <span class="fa fa-user" aria-hidden="true"></span>
+								  <a href="/">Rudy-Yuan</a> 	
+							  </span>
+
+
+
+							<span class="comments-link">
+								<span class="fa fa-comments" aria-hidden="true"></span>
+								<span class="ds-thread-count" data-thread-key="archives/135/">暂无评论</span>
+							</span>	
+							
+						</div>	
+									
+						<h3 class="entry-title"> 
+							  <a href="/archives/135/" >在mediastreamer2库中添加自定义filter(1)</a>
+						</h3>
+
+					</header>
+
+					<div class="entry">
+  <div class="row">
+	
+           
+              <div class="thumbnail"><a href="/archives/135/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/12/17/msfilter.jpg" alt="在mediastreamer2库中添加自定义filter(1)"  class="nofancybox"></a>
+           
+		</div>
+	
+	
+		<p>mediastreamer2是由开源VoIP客户端项目Linphone设计并使用的一个多媒体框架，mediastreamer2通过oRTP库实现了音视频的RTP、SRTP和ZRTP传输。该框架通过类似于DirectShow所提供的Filter链接为Graph的方式，通过代码让使用者将各种自带的msfilter结构链接起来，使之可以灵活的定义多媒体流。</p>
+<p>Mediastreamer2中的两个重要概念：filter、graph
+	
+	...</div>
+</div>
+
+
+					<footer class="entry-meta">					  
+						<a href="/archives/135/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+					</footer>
+
+				</div>	
+
+             </div>
+		
+            <div class="archive">	  
+				<div id="archives"> 
+				
+					<header class="entry-header">
+						<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+							  <span class="entry-date">
+								  <span class="fa fa-calendar" aria-hidden="true"></span>
+								  2014-08-15						      
+							  </span>
+							  
+							  <span class="author vcard">
+								  <span class="fa fa-user" aria-hidden="true"></span>
+								  <a href="/">Rudy-Yuan</a> 	
+							  </span>
+
+
+
+							<span class="comments-link">
+								<span class="fa fa-comments" aria-hidden="true"></span>
+								<span class="ds-thread-count" data-thread-key="archives/134/">暂无评论</span>
+							</span>	
+							
+						</div>	
+									
+						<h3 class="entry-title"> 
+							  <a href="/archives/134/" >在mediastreamer2库中添加自定义filter(2)</a>
+						</h3>
+
+					</header>
+
+					<div class="entry">
+  <div class="row">
+	
+           
+              <div class="thumbnail"><a href="/archives/134/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/12/17/result.png" alt="在mediastreamer2库中添加自定义filter(2)"  class="nofancybox"></a>
+           
+		</div>
+	
+	
+		<h4 id="增加自定义filter"><a href="#增加自定义filter" class="headerlink" title="增加自定义filter"></a>增加自定义filter</h4><p>通过自定义插件，可以给mediastreamer2框架加入新功能，而本文提到的加解密模块正是通过此方式实现。</p>
+<p>要自定义一个模块，需要按照规范定义一系列数据结构，其中最关键的是描述插件功能的结构体MSFilterDesc，该结构体包含了插件名字、类型、输入输出端个数和处理函数。</p>
+<p>例如这里定义了本方案中实现加密功能的插件
+	
+	...</div>
+</div>
+
+
+					<footer class="entry-meta">					  
+						<a href="/archives/134/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+					</footer>
+
+				</div>	
+
+             </div>
+		
+            <div class="archive">	  
+				<div id="archives"> 
+				
+					<header class="entry-header">
+						<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+							  <span class="entry-date">
+								  <span class="fa fa-calendar" aria-hidden="true"></span>
+								  2014-08-05						      
+							  </span>
+							  
+							  <span class="author vcard">
+								  <span class="fa fa-user" aria-hidden="true"></span>
+								  <a href="/">Rudy-Yuan</a> 	
+							  </span>
+
+
+
+							<span class="comments-link">
+								<span class="fa fa-comments" aria-hidden="true"></span>
+								<span class="ds-thread-count" data-thread-key="archives/130/">暂无评论</span>
+							</span>	
+							
+						</div>	
+									
+						<h3 class="entry-title"> 
+							  <a href="/archives/130/" >求字符串的最长回文子串--最直观的“马拉车算法”分析</a>
+						</h3>
+
+					</header>
+
+					<div class="entry">
+  <div class="row">
+	
+           
+              <div class="thumbnail"><a href="/archives/130/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/08/05/Palindromic-Substring-2.jpg" alt="求字符串的最长回文子串--最直观的“马拉车算法”分析"  class="nofancybox"></a>
+           
+		</div>
+	
+	
+		<p>首先用一个非常巧妙的方式，将所有可能的奇数/偶数长度的回文子串都转换成了奇数长度：在每个字符的两边都插入一个特殊的符号。比如 abba 变成 #a#b#b#a#， aba变成 #a#b#a#。 为了进一步减少编码的复杂度，可以在字符串的开始加入另一个特殊字符，这样就不用特殊处理越界问题，比如$#a#b#a#（注意，下面的代码是用C语言写就，由于C语言规范还要求字符串末尾有一个’\0’所以正好OK，但其他语言可能会导致越界）
+	
+	...</div>
+</div>
+
+
+					<footer class="entry-meta">					  
+						<a href="/archives/130/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
 					</footer>
 
 				</div>	
@@ -375,7 +490,7 @@
 			<center>
 			
     <nav class="pagination">
-	    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
+	    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right"></i></a>
     </nav>
 
 
@@ -529,43 +644,43 @@
 		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
+			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
 		
-			<li><a href="/tags/热点文章/">热点文章<span>7</span></a></li>
+			<li><a href="/tags/Manacher算法/">Manacher算法<span>1</span></a></li>
 		
-			<li><a href="/tags/博主推荐/">博主推荐<span>2</span></a></li>
+			<li><a href="/tags/django/">django<span>1</span></a></li>
 		
-			<li><a href="/tags/操作系统/">操作系统<span>2</span></a></li>
+			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
 		
-			<li><a href="/tags/简体/">简体<span>1</span></a></li>
+			<li><a href="/tags/面试/">面试<span>8</span></a></li>
 		
-			<li><a href="/tags/个人博客/">个人博客<span>1</span></a></li>
+			<li><a href="/tags/vi/">vi<span>1</span></a></li>
 		
 			<li><a href="/tags/数据结构/">数据结构<span>3</span></a></li>
 		
-			<li><a href="/tags/awk/">awk<span>2</span></a></li>
+			<li><a href="/tags/facebook访问/">facebook访问<span>1</span></a></li>
+		
+			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
 		
 			<li><a href="/tags/转载/">转载<span>9</span></a></li>
 		
-			<li><a href="/tags/翻墙/">翻墙<span>1</span></a></li>
+			<li><a href="/tags/awk/">awk<span>2</span></a></li>
 		
-			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
-		
-			<li><a href="/tags/TCP/">TCP<span>1</span></a></li>
-		
-			<li><a href="/tags/读书笔记/">读书笔记<span>2</span></a></li>
-		
-			<li><a href="/tags/sofa-pbrpc/">sofa-pbrpc<span>1</span></a></li>
+			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
 		
 			<li><a href="/tags/IO复用/">IO复用<span>2</span></a></li>
 		
-			<li><a href="/tags/shell/">shell<span>3</span></a></li>
+			<li><a href="/tags/Web服务器/">Web服务器<span>6</span></a></li>
 		
-			<li><a href="/tags/themes/">themes<span>1</span></a></li>
+			<li><a href="/tags/gdb/">gdb<span>1</span></a></li>
 		
-			<li><a href="/tags/Q-A/">Q&amp;A<span>1</span></a></li>
+			<li><a href="/tags/linux内核/">linux内核<span>1</span></a></li>
 		
-			<li><a href="/tags/对象模型/">对象模型<span>2</span></a></li>
+			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
+		
+			<li><a href="/tags/sofa-pbrpc/">sofa-pbrpc<span>1</span></a></li>
+		
+			<li><a href="/tags/保研/">保研<span>1</span></a></li>
 		
 			<li><a href="/tags/NDN/">NDN<span>4</span></a></li>
 		

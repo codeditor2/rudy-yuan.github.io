@@ -3,6 +3,8 @@
 
 
     
+    
+    
   <url>
     <loc>http://www.rudy-yuan.net/archives/157/</loc>
     <lastmod>2016-03-16T13:33:59.159Z</lastmod>
@@ -1858,7 +1860,25 @@
     </url>
 
     
-    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/tag-plugins-cn/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Tag Plugins（中文）</title>
+        <pubTime>2014-03-16T02:10:16.000Z</pubTime>
+        
+        <tag>plugins</tag>
+         
+         
+           
+             
+              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
   <url>
     <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
@@ -1881,19 +1901,19 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/tag-plugins-cn/</loc>
+    <loc>http://www.rudy-yuan.net/archives/code-highlight/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>Tag Plugins（中文）</title>
-        <pubTime>2014-03-16T02:10:16.000Z</pubTime>
+        <title>Code Highlight</title>
+        <pubTime>2014-03-15T12:17:16.000Z</pubTime>
         
-        <tag>plugins</tag>
+        <tag>highlight</tag>
          
          
            
              
-              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
+              <breadCrumb title="Demo" url="http://www.rudy-yuan.net/categories/Demo/"/>
           
         </display>
     </data>
@@ -1954,26 +1974,6 @@
            
              
               <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/code-highlight/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Code Highlight</title>
-        <pubTime>2014-03-15T12:17:16.000Z</pubTime>
-        
-        <tag>highlight</tag>
-         
-         
-           
-             
-              <breadCrumb title="Demo" url="http://www.rudy-yuan.net/categories/Demo/"/>
           
         </display>
     </data>
