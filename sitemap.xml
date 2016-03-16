@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/73/</loc>
+    <lastmod>2016-03-16T14:53:28.260Z</lastmod>
+    <data>
+        <display>
+        <title>手把手教你使用git及github(1)</title>
+        <pubTime>2014-04-26T13:00:58.000Z</pubTime>
+        
+        <tag>github</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具相关" url="http://www.rudy-yuan.net/categories/%E5%B7%A5%E5%85%B7%E7%9B%B8%E5%85%B3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/vi-guide/</loc>
     <lastmod>2016-03-16T14:49:36.285Z</lastmod>
     <data>
@@ -37,26 +57,6 @@
            
              
               <breadCrumb title="linux学习" url="http://www.rudy-yuan.net/categories/linux%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/73/</loc>
-    <lastmod>2016-03-16T14:48:19.502Z</lastmod>
-    <data>
-        <display>
-        <title>手把手教你使用git及github(1)</title>
-        <pubTime>2014-04-26T13:00:58.000Z</pubTime>
-        
-        <tag>github</tag>
-         
-         
-           
-             
-              <breadCrumb title="工具相关" url="http://www.rudy-yuan.net/categories/%E5%B7%A5%E5%85%B7%E7%9B%B8%E5%85%B3/"/>
           
         </display>
     </data>
