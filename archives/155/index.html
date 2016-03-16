@@ -3,13 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>leetcode--Valid Phone Numbers | Rudy-Yuan的博客</title>
+  <title>linux pthread_join函数 | Rudy-Yuan的博客</title>
   <meta name="author" content="Rudy-Yuan">
+  
+  <meta name="description" content="在Linux中，默认情况下是在一个线程被创建后，必须使用此函数对创建的线程进行资源回收，但是可以设置Threads attributes来设置当一个线程结束时，直接回收此线程所占用的系统资源，详细资料查看Threads attributes。
+其实在Linux中，新建的线程并不是在原先的进程中，而是系统通过一个系统调用">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="leetcode--Valid Phone Numbers"/>
+  <meta property="og:title" content="linux pthread_join函数"/>
   <meta property="og:site_name" content="Rudy-Yuan的博客"/>
 
   
@@ -110,9 +113,9 @@
 		  <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">
 			  当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;:&nbsp;
 			
-				<a href="/categories/shell编程/">shell编程</a>
+				<a href="/categories/linux学习/">linux学习</a>
 			
-		  &nbsp;</a>»&nbsp; leetcode--Valid Phone Numbers </h4>
+		  &nbsp;</a>»&nbsp; linux pthread_join函数 </h4>
 		</div>
 
 		<div id="top_search"></div>
@@ -127,7 +130,7 @@
 							
 						<span class="entry-date">
 							<span class="fa fa-calendar" aria-hidden="true"></span>
-							2014-10-21						      
+							2014-09-24						      
 						</span>
 							  
 							  
@@ -145,10 +148,17 @@
 
 									
 					<h3 class="entry-title"> 
-						<a href="/archives/155/" >leetcode--Valid Phone Numbers</a>
+						<a href="/archives/155/" >linux pthread_join函数</a>
 					</h3>		
 						
-					<span style="font-size:15px"></span>
+					<span style="font-size:15px"><p>在Linux中，默认情况下是在一个线程被创建后，必须使用此函数对创建的线程进行资源回收，但是可以设置Threads attributes来设置当一个线程结束时，直接回收此线程所占用的系统资源，详细资料查看Threads attributes。</p>
+<p>其实在Linux中，新建的线程并不是在原先的进程中，而是系统通过一个系统调用<a id="more"></a>clone()。该系统调用copy了一个和原先进程完全一样的进程，并在这个进程中执行线程函数。不过这个copy过程和fork不一样。<br>copy后的进程和原先的进程共享了所有的变量，运行环境。这样，原先进程中的变量变动在copy后的进程中便能体现出来。</p>
+<p>代码中如果没有pthread_join，<strong>主线程会很快结束从而使整个进程结束</strong>，从而<strong>使创建的线程没有机会开始执行就结束了</strong>!</p>
+<p>pthread_join函数会被<strong>一直阻塞本线程，直到被等待线程结束</strong>。 </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> NUM 6</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">thread_function</span><span class="params">(<span class="keyword">void</span> *arg)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> res;</span><br><span class="line"><span class="keyword">pthread_t</span> a_thread[NUM];</span><br><span class="line"><span class="keyword">void</span> *thread_result;</span><br><span class="line"><span class="keyword">int</span> index;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (index = <span class="number">0</span>; index &lt; NUM; ++index)</span><br><span class="line">&#123;</span><br><span class="line">    res = pthread_create(&amp;a_thread[index], <span class="literal">NULL</span>, thread_function, (<span class="keyword">void</span> *)index);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (res != <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">    perror(<span class="string">"Thread create failed!"</span>);</span><br><span class="line">    <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    sleep(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Waiting for threads to finished...\n"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (index = NUM - <span class="number">1</span>; index &gt;= <span class="number">0</span>; --index)</span><br><span class="line">&#123;</span><br><span class="line">    res = pthread_join(a_thread[index], &amp;thread_result);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (res == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Picked up a thread:%d\n"</span>, index);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">    perror(<span class="string">"pthread_join failed\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"All done\n"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span>(EXIT_SUCCESS);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">thread_function</span><span class="params">(<span class="keyword">void</span> *arg)</span></span><br><span class="line"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> my_number = (<span class="keyword">int</span>)arg;</span><br><span class="line"><span class="keyword">int</span> rand_num;</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"thread_function is running. Argument was %d\n"</span>, my_number);</span><br><span class="line"></span><br><span class="line">rand_num = <span class="number">5</span> + (<span class="keyword">int</span>)(<span class="number">9.0</span> * rand()/(RAND_MAX + <span class="number">1.0</span>));</span><br><span class="line">sleep(rand_num);</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Bye from %d\n"</span>, my_number);</span><br><span class="line">pthread_exit(<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/03/21/pthread_join.png?imageView/2/w/760/h/580" alt=""></p>
+</span>
 				</header>
 
 				<!-- share -->
@@ -163,7 +173,7 @@
 				<span class="fa fa-folder" aria-hidden="true"></span> 
 
 				
-					<a href="/categories/shell编程/">shell编程</a>
+					<a href="/categories/linux学习/">linux学习</a>
 				
 
 			</span>
@@ -172,11 +182,9 @@
 				<span class="fa fa-tags" aria-hidden="true"></span> 
 
 				
-					<a href="/tags/leetcode/">leetcode</a>&nbsp;
+					<a href="/tags/linux/">linux</a>&nbsp;
 				
-					<a href="/tags/shell/">shell</a>&nbsp;
-				
-					<a href="/tags/sed/">sed</a>&nbsp;
+					<a href="/tags/多线程/">多线程</a>&nbsp;
 				
 
 			</span>
@@ -205,17 +213,17 @@
 
 		 
 				
-					<p class="p1">Previous <a href="/archives/158/">leetcode--Valid Phone Numbers</a></p> 
+					<p class="p1">上一篇 <a href="/archives/156/">Nginx源码学习笔记</a></p> 
 
 				
-				   <p class="p2">Next <a href="/archives/156/">leetcode--Valid Phone Numbers</a></p> 
+				   <p class="p2">下一篇 <a href="/archives/154/">基于libevent实现一个简单的httpServer</a></p> 
 			
 		
 		<!-- comment -->
 		
 <section id="comment">
   
-  	 <div class="ds-thread" data-thread-key="archives/155/" data-title="leetcode--Valid Phone Numbers" data-url="http://www.rudy-yuan.net/archives/155/"></div>  
+  	 <div class="ds-thread" data-thread-key="archives/155/" data-title="linux pthread_join函数" data-url="http://www.rudy-yuan.net/archives/155/"></div>  
   
 </section>
 
@@ -230,7 +238,7 @@
 	      
   <div class="form-group has-success has-feedback" id="site_search">
     <form class="site-search-form">
-        <input type="text" id="st-search-input" name="q" results="0" placeholder="Search" class="st-search-input st-default-search-input form-control" />
+        <input type="text" id="st-search-input" name="q" results="0" placeholder="搜索" class="st-search-input st-default-search-input form-control" />
     </form>
   </div>  
 
@@ -241,7 +249,7 @@
 </style>
 
 <div class="widget">
-	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Notification</h4>
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">本站公告</h4>
 
 	<div id="myscroll" class="cls_container">
 		<ul>
@@ -323,7 +331,7 @@
 
 	      
 	<div class="widget">
-		<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Categories</h4>
+		<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">分类目录</h4>
 		<ul class="tag_box inline list-unstyled">
 		
 			<li><a href="/categories/Demo/">Demo<span>1</span></a></li>
@@ -332,7 +340,7 @@
 		
 			<li><a href="/categories/MapReduce/">MapReduce<span>1</span></a></li>
 		
-			<li><a href="/categories/NDN/">NDN<span>3</span></a></li>
+			<li><a href="/categories/NDN/">NDN<span>4</span></a></li>
 		
 			<li><a href="/categories/Test/">Test<span>2</span></a></li>
 		
@@ -342,11 +350,11 @@
 		
 			<li><a href="/categories/leetcode/">leetcode<span>13</span></a></li>
 		
-			<li><a href="/categories/linux学习/">linux学习<span>5</span></a></li>
+			<li><a href="/categories/linux学习/">linux学习<span>6</span></a></li>
 		
 			<li><a href="/categories/python与Django/">python与Django<span>9</span></a></li>
 		
-			<li><a href="/categories/shell编程/">shell编程<span>5</span></a></li>
+			<li><a href="/categories/shell编程/">shell编程<span>1</span></a></li>
 		
 			<li><a href="/categories/socket与网络/">socket与网络<span>4</span></a></li>
 		
@@ -358,55 +366,55 @@
 		
 			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>6</span></a></li>
 		
-			<li><a href="/categories/源码学习/">源码学习<span>9</span></a></li>
+			<li><a href="/categories/源码学习/">源码学习<span>11</span></a></li>
 		
 		</ul>
 	</div>
 	
 	      
 	<div class="widget">
-		<h4 style="font-weight: bold; color: #333 ">Tag Cloud</h4>
+		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/阿里云/">阿里云<span>2</span></a></li>
+			<li><a href="/tags/IO复用/">IO复用<span>2</span></a></li>
 		
-			<li><a href="/tags/select/">select<span>1</span></a></li>
+			<li><a href="/tags/leetcode/">leetcode<span>16</span></a></li>
 		
-			<li><a href="/tags/github/">github<span>1</span></a></li>
+			<li><a href="/tags/themes/">themes<span>1</span></a></li>
 		
-			<li><a href="/tags/个人博客/">个人博客<span>1</span></a></li>
+			<li><a href="/tags/Leetcode/">Leetcode<span>1</span></a></li>
 		
-			<li><a href="/tags/vi/">vi<span>1</span></a></li>
+			<li><a href="/tags/博主推荐/">博主推荐<span>2</span></a></li>
 		
-			<li><a href="/tags/数据结构/">数据结构<span>3</span></a></li>
+			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
 		
-			<li><a href="/tags/TCP/">TCP<span>1</span></a></li>
-		
-			<li><a href="/tags/网络/">网络<span>6</span></a></li>
-		
-			<li><a href="/tags/gdb/">gdb<span>1</span></a></li>
-		
-			<li><a href="/tags/数组对称/">数组对称<span>1</span></a></li>
-		
-			<li><a href="/tags/clixsense/">clixsense<span>1</span></a></li>
+			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
 		
 			<li><a href="/tags/ubuntu源/">ubuntu源<span>1</span></a></li>
 		
-			<li><a href="/tags/nginx/">nginx<span>2</span></a></li>
+			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
 		
-			<li><a href="/tags/对象模型/">对象模型<span>2</span></a></li>
+			<li><a href="/tags/English/">English<span>1</span></a></li>
 		
-			<li><a href="/tags/数据库/">数据库<span>1</span></a></li>
+			<li><a href="/tags/算法/">算法<span>10</span></a></li>
 		
-			<li><a href="/tags/华为面试/">华为面试<span>1</span></a></li>
+			<li><a href="/tags/设计模式/">设计模式<span>2</span></a></li>
 		
-			<li><a href="/tags/latex/">latex<span>1</span></a></li>
+			<li><a href="/tags/edas提前/">edas提前<span>1</span></a></li>
 		
-			<li><a href="/tags/回文/">回文<span>1</span></a></li>
+			<li><a href="/tags/读书笔记/">读书笔记<span>2</span></a></li>
 		
-			<li><a href="/tags/sofa-pbrpc/">sofa-pbrpc<span>1</span></a></li>
+			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
+		
+			<li><a href="/tags/Web服务器/">Web服务器<span>6</span></a></li>
+		
+			<li><a href="/tags/简体/">简体<span>1</span></a></li>
 		
 			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
+		
+			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
+		
+			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>79</span></a></li>
@@ -417,7 +425,7 @@
 
 	      
 <div class="widget">
-	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Friend Links</h4>
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">友情链接</h4>
 	<ul class="blogroll list-unstyled">
 	
 		<li style="font-size:14px"><i class="fa fa-share"></i><a href="http://hexo.io" title="My Linkin account." target="_blank"]);">Hexo</a></li>
@@ -441,7 +449,7 @@
 
 
 	      <div class="widget">
-	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Recent Comments</h4>
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">近期评论</h4>
 	<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="0" data-show-admin="1" data-excerpt-length="100" ></ul>
 	
 	<script type="text/javascript">
@@ -460,7 +468,7 @@
 
 	
 	      <section id="recent-visitors" class="widget widget_recent_comments">
-	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">Recent Visitors</h4>
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">最近访客</h4>
   	<div class="panelbody clearfix"><ul class="ds-recent-visitors" data-num-items="30"></ul></div>
 </section>    
 	      </div> <!-- sidebar -->
