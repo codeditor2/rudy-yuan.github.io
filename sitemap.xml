@@ -4,6 +4,30 @@
 
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/197/</loc>
+    <lastmod>2016-03-17T11:53:49.722Z</lastmod>
+    <data>
+        <display>
+        <title>使用rz和sz命令在windows和阿里云linux间传文件</title>
+        <pubTime>2015-09-15T00:11:00.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+        <tag>阿里云</tag>
+         
+        <tag>xshell</tag>
+         
+         
+           
+             
+              <breadCrumb title="linux学习" url="http://www.rudy-yuan.net/categories/linux%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/59/</loc>
     <lastmod>2016-03-17T05:40:18.303Z</lastmod>
     <data>
@@ -1370,30 +1394,6 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/197/</loc>
-    <lastmod>2016-03-15T15:00:28.395Z</lastmod>
-    <data>
-        <display>
-        <title>使用rz和sz命令在windows和阿里云linux间传文件</title>
-        <pubTime>2015-09-15T00:11:00.000Z</pubTime>
-        
-        <tag>linux</tag>
-         
-        <tag>阿里云</tag>
-         
-        <tag>xshell</tag>
-         
-         
-           
-             
-              <breadCrumb title="linux学习" url="http://www.rudy-yuan.net/categories/linux%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.rudy-yuan.net/archives/206/</loc>
     <lastmod>2016-03-15T14:55:01.493Z</lastmod>
     <data>
@@ -1975,19 +1975,19 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/color-themes/</loc>
+    <loc>http://www.rudy-yuan.net/archives/code-highlight/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>Color Themes</title>
-        <pubTime>2016-01-30T05:00:24.000Z</pubTime>
+        <title>Code Highlight</title>
+        <pubTime>2014-03-15T12:17:16.000Z</pubTime>
         
-        <tag>themes</tag>
+        <tag>highlight</tag>
          
          
            
              
-              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
+              <breadCrumb title="Demo" url="http://www.rudy-yuan.net/categories/Demo/"/>
           
         </display>
     </data>
@@ -2001,6 +2001,26 @@
         <display>
         <title>Tag Plugins（中文）</title>
         <pubTime>2014-03-16T02:10:16.000Z</pubTime>
+        
+        <tag>plugins</tag>
+         
+         
+           
+             
+              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Tag Plugins</title>
+        <pubTime>2014-03-16T02:17:16.000Z</pubTime>
         
         <tag>plugins</tag>
          
@@ -2035,26 +2055,6 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/code-highlight/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Code Highlight</title>
-        <pubTime>2014-03-15T12:17:16.000Z</pubTime>
-        
-        <tag>highlight</tag>
-         
-         
-           
-             
-              <breadCrumb title="Demo" url="http://www.rudy-yuan.net/categories/Demo/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
@@ -2075,14 +2075,14 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
+    <loc>http://www.rudy-yuan.net/archives/color-themes/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>Tag Plugins</title>
-        <pubTime>2014-03-16T02:17:16.000Z</pubTime>
+        <title>Color Themes</title>
+        <pubTime>2016-01-30T05:00:24.000Z</pubTime>
         
-        <tag>plugins</tag>
+        <tag>themes</tag>
          
          
            
