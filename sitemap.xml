@@ -4,8 +4,30 @@
 
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/hexo-url-map-to-theme-file/</loc>
+    <lastmod>2016-03-17T05:16:23.852Z</lastmod>
+    <data>
+        <display>
+        <title>hexo中如何实现自定义url与对应页面的主题文件的映射</title>
+        <pubTime>2016-03-08T01:11:24.000Z</pubTime>
+        
+        <tag>Hexo</tag>
+         
+        <tag>github静态博客</tag>
+         
+         
+           
+             
+              <breadCrumb title="源码学习" url="http://www.rudy-yuan.net/categories/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/2016-newest-hexo-guide/</loc>
-    <lastmod>2016-03-17T03:36:35.843Z</lastmod>
+    <lastmod>2016-03-17T05:09:38.158Z</lastmod>
     <data>
         <display>
         <title>2016年最新最全面的hexo教程</title>
@@ -1951,14 +1973,34 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
+    <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>Tag Plugins</title>
-        <pubTime>2014-03-16T02:17:16.000Z</pubTime>
+        <title>简体中文测试</title>
+        <pubTime>2013-12-25T12:17:16.000Z</pubTime>
         
-        <tag>plugins</tag>
+        <tag>简体</tag>
+         
+         
+           
+             
+              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/color-themes/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Color Themes</title>
+        <pubTime>2016-01-30T05:00:24.000Z</pubTime>
+        
+        <tag>themes</tag>
          
          
            
@@ -1991,19 +2033,19 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
+    <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>简体中文测试</title>
-        <pubTime>2013-12-25T12:17:16.000Z</pubTime>
+        <title>Tag Plugins</title>
+        <pubTime>2014-03-16T02:17:16.000Z</pubTime>
         
-        <tag>简体</tag>
+        <tag>plugins</tag>
          
          
            
              
-              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
+              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
           
         </display>
     </data>
@@ -2024,26 +2066,6 @@
            
              
               <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/color-themes/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Color Themes</title>
-        <pubTime>2016-01-30T05:00:24.000Z</pubTime>
-        
-        <tag>themes</tag>
-         
-         
-           
-             
-              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
           
         </display>
     </data>
