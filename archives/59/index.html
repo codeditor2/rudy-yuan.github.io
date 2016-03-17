@@ -1,0 +1,604 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>安卓(Android)Activity启动过程性能剖视 | Rudy-Yuan的博客</title>
+  <meta name="author" content="Rudy-Yuan">
+  
+  <meta name="description" content="Activity启动过程源代码简析在Android源代码中，每一个应用程序都有一个ActivityThread表示该应用程序的主进程，且每一个ActivityThread都包含有一个ApplicationThread实例，该ApplicationThread实例为一个Binder对象，负责和其它进程进行IPC通信。无论是通过点击Luancher上的应用程序图标来启动Activity，还是通过Activity内部调用startActivity函数启动新的Activity，都要借助于应用程序框架层的ActivityManagerService服务进程。ActivityManagerService负责管理Activity的生命周期，并借助ActivityStack把所有的Activity按照后进先出的顺序放在一个堆栈中。ActivityManagerService和ActivityStack位于同一个进程中，而ApplicationThread和ActivityThread位于另一个进程中">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="安卓(Android)Activity启动过程性能剖视"/>
+  <meta property="og:site_name" content="Rudy-Yuan的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+
+
+  <link rel="stylesheet" href="/css/themes/cerulean.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+
+  <!-- analytics -->
+  
+
+
+  
+  <meta name="domain_verify" content="pmrgi33nmfuw4ir2ejzhkzdzfv4xkylofzxgk5bcfqrgo5ljmqrduiruhbtdszbygjrgcnrxgq2gmmrsha3dmmdbgm4dcmdegvqwkm3fmmrcyitunfwwku3bozsseorrgq2tqmjuga4dinzqg4zx2">
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Rudy-Yuan的博客</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/tags/热点文章/" title="All the tags.">
+			  <i class="fa fa-fire"></i>热点文章
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags/博主推荐/" title="All the tags.">
+			  <i class="fa fa-volume-up"></i>博主推荐
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>文章归档
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/message" title="All the tags.">
+			  <i class="fa fa-pencil"></i>给我留言
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-info-circle"></i>关于本站
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+		<!-- content -->
+
+		<div class="slogan" style="margin-bottom: 17px">
+		  <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">
+			  当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;:&nbsp;
+			
+				<a href="/categories/Android开发/">Android开发</a>
+			
+		  &nbsp;</a>»&nbsp; 安卓(Android)Activity启动过程性能剖视 </h4>
+		</div>
+
+		<div id="top_search"></div>
+				 
+		
+
+		<div class="archive">	  
+			<div id="archives"> 
+				
+				<header class="entry-header">
+					<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+						<span class="entry-date">
+							<span class="fa fa-calendar" aria-hidden="true"></span>
+							2014-03-31						      
+						</span>
+							  
+							  
+						<span class="author vcard">
+							<span class="fa fa-user" aria-hidden="true"></span>
+							<a href="/">Rudy-Yuan</a> 	 	
+						</span>
+
+						<span class="comments-link">
+							<span class="fa fa-comments" aria-hidden="true"></span>
+							<span class="ds-thread-count" data-thread-key="archives/59/">暂无评论</span>
+						</span>						
+							
+					</div>	
+
+									
+					<h3 class="entry-title"> 
+						<a href="/archives/59/" >安卓(Android)Activity启动过程性能剖视</a>
+					</h3>		
+						
+					<span style="font-size:15px"><h3 id="Activity启动过程源代码简析"><a href="#Activity启动过程源代码简析" class="headerlink" title="Activity启动过程源代码简析"></a>Activity启动过程源代码简析</h3><p>在Android源代码中，每一个应用程序都有一个ActivityThread表示该应用程序的主进程，且每一个ActivityThread都包含有一个ApplicationThread实例，该ApplicationThread实例为一个Binder对象，负责和其它进程进行IPC通信。无论是通过点击Luancher上的应用程序图标来启动Activity，还是通过Activity内部调用startActivity函数启动新的Activity，都要借助于应用程序框架层的ActivityManagerService服务进程。ActivityManagerService负责管理Activity的生命周期，并借助ActivityStack把所有的Activity按照后进先出的顺序放在一个堆栈中。ActivityManagerService和ActivityStack位于同一个进程中，而ApplicationThread和ActivityThread位于另一个进程中<a id="more"></a>。图1表示了应用程序框架层中的ActivityManagerService启动Activity的主要过程，Activity启动过程中涉及到的4个实体的交互情况如图1所示。</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/03/31/QQ截图20150512090241.jpg" alt=""></p>
+<p>具体步骤为：<br>(1) 通过Binder进程间通信进入到ActivityManagerService进程中并调用ActivityManagerService.startActivity函数；</p>
+<p>(2) ActivityManagerService调用ActivityStack.startActivityMayWait函数准备好要启动的Activity的有关信息；</p>
+<p>(3) ActivityStack通知ApplicationThread进行Activity启动调度，对于点击Launcher上的应用程序图标启动Activity，该进程为Launcher；而对于通过在Activity内部调用startActivity启动子Activity，该进程为MainActivity所在进程；</p>
+<p>(4) ApplicationThread通过调用ActivityManagerService.activityPaused函数进入到ActivityManagerService进程中，检查是否需要创建新的进程来启动Activity；</p>
+<p>(5) 对于通过点击应用程序图标启动Activity的情形，ActivityManagerService调用startProcessLocked函数来创建一个新的进程；</p>
+<p>(6) ActivityManagerService调用ApplicationThread.scheduleLaunchActivity函数通知相应进程执行启动Activity的操作；对于点击Launcher上的应用程序图标启动Activity而言，该进程为Launcher，而对于对于通过在Activity内部调用startActivity启动子Activity的情况，该进程为MainActivity所在进程；</p>
+<p>(7) ApplicationThread不执行真正的启动操作，而是把这个启动Activity的操作转发给ActivityThread，再通过ActivityThread调用ClassLoader装载相应的Activity类并将其启动。</p>
+<h3 id="主Activity启动过程源代码详解"><a href="#主Activity启动过程源代码详解" class="headerlink" title="主Activity启动过程源代码详解"></a>主Activity启动过程源代码详解</h3><h4 id="主Activity启动基本原理"><a href="#主Activity启动基本原理" class="headerlink" title="主Activity启动基本原理"></a>主Activity启动基本原理</h4><p>(1) Launcher向AMS发送一个启动MainActivity的IPC请求(即图2所示1~2)；</p>
+<p>(2) AMS首先保存要启动的MainActivity组件的信息，然后再向Launcher发送一个进入终止状态的IPC请求(3~4)； </p>
+<p>(3) Launcher进入终止状态后，向AMS发送一个已经进入终止状态的IPC，以便AMS可继续执行启动MainActivity的动作(5~6)；</p>
+<p>(4) AMS发现用来运行MainActivity组件的应用程序不存在，因此，它会先启动一个新应用程序进程(7~8)； </p>
+<p>(5) 新进程启动后，向AMS发送一个启动完成的IPC请求，以便AMS继续执行启动MainActivity的操作(9~10)；</p>
+<p>(6) AMS将第2步保存的MainActivity的信息发送给第4步创建的进程，以便它将MainActivity启动起来(11~12)；</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/03/31/QQ截图20150512090501.jpg" alt=""></p>
+<h4 id="主Activity启动过程源代码详解-1"><a href="#主Activity启动过程源代码详解-1" class="headerlink" title="主Activity启动过程源代码详解"></a>主Activity启动过程源代码详解</h4><p>(1) 用户启动主Activity时，点击该Activity应用的图标，进入Launcher.onClick函数(或者通过AppCustomizePagedView.OnClick)，解析AndroidManifest.xml文件获取应用程序组件信息，再进入Launcher.startActivitySafely。</p>
+<p>(2) Launcher.startActivitySafely：将获取的应用程序组件信息以Intent的方式传入并调用Activity中的startActivity函数。</p>
+<p>(3) Activity.startActivity：调用startActivityForResult函数进行进一步处理。</p>
+<p>(4) Activity.startActivityForResult：Instrumentation用来监视应用程序和系统的交互，这里调用Instrumentation中的startActivityForResult函数。</p>
+<p>(5) Instrumentation.execStartActivity：调用ActivityManagerProxy中的startActivity函数。</p>
+<p>(6) ActivityManagerProxy.startActivity：向AMS以transact的方式发送START_ACTIVITY_TRANSACTION信息的指令，启动调用AMS中startActivity函数。</p>
+<p>(7) ActivityManagerService.startActivity：简单转发给ActivityStack中的startActivityMayWait函数。</p>
+<p>(8) ActivityStack.startActivityMayWait：解析Intent内容，再调用startActivityLocked函数。</p>
+<p>(9) ActivityStack.startActivityLocked：创建需要启动的Activity信息，调用startActivityUncheckedLocked函数。</p>
+<p>(10) ActivityStack.startActivityUncheckedLocked：找到（创建）一个Task执行该Activity，再调用Activity中的resumeTopActivityLocked函数。</p>
+<p>(11) Activity.resumeTopActivityLocked：处理启动的Activity信息，调用ActivityStack中的startPausingLocked函数。</p>
+<p>(12) AcitvityStack.startPausingLocked：通知Launcher该Activity进入Pause状态，调用ApplicationThreadProxy中的schedulePauseActivity函数。</p>
+<p>(13) ApplicationThreadProxy.schedulePauseActivity：以transact的方式发送SCHEDULE_PAUSE_ACTIVITY_TRANSACTION指令，进入ApplicationThread中的schedulePauseActivity函数。</p>
+<p>(14) ApplicationThread.schedulePauseActivity：调用ActivityThread中的queueOrSendMessage函数。</p>
+<p>(15) ActivityThread.queueOrSendMessage：组装并发送消息给H类。</p>
+<p>(16) H.handleMessage：获取消息，调用其中PAUSE_ACTIVITY的一步：调用ActivityThread中的handlePauseActivity函数。</p>
+<p>(17) ActivityThread.handlePauseActivity：调用ActivityManagerProxy中的activityPaused函数，通知该Activity已经进入Pause状态了。</p>
+<p>(18) ActivityManagerProxy.activityPaused：使用transact方式以ACTIVITY_PAUSED_TRANSACTION的指令进入AMS中的activityPaused函数。</p>
+<p>(19) ActivityManagerService.activityPaused：进入ActivityStack调用activityPaused函数。</p>
+<p>(20) ActivityStack.activityPaused：获得启动Activity的信息，调用completePauseLocked函数。</p>
+<p>(21) ActivityStack.completePauseLocked：传入启动Activity的信息，调用resumeTopActivityLocked函数。</p>
+<p>(22) ActivityStack.resumeTopActivityLocked：取回MainActivity的信息，调用startSpecificActivityLocked函数。</p>
+<p>(23) ActivitySyack.strartSpecificActivityLocked：配置启动Activity的信息，调用AMS中的startProcessLocked函数。</p>
+<p>(24) ActivityManagerService.startProcessLocked：调用Process.start创建一个新的进程。</p>
+<p>(25) ActivityThread.main：创建一个ActivityThread的实例，调用ActivityManagerProxy中的attachApplication函数。</p>
+<p>(26) ActivityManagerProxy.attachApplication：以transact的方式发送ATTACH_APPLICATION_TRANSACTION指令，调用AMS中的attachApplication函数。</p>
+<p>(27) ActivityManagerService.attachApplication：将操作转发给attachApplicationLocked函数。</p>
+<p>(28) ActivityManagerService.attachApplicationLocked：取回启动Activity的信息，完成初始化，在调用ActivityStack中的realStartActivityLocked函数。</p>
+<p>(29) ActivityStack.realStartActivityLocked：进入ApplicationThreadProxy中的scheduleLaunchActivity函数。</p>
+<p>(30) ApplicationThreadProxy.scheduleLaunchActivity：以transact的方式发送SCHED_LAUNCH_ACTIVITY_TRANS指令进入ApplicationThread中的scheduleLaunchActivity函数。</p>
+<p>(31) ApplicationThread.scheduleLaunchActivity：初始化信息，再调用ActivityThread中的queueOrSendMessage函数。<br>(32) ActivityThread.queueOrSendMessage：组装并发送消息给H类。</p>
+<p>(33) H.handleMessage：调用ActivityThread中的handleLaunchActivity函数进行进一步处理。</p>
+<p>(34) ActivityThread.handleLaunchActivity：调用performLaunchActivity函数来加载启动的Activity类，之后使其进入Resumed状态。</p>
+<p>(35) ActivityThread.performLaunchActivity：完成加载启动Activity的信息，间接调用MainActivity中的onCreate函数。</p>
+<p>(36) MainActivity.onCreate：启动MainActivity，启动应用程序。</p>
+<p>上述步骤(1)到步骤(36)详细描述了主Activity启动的过程。对比图2所示启动过程图可知：</p>
+<p>步骤1~步骤 7对应：onClick到Launcher向AMS Transact消息；</p>
+<p>步骤7~步骤13对应：ActivityManagerServic 从 Launcher onTransact消息到AMS 向 Launcher Transact消息；</p>
+<p>步骤14~步骤18对应：Launcher 从 ActivityManagerServic onTransact消息到Launcher向AMS Transact消息；</p>
+<p>步骤19~步骤24对应：ActivityManagerServic 从 Launcher onTransact消息到AMS 调用Process.start调用MainActivity；</p>
+<p>步骤25~步骤26对应：MainActivity调用到MainActivity 向 ActivityManagerServic Transact消息；</p>
+<p>步骤27~步骤36对应：ActivityManagerServic 从 MainActivity onTransact消息到 AMS向MainActivity Transact消息；MainActivity从AMS onTransact消息后调用Oncreate启动最终进程。</p>
+<div class="alert alert-success"><i class="fa fa-lightbulb-o"></i>   本文由<a href="http://www.rudy-yuan.net">Rudy Yuan</a>创作，采用<a href="http://creativecommons.org/licenses/by/3.0/cn" target="_blank" rel="external">CC BY 3.0 CN协议</a>进行许可。
+可自由转载、引用，但需署名作者且注明文章出处。</div></span>
+				</header>
+
+				<!-- share -->
+				
+					
+
+					
+     <footer class="entry-meta">      
+
+	    <div class="fenlei" style="font-size:13.5px">
+			<span class="entry-categories">
+				<span class="fa fa-folder" aria-hidden="true"></span> 
+
+				
+					<a href="/categories/Android开发/">Android开发</a>
+				
+
+			</span>
+			
+			<span class="entry-tags">        
+				<span class="fa fa-tags" aria-hidden="true"></span> 
+
+				
+					<a href="/tags/源码学习/">源码学习</a>&nbsp;
+				
+					<a href="/tags/android/">android</a>&nbsp;
+				
+
+			</span>
+		</div>
+
+     
+		<!-- JiaThis Button BEGIN -->
+		<div class="jiathis_style" style="float:right;">
+			<span class="jiathis_txt">分享到：</span>
+			<a class="jiathis_button_qzone">QQ空间</a>
+			<a class="jiathis_button_tsina">新浪微博</a>
+			<a class="jiathis_button_weixin">微信</a>
+			<a class="jiathis_button_copy">复制</a>
+			<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+			<a class="jiathis_counter_style"></a>
+		</div>
+		<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+		<!-- JiaThis Button END -->
+		<br>
+    </footer>
+
+
+				
+			</div>	
+		</div>	 	        
+
+		 
+				
+					<p class="p1">上一篇 <a href="/archives/68/">leetcode--Rotate Image</a></p> 
+
+				
+				   <p class="p2">下一篇 <a href="/archives/qna-cn/">Questions and Answers（中文）</a></p> 
+			
+		
+		<!-- comment -->
+		
+<section id="comment">
+  
+  	 <div class="ds-thread" data-thread-key="archives/59/" data-title="安卓(Android)Activity启动过程性能剖视" data-url="http://www.rudy-yuan.net/archives/59/"></div>  
+  
+</section>
+
+		
+	</div> <!-- col-md-9/col-md-12 -->	
+
+	
+		<div id="side_meta">
+			
+      <div class="col-md-3">
+	      <div id="sidebar">
+	      
+  <div class="form-group has-success has-feedback" id="site_search">
+    <form class="site-search-form">
+        <input type="text" id="st-search-input" name="q" results="0" placeholder="搜索" class="st-search-input st-default-search-input form-control" />
+    </form>
+  </div>  
+
+	      <style type="text/css">
+  .cls_container{height:24px;overflow:hidden;}
+  .cls_container ul{list-style-type:none;margin:0;padding:0;margin-left:0px;}
+  .cls_container ul li{height:24px;line-height:24px;float:left;display:inline;}
+</style>
+
+<div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">本站公告</h4>
+
+	<div id="myscroll" class="cls_container">
+		<ul>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>欢迎访问本站!</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>本站内容已经全部进行迁移</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>谷歌浏览器访问本站效果最佳!</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>若URL失效，请使用本站内部搜索</span></li></br>
+		</ul>
+	</div>
+
+	<div id="showhint"></div>
+</div>
+
+<script type="text/javascript">
+	function $(element){
+	 if(arguments.length>1){
+	  for(var i=0,length=arguments.length,elements=[];i<length;i++){
+	   elements.push($(arguments[i]));
+	  }
+	  return elements;
+	 }
+	 if(typeof element=="string"){
+	  return document.getElementById(element);
+	 }else{
+	  return element;
+	 }
+	}
+	var Class={
+	 create:function(){
+	  return function(){
+	   this.initialize.apply(this,arguments);
+	  }
+	 }
+	}
+	Function.prototype.bind=function(object){
+	 var method=this;
+	 return function(){
+	  method.apply(object,arguments);
+	 }
+	}
+	var Scroll=Class.create();
+	Scroll.prototype={
+	 initialize:function(element,height){
+	  this.element=$(element);
+	  this.element.innerHTML+=this.element.innerHTML;
+	  this.height=height;
+	  this.maxHeight=this.element.scrollHeight/2;
+	  this.counter=0;
+	  this.scroll();
+	  this.timer="";
+	  this.element.onmouseover=this.stop.bind(this);
+	  this.element.onmouseout=function(){this.timer=setTimeout(this.scroll.bind(this),1000);}.bind(this);
+	 },
+	 scroll:function(){
+	  if(this.element.scrollTop<this.maxHeight){
+	   this.element.scrollTop++;
+	   this.counter++;
+	  }else{
+	   this.element.scrollTop=0;
+	   this.counter=0;
+	  }
+	  if(this.counter<this.height){
+	   this.timer=setTimeout(this.scroll.bind(this),20);
+	  }else{
+	   this.counter=0;
+	   this.timer=setTimeout(this.scroll.bind(this),3000);
+	  }
+	 },
+	 stop:function(){
+	  clearTimeout(this.timer);
+	 }
+	}
+	var myscroll=new Scroll("myscroll",24);
+</script>
+
+
+	      <!-- toc -->	      
+	      	      
+
+	      
+	<div class="widget">
+		<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">分类目录</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Android开发/">Android开发<span>1</span></a></li>
+		
+			<li><a href="/categories/Demo/">Demo<span>1</span></a></li>
+		
+			<li><a href="/categories/Docs/">Docs<span>4</span></a></li>
+		
+			<li><a href="/categories/MapReduce/">MapReduce<span>1</span></a></li>
+		
+			<li><a href="/categories/NDN/">NDN<span>6</span></a></li>
+		
+			<li><a href="/categories/Test/">Test<span>2</span></a></li>
+		
+			<li><a href="/categories/c和c/">c和c++<span>1</span></a></li>
+		
+			<li><a href="/categories/c和cpp/">c和cpp<span>5</span></a></li>
+		
+			<li><a href="/categories/leetcode/">leetcode<span>13</span></a></li>
+		
+			<li><a href="/categories/linux学习/">linux学习<span>6</span></a></li>
+		
+			<li><a href="/categories/python与Django/">python与Django<span>9</span></a></li>
+		
+			<li><a href="/categories/shell编程/">shell编程<span>1</span></a></li>
+		
+			<li><a href="/categories/socket与网络/">socket与网络<span>4</span></a></li>
+		
+			<li><a href="/categories/不可分/">不可分<span>1</span></a></li>
+		
+			<li><a href="/categories/工具相关/">工具相关<span>2</span></a></li>
+		
+			<li><a href="/categories/技术杂文/">技术杂文<span>18</span></a></li>
+		
+			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>6</span></a></li>
+		
+			<li><a href="/categories/源码学习/">源码学习<span>12</span></a></li>
+		
+		</ul>
+	</div>
+	
+	      
+	<div class="widget">
+		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
+		
+			<li><a href="/tags/Protobuf/">Protobuf<span>1</span></a></li>
+		
+			<li><a href="/tags/cnzz/">cnzz<span>1</span></a></li>
+		
+			<li><a href="/tags/设计模式/">设计模式<span>2</span></a></li>
+		
+			<li><a href="/tags/ndnSIM/">ndnSIM<span>3</span></a></li>
+		
+			<li><a href="/tags/回文/">回文<span>1</span></a></li>
+		
+			<li><a href="/tags/cpp/">cpp<span>5</span></a></li>
+		
+			<li><a href="/tags/linux内核/">linux内核<span>1</span></a></li>
+		
+			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
+		
+			<li><a href="/tags/二分查找/">二分查找<span>1</span></a></li>
+		
+			<li><a href="/tags/TCP/">TCP<span>1</span></a></li>
+		
+			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
+		
+			<li><a href="/tags/linux/">linux<span>7</span></a></li>
+		
+			<li><a href="/tags/github/">github<span>2</span></a></li>
+		
+			<li><a href="/tags/源码学习/">源码学习<span>3</span></a></li>
+		
+			<li><a href="/tags/select/">select<span>1</span></a></li>
+		
+			<li><a href="/tags/数组对称/">数组对称<span>1</span></a></li>
+		
+			<li><a href="/tags/sofa-pbrpc/">sofa-pbrpc<span>1</span></a></li>
+		
+			<li><a href="/tags/博主推荐/">博主推荐<span>2</span></a></li>
+		
+			<li><a href="/tags/vi/">vi<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>82</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+	      
+<div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">友情链接</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li style="font-size:14px"><i class="fa fa-share"></i><a href="http://hexo.io" title="My Linkin account." target="_blank"]);">Hexo</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-github"></i><a href="http://www.github.com/rudy-yuan" title="My Github account." target="_blank"]);">我的github</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-trash"></i><a href="http://yjiehn.sinaapp.com" title="My Linkin account." target="_blank"]);">我的旧版博客</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-cloud-upload"></i><a href="http://www.qiniu.com" title="My Weibo account." target="_blank"]);">七牛云存储</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://netlab.pkusz.edu.cn" title="My Weibo account." target="_blank"]);">北大互联网信息工程研发中心</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://cs.whu.edu.cn" title="My Weibo account." target="_blank"]);">武汉大学 计算机学院</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://github.com/wzpan/hexo-theme-freemind" title="My Weibo account." target="_blank"]);">Hexo-Theme-Freemind</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://www.wengweitao.com" title="My Weibo account." target="_blank"]);">WWT的博客</a></li>
+	
+	</ul>
+</div>
+
+
+	      <div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">近期评论</h4>
+	<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="0" data-show-admin="1" data-excerpt-length="100" ></ul>
+	
+	<script type="text/javascript">
+	    var duoshuoQuery = {short_name:"rudy-yuan"};
+	    (function() {
+	    var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+	</script>
+
+</div>
+
+
+	
+	      <section id="recent-visitors" class="widget widget_recent_comments">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">最近访客</h4>
+  	<div class="panelbody clearfix"><ul class="ds-recent-visitors" data-num-items="30"></ul></div>
+</section>    
+	      </div> <!-- sidebar -->
+      </div> <!-- col-md-3 -->
+
+		</div>
+			
+
+</div><!-- row -->
+
+
+	<script type="text/javascript">
+	  var duoshuoQuery = { short_name: 'rudy-yuan' };
+	  (function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';
+		ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	  })();
+	</script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  Rudy-Yuan &copy; 2013-2016.
+  
+       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, <a href="https://swiftype.com/" target="_blank">Swiftype</a> and <a href="http://www.qiniu.com/" target="_blank">七牛云存储</a>.
+      <i class="fa fa-sitemap %>"></i> <a href="/sitemap.xml" target="_blank"> 站点地图</a>. <a href="http://www.miitbeian.gov.cn/">粤ICP备15038546号</a>.
+      <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255163192'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1255163192' type='text/javascript'%3E%3C/script%3E"));</script>   
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+  <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'YYG5W2xNQTns7U8J3YqW','2.0.0');
+  </script>
+
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+<!-- UJian Button BEGIN -->
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide&btn=4&fade=1&uid=2030693"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+  
+</body>
+</html>

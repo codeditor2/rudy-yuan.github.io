@@ -4,6 +4,50 @@
 
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/59/</loc>
+    <lastmod>2016-03-17T05:36:51.584Z</lastmod>
+    <data>
+        <display>
+        <title>安卓(Android)Activity启动过程性能剖视</title>
+        <pubTime>2014-03-30T22:40:33.000Z</pubTime>
+        
+        <tag>源码学习</tag>
+         
+        <tag>android</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android开发" url="http://www.rudy-yuan.net/categories/Android%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/hexo-url-map-to-theme-file/</loc>
+    <lastmod>2016-03-17T05:36:14.496Z</lastmod>
+    <data>
+        <display>
+        <title>hexo中如何实现自定义url与对应页面的主题文件的映射</title>
+        <pubTime>2016-03-08T01:11:24.000Z</pubTime>
+        
+        <tag>Hexo</tag>
+         
+        <tag>github静态博客</tag>
+         
+         
+           
+             
+              <breadCrumb title="源码学习" url="http://www.rudy-yuan.net/categories/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/2016-newest-hexo-guide/</loc>
     <lastmod>2016-03-17T05:31:30.210Z</lastmod>
     <data>
@@ -19,28 +63,6 @@
            
              
               <breadCrumb title="技术杂文" url="http://www.rudy-yuan.net/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E6%96%87/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/hexo-url-map-to-theme-file/</loc>
-    <lastmod>2016-03-17T05:16:23.852Z</lastmod>
-    <data>
-        <display>
-        <title>hexo中如何实现自定义url与对应页面的主题文件的映射</title>
-        <pubTime>2016-03-08T01:11:24.000Z</pubTime>
-        
-        <tag>Hexo</tag>
-         
-        <tag>github静态博客</tag>
-         
-         
-           
-             
-              <breadCrumb title="源码学习" url="http://www.rudy-yuan.net/categories/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
           
         </display>
     </data>
@@ -1953,46 +1975,6 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/tag-plugins-cn/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Tag Plugins（中文）</title>
-        <pubTime>2014-03-16T02:10:16.000Z</pubTime>
-        
-        <tag>plugins</tag>
-         
-         
-           
-             
-              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>简体中文测试</title>
-        <pubTime>2013-12-25T12:17:16.000Z</pubTime>
-        
-        <tag>简体</tag>
-         
-         
-           
-             
-              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.rudy-yuan.net/archives/color-themes/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
@@ -2013,32 +1995,12 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/code-highlight/</loc>
+    <loc>http://www.rudy-yuan.net/archives/tag-plugins-cn/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>Code Highlight</title>
-        <pubTime>2014-03-15T12:17:16.000Z</pubTime>
-        
-        <tag>highlight</tag>
-         
-         
-           
-             
-              <breadCrumb title="Demo" url="http://www.rudy-yuan.net/categories/Demo/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Tag Plugins</title>
-        <pubTime>2014-03-16T02:17:16.000Z</pubTime>
+        <title>Tag Plugins（中文）</title>
+        <pubTime>2014-03-16T02:10:16.000Z</pubTime>
         
         <tag>plugins</tag>
          
@@ -2066,6 +2028,66 @@
            
              
               <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/code-highlight/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Code Highlight</title>
+        <pubTime>2014-03-15T12:17:16.000Z</pubTime>
+        
+        <tag>highlight</tag>
+         
+         
+           
+             
+              <breadCrumb title="Demo" url="http://www.rudy-yuan.net/categories/Demo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>简体中文测试</title>
+        <pubTime>2013-12-25T12:17:16.000Z</pubTime>
+        
+        <tag>简体</tag>
+         
+         
+           
+             
+              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Tag Plugins</title>
+        <pubTime>2014-03-16T02:17:16.000Z</pubTime>
+        
+        <tag>plugins</tag>
+         
+         
+           
+             
+              <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
           
         </display>
     </data>
