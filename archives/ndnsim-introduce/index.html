@@ -1,0 +1,598 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ndnSIM模拟器介绍 | Rudy-Yuan的博客</title>
+  <meta name="author" content="Rudy-Yuan">
+  
+  <meta name="description" content="ndnSIM是由UCLA的研究人员为NDN协议开发的NS3模块。虽然PARC研究所开发了一个 NDN 协议的原型实现 CCNx，人们可以使用 CCNx 在真实环境中评估NDN协议的设计和CCNx的性能，然而，人们不能探索不同的网络层设计，也无法大规模部署。因此，为了让人们可以研究 NDN 网络层的各种组件，比如路由协议、转发策略、缓存策略、拥塞控制等，UCLA 的研究人员基于NS3 开发了NDN 协议模拟器。2015年，ndnSIM发布了2.0版本，使得模拟实验能够更加真实地与真实环境相结合">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="ndnSIM模拟器介绍"/>
+  <meta property="og:site_name" content="Rudy-Yuan的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+
+
+  <link rel="stylesheet" href="/css/themes/cerulean.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+
+  <!-- analytics -->
+  
+
+
+  
+  <meta name="domain_verify" content="pmrgi33nmfuw4ir2ejzhkzdzfv4xkylofzxgk5bcfqrgo5ljmqrduiruhbtdszbygjrgcnrxgq2gmmrsha3dmmdbgm4dcmdegvqwkm3fmmrcyitunfwwku3bozsseorrgq2tqmjuga4dinzqg4zx2">
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Rudy-Yuan的博客</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/tags/热点文章/" title="All the tags.">
+			  <i class="fa fa-fire"></i>热点文章
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags/博主推荐/" title="All the tags.">
+			  <i class="fa fa-volume-up"></i>博主推荐
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>文章归档
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/message" title="All the tags.">
+			  <i class="fa fa-pencil"></i>给我留言
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-info-circle"></i>关于本站
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+		<!-- content -->
+
+		<div class="slogan" style="margin-bottom: 17px">
+		  <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">
+			  当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;:&nbsp;
+			
+				<a href="/categories/NDN/">NDN</a>
+			
+		  &nbsp;</a>»&nbsp; ndnSIM模拟器介绍 </h4>
+		</div>
+
+		<div id="top_search"></div>
+				 
+		
+
+		<div class="archive">	  
+			<div id="archives"> 
+				
+				<header class="entry-header">
+					<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+						<span class="entry-date">
+							<span class="fa fa-calendar" aria-hidden="true"></span>
+							2016-03-17						      
+						</span>
+							  
+							  
+						<span class="author vcard">
+							<span class="fa fa-user" aria-hidden="true"></span>
+							<a href="/">Rudy-Yuan</a> 	 	
+						</span>
+
+						<span class="comments-link">
+							<span class="fa fa-comments" aria-hidden="true"></span>
+							<span class="ds-thread-count" data-thread-key="archives/ndnsim-introduce/">暂无评论</span>
+						</span>						
+							
+					</div>	
+
+									
+					<h3 class="entry-title"> 
+						<a href="/archives/ndnsim-introduce/" >ndnSIM模拟器介绍</a>
+					</h3>		
+						
+					<span style="font-size:15px"><p><a href="http://ndnsim.net/" target="_blank" rel="external">ndnSIM</a>是由UCLA的研究人员为NDN协议开发的NS3模块。虽然PARC研究所开发了一个 NDN 协议的原型实现 CCNx，人们可以使用 CCNx 在真实环境中评估NDN协议的设计和CCNx的性能，然而，人们不能探索不同的网络层设计，也无法大规模部署。因此，为了让人们可以研究 NDN 网络层的各种组件，比如路由协议、转发策略、缓存策略、拥塞控制等，UCLA 的研究人员基于NS3 开发了NDN 协议模拟器。2015年，ndnSIM发布了2.0版本，使得模拟实验能够更加真实地与真实环境相结合<a id="more"></a>。</p>
+<p>ndnSIM 是作为新的网络层协议模块实现的，它可以运行在任何链路层协议模块之上（point-to-point, CSMA, wireless 等），也可以运行在其他网络层（IPv4,IPv6）和传输层协议（TCP，UDP）之上。这种灵活性使得 ndnSIM 可以模拟多种同质或异质网络（只有 NDN或 IP 之上的 NDN）。 ndnSIM 是模块化设计的，NDN 网络层的每一个实体都使用一个单独的C++类来模拟，比如 PIT、FIB、Content  Store、网络和应用接口、Interest 转发策略等。这种模块化的结构使得任意组件都可以被轻易地修改和替换，而不会对其他组件造成太大的影响。此外，该模拟器提供了大量的接口和辅助类来追踪每个组件的行为，同时也追踪 NDN的流量</p>
+<h4 id="设计总览"><a href="#设计总览" class="headerlink" title="设计总览"></a>设计总览</h4><p>ndnSIM的设计和NS3的设计理念一致，尽可能地将网络中的各个组件抽象化。和现有的 IPv4 和 IPv6 协议栈一样，ndnSIM被实现为一个可以安装在网络节点上的独立协议栈。除了核心协议栈之外，ndnSIM 还包含了几个基本的可以简化模拟过程的流量发生器应用和辅助类，以及用来收集模拟数据的工具。ndnSIM 在NS-3模拟器中的位置如下图所示</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog%2F2016%2F03%2F17%2Fndnsim-1.jpg" alt=""></p>
+<p>下面是 ndnSIM 中实现的模块，下图显示了他们之间的相互关系。</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog%2F2016%2F03%2F17%2Fndnsim-2.jpg" alt=""></p>
+<ul>
+<li>ccnxL3Protocol<br>实现了NDN的核心协议：从上层和下层接口接收Interest和Data包，执行Content Store、PIT、FIB 查询，根据 PIT 的状态转发数据包，并用转发策略来处理 Interest。 </li>
+<li>ccnxFace<br>该模块抽象出来是为了让应用和其他模拟节点（NetDeviceFace）在通信上保持一致性，该模块还支持连接层拥塞控制功能。 </li>
+<li>ccnxContentStore<br>网络中的数据存储，带有替换策略模块。 </li>
+<li>ccnxPit<br>等待状态的 Interest 列表，以及相应的进出接口列表。 </li>
+<li>ccnxFib<br>转发表，每个前缀一个有序接口列表 </li>
+<li>可选的 Interest 转发策略<br>*NDN参考应用 </li>
+</ul>
+<p>Interest和Data包的格式和CCNx原型实现中的二进制格式一致，可以重用已有的流量分析工具，并用实际的 NDN 流量数据来进行模拟。</p>
+<p>ndnSIM 的设计包含了一些可选的模块，包括</p>
+<blockquote>
+<p>(1)用于数据安全的占位符（当前的代码只给数据包附加了签名但没有计算，在路由器上也没有进行签名验证）<br>(2)实验性的否定确认机制，以实现快速地反馈数据平面问题<br>(3)可选的Interest速度限制和接口可用性组件。 </p>
+</blockquote>
+<h4 id="核心NDN协议的实现"><a href="#核心NDN协议的实现" class="headerlink" title="核心NDN协议的实现"></a>核心NDN协议的实现</h4><p>ndnSIM 中的 CcnxL3Protocol 是一个核心的架构性实体，它和 NS-3 中实现IPv4 和 IPv6 的网络层协议的 Ipv4L3Protocol 类和 Ipv6L3Protocol 类在同一层次中。ccnxL3Protocol 是一个逻辑组件聚合器，用于聚合 Content Store，PIT，FIB，转发策略，以及所有可用的接口（即所有应用程序和其他节点上的通信信道）。它还可以处理所有传入的 Interest 和Data 包。 </p>
+<p>ccnxL3Protocol 类定义了 API用来完成 NDN 协议栈的以下几种操作： </p>
+<ul>
+<li>AddFace/RemoveFace：注册一个新的接口到 NDN协议或删除现有的接口; </li>
+<li>GetForwardingStrategy/SetForwardingStrategy：获取当前或注册一个新的转发策略给 NDN协议栈使用;</li>
+<li>提供网络层统计数据收集接口，包括 Interest 包（InInterests，DropInterests），Data 包（OutData，InData，DropData），以及可选的Interest NACK（OutNacks，InNacks，DropNacks），以达到测量的目的; </li>
+<li>提供配置可选组件的功能（对 NACK 的支持以及缓存听说过但没有被请求的数据） </li>
+</ul>
+<h4 id="接口抽象"><a href="#接口抽象" class="headerlink" title="接口抽象"></a>接口抽象</h4><p>为了提供最大的灵活性和可扩展性的目标，ndnSIM 的层间交互被抽象出来使得 ndnSIM 的设计独立于底层传输。换言之，核心协议实现（NDN Level 3 Protocol,ccnxL3Protocol）、网络、应用之间的所有通信都是通过接口抽象（ccnxFace）来完成的。而 ccnxFace可以通过多种形式实现：用于节点间直接通过链路层通信的链路层接口（ccnxNetDeviceFace）、用于节点间覆盖通信的网络层接口（ccnxIpv4Face 和 ccnxIpv6Face）和传输层接口（ccnxTcpFace 和ccnxUdpFace），以及用于节点内通信的应用层接口（ccnxAppFace）。 </p>
+<p>接口（Face）中定义了如下的方法： </p>
+<ul>
+<li>SendImpl：该方法用于将数据包从 NDN协议传递给底层的协议。 </li>
+<li>RegisterProtocolHandler：该方法用于将底层的数据包转发给上层的 NDN<br>协议栈。 </li>
+<li>SetMetric/ GetMetric：设置和获取用于路由计算的指标。 </li>
+<li>IsUp/SetUp：检查接口是否开启；启用接口。 </li>
+</ul>
+<h4 id="Content-Store"><a href="#Content-Store" class="headerlink" title="Content Store"></a>Content Store</h4><p>ndnSIM 将 Content Store 设计成接口的形式，这样 ndnSIM 开发人员或者其他研究者可以方便地添加新的 Content Store实现，新实现中可以采用不同的索引和查询方法、不同的块大小、不同的替换策略等。 目前的 Content Store是用Trie树来实现 Data 查询，替换策略采用 LRU。目前Content Store支持的方法有添加、查询 Data，尚不支持显式地删除 Data包。 </p>
+<h4 id="PIT"><a href="#PIT" class="headerlink" title="PIT"></a>PIT</h4><p>PIT（ccnxPit）维护每个被转发的 Interest 的状态，以便收到相应的响应 Data时正确地转发回去。每个 PIT项包括了以下内容： </p>
+<ul>
+<li>所转发 Interest 的name</li>
+<li>所有同名 Interest 的来源接口列表，也就是传入该 Interest 的接口列表；外加相关信息，比如 Interest 传入的时间。 </li>
+<li>所有同名 Interest 的传出接口列表，以及相关信息，比如 Interest 传出时间，重传次数等。 </li>
+<li>该PIT项过期时间，它等于所有同名 Interest 中最长的存活时间。 </li>
+</ul>
+<p>PIT提供了两种索引，一种用名字 hash 实现名字快速查询，另一种是根据过期时间建立的索引，使用它可以方便地删除超时的 Interest。 </p>
+<h4 id="FIB"><a href="#FIB" class="headerlink" title="FIB"></a>FIB</h4><p>FIB（ccnxFib）记录了每个名字前缀的转发接口，以供转发策略在决定如何转发 Interest 时使用。FIB 是用一个哈希表实现的，其中每一项包含一个名字前缀，以及相应的转发接口列表。转发接口列表的排列顺序综合考虑了接口（Face）的路由指标，以及数据平面的反馈。根据数据平面的反馈，ndnSIM 采用绿、黄、红三种颜色来标记每个 Face的状态：绿色表示该 Face 可以正常工作；黄色表示该接口的状态未知，可能是新添加的或者已经长时间没使用过；红色表示该接口不能正常工作。开始，所有的接口都被设定为黄色。后续通过 Data 包和 Nack Interest 的回复响应，设置接口的颜色。 </p>
+<h4 id="FIB-的传播"><a href="#FIB-的传播" class="headerlink" title="FIB 的传播"></a>FIB 的传播</h4><p>ndnSIM 目前提供两种方式来传播 FIB。第一种是手动添加，第二种是使用全局路由控制器来自动计算。使用第一种方式，人们可以完全控制每个 FIB 中的内容，比较适合小规模的模拟，但对于大规模的模拟来说不太现实。第二种方式需要借助一个全局的路由控制器，它可以获取所有安装了 NDN协议栈的节点中的FIB 信息，然后用图算法计算每两个节点之间的最优路径。这种方式不仅在模拟开始之前可以传播 FIB，在模拟过程中也可以更新 FIB。</p>
+</span>
+				</header>
+
+				<!-- share -->
+				
+					
+
+					
+     <footer class="entry-meta">      
+
+	    <div class="fenlei" style="font-size:13.5px">
+			<span class="entry-categories">
+				<span class="fa fa-folder" aria-hidden="true"></span> 
+
+				
+					<a href="/categories/NDN/">NDN</a>
+				
+
+			</span>
+			
+			<span class="entry-tags">        
+				<span class="fa fa-tags" aria-hidden="true"></span> 
+
+				
+					<a href="/tags/NDN/">NDN</a>&nbsp;
+				
+					<a href="/tags/ndnSIM/">ndnSIM</a>&nbsp;
+				
+					<a href="/tags/源码学习/">源码学习</a>&nbsp;
+				
+
+			</span>
+		</div>
+
+     
+		<!-- JiaThis Button BEGIN -->
+		<div class="jiathis_style" style="float:right;">
+			<span class="jiathis_txt">分享到：</span>
+			<a class="jiathis_button_qzone">QQ空间</a>
+			<a class="jiathis_button_tsina">新浪微博</a>
+			<a class="jiathis_button_weixin">微信</a>
+			<a class="jiathis_button_copy">复制</a>
+			<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+			<a class="jiathis_counter_style"></a>
+		</div>
+		<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+		<!-- JiaThis Button END -->
+		<br>
+    </footer>
+
+
+				
+			</div>	
+		</div>	 	        
+
+		 
+				
+					<p class="p1">上一篇 <a href="/archives/ndnsim-add-attritube-on-packet/">在ndnSIM的Packet中添加自定义变量</a></p> 
+
+				
+				   <p class="p2">下一篇 <a href="/archives/blog-cnzz-visitor-group/">学霸，您好！欢迎访问我的个人博客</a></p> 
+			
+		
+		<!-- comment -->
+		
+<section id="comment">
+  
+  	 <div class="ds-thread" data-thread-key="archives/ndnsim-introduce/" data-title="ndnSIM模拟器介绍" data-url="http://www.rudy-yuan.net/archives/ndnsim-introduce/"></div>  
+  
+</section>
+
+		
+	</div> <!-- col-md-9/col-md-12 -->	
+
+	
+		<div id="side_meta">
+			
+      <div class="col-md-3">
+	      <div id="sidebar">
+	      
+  <div class="form-group has-success has-feedback" id="site_search">
+    <form class="site-search-form">
+        <input type="text" id="st-search-input" name="q" results="0" placeholder="搜索" class="st-search-input st-default-search-input form-control" />
+    </form>
+  </div>  
+
+	      <style type="text/css">
+  .cls_container{height:24px;overflow:hidden;}
+  .cls_container ul{list-style-type:none;margin:0;padding:0;margin-left:0px;}
+  .cls_container ul li{height:24px;line-height:24px;float:left;display:inline;}
+</style>
+
+<div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">本站公告</h4>
+
+	<div id="myscroll" class="cls_container">
+		<ul>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>欢迎访问本站!</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>本站内容已经全部进行迁移</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>谷歌浏览器访问本站效果最佳!</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>若URL失效，请使用本站内部搜索</span></li></br>
+		</ul>
+	</div>
+
+	<div id="showhint"></div>
+</div>
+
+<script type="text/javascript">
+	function $(element){
+	 if(arguments.length>1){
+	  for(var i=0,length=arguments.length,elements=[];i<length;i++){
+	   elements.push($(arguments[i]));
+	  }
+	  return elements;
+	 }
+	 if(typeof element=="string"){
+	  return document.getElementById(element);
+	 }else{
+	  return element;
+	 }
+	}
+	var Class={
+	 create:function(){
+	  return function(){
+	   this.initialize.apply(this,arguments);
+	  }
+	 }
+	}
+	Function.prototype.bind=function(object){
+	 var method=this;
+	 return function(){
+	  method.apply(object,arguments);
+	 }
+	}
+	var Scroll=Class.create();
+	Scroll.prototype={
+	 initialize:function(element,height){
+	  this.element=$(element);
+	  this.element.innerHTML+=this.element.innerHTML;
+	  this.height=height;
+	  this.maxHeight=this.element.scrollHeight/2;
+	  this.counter=0;
+	  this.scroll();
+	  this.timer="";
+	  this.element.onmouseover=this.stop.bind(this);
+	  this.element.onmouseout=function(){this.timer=setTimeout(this.scroll.bind(this),1000);}.bind(this);
+	 },
+	 scroll:function(){
+	  if(this.element.scrollTop<this.maxHeight){
+	   this.element.scrollTop++;
+	   this.counter++;
+	  }else{
+	   this.element.scrollTop=0;
+	   this.counter=0;
+	  }
+	  if(this.counter<this.height){
+	   this.timer=setTimeout(this.scroll.bind(this),20);
+	  }else{
+	   this.counter=0;
+	   this.timer=setTimeout(this.scroll.bind(this),3000);
+	  }
+	 },
+	 stop:function(){
+	  clearTimeout(this.timer);
+	 }
+	}
+	var myscroll=new Scroll("myscroll",24);
+</script>
+
+
+	      <!-- toc -->	      
+	      
+		<div class="widget">
+		    <span style="font-size: 14px font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">本文目录 <a data-toggle="collapse" data-target="#toc"><i class="fa fa-bars"></i></a></span>
+		    <div id="toc" class="toc collapse in">
+			<ol class="toc-article"><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#设计总览"><span class="toc-article-text">设计总览</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#核心NDN协议的实现"><span class="toc-article-text">核心NDN协议的实现</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#接口抽象"><span class="toc-article-text">接口抽象</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#Content-Store"><span class="toc-article-text">Content Store</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#PIT"><span class="toc-article-text">PIT</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#FIB"><span class="toc-article-text">FIB</span></a></li><li class="toc-article-item toc-article-level-4"><a class="toc-article-link" href="#FIB-的传播"><span class="toc-article-text">FIB 的传播</span></a></li></ol>
+		    </div>
+		</div>
+	      	      
+
+	      
+	<div class="widget">
+		<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">分类目录</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Demo/">Demo<span>1</span></a></li>
+		
+			<li><a href="/categories/Docs/">Docs<span>4</span></a></li>
+		
+			<li><a href="/categories/MapReduce/">MapReduce<span>1</span></a></li>
+		
+			<li><a href="/categories/NDN/">NDN<span>6</span></a></li>
+		
+			<li><a href="/categories/Test/">Test<span>2</span></a></li>
+		
+			<li><a href="/categories/c和c/">c和c++<span>1</span></a></li>
+		
+			<li><a href="/categories/c和cpp/">c和cpp<span>5</span></a></li>
+		
+			<li><a href="/categories/leetcode/">leetcode<span>13</span></a></li>
+		
+			<li><a href="/categories/linux学习/">linux学习<span>6</span></a></li>
+		
+			<li><a href="/categories/python与Django/">python与Django<span>9</span></a></li>
+		
+			<li><a href="/categories/shell编程/">shell编程<span>1</span></a></li>
+		
+			<li><a href="/categories/socket与网络/">socket与网络<span>4</span></a></li>
+		
+			<li><a href="/categories/不可分/">不可分<span>1</span></a></li>
+		
+			<li><a href="/categories/工具相关/">工具相关<span>2</span></a></li>
+		
+			<li><a href="/categories/技术杂文/">技术杂文<span>18</span></a></li>
+		
+			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>6</span></a></li>
+		
+			<li><a href="/categories/源码学习/">源码学习<span>11</span></a></li>
+		
+		</ul>
+	</div>
+	
+	      
+	<div class="widget">
+		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/算法/">算法<span>10</span></a></li>
+		
+			<li><a href="/tags/themes/">themes<span>1</span></a></li>
+		
+			<li><a href="/tags/多线程/">多线程<span>3</span></a></li>
+		
+			<li><a href="/tags/二分查找/">二分查找<span>1</span></a></li>
+		
+			<li><a href="/tags/读书笔记/">读书笔记<span>2</span></a></li>
+		
+			<li><a href="/tags/保研/">保研<span>1</span></a></li>
+		
+			<li><a href="/tags/github/">github<span>2</span></a></li>
+		
+			<li><a href="/tags/数据结构/">数据结构<span>3</span></a></li>
+		
+			<li><a href="/tags/华为面试/">华为面试<span>1</span></a></li>
+		
+			<li><a href="/tags/KMP/">KMP<span>2</span></a></li>
+		
+			<li><a href="/tags/libevent/">libevent<span>2</span></a></li>
+		
+			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
+		
+			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
+		
+			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
+		
+			<li><a href="/tags/cpp/">cpp<span>5</span></a></li>
+		
+			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
+		
+			<li><a href="/tags/free2mind/">free2mind<span>1</span></a></li>
+		
+			<li><a href="/tags/NDN/">NDN<span>6</span></a></li>
+		
+			<li><a href="/tags/ubuntu源/">ubuntu源<span>1</span></a></li>
+		
+			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>81</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+	      
+<div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">友情链接</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li style="font-size:14px"><i class="fa fa-share"></i><a href="http://hexo.io" title="My Linkin account." target="_blank"]);">Hexo</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-github"></i><a href="http://www.github.com/rudy-yuan" title="My Github account." target="_blank"]);">我的github</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-trash"></i><a href="http://yjiehn.sinaapp.com" title="My Linkin account." target="_blank"]);">我的旧版博客</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-cloud-upload"></i><a href="http://www.qiniu.com" title="My Weibo account." target="_blank"]);">七牛云存储</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://netlab.pkusz.edu.cn" title="My Weibo account." target="_blank"]);">北大互联网信息工程研发中心</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://cs.whu.edu.cn" title="My Weibo account." target="_blank"]);">武汉大学 计算机学院</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://github.com/wzpan/hexo-theme-freemind" title="My Weibo account." target="_blank"]);">Hexo-Theme-Freemind</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://www.wengweitao.com" title="My Weibo account." target="_blank"]);">WWT的博客</a></li>
+	
+	</ul>
+</div>
+
+
+	      <div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">近期评论</h4>
+	<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="0" data-show-admin="1" data-excerpt-length="100" ></ul>
+	
+	<script type="text/javascript">
+	    var duoshuoQuery = {short_name:"rudy-yuan"};
+	    (function() {
+	    var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+	</script>
+
+</div>
+
+
+	
+	      <section id="recent-visitors" class="widget widget_recent_comments">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">最近访客</h4>
+  	<div class="panelbody clearfix"><ul class="ds-recent-visitors" data-num-items="30"></ul></div>
+</section>    
+	      </div> <!-- sidebar -->
+      </div> <!-- col-md-3 -->
+
+		</div>
+			
+
+</div><!-- row -->
+
+
+	<script type="text/javascript">
+	  var duoshuoQuery = { short_name: 'rudy-yuan' };
+	  (function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';
+		ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	  })();
+	</script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  Rudy-Yuan &copy; 2013-2016.
+  
+       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, <a href="https://swiftype.com/" target="_blank">Swiftype</a> and <a href="http://www.qiniu.com/" target="_blank">七牛云存储</a>.
+      <i class="fa fa-sitemap %>"></i> <a href="/sitemap.xml" target="_blank"> 站点地图</a>. <a href="http://www.miitbeian.gov.cn/">粤ICP备15038546号</a>.
+      <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255163192'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1255163192' type='text/javascript'%3E%3C/script%3E"));</script>   
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+  <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'YYG5W2xNQTns7U8J3YqW','2.0.0');
+  </script>
+
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+<!-- UJian Button BEGIN -->
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide&btn=4&fade=1&uid=2030693"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+  
+</body>
+</html>

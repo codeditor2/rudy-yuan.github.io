@@ -142,9 +142,14 @@
 					<div class="entry">
   <div class="row">
 	
+           
+              <div class="thumbnail"><a href="/archives/ndnsim-add-attritube-on-packet/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog%2F2016%2F03%2F17%2Fndnsim.jpg" alt="在ndnSIM的Packet中添加自定义变量"  class="nofancybox"></a>
+           
+		</div>
 	
-		<p>在linux 2.6.3内核中，实现了在链路层和IP网络层中间添加一个自定义“网络协议“的功能，即：MAC包头 || 自定义包头 || IP包头||….。</p>
-<p>对其中用到的部分关键原理进行记录
+	
+		<p>本文通过描述数据包请求跳数来说明如何在Packet中增加自定义变量，以及对其操作的整个过程。</p>
+<p>Packet为NS3中的Packet，Packet中具有PacketTagList变量，可以用来存储用户自定义的变量
 	
 	...</div>
 </div>
@@ -152,6 +157,60 @@
 
 					<footer class="entry-meta">					  
 						<a href="/archives/ndnsim-add-attritube-on-packet/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+					</footer>
+
+				</div>	
+
+             </div>
+		
+            <div class="archive">	  
+				<div id="archives"> 
+				
+					<header class="entry-header">
+						<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+							  <span class="entry-date">
+								  <span class="fa fa-calendar" aria-hidden="true"></span>
+								  2016-03-17						      
+							  </span>
+							  
+							  <span class="author vcard">
+								  <span class="fa fa-user" aria-hidden="true"></span>
+								  <a href="/">Rudy-Yuan</a> 	
+							  </span>
+
+
+
+							<span class="comments-link">
+								<span class="fa fa-comments" aria-hidden="true"></span>
+								<span class="ds-thread-count" data-thread-key="archives/ndnsim-introduce/">暂无评论</span>
+							</span>	
+							
+						</div>	
+									
+						<h3 class="entry-title"> 
+							  <a href="/archives/ndnsim-introduce/" >ndnSIM模拟器介绍</a>
+						</h3>
+
+					</header>
+
+					<div class="entry">
+  <div class="row">
+	
+           
+              <div class="thumbnail"><a href="/archives/ndnsim-introduce/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog%2F2016%2F03%2F17%2Fndnsim.jpg" alt="ndnSIM模拟器介绍"  class="nofancybox"></a>
+           
+		</div>
+	
+	
+		<p><a href="http://ndnsim.net/">ndnSIM</a>是由UCLA的研究人员为NDN协议开发的NS3模块。虽然PARC研究所开发了一个 NDN 协议的原型实现 CCNx，人们可以使用 CCNx 在真实环境中评估NDN协议的设计和CCNx的性能，然而，人们不能探索不同的网络层设计，也无法大规模部署。因此，为了让人们可以研究 NDN 网络层的各种组件，比如路由协议、转发策略、缓存策略、拥塞控制等，UCLA 的研究人员基于NS3 开发了NDN 协议模拟器。2015年，ndnSIM发布了2.0版本，使得模拟实验能够更加真实地与真实环境相结合
+	
+	...</div>
+</div>
+
+
+					<footer class="entry-meta">					  
+						<a href="/archives/ndnsim-introduce/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
 					</footer>
 
 				</div>	
@@ -439,63 +498,6 @@
 
              </div>
 		
-            <div class="archive">	  
-				<div id="archives"> 
-				
-					<header class="entry-header">
-						<div class="entry-info" text-transform : capitalize>				     					      	      
-							
-							  <span class="entry-date">
-								  <span class="fa fa-calendar" aria-hidden="true"></span>
-								  2016-01-30						      
-							  </span>
-							  
-							  <span class="author vcard">
-								  <span class="fa fa-user" aria-hidden="true"></span>
-								  <a href="/">Rudy-Yuan</a> 	
-							  </span>
-
-
-
-							<span class="comments-link">
-								<span class="fa fa-comments" aria-hidden="true"></span>
-								<span class="ds-thread-count" data-thread-key="archives/color-themes/">暂无评论</span>
-							</span>	
-							
-						</div>	
-									
-						<h3 class="entry-title"> 
-							  <a href="/archives/color-themes/" >Color Themes</a>
-						</h3>
-
-					</header>
-
-					<div class="entry">
-  <div class="row">
-	
-           
-              <div class="thumbnail"><a href="/archives/color-themes/"><img src="/hexo-theme-freemind/images/color-themes.png" alt="Color Themes"  class="nofancybox"></a>
-           
-		</div>
-	
-	
-		<p>Freemind contains luxuriant color themes for your choice. To use one of them, simply modify the <code>theme</code> and <code>inverse</code> settings from your theme <code>_config.yml</code> file <em>e.g.</em></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">theme: bootstrap</span><br><span class="line">inverse: true</span><br></pre></td></tr></table></figure>
-<p>, where <code>theme</code> here indicates which theme you are going to use, and <code>inverse</code> here says you want inverse color scheme on some important components such as navigation bar and header title.</p>
-<p>User contributions are welcome! If you want to contribute a color theme, you can <a href="https://github.com/wzpan/hexo-theme-freemind/tree/dev">fork the dev branch</a> . Write a new theme in LESS and send me a pull request.</p>
-	
-	...</div>
-</div>
-
-
-					<footer class="entry-meta">					  
-						<a href="/archives/color-themes/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
-					</footer>
-
-				</div>	
-
-             </div>
-		
 
 		<!-- pagination -->
 		<div>
@@ -619,7 +621,7 @@
 		
 			<li><a href="/categories/MapReduce/">MapReduce<span>1</span></a></li>
 		
-			<li><a href="/categories/NDN/">NDN<span>4</span></a></li>
+			<li><a href="/categories/NDN/">NDN<span>6</span></a></li>
 		
 			<li><a href="/categories/Test/">Test<span>2</span></a></li>
 		
@@ -629,7 +631,7 @@
 		
 			<li><a href="/categories/leetcode/">leetcode<span>13</span></a></li>
 		
-			<li><a href="/categories/linux学习/">linux学习<span>7</span></a></li>
+			<li><a href="/categories/linux学习/">linux学习<span>6</span></a></li>
 		
 			<li><a href="/categories/python与Django/">python与Django<span>9</span></a></li>
 		
@@ -656,48 +658,48 @@
 		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/Q-A/">Q&amp;A<span>1</span></a></li>
-		
-			<li><a href="/tags/linux/">linux<span>7</span></a></li>
-		
-			<li><a href="/tags/google访问/">google访问<span>1</span></a></li>
-		
-			<li><a href="/tags/latex/">latex<span>1</span></a></li>
-		
-			<li><a href="/tags/设计模式/">设计模式<span>2</span></a></li>
-		
-			<li><a href="/tags/themes/">themes<span>1</span></a></li>
-		
-			<li><a href="/tags/IO复用/">IO复用<span>2</span></a></li>
-		
 			<li><a href="/tags/操作系统/">操作系统<span>2</span></a></li>
 		
-			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
-		
-			<li><a href="/tags/数据库/">数据库<span>1</span></a></li>
+			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
 		
 			<li><a href="/tags/nginx/">nginx<span>3</span></a></li>
 		
 			<li><a href="/tags/django/">django<span>1</span></a></li>
 		
-			<li><a href="/tags/桃江地震/">桃江地震<span>1</span></a></li>
+			<li><a href="/tags/ubuntu-yuan/">ubuntu yuan<span>1</span></a></li>
 		
-			<li><a href="/tags/web服务器/">web服务器<span>1</span></a></li>
+			<li><a href="/tags/sed/">sed<span>1</span></a></li>
 		
-			<li><a href="/tags/leetcode/">leetcode<span>16</span></a></li>
+			<li><a href="/tags/热点文章/">热点文章<span>7</span></a></li>
 		
-			<li><a href="/tags/翻墙/">翻墙<span>1</span></a></li>
+			<li><a href="/tags/Q-A/">Q&amp;A<span>1</span></a></li>
+		
+			<li><a href="/tags/IO复用/">IO复用<span>2</span></a></li>
+		
+			<li><a href="/tags/sofa-pbrpc/">sofa-pbrpc<span>1</span></a></li>
+		
+			<li><a href="/tags/mediastreamer2/">mediastreamer2<span>3</span></a></li>
+		
+			<li><a href="/tags/个人博客/">个人博客<span>1</span></a></li>
+		
+			<li><a href="/tags/gdb/">gdb<span>1</span></a></li>
 		
 			<li><a href="/tags/二分查找/">二分查找<span>1</span></a></li>
 		
-			<li><a href="/tags/华为面试/">华为面试<span>1</span></a></li>
+			<li><a href="/tags/剑指offer/">剑指offer<span>1</span></a></li>
 		
-			<li><a href="/tags/github静态博客/">github静态博客<span>1</span></a></li>
+			<li><a href="/tags/linux/">linux<span>7</span></a></li>
 		
-			<li><a href="/tags/TCP/">TCP<span>1</span></a></li>
+			<li><a href="/tags/数据库/">数据库<span>1</span></a></li>
+		
+			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
+		
+			<li><a href="/tags/Protobuf/">Protobuf<span>1</span></a></li>
+		
+			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
 		
 		
-		   <li><a href="/tags">...<span>79</span></a></li>
+		   <li><a href="/tags">...<span>81</span></a></li>
 		 
 		</ul>
 	</div>

@@ -5,18 +5,70 @@
     
   <url>
     <loc>http://www.rudy-yuan.net/archives/ndnsim-add-attritube-on-packet/</loc>
-    <lastmod>2016-03-16T14:59:59.510Z</lastmod>
+    <lastmod>2016-03-17T03:12:00.214Z</lastmod>
     <data>
         <display>
         <title>在ndnSIM的Packet中添加自定义变量</title>
-        <pubTime>2016-03-17T00:21:58.000Z</pubTime>
+        <pubTime>2016-03-17T04:21:58.000Z</pubTime>
         
-        <tag>linux内核</tag>
+        <tag>NDN</tag>
+         
+        <tag>ndnSIM</tag>
+         
+        <tag>源码学习</tag>
          
          
            
              
-              <breadCrumb title="linux学习" url="http://www.rudy-yuan.net/categories/linux%E5%AD%A6%E4%B9%A0/"/>
+              <breadCrumb title="NDN" url="http://www.rudy-yuan.net/categories/NDN/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/179/</loc>
+    <lastmod>2016-03-17T03:05:48.031Z</lastmod>
+    <data>
+        <display>
+        <title>在ndnSIM中添加转发属性实现自定义转发策略</title>
+        <pubTime>2015-05-30T07:31:00.000Z</pubTime>
+        
+        <tag>NDN</tag>
+         
+        <tag>ndnSIM</tag>
+         
+        <tag>转发策略</tag>
+         
+         
+           
+             
+              <breadCrumb title="NDN" url="http://www.rudy-yuan.net/categories/NDN/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/ndnsim-introduce/</loc>
+    <lastmod>2016-03-17T03:03:06.036Z</lastmod>
+    <data>
+        <display>
+        <title>ndnSIM模拟器介绍</title>
+        <pubTime>2016-03-17T00:21:58.000Z</pubTime>
+        
+        <tag>NDN</tag>
+         
+        <tag>ndnSIM</tag>
+         
+        <tag>源码学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="NDN" url="http://www.rudy-yuan.net/categories/NDN/"/>
           
         </display>
     </data>
@@ -1036,28 +1088,6 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/179/</loc>
-    <lastmod>2016-03-16T06:22:08.737Z</lastmod>
-    <data>
-        <display>
-        <title>在ndnSIM中添加转发属性实现自定义转发策略</title>
-        <pubTime>2015-05-30T07:31:00.000Z</pubTime>
-        
-        <tag>NDN</tag>
-         
-        <tag>ndnSIM</tag>
-         
-         
-           
-             
-              <breadCrumb title="NDN" url="http://www.rudy-yuan.net/categories/NDN/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.rudy-yuan.net/archives/68/</loc>
     <lastmod>2016-03-16T04:43:36.478Z</lastmod>
     <data>
@@ -1901,26 +1931,6 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>简体中文测试</title>
-        <pubTime>2013-12-25T12:17:16.000Z</pubTime>
-        
-        <tag>简体</tag>
-         
-         
-           
-             
-              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.rudy-yuan.net/archives/tag-plugins-cn/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
@@ -1941,14 +1951,14 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/lorem-ipsum/</loc>
+    <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>Lorem Ipsum</title>
-        <pubTime>2014-03-15T12:17:16.000Z</pubTime>
+        <title>简体中文测试</title>
+        <pubTime>2013-12-25T12:17:16.000Z</pubTime>
         
-        <tag>English</tag>
+        <tag>简体</tag>
          
          
            
@@ -2014,6 +2024,26 @@
            
              
               <breadCrumb title="Docs" url="http://www.rudy-yuan.net/categories/Docs/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/lorem-ipsum/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Lorem Ipsum</title>
+        <pubTime>2014-03-15T12:17:16.000Z</pubTime>
+        
+        <tag>English</tag>
+         
+         
+           
+             
+              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
           
         </display>
     </data>

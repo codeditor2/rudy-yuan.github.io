@@ -7,7 +7,7 @@
   <meta name="author" content="Rudy-Yuan">
   
   <meta name="description" content="Globecom论文总算是提交结束了，这里总结如何在ndnSIM中添加新的转发属性来实现自己的转发策略。
-参考“Optimal Multipath Congestion Control and Request Forwarding in Information-Centric Networks”这篇文章，在ndnSIM中添加了一个PI属性，具体过程如下">
+ndnSIM已有转发策略ndnSIM 将转发策略抽象成 ForwardingStrategy类，这样 ndnSIM 开发者或者其他研究人员就可以通过继承 ForwardingStrategy类方便地实现其他的转发策略。ForwardingStrategy的所有子类都必须实现 PropagateInterest 方法，由该方法完成具体的转发决策。ndnSIM 目前实现的转发策略如下图所示">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -154,7 +154,16 @@
 					</h3>		
 						
 					<span style="font-size:15px"><p>Globecom论文总算是提交结束了，这里总结如何在ndnSIM中添加新的转发属性来实现自己的转发策略。</p>
-<p>参考“Optimal Multipath Congestion Control and Request Forwarding in Information-Centric Networks”这篇文章，在ndnSIM中添加了一个PI属性，具体过程如下<a id="more"></a>：</p>
+<h4 id="ndnSIM已有转发策略"><a href="#ndnSIM已有转发策略" class="headerlink" title="ndnSIM已有转发策略"></a>ndnSIM已有转发策略</h4><p>ndnSIM 将转发策略抽象成 ForwardingStrategy类，这样 ndnSIM 开发者或者其他研究人员就可以通过继承 ForwardingStrategy类方便地实现其他的转发策略。ForwardingStrategy的所有子类都必须实现 PropagateInterest 方法，由该方法完成具体的转发决策。ndnSIM 目前实现的转发策略如下图所示<a id="more"></a></p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog%2F2015%2F05%2F30%2Fndnsim-fowarding.jpg?imageView/2/w/800/h/600" alt=""></p>
+<ul>
+<li><p>Flooding strategy（ccnxFloodingStrategy）。该策略将 Interest 从相应 FIB 项中除了来源接口之外的所有绿色和黄色接口转发出去。该策略有一个“smart forwarding”选项，设置该选项后，若有绿色接口，Interest 会直接从绿色接口转发出去，若没有绿色接口，则从 FIB 中可选接口全部转发。 </p>
+</li>
+<li><p>Best-Route strategy（ccnxBestRouteStrategy）。该策略将 Interest 从排名最高的绿色或者黄色接口转发出去，来源接口除外。 </p>
+</li>
+</ul>
+<p>所有的转发策略都不会使用红色接口。此外，如果开启了 Interest 限制选项，那么所有的转发策略在选择接口的过程中都会考虑该接口的限制。</p>
+<h4 id="实现自定义转发策略"><a href="#实现自定义转发策略" class="headerlink" title="实现自定义转发策略"></a>实现自定义转发策略</h4><p>参考“Optimal Multipath Congestion Control and Request Forwarding in Information-Centric Networks”这篇文章，在ndnSIM中添加了一个PI属性，具体过程如下：</p>
 <p>(1) PI属性被定义为FaceMetric类的数据成员m_pi，FaceMetric类是ndnSIM中一个Face拥有的各个属性的集合；<br>(2) 为了实现对m_pi数据成员的访问，增加了GetPI，SetPI函数分别用于获取和设置m_pi的值；此外，还增加了IncreaseFacePI和DecreaseFacePI函数用于增加对应Face的PI值；<br>(3) IncreaseFacePI和DecreaseFacePI函数是作为Entry类的成员函数，其中Entry类是FIB表中的一个表项，一个Entry对应一个前缀；</p>
 <p>上述源代码都在fib/ndn-fib-entry.h和fib/ndn-fib-entry.cc文件中。</p>
 <p>论文中计算权重的过程与PI的计算过程类似，可以在PI的代码附近看下UpdateFaceWeight等有关的代码就可以了解是怎么计算和更新权重的。<br>权重只是用于实现上述论文提出的基于PI的算法，在基于离差的转发策略中并没有使用到。</p>
@@ -189,6 +198,8 @@
 					<a href="/tags/NDN/">NDN</a>&nbsp;
 				
 					<a href="/tags/ndnSIM/">ndnSIM</a>&nbsp;
+				
+					<a href="/tags/转发策略/">转发策略</a>&nbsp;
 				
 
 			</span>
@@ -344,7 +355,7 @@
 		
 			<li><a href="/categories/MapReduce/">MapReduce<span>1</span></a></li>
 		
-			<li><a href="/categories/NDN/">NDN<span>4</span></a></li>
+			<li><a href="/categories/NDN/">NDN<span>6</span></a></li>
 		
 			<li><a href="/categories/Test/">Test<span>2</span></a></li>
 		
@@ -354,7 +365,7 @@
 		
 			<li><a href="/categories/leetcode/">leetcode<span>13</span></a></li>
 		
-			<li><a href="/categories/linux学习/">linux学习<span>7</span></a></li>
+			<li><a href="/categories/linux学习/">linux学习<span>6</span></a></li>
 		
 			<li><a href="/categories/python与Django/">python与Django<span>9</span></a></li>
 		
@@ -380,48 +391,48 @@
 		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/sed/">sed<span>1</span></a></li>
+			<li><a href="/tags/ubuntu-yuan/">ubuntu yuan<span>1</span></a></li>
 		
-			<li><a href="/tags/django/">django<span>1</span></a></li>
-		
-			<li><a href="/tags/xshell/">xshell<span>1</span></a></li>
-		
-			<li><a href="/tags/themes/">themes<span>1</span></a></li>
-		
-			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
-		
-			<li><a href="/tags/数据结构/">数据结构<span>3</span></a></li>
-		
-			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
-		
-			<li><a href="/tags/latex/">latex<span>1</span></a></li>
-		
-			<li><a href="/tags/Hexo/">Hexo<span>1</span></a></li>
-		
-			<li><a href="/tags/clixsense/">clixsense<span>1</span></a></li>
-		
-			<li><a href="/tags/阿里云/">阿里云<span>2</span></a></li>
+			<li><a href="/tags/linux内核/">linux内核<span>1</span></a></li>
 		
 			<li><a href="/tags/数据库/">数据库<span>1</span></a></li>
 		
-			<li><a href="/tags/操作系统/">操作系统<span>2</span></a></li>
+			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
 		
-			<li><a href="/tags/mapReduce/">mapReduce<span>1</span></a></li>
+			<li><a href="/tags/plugins/">plugins<span>2</span></a></li>
 		
-			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
+			<li><a href="/tags/themes/">themes<span>1</span></a></li>
 		
-			<li><a href="/tags/面试/">面试<span>8</span></a></li>
+			<li><a href="/tags/阿里云/">阿里云<span>2</span></a></li>
 		
-			<li><a href="/tags/设计模式/">设计模式<span>2</span></a></li>
+			<li><a href="/tags/Q-A/">Q&amp;A<span>1</span></a></li>
 		
-			<li><a href="/tags/KMP/">KMP<span>2</span></a></li>
+			<li><a href="/tags/翻墙/">翻墙<span>1</span></a></li>
 		
-			<li><a href="/tags/ndnSIM/">ndnSIM<span>1</span></a></li>
+			<li><a href="/tags/个人博客/">个人博客<span>1</span></a></li>
+		
+			<li><a href="/tags/热点文章/">热点文章<span>7</span></a></li>
 		
 			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
 		
+			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
 		
-		   <li><a href="/tags">...<span>79</span></a></li>
+			<li><a href="/tags/算法/">算法<span>10</span></a></li>
+		
+			<li><a href="/tags/github/">github<span>2</span></a></li>
+		
+			<li><a href="/tags/读书笔记/">读书笔记<span>2</span></a></li>
+		
+			<li><a href="/tags/二分查找/">二分查找<span>1</span></a></li>
+		
+			<li><a href="/tags/cnzz/">cnzz<span>1</span></a></li>
+		
+			<li><a href="/tags/gdb/">gdb<span>1</span></a></li>
+		
+			<li><a href="/tags/多线程/">多线程<span>3</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>81</span></a></li>
 		 
 		</ul>
 	</div>
