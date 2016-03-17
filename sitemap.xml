@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/2016-newest-hexo-guide/</loc>
+    <lastmod>2016-03-17T05:31:30.210Z</lastmod>
+    <data>
+        <display>
+        <title>2016年最新的hexo教程</title>
+        <pubTime>2016-03-08T02:07:33.000Z</pubTime>
+        
+        <tag>Hexo</tag>
+         
+        <tag>github静态博客</tag>
+         
+         
+           
+             
+              <breadCrumb title="技术杂文" url="http://www.rudy-yuan.net/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E6%96%87/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/hexo-url-map-to-theme-file/</loc>
     <lastmod>2016-03-17T05:16:23.852Z</lastmod>
     <data>
@@ -19,28 +41,6 @@
            
              
               <breadCrumb title="源码学习" url="http://www.rudy-yuan.net/categories/%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/2016-newest-hexo-guide/</loc>
-    <lastmod>2016-03-17T05:09:38.158Z</lastmod>
-    <data>
-        <display>
-        <title>2016年最新最全面的hexo教程</title>
-        <pubTime>2016-03-08T02:07:33.000Z</pubTime>
-        
-        <tag>Hexo</tag>
-         
-        <tag>github静态博客</tag>
-         
-         
-           
-             
-              <breadCrumb title="技术杂文" url="http://www.rudy-yuan.net/categories/%E6%8A%80%E6%9C%AF%E6%9D%82%E6%96%87/"/>
           
         </display>
     </data>
