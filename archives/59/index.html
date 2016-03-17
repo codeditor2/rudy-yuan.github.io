@@ -152,7 +152,8 @@
 						<a href="/archives/59/" >安卓(Android)Activity启动过程性能剖视</a>
 					</h3>		
 						
-					<span style="font-size:15px"><h3 id="Activity启动过程源代码简析"><a href="#Activity启动过程源代码简析" class="headerlink" title="Activity启动过程源代码简析"></a>Activity启动过程源代码简析</h3><p>在Android源代码中，每一个应用程序都有一个ActivityThread表示该应用程序的主进程，且每一个ActivityThread都包含有一个ApplicationThread实例，该ApplicationThread实例为一个Binder对象，负责和其它进程进行IPC通信。无论是通过点击Luancher上的应用程序图标来启动Activity，还是通过Activity内部调用startActivity函数启动新的Activity，都要借助于应用程序框架层的ActivityManagerService服务进程。ActivityManagerService负责管理Activity的生命周期，并借助ActivityStack把所有的Activity按照后进先出的顺序放在一个堆栈中。ActivityManagerService和ActivityStack位于同一个进程中，而ApplicationThread和ActivityThread位于另一个进程中<a id="more"></a>。图1表示了应用程序框架层中的ActivityManagerService启动Activity的主要过程，Activity启动过程中涉及到的4个实体的交互情况如图1所示。</p>
+					<span style="font-size:15px"><h3 id="Activity启动过程源代码简析"><a href="#Activity启动过程源代码简析" class="headerlink" title="Activity启动过程源代码简析"></a>Activity启动过程源代码简析</h3><p>在Android源代码中，每一个应用程序都有一个ActivityThread表示该应用程序的主进程，且每一个ActivityThread都包含有一个ApplicationThread实例，该ApplicationThread实例为一个Binder对象，负责和其它进程进行IPC通信。无论是通过点击Luancher上的应用程序图标来启动Activity，还是通过Activity内部调用startActivity函数启动新的Activity，都要借助于应用程序框架层的ActivityManagerService服务进程。ActivityManagerService负责管理Activity的生命周期，并借助ActivityStack把所有的Activity按照后进先出的顺序放在一个堆栈中。ActivityManagerService和ActivityStack位于同一个进程中，而ApplicationThread和ActivityThread位于另一个进程中<a id="more"></a>。</p>
+<p>图1表示了应用程序框架层中的ActivityManagerService启动Activity的主要过程，Activity启动过程中涉及到的4个实体的交互情况如图1所示。</p>
 <p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/03/31/QQ截图20150512090241.jpg" alt=""></p>
 <p>具体步骤为：<br>(1) 通过Binder进程间通信进入到ActivityManagerService进程中并调用ActivityManagerService.startActivity函数；</p>
 <p>(2) ActivityManagerService调用ActivityStack.startActivityMayWait函数准备好要启动的Activity的有关信息；</p>
@@ -204,12 +205,14 @@
 <p>(35) ActivityThread.performLaunchActivity：完成加载启动Activity的信息，间接调用MainActivity中的onCreate函数。</p>
 <p>(36) MainActivity.onCreate：启动MainActivity，启动应用程序。</p>
 <p>上述步骤(1)到步骤(36)详细描述了主Activity启动的过程。对比图2所示启动过程图可知：</p>
+<blockquote>
 <p>步骤1~步骤 7对应：onClick到Launcher向AMS Transact消息；</p>
 <p>步骤7~步骤13对应：ActivityManagerServic 从 Launcher onTransact消息到AMS 向 Launcher Transact消息；</p>
 <p>步骤14~步骤18对应：Launcher 从 ActivityManagerServic onTransact消息到Launcher向AMS Transact消息；</p>
 <p>步骤19~步骤24对应：ActivityManagerServic 从 Launcher onTransact消息到AMS 调用Process.start调用MainActivity；</p>
 <p>步骤25~步骤26对应：MainActivity调用到MainActivity 向 ActivityManagerServic Transact消息；</p>
 <p>步骤27~步骤36对应：ActivityManagerServic 从 MainActivity onTransact消息到 AMS向MainActivity Transact消息；MainActivity从AMS onTransact消息后调用Oncreate启动最终进程。</p>
+</blockquote>
 <div class="alert alert-success"><i class="fa fa-lightbulb-o"></i>   本文由<a href="http://www.rudy-yuan.net">Rudy Yuan</a>创作，采用<a href="http://creativecommons.org/licenses/by/3.0/cn" target="_blank" rel="external">CC BY 3.0 CN协议</a>进行许可。
 可自由转载、引用，但需署名作者且注明文章出处。</div></span>
 				</header>
@@ -431,45 +434,45 @@
 		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
+			<li><a href="/tags/mysql远程连接/">mysql远程连接<span>1</span></a></li>
 		
-			<li><a href="/tags/Protobuf/">Protobuf<span>1</span></a></li>
+			<li><a href="/tags/转载/">转载<span>9</span></a></li>
 		
-			<li><a href="/tags/cnzz/">cnzz<span>1</span></a></li>
+			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
 		
-			<li><a href="/tags/设计模式/">设计模式<span>2</span></a></li>
+			<li><a href="/tags/Next数组/">Next数组<span>1</span></a></li>
 		
-			<li><a href="/tags/ndnSIM/">ndnSIM<span>3</span></a></li>
+			<li><a href="/tags/gdb/">gdb<span>1</span></a></li>
 		
-			<li><a href="/tags/回文/">回文<span>1</span></a></li>
+			<li><a href="/tags/保研/">保研<span>1</span></a></li>
 		
-			<li><a href="/tags/cpp/">cpp<span>5</span></a></li>
-		
-			<li><a href="/tags/linux内核/">linux内核<span>1</span></a></li>
-		
-			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
+			<li><a href="/tags/leetcode/">leetcode<span>16</span></a></li>
 		
 			<li><a href="/tags/二分查找/">二分查找<span>1</span></a></li>
 		
-			<li><a href="/tags/TCP/">TCP<span>1</span></a></li>
+			<li><a href="/tags/sed/">sed<span>1</span></a></li>
+		
+			<li><a href="/tags/数据结构/">数据结构<span>3</span></a></li>
 		
 			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
 		
+			<li><a href="/tags/xshell/">xshell<span>1</span></a></li>
+		
+			<li><a href="/tags/观察者模式/">观察者模式<span>1</span></a></li>
+		
+			<li><a href="/tags/ubuntu-yuan/">ubuntu yuan<span>1</span></a></li>
+		
+			<li><a href="/tags/设计模式/">设计模式<span>2</span></a></li>
+		
 			<li><a href="/tags/linux/">linux<span>7</span></a></li>
 		
-			<li><a href="/tags/github/">github<span>2</span></a></li>
+			<li><a href="/tags/网络/">网络<span>7</span></a></li>
 		
-			<li><a href="/tags/源码学习/">源码学习<span>3</span></a></li>
+			<li><a href="/tags/简体/">简体<span>1</span></a></li>
 		
-			<li><a href="/tags/select/">select<span>1</span></a></li>
+			<li><a href="/tags/edas提前/">edas提前<span>1</span></a></li>
 		
-			<li><a href="/tags/数组对称/">数组对称<span>1</span></a></li>
-		
-			<li><a href="/tags/sofa-pbrpc/">sofa-pbrpc<span>1</span></a></li>
-		
-			<li><a href="/tags/博主推荐/">博主推荐<span>2</span></a></li>
-		
-			<li><a href="/tags/vi/">vi<span>1</span></a></li>
+			<li><a href="/tags/阿里云/">阿里云<span>2</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>82</span></a></li>
