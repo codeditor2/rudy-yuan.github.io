@@ -230,6 +230,170 @@
 							
 							  <span class="entry-date">
 								  <span class="fa fa-calendar" aria-hidden="true"></span>
+								  2014-04-01						      
+							  </span>
+							  
+							  <span class="author vcard">
+								  <span class="fa fa-user" aria-hidden="true"></span>
+								  <a href="/">Rudy-Yuan</a> 	
+							  </span>
+
+
+
+							<span class="comments-link">
+								<span class="fa fa-comments" aria-hidden="true"></span>
+								<span class="ds-thread-count" data-thread-key="archives/62/">暂无评论</span>
+							</span>	
+							
+						</div>	
+									
+						<h3 class="entry-title"> 
+							  <a href="/archives/62/" >Android Activity启动过程实验结果与分析</a>
+						</h3>
+
+					</header>
+
+					<div class="entry">
+  <div class="row">
+	
+           
+              <div class="thumbnail"><a href="/archives/62/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/04/01/android-3.jpg" alt="Android Activity启动过程实验结果与分析"  class="nofancybox"></a>
+           
+		</div>
+	
+	
+		<p>实验中主要<strong>使用Date类获取当前的时间信息，并且通过Log指令输出，在终端使用Logcat信息对输出的Log信息进行捕获</strong>，具体包括：</p>
+<p>(1) 在编译Android内核的时候，在需要进行时间信息输出的事件点加入Log命令：Log.v(TIMETAG, content + new Date().getTime())；其中使用Date类中的getTime函数来获取当前的时间信息，将其以Log信息的方式输出
+	
+	...</div>
+</div>
+
+
+					<footer class="entry-meta">					  
+						<a href="/archives/62/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+					</footer>
+
+				</div>	
+
+             </div>
+		
+            <div class="archive">	  
+				<div id="archives"> 
+				
+					<header class="entry-header">
+						<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+							  <span class="entry-date">
+								  <span class="fa fa-calendar" aria-hidden="true"></span>
+								  2014-04-01						      
+							  </span>
+							  
+							  <span class="author vcard">
+								  <span class="fa fa-user" aria-hidden="true"></span>
+								  <a href="/">Rudy-Yuan</a> 	
+							  </span>
+
+
+
+							<span class="comments-link">
+								<span class="fa fa-comments" aria-hidden="true"></span>
+								<span class="ds-thread-count" data-thread-key="archives/61/">暂无评论</span>
+							</span>	
+							
+						</div>	
+									
+						<h3 class="entry-title"> 
+							  <a href="/archives/61/" >安卓(Android)Activity启动过程性能剖视(3)</a>
+						</h3>
+
+					</header>
+
+					<div class="entry">
+  <div class="row">
+	
+           
+              <div class="thumbnail"><a href="/archives/61/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog%2F2014%2F04%2F01%2Fandroid-logo.jpg" alt="安卓(Android)Activity启动过程性能剖视(3)"  class="nofancybox"></a>
+           
+		</div>
+	
+	
+		<h4 id="子Activity启动过程源代码详解"><a href="#子Activity启动过程源代码详解" class="headerlink" title="子Activity启动过程源代码详解"></a>子Activity启动过程源代码详解</h4><p>子Activity启动过程，类似主Activity启动的过程，但是存在以下不同：</p>
+<p>(1) Activity.startActivity大致和主Activity启动的第(3)步相同，但是需要隐式启动子Activity，传入Intent参数中没有Intent.FLAG_ACTIVITY_NEW_TASK标志
+	
+	...</div>
+</div>
+
+
+					<footer class="entry-meta">					  
+						<a href="/archives/61/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+					</footer>
+
+				</div>	
+
+             </div>
+		
+            <div class="archive">	  
+				<div id="archives"> 
+				
+					<header class="entry-header">
+						<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+							  <span class="entry-date">
+								  <span class="fa fa-calendar" aria-hidden="true"></span>
+								  2014-04-01						      
+							  </span>
+							  
+							  <span class="author vcard">
+								  <span class="fa fa-user" aria-hidden="true"></span>
+								  <a href="/">Rudy-Yuan</a> 	
+							  </span>
+
+
+
+							<span class="comments-link">
+								<span class="fa fa-comments" aria-hidden="true"></span>
+								<span class="ds-thread-count" data-thread-key="archives/60/">暂无评论</span>
+							</span>	
+							
+						</div>	
+									
+						<h3 class="entry-title"> 
+							  <a href="/archives/60/" >安卓(Android)Activity启动过程性能剖视(2)</a>
+						</h3>
+
+					</header>
+
+					<div class="entry">
+  <div class="row">
+	
+           
+              <div class="thumbnail"><a href="/archives/60/"><img src="http://7xj852.com1.z0.glb.clouddn.com/blog%2F2014%2F04%2F01%2Fandroid-logo.jpg" alt="安卓(Android)Activity启动过程性能剖视(2)"  class="nofancybox"></a>
+           
+		</div>
+	
+	
+		<h4 id="Android主Activity启动分析方法"><a href="#Android主Activity启动分析方法" class="headerlink" title="Android主Activity启动分析方法"></a>Android主Activity启动分析方法</h4><p>根据实验要求，需要获取每个事件点发生的位置，而不同事件之间的转换涉及到Binder进程间通信机制，因此，利用每次通过Binder进行Transact信息交互和调用Process.start的部分可获得各个事件的发生时间。从3.2所述步骤图和36个详细步骤中可以得出：从点击Launcher启动应用程序到主Activity启动的过程中有以下14个事件时间点
+	
+	...</div>
+</div>
+
+
+					<footer class="entry-meta">					  
+						<a href="/archives/60/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
+					</footer>
+
+				</div>	
+
+             </div>
+		
+            <div class="archive">	  
+				<div id="archives"> 
+				
+					<header class="entry-header">
+						<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+							  <span class="entry-date">
+								  <span class="fa fa-calendar" aria-hidden="true"></span>
 								  2014-03-31						      
 							  </span>
 							  
@@ -262,7 +426,7 @@
 		</div>
 	
 	
-		<h3 id="Activity启动过程源代码简析"><a href="#Activity启动过程源代码简析" class="headerlink" title="Activity启动过程源代码简析"></a>Activity启动过程源代码简析</h3><p>在Android源代码中，每一个应用程序都有一个ActivityThread表示该应用程序的主进程，且每一个ActivityThread都包含有一个ApplicationThread实例，该ApplicationThread实例为一个Binder对象，负责和其它进程进行IPC通信。无论是通过点击Luancher上的应用程序图标来启动Activity，还是通过Activity内部调用startActivity函数启动新的Activity，都要借助于应用程序框架层的ActivityManagerService服务进程。ActivityManagerService负责管理Activity的生命周期，并借助ActivityStack把所有的Activity按照后进先出的顺序放在一个堆栈中。ActivityManagerService和ActivityStack位于同一个进程中，而ApplicationThread和ActivityThread位于另一个进程中
+		<p>安卓(Android)Activity启动过程性能剖视共包含4篇文章，分别是<a href="http://www.rudy-yuan.net/archives/59/">安卓(Android)Activity启动过程性能剖视(1)</a>、<a href="http://www.rudy-yuan.net/archives/60/">安卓(Android)Activity启动过程性能剖视(2)</a>、<a href="http://www.rudy-yuan.net/archives/61/">安卓(Android)Activity启动过程性能剖视(3)</a>和<a href="http://www.rudy-yuan.net/archives/62/">Android Activity启动过程实验结果与分析</a>，讲述了我通过实验分析Activity启动过程中的各个步骤的时间消耗，若您只对实验结果感兴趣，可直接阅读<a href="http://www.rudy-yuan.net/archives/62/">Android Activity启动过程实验结果与分析</a>
 	
 	...</div>
 </div>
@@ -330,177 +494,13 @@
 
              </div>
 		
-            <div class="archive">	  
-				<div id="archives"> 
-				
-					<header class="entry-header">
-						<div class="entry-info" text-transform : capitalize>				     					      	      
-							
-							  <span class="entry-date">
-								  <span class="fa fa-calendar" aria-hidden="true"></span>
-								  2014-03-16						      
-							  </span>
-							  
-							  <span class="author vcard">
-								  <span class="fa fa-user" aria-hidden="true"></span>
-								  <a href="/">Rudy-Yuan</a> 	
-							  </span>
-
-
-
-							<span class="comments-link">
-								<span class="fa fa-comments" aria-hidden="true"></span>
-								<span class="ds-thread-count" data-thread-key="archives/tag-plugins/">暂无评论</span>
-							</span>	
-							
-						</div>	
-									
-						<h3 class="entry-title"> 
-							  <a href="/archives/tag-plugins/" >Tag Plugins</a>
-						</h3>
-
-					</header>
-
-					<div class="entry">
-  <div class="row">
-	
-           
-              <div class="thumbnail"><a href="/archives/tag-plugins/"><img src="/hexo-theme-freemind/images/tag-plugins/plugins.jpg" alt="Tag Plugins"  class="nofancybox"></a>
-           
-		</div>
-	
-	
-		<p>The freemind theme offers several new tag plugins, so as to fully take advantages of Bootstrap.</p>
-<p>To use these tag plugins, you need to install <a href="https://github.com/wzpan/hexo-tag-bootstrap">hexo-tag-bootstrap</a> first. In your blog root folder, execute the following command:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-tag-bootstrap --save</span><br></pre></td></tr></table></figure>
-<p>Then you can use these tag plugins in your blog, as easily as you normally do using hexo tag plugins. </p>
-	
-	...</div>
-</div>
-
-
-					<footer class="entry-meta">					  
-						<a href="/archives/tag-plugins/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
-					</footer>
-
-				</div>	
-
-             </div>
-		
-            <div class="archive">	  
-				<div id="archives"> 
-				
-					<header class="entry-header">
-						<div class="entry-info" text-transform : capitalize>				     					      	      
-							
-							  <span class="entry-date">
-								  <span class="fa fa-calendar" aria-hidden="true"></span>
-								  2014-03-16						      
-							  </span>
-							  
-							  <span class="author vcard">
-								  <span class="fa fa-user" aria-hidden="true"></span>
-								  <a href="/">Rudy-Yuan</a> 	
-							  </span>
-
-
-
-							<span class="comments-link">
-								<span class="fa fa-comments" aria-hidden="true"></span>
-								<span class="ds-thread-count" data-thread-key="archives/tag-plugins-cn/">暂无评论</span>
-							</span>	
-							
-						</div>	
-									
-						<h3 class="entry-title"> 
-							  <a href="/archives/tag-plugins-cn/" >Tag Plugins（中文）</a>
-						</h3>
-
-					</header>
-
-					<div class="entry">
-  <div class="row">
-	
-           
-              <div class="thumbnail"><a href="/archives/tag-plugins-cn/"><img src="/hexo-theme-freemind/images/tag-plugins/plugins.jpg" alt="Tag Plugins（中文）"  class="nofancybox"></a>
-           
-		</div>
-	
-	
-		<p>Freemind 主题提供了丰富的 tag plugins，以充分利用 Bootstrap 的威力。</p>
-<p>在使用这些 tag plugins 之前，你需要先安装 <a href="https://github.com/wzpan/hexo-tag-bootstrap">hexo-tag-bootstrap</a> 。在你的 Hexo 博客目录，执行下列命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-tag-bootstrap --save</span><br></pre></td></tr></table></figure>
-<p>然后就可以像使用其他 hexo tag plugins 一样使用这些 Bootstrap tag plugins 了。</p>
-	
-	...</div>
-</div>
-
-
-					<footer class="entry-meta">					  
-						<a href="/archives/tag-plugins-cn/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
-					</footer>
-
-				</div>	
-
-             </div>
-		
-            <div class="archive">	  
-				<div id="archives"> 
-				
-					<header class="entry-header">
-						<div class="entry-info" text-transform : capitalize>				     					      	      
-							
-							  <span class="entry-date">
-								  <span class="fa fa-calendar" aria-hidden="true"></span>
-								  2014-03-15						      
-							  </span>
-							  
-							  <span class="author vcard">
-								  <span class="fa fa-user" aria-hidden="true"></span>
-								  <a href="/">Rudy-Yuan</a> 	
-							  </span>
-
-
-
-							<span class="comments-link">
-								<span class="fa fa-comments" aria-hidden="true"></span>
-								<span class="ds-thread-count" data-thread-key="archives/lorem-ipsum/">暂无评论</span>
-							</span>	
-							
-						</div>	
-									
-						<h3 class="entry-title"> 
-							  <a href="/archives/lorem-ipsum/" >Lorem Ipsum</a>
-						</h3>
-
-					</header>
-
-					<div class="entry">
-  <div class="row">
-	
-	
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-<p><img src="/hexo-theme-freemind/images/lorem-ipsum/lorem-ipsum.jpg" alt="Lorem Ipsum"></p>
-	
-	...</div>
-</div>
-
-
-					<footer class="entry-meta">					  
-						<a href="/archives/lorem-ipsum/" class="more-link"><span class="fa fa-link" aria-hidden="true"></span>  阅读全文</a>	
-					</footer>
-
-				</div>	
-
-             </div>
-		
 
 		<!-- pagination -->
 		<div>
 			<center>
 			
     <nav class="pagination">
-	    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
+	    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right"></i></a>
     </nav>
 
 
@@ -611,7 +611,7 @@
 		<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">分类目录</h4>
 		<ul class="tag_box inline list-unstyled">
 		
-			<li><a href="/categories/Android开发/">Android开发<span>1</span></a></li>
+			<li><a href="/categories/Android开发/">Android开发<span>4</span></a></li>
 		
 			<li><a href="/categories/Demo/">Demo<span>1</span></a></li>
 		
@@ -669,45 +669,45 @@
 		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
 		<ul class="tag_box inline list-unstyled">		
 		
-			<li><a href="/tags/阿里云/">阿里云<span>2</span></a></li>
-		
-			<li><a href="/tags/python/">python<span>9</span></a></li>
-		
-			<li><a href="/tags/源码学习/">源码学习<span>3</span></a></li>
-		
-			<li><a href="/tags/English/">English<span>1</span></a></li>
-		
-			<li><a href="/tags/观察者模式/">观察者模式<span>1</span></a></li>
-		
-			<li><a href="/tags/Protobuf/">Protobuf<span>1</span></a></li>
-		
-			<li><a href="/tags/Leetcode/">Leetcode<span>1</span></a></li>
-		
-			<li><a href="/tags/个人博客/">个人博客<span>1</span></a></li>
-		
-			<li><a href="/tags/喜大普奔/">喜大普奔<span>1</span></a></li>
-		
-			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
-		
-			<li><a href="/tags/mapReduce/">mapReduce<span>1</span></a></li>
-		
-			<li><a href="/tags/django/">django<span>1</span></a></li>
-		
-			<li><a href="/tags/剑指offer/">剑指offer<span>1</span></a></li>
-		
-			<li><a href="/tags/free2mind/">free2mind<span>1</span></a></li>
-		
-			<li><a href="/tags/设计模式/">设计模式<span>2</span></a></li>
-		
 			<li><a href="/tags/ubuntu-yuan/">ubuntu yuan<span>1</span></a></li>
 		
-			<li><a href="/tags/多线程/">多线程<span>3</span></a></li>
+			<li><a href="/tags/highlight/">highlight<span>1</span></a></li>
+		
+			<li><a href="/tags/阿里云/">阿里云<span>2</span></a></li>
+		
+			<li><a href="/tags/gdb/">gdb<span>1</span></a></li>
+		
+			<li><a href="/tags/虚函数/">虚函数<span>1</span></a></li>
+		
+			<li><a href="/tags/个人网站/">个人网站<span>1</span></a></li>
+		
+			<li><a href="/tags/cnzz/">cnzz<span>1</span></a></li>
 		
 			<li><a href="/tags/转发策略/">转发策略<span>1</span></a></li>
 		
+			<li><a href="/tags/桃江地震/">桃江地震<span>1</span></a></li>
+		
+			<li><a href="/tags/sed/">sed<span>1</span></a></li>
+		
 			<li><a href="/tags/KMP/">KMP<span>2</span></a></li>
 		
+			<li><a href="/tags/数组对称/">数组对称<span>1</span></a></li>
+		
+			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
+		
+			<li><a href="/tags/设计模式/">设计模式<span>2</span></a></li>
+		
+			<li><a href="/tags/转载/">转载<span>9</span></a></li>
+		
+			<li><a href="/tags/数据结构/">数据结构<span>3</span></a></li>
+		
+			<li><a href="/tags/edas-bug/">edas bug<span>1</span></a></li>
+		
+			<li><a href="/tags/网络/">网络<span>7</span></a></li>
+		
 			<li><a href="/tags/IO复用/">IO复用<span>2</span></a></li>
+		
+			<li><a href="/tags/源码学习/">源码学习<span>6</span></a></li>
 		
 		
 		   <li><a href="/tags">...<span>82</span></a></li>

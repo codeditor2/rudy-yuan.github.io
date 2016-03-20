@@ -1,0 +1,594 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Android Activity启动过程实验结果与分析 | Rudy-Yuan的博客</title>
+  <meta name="author" content="Rudy-Yuan">
+  
+  <meta name="description" content="实验中主要使用Date类获取当前的时间信息，并且通过Log指令输出，在终端使用Logcat信息对输出的Log信息进行捕获，具体包括：
+(1) 在编译Android内核的时候，在需要进行时间信息输出的事件点加入Log命令：Log.v(TIMETAG, content + new Date().getTime())；其中使用Date类中的getTime函数来获取当前的时间信息，将其以Log信息的方式输出">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Android Activity启动过程实验结果与分析"/>
+  <meta property="og:site_name" content="Rudy-Yuan的博客"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.ico" rel="icon">
+  
+
+  <!-- CSS -->
+
+
+  <link rel="stylesheet" href="/css/themes/cerulean.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/responsive.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+
+  <!-- analytics -->
+  
+
+
+  
+  <meta name="domain_verify" content="pmrgi33nmfuw4ir2ejzhkzdzfv4xkylofzxgk5bcfqrgo5ljmqrduiruhbtdszbygjrgcnrxgq2gmmrsha3dmmdbgm4dcmdegvqwkm3fmmrcyitunfwwku3bozsseorrgq2tqmjuga4dinzqg4zx2">
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+       <a class="navbar-brand" href="/">Rudy-Yuan的博客</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/tags/热点文章/" title="Hots">
+			  <i class="fa fa-fire"></i>热点文章
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags/博主推荐/" title="Recommendation">
+			  <i class="fa fa-volume-up"></i>博主推荐
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/archives" title="All articles">
+			  <i class="fa fa-archive"></i>文章归档
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/message" title="Leave a message">
+			  <i class="fa fa-pencil"></i>给我留言
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me">
+			  <i class="fa fa-info-circle"></i>关于本站
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div id="top_meta"></div>
+	<div class="col-md-9">
+	
+
+		<!-- content -->
+
+		<div class="slogan" style="margin-bottom: 17px">
+		  <h4 style="margin-top: 0;color: #333;font-size:15px;font-weight: normal;">
+			  当前位置&nbsp;:&nbsp;<a href="/" >首页&nbsp;</a>»&nbsp;文章分类&nbsp;:&nbsp;
+			
+				<a href="/categories/Android开发/">Android开发</a>
+			
+		  &nbsp;</a>»&nbsp; Android Activity启动过程实验结果与分析 </h4>
+		</div>
+
+		<div id="top_search"></div>
+				 
+		
+
+		<div class="archive">	  
+			<div id="archives"> 
+				
+				<header class="entry-header">
+					<div class="entry-info" text-transform : capitalize>				     					      	      
+							
+						<span class="entry-date">
+							<span class="fa fa-calendar" aria-hidden="true"></span>
+							2014-04-01						      
+						</span>
+							  
+							  
+						<span class="author vcard">
+							<span class="fa fa-user" aria-hidden="true"></span>
+							<a href="/">Rudy-Yuan</a> 	 	
+						</span>
+
+						<span class="comments-link">
+							<span class="fa fa-comments" aria-hidden="true"></span>
+							<span class="ds-thread-count" data-thread-key="archives/62/">暂无评论</span>
+						</span>						
+							
+					</div>	
+
+									
+					<h3 class="entry-title"> 
+						<a href="/archives/62/" >Android Activity启动过程实验结果与分析</a>
+					</h3>		
+						
+					<span style="font-size:15px"><p>实验中主要<strong>使用Date类获取当前的时间信息，并且通过Log指令输出，在终端使用Logcat信息对输出的Log信息进行捕获</strong>，具体包括：</p>
+<p>(1) 在编译Android内核的时候，在需要进行时间信息输出的事件点加入Log命令：Log.v(TIMETAG, content + new Date().getTime())；其中使用Date类中的getTime函数来获取当前的时间信息，将其以Log信息的方式输出<a id="more"></a>。</p>
+<p>(2) 启动已经编译完Android内核的模拟器，再将应用程序安装到模拟器内，并按指定动作启动该应用程序。</p>
+<p>(3) 使用Logcat工具，即在终端上使用adb logcat | grep TAG的命令，获取该应用程序启动时，事件点的Log时间信息。</p>
+<p>(4) 分析所获取的时间信息，完成对Activity启动过程的性能分析工作。</p>
+<h4 id="主Activity启动实验结果"><a href="#主Activity启动实验结果" class="headerlink" title="主Activity启动实验结果"></a>主Activity启动实验结果</h4><p>以Android SDK自带示例程序SearchableDictionary作为测试程序，通过点击Luancher上的应用程序图标启动其主Activity时，终端输出的结果如图3所示。将图中所示输出结果进行统计后，得到的各个事件的产生间隔如图4所示。</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/04/01/android-3.jpg" alt=""></p>
+<p>图3 启动主Activity时终端输出结果</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/04/01/android-4.jpg?imageView/2/w/1000/h/500" alt=""><br>图4 主Activity启动过程各事件占用的时间</p>
+<p>如图4所示柱状图使用开源软件gnuplot进行处理得到，表示主Activity启动过程中各个事件占用的时间，其中横坐标表示两个时间点的间隔，纵坐标表示该时间间隔的大小，单位为毫秒(ms)。</p>
+<p>首先，根据4.3所述内容，涉及到Binder进程间通信的时间点有t1、t3、t4、t5、t6、t7、t10、t11、t12，而从图4可以看出，这些时间段所占用的时间都相对较小，这说明Android系统的Binder进程间通信机制是一种十分高效的方法，虽然涉及到不同进程的消息传递，但是整个通信过程占用的时间很短，效率很高；其次，从图4中可以看出，主Activity启动过程中的主要时间开销在于t8~t9与t13~t14这两个时间段内。</p>
+<p>根据4.3所述内容可知，t8表示调用Process.start创建一个新进程的起始时间，t9表示执行ActivityThread对象的main函数的时间点，因此，t8~t9这个时间段正好表示了完成“创建一个新进程并将新建进程导入ActivityThread类”这一工作所耗费的时间。创建一个新的进程时，Process.start()内部调用Process类的静态函数startViaZygote()发送创建进程的命令，最终工作在zygoteSendArgsAndGetResult函数中实现，该函数通过向socket服务端写数据， Zygote接收到有关命令以后，最终通过fork机制新建一个进程来完成具体的进程创建操作，具体操作包括：调用startThreadPool启动线程池、抛出异常ZygoteInit.MethodAndArgsCaller、ZygoteInit.main函数捕获异常、调用android.app.ActivityThread类的main函数等。这一过程涉及到从Java层进入到native层，然后再返回到Java层，如图5所示。因此，新建新的进程这一过程需要花费大量的时间。</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/04/01/android-5.jpg" alt=""></p>
+<p>为了验证上述分析的正确性，在实验过程中，我们首先正常地启动SearchableDictionary应用程序，得到的终端输出如图6所示；然后，通过使用模拟器上的“返回键”退出SearchableDictionary应用后再次点击SearchableDictionary图标进入该应用，得到的终端输出结果如图7所示。对比两幅图可以发现，当直接退出应用并再次启动该应用时，缺少了时间点t8~t11。这是因为，直接退出应用时并没有杀死该应用所对应的进程。而通过命令adb shell kill关闭SearchableDictionary程序进程并再次启动时，得到的输出结果与第一次启动应用时相同。这进一步证明了t8~t9为创建进程的过程，也说明了上述对实验结果的分析是正确的。</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/04/01/android-6.jpg" alt=""><br>图6 第一次启动主Activity时终端输出结果</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/04/01/android-7.jpg" alt=""><br>图7 第二次启动主Activity时终端输出结果</p>
+<p>另一方面，根据上述描述，时间点t13 表示进入ApplicationThread中的scheduleLaunchActivity函数的时间点，而t14表示进入MainActivity的onCreate函数的时间点，因此时间段t13~t14表示了最后正式启动主Activity的工作量。</p>
+<p>将t13~t14这段时间内涉及的操作进一步细化，可得到如图8所示结果。主要操作包括：ActivityManagerService通过Binder进程间通信机制发送请求scheduleLaunchActivity来请求应用程序的ActivityThread执行performLaunchActivity操作，即启动MainActivity。这个请求被封装成一个Message，然后通过queueOrSendMessage操作把这个Message加到应用程序的消息队列中；应用程序发现消息队列中有消息时，就会通过handleMessage操作来处理这个Message，即调用handleLaunchActivity来执行真正的加载主Acitivy类的操作。整个过程包含有设置进程、包名称，设置应用程序的根目录等操作，涉及到底层的JNI方法调用、Java层与native层的切换，主Activity在启动过程中需要处理的Message包括 LAUNCH_ACTIVITY 、PAUSE_ACTIVITY 、BIND_APPLICATION和SET_CORE_SETTINGS，且这4个Message是按序逐一处理，再加上消息队列机制存在等待延时，因此该过程耗时较长。</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/04/01/android-8.jpg" alt=""><br>图8 t13~t14时间段具体工作流程</p>
+<h4 id="子Activity启动实验结果"><a href="#子Activity启动实验结果" class="headerlink" title="子Activity启动实验结果"></a>子Activity启动实验结果</h4><p>从第一次点击搜索选项列表某一项开始至WordActivity启动结束时刻，各个事件的时间及间隔如图9所示。从图中我们可以看出，由于子Activity是通过主Activity启动，自身在启动过程中并不需要再创建新的进程，因此t8~t9这段时间内的时间开销为0；与主Activity的启动类似，在最后真正启动一个Activity时，通过Message机制调用handleLaunchActivity执行加载MainAcitivy类的操作仍然是整个Activity启动过程中耗时最大的步骤(即图9中的t13~t14)。</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/04/01/andoir-9.jpg?imageView/2/w/1000/h/500" alt=""><br>图9 子Activity启动过程各事件占用的时间</p>
+<p>在实验中，我们还对比了通过Launcher启动Activity和通过MainActivity启动新的子Activity这两种不同情况的时间开销，统计结果如图10所示。从图中可以看出，相比通过MainActivity启动子Activity而言，通过Launcher启动Activity时，在t13~t14时间段消耗的时间更长。这主要是因为启动通过MainActivity启动新的子Activity时，发送的Message消息只有两个，分别为：PAUSE_ACTIVITY和 LAUNCH_ACTIVITY，因此处理时间更短。当处理的消息从4个减少到2个时，整个Activity的启动时间有了明显的减少，这也进一步说明了处理Message消息所花费的时间占Activity启动时间的比例很大，从侧面佐证了上述对t13~t14所花费时间的分析的正确性。</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/04/01/android-10.jpg?imageView/2/w/1000/h/500" alt=""><br>图10 主Activity与子Activity启动过程对比</p>
+<h4 id="多次连续启动Activity情景分析"><a href="#多次连续启动Activity情景分析" class="headerlink" title="多次连续启动Activity情景分析"></a>多次连续启动Activity情景分析</h4><p>此外，为了验证论文[1]所述实验结果，在实验中，我们还分析了4次连续启动同一个应用程序的主Activity所需要的时间，在每次启动应用程序后通过adb shell kill命令杀死对应进程，统计结果如图11所示。其中，这一部分所说的主Activity启动所需时间是指从点击应用程序图标调用Launcher.onClick函数到主Activity调用MainActivity. onCreate函数的时间间隔。</p>
+<p><img src="http://7xj852.com1.z0.glb.clouddn.com/blog/2014/04/01/android-11.jpg" alt=""><br>图11 多次连续启动Activity的时间花费</p>
+<p>从图中可以看出，在误差允许范围内，第一次启动主Activity花费的时间与关闭当前主Activity再重新启动该Activity所需的时间是完全一致的。从我们的实验过程分析，原论文得出“连续启动Activity时，第一次启动Activity所需时间比后续启动时间要长”的原因可能在于：后续启动Activity时并没有杀死原有进程，从而导致在后续启动Activity时节约了新建进程所需的时间。该结论有待后续实验做进一步分析。</p>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>通过以上实验及分析，可以得出以下结论：</p>
+<blockquote>
+<p>(1) Android系统的Binder进程间通信机制的效率很高，一次Binder通信所花费的时间几乎不到整个Activity启动过程所需时间的1%；</p>
+<p>(2) Android的Activity启动过程中，主要的性能瓶颈在于：创建主Activity时通过Zygote创建新的进程的时间花费以及Activity真正启动时通过Message方式调用handleLaunchActivity来加载MainAcitivy所花费的时间；</p>
+<p>(3) 对于通过Message方式调用handleLaunchActivity来加载MainAcitivy的过程，启动主Activity所花费的时间比启动子Activity所花费的时间要长，主要原因在于启动主Activity时传递的Message比启动子Activity时要多。</p>
+</blockquote>
+<h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><p>[1] Measuring and Improving Application Launching Performance on Android Devices</p>
+<div class="alert alert-success"><i class="fa fa-lightbulb-o"></i>   本文由<a href="http://www.rudy-yuan.net">Rudy Yuan</a>创作，采用<a href="http://creativecommons.org/licenses/by/3.0/cn" target="_blank" rel="external">CC BY 3.0 CN协议</a>进行许可。
+可自由转载、引用，但需署名作者且注明文章出处。</div></span>
+				</header>
+
+				<!-- share -->
+				
+					
+
+					
+     <footer class="entry-meta">      
+
+	    <div class="fenlei" style="font-size:13.5px">
+			<span class="entry-categories">
+				<span class="fa fa-folder" aria-hidden="true"></span> 
+
+				
+					<a href="/categories/Android开发/">Android开发</a>
+				
+
+			</span>
+			
+			<span class="entry-tags">        
+				<span class="fa fa-tags" aria-hidden="true"></span> 
+
+				
+					<a href="/tags/android/">android</a>&nbsp;
+				
+					<a href="/tags/源码学习/">源码学习</a>&nbsp;
+				
+
+			</span>
+		</div>
+
+     
+		<!-- JiaThis Button BEGIN -->
+		<div class="jiathis_style" style="float:right;">
+			<span class="jiathis_txt">分享到：</span>
+			<a class="jiathis_button_qzone">QQ空间</a>
+			<a class="jiathis_button_tsina">新浪微博</a>
+			<a class="jiathis_button_weixin">微信</a>
+			<a class="jiathis_button_copy">复制</a>
+			<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+			<a class="jiathis_counter_style"></a>
+		</div>
+		<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+		<!-- JiaThis Button END -->
+		<br>
+    </footer>
+
+
+				
+			</div>	
+		</div>	 	        
+
+		 
+				
+					<p class="p1">上一篇 <a href="/archives/68/">leetcode--Rotate Image</a></p> 
+
+				
+				   <p class="p2">下一篇 <a href="/archives/61/">安卓(Android)Activity启动过程性能剖视(3)</a></p> 
+			
+		
+		<!-- comment -->
+		
+<section id="comment">
+  
+  	 <div class="ds-thread" data-thread-key="archives/62/" data-title="Android Activity启动过程实验结果与分析" data-url="http://www.rudy-yuan.net/archives/62/"></div>  
+  
+</section>
+
+		
+	</div> <!-- col-md-9/col-md-12 -->	
+
+	
+		<div id="side_meta">
+			
+      <div class="col-md-3">
+	      <div id="sidebar">
+	      
+  <div class="form-group has-success has-feedback" id="site_search">
+    <form class="site-search-form">
+        <input type="text" id="st-search-input" name="q" results="0" placeholder="搜索" class="st-search-input st-default-search-input form-control" />
+    </form>
+  </div>  
+
+	      <style type="text/css">
+  .cls_container{height:24px;overflow:hidden;}
+  .cls_container ul{list-style-type:none;margin:0;padding:0;margin-left:0px;}
+  .cls_container ul li{height:24px;line-height:24px;float:left;display:inline;}
+</style>
+
+<div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">本站公告</h4>
+
+	<div id="myscroll" class="cls_container">
+		<ul>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>欢迎访问本站!</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>本站内容已经全部进行迁移</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>谷歌浏览器访问本站效果最佳!</span></li></br>
+		  <li><span style="color:red"><i class="fa fa-warning"></i>若URL失效，请使用本站内部搜索</span></li></br>
+		</ul>
+	</div>
+
+	<div id="showhint"></div>
+</div>
+
+<script type="text/javascript">
+	function $(element){
+	 if(arguments.length>1){
+	  for(var i=0,length=arguments.length,elements=[];i<length;i++){
+	   elements.push($(arguments[i]));
+	  }
+	  return elements;
+	 }
+	 if(typeof element=="string"){
+	  return document.getElementById(element);
+	 }else{
+	  return element;
+	 }
+	}
+	var Class={
+	 create:function(){
+	  return function(){
+	   this.initialize.apply(this,arguments);
+	  }
+	 }
+	}
+	Function.prototype.bind=function(object){
+	 var method=this;
+	 return function(){
+	  method.apply(object,arguments);
+	 }
+	}
+	var Scroll=Class.create();
+	Scroll.prototype={
+	 initialize:function(element,height){
+	  this.element=$(element);
+	  this.element.innerHTML+=this.element.innerHTML;
+	  this.height=height;
+	  this.maxHeight=this.element.scrollHeight/2;
+	  this.counter=0;
+	  this.scroll();
+	  this.timer="";
+	  this.element.onmouseover=this.stop.bind(this);
+	  this.element.onmouseout=function(){this.timer=setTimeout(this.scroll.bind(this),1000);}.bind(this);
+	 },
+	 scroll:function(){
+	  if(this.element.scrollTop<this.maxHeight){
+	   this.element.scrollTop++;
+	   this.counter++;
+	  }else{
+	   this.element.scrollTop=0;
+	   this.counter=0;
+	  }
+	  if(this.counter<this.height){
+	   this.timer=setTimeout(this.scroll.bind(this),20);
+	  }else{
+	   this.counter=0;
+	   this.timer=setTimeout(this.scroll.bind(this),3000);
+	  }
+	 },
+	 stop:function(){
+	  clearTimeout(this.timer);
+	 }
+	}
+	var myscroll=new Scroll("myscroll",24);
+</script>
+
+
+	      <!-- toc -->	      
+	      	      
+
+	      
+	<div class="widget">
+		<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">分类目录</h4>
+		<ul class="tag_box inline list-unstyled">
+		
+			<li><a href="/categories/Android开发/">Android开发<span>4</span></a></li>
+		
+			<li><a href="/categories/Demo/">Demo<span>1</span></a></li>
+		
+			<li><a href="/categories/Docs/">Docs<span>4</span></a></li>
+		
+			<li><a href="/categories/MapReduce/">MapReduce<span>1</span></a></li>
+		
+			<li><a href="/categories/NDN/">NDN<span>6</span></a></li>
+		
+			<li><a href="/categories/Test/">Test<span>2</span></a></li>
+		
+			<li><a href="/categories/c和c/">c和c++<span>1</span></a></li>
+		
+			<li><a href="/categories/c和cpp/">c和cpp<span>5</span></a></li>
+		
+			<li><a href="/categories/leetcode/">leetcode<span>13</span></a></li>
+		
+			<li><a href="/categories/linux学习/">linux学习<span>6</span></a></li>
+		
+			<li><a href="/categories/python与Django/">python与Django<span>9</span></a></li>
+		
+			<li><a href="/categories/shell编程/">shell编程<span>1</span></a></li>
+		
+			<li><a href="/categories/socket与网络/">socket与网络<span>4</span></a></li>
+		
+			<li><a href="/categories/不可分/">不可分<span>1</span></a></li>
+		
+			<li><a href="/categories/工具相关/">工具相关<span>2</span></a></li>
+		
+			<li><a href="/categories/技术杂文/">技术杂文<span>18</span></a></li>
+		
+			<li><a href="/categories/数据结构与算法/">数据结构与算法<span>7</span></a></li>
+		
+			<li><a href="/categories/源码学习/">源码学习<span>12</span></a></li>
+		
+		</ul>
+	</div>
+	
+		  <div class="widget">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- ads1 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:300px;height:250px"
+     data-ad-client="ca-pub-5766287296734120"
+     data-ad-slot="9609232695"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+	      
+	<div class="widget">
+		<h4 style="font-weight: bold; color: #333 ">标签云</h4>
+		<ul class="tag_box inline list-unstyled">		
+		
+			<li><a href="/tags/clixsense/">clixsense<span>1</span></a></li>
+		
+			<li><a href="/tags/libevent/">libevent<span>2</span></a></li>
+		
+			<li><a href="/tags/plugins/">plugins<span>2</span></a></li>
+		
+			<li><a href="/tags/桃江地震/">桃江地震<span>1</span></a></li>
+		
+			<li><a href="/tags/剑指offer/">剑指offer<span>1</span></a></li>
+		
+			<li><a href="/tags/sofa-pbrpc/">sofa-pbrpc<span>1</span></a></li>
+		
+			<li><a href="/tags/sed/">sed<span>1</span></a></li>
+		
+			<li><a href="/tags/Hexo/">Hexo<span>2</span></a></li>
+		
+			<li><a href="/tags/linux/">linux<span>7</span></a></li>
+		
+			<li><a href="/tags/多线程/">多线程<span>3</span></a></li>
+		
+			<li><a href="/tags/nginx/">nginx<span>3</span></a></li>
+		
+			<li><a href="/tags/cpp/">cpp<span>5</span></a></li>
+		
+			<li><a href="/tags/hadoop/">hadoop<span>1</span></a></li>
+		
+			<li><a href="/tags/数据库/">数据库<span>1</span></a></li>
+		
+			<li><a href="/tags/mysql/">mysql<span>3</span></a></li>
+		
+			<li><a href="/tags/数据结构/">数据结构<span>3</span></a></li>
+		
+			<li><a href="/tags/mapReduce/">mapReduce<span>1</span></a></li>
+		
+			<li><a href="/tags/网络/">网络<span>7</span></a></li>
+		
+			<li><a href="/tags/hexo/">hexo<span>1</span></a></li>
+		
+			<li><a href="/tags/shell/">shell<span>3</span></a></li>
+		
+		
+		   <li><a href="/tags">...<span>82</span></a></li>
+		 
+		</ul>
+	</div>
+
+
+	      
+<div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">友情链接</h4>
+	<ul class="blogroll list-unstyled">
+	
+		<li style="font-size:14px"><i class="fa fa-share"></i><a href="http://hexo.io" title="Hexo官网" target="_blank"]);">Hexo</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-github"></i><a href="http://www.github.com/rudy-yuan" title="github帐号" target="_blank"]);">我的github</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-trash"></i><a href="http://yjiehn.sinaapp.com" title="旧版博客" target="_blank"]);">我的旧版博客</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-cloud-upload"></i><a href="http://www.qiniu.com" title="七牛" target="_blank"]);">七牛云存储</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://netlab.pkusz.edu.cn" title="北大互联网中心" target="_blank"]);">北大互联网信息工程研发中心</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://cs.whu.edu.cn" title="武大计院" target="_blank"]);">武汉大学 计算机学院</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://github.com/wzpan/hexo-theme-freemind" title="Theme Freemind" target="_blank"]);">Hexo-Theme-Freemind</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://www.wengweitao.com" title="WWT的博客" target="_blank"]);">WWT的博客</a></li>
+	
+		<li style="font-size:14px"><i class="fa fa-chain"></i><a href="http://www.lpbobo.com" title="Mi Tang的博客" target="_blank"]);">Mi Tang的博客</a></li>
+	
+	</ul>
+</div>
+
+
+	      <div class="widget">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">近期评论</h4>
+	<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="0" data-show-admin="1" data-excerpt-length="100" ></ul>
+	
+	<script type="text/javascript">
+	    var duoshuoQuery = {short_name:"rudy-yuan"};
+	    (function() {
+	    var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+	</script>
+
+</div>
+
+
+	
+	      <section id="recent-visitors" class="widget widget_recent_comments">
+	<h4 style="font-weight: bold; color: #333;font-family: "Helvetica Neue", Helvetica, Arial, sans-serif">最近访客</h4>
+  	<div class="panelbody clearfix"><ul class="ds-recent-visitors" data-num-items="30"></ul></div>
+</section>    
+	      </div> <!-- sidebar -->
+      </div> <!-- col-md-3 -->
+
+		</div>
+			
+
+</div><!-- row -->
+
+
+	<script type="text/javascript">
+	  var duoshuoQuery = { short_name: 'rudy-yuan' };
+	  (function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';
+		ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+	  })();
+	</script>
+
+
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  Rudy-Yuan &copy; 2013-2016.
+  
+       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>, <a href="https://swiftype.com/" target="_blank">Swiftype</a> and <a href="http://www.qiniu.com/" target="_blank">七牛云存储</a>.
+      <i class="fa fa-sitemap %>"></i> <a href="/sitemap.xml" target="_blank"> 站点地图</a>. <a href="http://www.miitbeian.gov.cn/">粤ICP备15038546号</a>.
+      <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1255163192'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1255163192' type='text/javascript'%3E%3C/script%3E"));</script>   
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+  <script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'YYG5W2xNQTns7U8J3YqW','2.0.0');
+  </script>
+
+
+
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/search.js"></script> 
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+
+
+<!-- UJian Button BEGIN -->
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?type=slide&btn=4&fade=1&uid=2030693"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+  
+</body>
+</html>

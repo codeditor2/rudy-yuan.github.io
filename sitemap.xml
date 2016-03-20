@@ -4,6 +4,94 @@
 
     
   <url>
+    <loc>http://www.rudy-yuan.net/archives/62/</loc>
+    <lastmod>2016-03-20T01:30:20.423Z</lastmod>
+    <data>
+        <display>
+        <title>Android Activity启动过程实验结果与分析</title>
+        <pubTime>2014-03-31T17:05:40.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>源码学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android开发" url="http://www.rudy-yuan.net/categories/Android%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/61/</loc>
+    <lastmod>2016-03-20T01:24:52.203Z</lastmod>
+    <data>
+        <display>
+        <title>安卓(Android)Activity启动过程性能剖视(3)</title>
+        <pubTime>2014-03-31T16:32:40.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>源码学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android开发" url="http://www.rudy-yuan.net/categories/Android%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/59/</loc>
+    <lastmod>2016-03-20T01:21:56.105Z</lastmod>
+    <data>
+        <display>
+        <title>安卓(Android)Activity启动过程性能剖视(1)</title>
+        <pubTime>2014-03-30T22:40:33.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>源码学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android开发" url="http://www.rudy-yuan.net/categories/Android%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/60/</loc>
+    <lastmod>2016-03-20T01:09:27.756Z</lastmod>
+    <data>
+        <display>
+        <title>安卓(Android)Activity启动过程性能剖视(2)</title>
+        <pubTime>2014-03-31T16:13:40.000Z</pubTime>
+        
+        <tag>android</tag>
+         
+        <tag>源码学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android开发" url="http://www.rudy-yuan.net/categories/Android%E5%BC%80%E5%8F%91/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.rudy-yuan.net/archives/2016-newest-hexo-guide/</loc>
     <lastmod>2016-03-20T00:59:58.371Z</lastmod>
     <data>
@@ -24,6 +112,7 @@
     </data>
     </url>
 
+    
     
   <url>
     <loc>http://www.rudy-yuan.net/archives/105/</loc>
@@ -65,28 +154,6 @@
            
              
               <breadCrumb title="linux学习" url="http://www.rudy-yuan.net/categories/linux%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/59/</loc>
-    <lastmod>2016-03-17T05:40:18.303Z</lastmod>
-    <data>
-        <display>
-        <title>安卓(Android)Activity启动过程性能剖视(1)</title>
-        <pubTime>2014-03-30T22:40:33.000Z</pubTime>
-        
-        <tag>android</tag>
-         
-        <tag>源码学习</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android开发" url="http://www.rudy-yuan.net/categories/Android%E5%BC%80%E5%8F%91/"/>
           
         </display>
     </data>
@@ -1996,34 +2063,14 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
+    <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>简体中文测试</title>
-        <pubTime>2013-12-25T12:17:16.000Z</pubTime>
+        <title>Tag Plugins</title>
+        <pubTime>2014-03-16T02:17:16.000Z</pubTime>
         
-        <tag>简体</tag>
-         
-         
-           
-             
-              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.rudy-yuan.net/archives/color-themes/</loc>
-    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
-    <data>
-        <display>
-        <title>Color Themes</title>
-        <pubTime>2016-01-30T05:00:24.000Z</pubTime>
-        
-        <tag>themes</tag>
+        <tag>plugins</tag>
          
          
            
@@ -2096,14 +2143,34 @@
 
     
   <url>
-    <loc>http://www.rudy-yuan.net/archives/tag-plugins/</loc>
+    <loc>http://www.rudy-yuan.net/archives/simplified-chinese-test/</loc>
     <lastmod>2016-01-30T11:16:22.000Z</lastmod>
     <data>
         <display>
-        <title>Tag Plugins</title>
-        <pubTime>2014-03-16T02:17:16.000Z</pubTime>
+        <title>简体中文测试</title>
+        <pubTime>2013-12-25T12:17:16.000Z</pubTime>
         
-        <tag>plugins</tag>
+        <tag>简体</tag>
+         
+         
+           
+             
+              <breadCrumb title="Test" url="http://www.rudy-yuan.net/categories/Test/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.rudy-yuan.net/archives/color-themes/</loc>
+    <lastmod>2016-01-30T11:16:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>Color Themes</title>
+        <pubTime>2016-01-30T05:00:24.000Z</pubTime>
+        
+        <tag>themes</tag>
          
          
            
